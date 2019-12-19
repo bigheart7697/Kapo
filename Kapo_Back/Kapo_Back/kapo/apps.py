@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class KapoConfig(AppConfig):
-    name = 'kapo'
+    name = 'Kapo_Back.kapo'
