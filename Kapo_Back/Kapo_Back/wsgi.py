@@ -1,5 +1,5 @@
 """
-WSGI config for Kapo project.
+WSGI config for Kapo_Back project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Kapo.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Kapo_Back.settings')
 
 application = get_wsgi_application()
