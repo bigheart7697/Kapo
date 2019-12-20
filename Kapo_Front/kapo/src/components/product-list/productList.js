@@ -1,5 +1,4 @@
 import React from 'react';
-import faker from 'faker';
 import { connect } from 'react-redux';
 import Product from './product';
 import RightPanel from '../right-panel/rightPanel';
@@ -12,10 +11,10 @@ class ProductList extends React.Component {
 				<div className="productRow">
 					<div className="col-lg-3 col-sm-3" >
 						<Product 
-							image={faker.image.image()}
-							title={faker.commerce.product()}
-							price={faker.commerce.price()}
-							date={faker.date.month()}
+							image={product.image}
+							title={product.title}
+							price={product.price}
+							date={product.date}
 						/>
 					</div>
 				</div>

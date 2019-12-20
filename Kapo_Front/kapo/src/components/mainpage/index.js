@@ -1,8 +1,12 @@
 import React from 'react'
+import ProductList from '../product-list/productList';
 
 const mainpage = () => {
     return(
-        <div> welcome to the project! </div>
+        <div> 
+			welcome to the project! 
+			<ProductList />
+		</div>
     )
 }
 
