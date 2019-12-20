@@ -10,7 +10,7 @@ import './index.scss'
 import App from '../src/components/App'
 import reducers from './reducers'
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || composeEnhancer;
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancer(applyMiddleware(reduxThunk)))
 
 ReactDOM.render( <Provider store={store}><App/></Provider>, document.querySelector('#root') )
