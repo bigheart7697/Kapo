@@ -1,0 +1,13 @@
+.dimmer { background-color: rgba(250,250,250,0.8)!important; }
+
+.card { width: auto !important; }
+
+.productRow {
+	text-align: right;
+	direction: rtl;
+}
+
+.productList {
+	float: right;
+	direction: rtl;
+}
