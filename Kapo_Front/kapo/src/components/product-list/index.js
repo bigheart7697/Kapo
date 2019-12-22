@@ -3,7 +3,7 @@ import faker from 'faker';
 import { connect } from 'react-redux';
 import Product from '../product';
 import RightPanel from '../right-panel';
-import SearchBar from '../base/searchBar'
+import SearchBar from '../basic/searchBar'
 import { selectProduct } from '../../actions';
 import './style.scss'
 

@@ -1,10 +1,12 @@
 import React from 'react'
-import ProductList from '../product-list/productList';
+import ProductList from '../product-list';
+import ProductDetails from '../product-details';
+import faker from 'faker';
 
 const mainpage = () => {
     return(
         <div>
-			<ProductList />
+			<ProductDetails image={faker.image.image()}/>
 		</div>
     )
 }

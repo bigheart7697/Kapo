@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Router} from 'react-router-dom'
 import history from '../../history'
+import '../../style.scss'
 
 import './index.scss'
 

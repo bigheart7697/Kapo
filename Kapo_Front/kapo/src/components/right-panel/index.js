@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.scss';
-import SearchBar from '../base/searchBar';
 
 class RightPanel extends React.Component {
 	onSearchSubmit(term){

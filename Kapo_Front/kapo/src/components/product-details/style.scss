@@ -1,0 +1,28 @@
+@import '../../style.scss';
+
+.productDetails__container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    .productDetails__leftPanel {
+        width: 50%;
+        float: left;
+        padding: 10px;
+        .productDetails__imageContainer {
+            width: 80%;
+            height: 400px;
+            margin: auto;
+            .productDetails__image{
+                height: 400px;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+    }
+    .productDetails__rightPanel {
+        width: 50%;
+        float: right;
+        padding: 10px;
+    }
+}
