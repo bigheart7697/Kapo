@@ -1,0 +1,30 @@
+@import '../../style.scss';
+
+.rightPanel__menu {
+    float: right;
+    width: 20%; 
+    .rightPanel__item {
+        padding: 5px 10px;
+        display: block;
+        border: $borders 1px solid;
+        border-radius: 5px;
+        height: 30px;
+        margin: 5px auto;
+        background: $superwhite;
+        .rightPanel__counter {
+            float: left;
+            border-radius: 10px;
+            background: $bermuda;
+            width: auto;
+            padding: 0 10px;
+            height: 20px;
+            color: $white;
+            text-align: center;
+        }
+
+        .rightPanel__text {
+            float:right;
+            
+        }
+    }
+}

@@ -3,8 +3,7 @@ import ProductList from '../product-list/productList';
 
 const mainpage = () => {
     return(
-        <div> 
-			welcome to the project! 
+        <div>
 			<ProductList />
 		</div>
     )
