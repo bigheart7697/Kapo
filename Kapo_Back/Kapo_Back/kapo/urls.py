@@ -19,6 +19,7 @@ from Kapo_Back.kapo import views
 
 
 urlpatterns = [
+    path('', views.ProductList.as_view()),
     path('products/add', views.ProductCreate.as_view()),
 ]
 

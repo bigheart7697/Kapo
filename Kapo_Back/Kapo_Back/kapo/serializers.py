@@ -3,16 +3,16 @@ from Kapo_Back.kapo.models import *
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='owner.user.username')
 
     class Meta:
         model = Product
-        fields = ['owner', ]
+        fields = ['name', 'description', 'image',  'main_category', 'price', 'second_hand', 'quantity', 'owner']
 
 
 class UserSerializer(serializers.ModelSerializer):
     products = serializers.PrimaryKeyRelatedField(many=True, queryset=Product.objects.all())
 
     class Meta:
-        model = User
-        fields = []
+        model = Profile
+        fields = ['user', 'image', 'phone_number', 'city', 'address', 'products']

@@ -1,3 +1,13 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    model = Product
+
+
+@admin.register(Profile)
+class ProductAdmin(admin.ModelAdmin):
+    model = Profile
+
