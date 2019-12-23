@@ -5,3 +5,4 @@ asgiref>=3.2.3
 pytz>=2019.3
 setuptools>=42.0.2
 sqlparse>=0.3.0
+django-phone-field>=1.8.0
