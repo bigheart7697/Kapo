@@ -64,6 +64,7 @@ python-testing:
   script:
     - curl -sL https://deb.nodesource.com/setup_8.x | bash -
     - apt install -y nodejs npm
+    - chmod +x ./test.sh
     - sudo ./test.sh -i backend
   artifacts:
     paths:
