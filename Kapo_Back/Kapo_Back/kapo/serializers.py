@@ -7,7 +7,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['name', 'description', 'image',  'main_category', 'price', 'second_hand', 'quantity', 'owner']
+        fields = ['name', 'description', 'image', 'main_category', 'price', 'second_hand', 'quantity', 'owner',
+                  'production_year']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,3 +17,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['user', 'image', 'phone_number', 'city', 'address', 'products']
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    customer = serializers.ReadOnlyField(source='customer.user.username')
+    product = serializers.ReadOnlyField(source='product.id')
+
+    class Meta:
+        model = Order
+        fields = ['customer', 'product', 'count', 'created']

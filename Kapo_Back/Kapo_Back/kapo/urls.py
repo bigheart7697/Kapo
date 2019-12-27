@@ -16,11 +16,14 @@ Including another URLconf
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from Kapo_Back.kapo import views
+from django.conf.urls import url
 
 
 urlpatterns = [
-    path('', views.ProductList.as_view()),
-    path('products/add', views.ProductCreate.as_view()),
+    path('', views.ProductListView.as_view()),
+    path('add-product', views.ProductCreateView.as_view()),
+    url(r'^product/(?P<pk>\d+)$', views.ProductDetailView.as_view()),
+    url(r'^product/(?P<pk>\d+)/order', views.OrderCreateView.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

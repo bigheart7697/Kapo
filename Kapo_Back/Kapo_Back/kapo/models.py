@@ -5,6 +5,7 @@ import random
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
+import datetime
 
 PRODUCT_CATEGORIES = [("0", _("Default")),
                       ("1", _("Digital")),
@@ -45,6 +46,14 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+def year_choices():
+    return [(r, r) for r in range(1979, datetime.date.today().year + 1)]
+
+
+def current_year():
+    return datetime.date.today().year
+
+
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
     created = models.DateTimeField(_("creation date"), auto_now_add=True)
@@ -53,12 +62,13 @@ class Product(models.Model):
     image = models.ImageField(_("image"), upload_to='products/{}/'.format(image_dir), height_field=None,
                               width_field=None, null=True)
     description = models.TextField(_("description"), default="")
-    owner = models.ForeignKey(Profile, related_name='products', on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, related_name=_('products'), on_delete=models.CASCADE)
     main_category = models.CharField(_("category"), choices=PRODUCT_CATEGORIES, max_length=100, default=0)
     # if main_category == "Digital devices":
     #     sub_category = models.CharField()
     price = models.IntegerField(_("price"))
     quantity = models.IntegerField(_("quantity"), default=1)
+    production_year = models.IntegerField(_('production year'), choices=year_choices(), default=current_year)
     second_hand = models.BooleanField(_("second hand"), default=False)
     available = models.BooleanField(_("available"), default=False)
     visit_count = models.IntegerField(_("visit count"), default=0)
@@ -67,3 +77,16 @@ class Product(models.Model):
         ordering = ['created']
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
+
+
+class Order(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
+    customer = models.ForeignKey(Profile, related_name=_("orders"), on_delete=models.CASCADE)
+    count = models.IntegerField(_('quantity'), default=1)
+    created = models.DateTimeField(_("registration date"), auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+        verbose_name = _('Order')
+        verbose_name_plural = _('Orders')
