@@ -16,7 +16,6 @@ const mainpage = () => {
                     type: 'غذا',
                     availability: 'موجود',
                     year_produced: '1398',
-                    selling_type: 'نقدی',
                     user: {
                         name: 'محمد محمدی',
                         address: 'تهران - تهران پارس',

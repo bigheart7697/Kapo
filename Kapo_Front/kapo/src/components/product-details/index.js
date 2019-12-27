@@ -33,10 +33,6 @@ class ProductDetails extends React.Component {
                                 <td>در دسترس بودن</td>
                             </tr>
                             <tr>
-                                <td>{this.props.product.selling_type}</td>
-                                <td>نحوه فروش</td>
-                            </tr>
-                            <tr>
                                 <td>{this.props.product.year_produced}</td>
                                 <td>سال ساخت</td>
                             </tr>
