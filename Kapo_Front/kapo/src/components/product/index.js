@@ -32,11 +32,14 @@ class Product extends React.Component {
                 <a href='#'>{this.props.title}</a>
               </h1>
               <p className='product__text'>{this.props.description}</p>
+              {/*
               <label for='show-menu' className='product__menu-button' onClick={this.changeState}>
                 <span></span>
               </label>
+              */}
             </div>
-            <ul className='product__menu-content' style={{zIndex: this.state.zIndex, top: this.state.top}}>
+            {/*
+              <ul className='product__menu-content' style={{zIndex: this.state.zIndex, top: this.state.top}}>
               <li>
                 <i class="bookmark icon product__i--no-margin"></i>
               </li>
@@ -49,6 +52,7 @@ class Product extends React.Component {
                 <span>{this.props.comments}</span>
               </li>
             </ul>
+            */}
           </div>
         </div>
       </div>

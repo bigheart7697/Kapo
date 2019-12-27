@@ -6,7 +6,24 @@ import faker from 'faker';
 const mainpage = () => {
     return(
         <div>
-			<ProductDetails image={faker.image.image()}/>
+            <ProductDetails 
+                product={{
+                    name:'غذا',
+                    image:faker.image.food(), 
+                    details:'بسیار خوشمزه و سالم است',
+                    price:'200,000',
+                    second_hand: 'دست دوم',
+                    type: 'غذا',
+                    availability: 'موجود',
+                    year_produced: '1398',
+                    selling_type: 'نقدی',
+                    user: {
+                        name: 'محمد محمدی',
+                        address: 'تهران - تهران پارس',
+                        type: 'شخصی'
+                    }
+                }}
+            />
 		</div>
     )
 }
