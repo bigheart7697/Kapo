@@ -64,7 +64,7 @@ python-testing:
   script:
     - curl -sL https://deb.nodesource.com/setup_8.x | bash -
     - apt install -y nodejs npm
-    - ./test.sh -i backend
+    - sudo ./test.sh -i backend
   artifacts:
     paths:
       - src/htmlcov
