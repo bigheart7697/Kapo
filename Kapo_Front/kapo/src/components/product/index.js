@@ -3,11 +3,11 @@ import { Dimmer, Image } from 'semantic-ui-react'
 import './style.scss'
 
 class Product extends React.Component {
-  state = { active: false, zIndex: -1, top: "0px" }
+  state = { active: false, zIndex: -1, top: "30px" }
 
   changeState = () => {
     if(this.state.active){
-      this.setState({top: "0px"})
+      this.setState({top: "30px"})
     } else {
       this.setState({top: "-30px"})
     }
@@ -38,18 +38,15 @@ class Product extends React.Component {
             </div>
             <ul className='product__menu-content' style={{zIndex: this.state.zIndex, top: this.state.top}}>
               <li>
-                <a href='#' className='fa fa-bookmark-o'></a>
+                <i class="bookmark icon product__i--no-margin"></i>
               </li>
               <li>
-                <a href='#' className='fa fa-heart-o'>
-                  <span>{this.props.likes}</span>
-                </a>
+                <i class="heart icon"></i>
+                <span>{this.props.likes}</span>
               </li>
               <li>
-                <a href='#'>
-                  <i class="fa fa-comment-o" aria-hidden="true"></i>
-                  <span>{this.props.comments}</span>
-                </a>
+                <i class="comment icon"></i>
+                <span>{this.props.comments}</span>
               </li>
             </ul>
           </div>

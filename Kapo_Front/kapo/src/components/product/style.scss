@@ -13,11 +13,17 @@
     list-style-type: none;
     li {
       display: inline-block;
+      i {
+        color: $white;
+        margin: 0;
+        margin-top: 10px;
+      }
     }
     a {
       color: $white;
     }
     span {
+      color: $white;
       position: absolute;
       left: 50%;
       top: 0;
@@ -158,6 +164,9 @@
       background-color: $bermuda;
       height: 30px;
       position: relative;
+      .product__i--no-margin {
+        margin: 5px;
+      }
     }
     a {
       position: absolute;
@@ -167,7 +176,7 @@
       font-size: 24px;
     }
     span {
-      top: -10px;
+      top: 0px;
     }
   }
 }
