@@ -10,37 +10,37 @@ variables:
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
   IMAGE_NAME: kapo
 
-pages:
-  stage: deploy
-  script:
-  - mkdir .public
-  - cp -r docs/. .public
-  - mv .public public
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
+# pages:
+#   stage: deploy
+#   script:
+#   - mkdir .public
+#   - cp -r docs/. .public
+#   - mv .public public
+#   artifacts:
+#     paths:
+#     - public
+#   only:
+#   - master
 
-heroku:
-  stage: deploy
-  image: ruby:2.2
-  script:
-    - gem install dpl
-    - cp heroku/webpack.local.config.js ./workshop/front/webpack.local.config.js
-    - cp heroku/webpack.prod.config.js ./workshop/front/webpack.prod.config.js
-    - cp heroku/settings.py ./workshop/workshop/settings.py
-    - cp heroku/package.json ./package.json
-    - cp heroku/yarn.lock ./yarn.lock
-    - cp heroku/deploy.sh ./deploy.sh
-    - cp heroku/Procfile ./Procfile
-    - mkdir -p workshop/links/static
-    - mkdir -p workshop/workshop/static
-    - mkdir -p workshop/front/workshop/static
-    - sed -i -e "s@<Websocket url={LINKS_WS_URL} onMessage={this._onUpdate}/>@@g" workshop/front/src/containers/LinksDetail/index.jsx
-    - dpl --skip_cleanup=true --strategy=api --provider=heroku --app=django-react-workshop --api-key=$HEROKU_API_KEY
-  only:
-  - master
+# heroku:
+#   stage: deploy
+#   image: ruby:2.2
+#   script:
+#     - gem install dpl
+#     - cp heroku/webpack.local.config.js ./workshop/front/webpack.local.config.js
+#     - cp heroku/webpack.prod.config.js ./workshop/front/webpack.prod.config.js
+#     - cp heroku/settings.py ./workshop/workshop/settings.py
+#     - cp heroku/package.json ./package.json
+#     - cp heroku/yarn.lock ./yarn.lock
+#     - cp heroku/deploy.sh ./deploy.sh
+#     - cp heroku/Procfile ./Procfile
+#     - mkdir -p workshop/links/static
+#     - mkdir -p workshop/workshop/static
+#     - mkdir -p workshop/front/workshop/static
+#     - sed -i -e "s@<Websocket url={LINKS_WS_URL} onMessage={this._onUpdate}/>@@g" workshop/front/src/containers/LinksDetail/index.jsx
+#     - dpl --skip_cleanup=true --strategy=api --provider=heroku --app=django-react-workshop --api-key=$HEROKU_API_KEY
+#   only:
+#   - master
 
 docker_image:
   stage: build
