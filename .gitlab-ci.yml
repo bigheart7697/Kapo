@@ -1,14 +1,14 @@
 image: python:latest
 stages:
   - testing
-  - styling
+#   - styling
   - build
-  - deploy
+#   - deploy
 
 variables:
   CONTAINER_DEPLOY_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
-  IMAGE_NAME: django-react-workshop
+  IMAGE_NAME: kapo
 
 pages:
   stage: deploy
@@ -78,22 +78,22 @@ react-testing:
     paths:
       - src/front/coverage
 
-python-lint:
-  stage: styling
-  script:
-    - ./test.sh -i pythonlint
+# python-lint:
+#   stage: styling
+#   script:
+#     - ./test.sh -i pythonlint
 
-react-lint-report:
-  image: node:8
-  stage: styling
-  script:
-    - ./test.sh -i lint-report
-  artifacts:
-    paths:
-      - src/front/report.html
+# react-lint-report:
+#   image: node:8
+#   stage: styling
+#   script:
+#     - ./test.sh -i lint-report
+#   artifacts:
+#     paths:
+#       - src/front/report.html
 
-react-lint:
-  image: node:8
-  stage: styling
-  script:
-    - ./test.sh -i lint
+# react-lint:
+#   image: node:8
+#   stage: styling
+#   script:
+#     - ./test.sh -i lint
