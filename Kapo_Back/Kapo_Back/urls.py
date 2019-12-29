@@ -19,5 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Kapo_Back.kapo.urls')),
-    path('auth/', include('rest_framework.urls')),
+    path('', include('rest_framework.urls')),
 ]

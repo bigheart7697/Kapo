@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
 import datetime
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 PRODUCT_CATEGORIES = [("0", _("Default")),
                       ("1", _("Digital")),
@@ -22,7 +23,7 @@ PRODUCT_CATEGORIES = [("0", _("Default")),
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image_dir = random.randint(0, 1e20)
-    image = models.ImageField(upload_to='users/{}/'.format(image_dir), null=True)
+    image = models.ImageField(upload_to='users/{}/'.format(image_dir), null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     phone_number = PhoneNumberField(unique=True)
     city = models.CharField(max_length=100, default='')
@@ -47,7 +48,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 def year_choices():
-    return [(r, r) for r in range(1979, datetime.date.today().year + 1)]
+    return [(r, r) for r in range(1900, datetime.date.today().year + 1)]
 
 
 def current_year():
@@ -60,15 +61,16 @@ class Product(models.Model):
     name = models.CharField(_("name"), max_length=100, default="")
     image_dir = random.randint(0, 1e20)
     image = models.ImageField(_("image"), upload_to='products/{}/'.format(image_dir), height_field=None,
-                              width_field=None, null=True)
+                              width_field=None, null=True, blank=True)
     description = models.TextField(_("description"), default="")
     owner = models.ForeignKey(Profile, related_name=_('products'), on_delete=models.CASCADE)
     main_category = models.CharField(_("category"), choices=PRODUCT_CATEGORIES, max_length=100, default=0)
     # if main_category == "Digital devices":
     #     sub_category = models.CharField()
-    price = models.IntegerField(_("price"))
-    quantity = models.IntegerField(_("quantity"), default=1)
-    production_year = models.IntegerField(_('production year'), choices=year_choices(), default=current_year)
+    price = models.PositiveIntegerField(_("price"), validators=[MinValueValidator(0)])
+    quantity = models.PositiveIntegerField(_("quantity"), default=1, validators=[MinValueValidator(0)])
+    production_year = models.IntegerField(_('production year'), choices=year_choices(), default=current_year,
+                                          validators=[MaxValueValidator(current_year())])
     second_hand = models.BooleanField(_("second hand"), default=False)
     available = models.BooleanField(_("available"), default=False)
     visit_count = models.IntegerField(_("visit count"), default=0)
