@@ -27,9 +27,9 @@ SECRET_KEY = 'cky)4vk1(2sfkatfazii^s8e!4o%1zxj23d&o5%-xi*u0ad6%j'
 #
 # SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
-DEBUG = int(os.environ.get('DEBUG', default=1))
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/']
 
 
 # Application definition
