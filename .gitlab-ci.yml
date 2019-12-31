@@ -70,11 +70,11 @@ python-testing:
 #     paths:
 #       - src/htmlcov
 
-react-testing:
-  image: node:8
-  stage: testing
-  script:
-    - ./test.sh -i frontend
+# react-testing:
+#   image: node:8
+#   stage: testing
+#   script:
+#     - ./test.sh -i frontend
 #   artifacts:
 #     paths:
 #       - src/front/coverage
