@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from Kapo_Back.kapo.models import *
 from Kapo_Back.kapo.serializers import *
 from rest_framework import permissions
+from django.core.exceptions import ValidationError
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -35,8 +36,7 @@ class OrderCreateView(generics.CreateAPIView):
             remaining_quantity = product.quantity
             order_count = int(self.request.data['count'])
             if order_count > remaining_quantity:
-                content = {'error_message': 'The count ordered exceeds product quantity'}
-                return Response(content, status=status.HTTP_412_PRECONDITION_FAILED)
+                raise ValidationError('The count ordered exceeds product quantity')
             else:
                 product.quantity = remaining_quantity - order_count
                 product.save()

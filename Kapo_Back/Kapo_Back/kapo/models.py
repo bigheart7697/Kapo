@@ -85,7 +85,7 @@ class Order(models.Model):
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
     customer = models.ForeignKey(Profile, related_name=_("orders"), on_delete=models.CASCADE)
-    count = models.IntegerField(_('quantity'), default=1)
+    count = models.IntegerField(_('quantity'), default=1, validators=[MinValueValidator(1)])
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
     class Meta:
