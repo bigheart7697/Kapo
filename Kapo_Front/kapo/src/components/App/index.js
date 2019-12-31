@@ -7,12 +7,14 @@ import './index.scss'
 
 import mainpage from '../mainpage'
 import AddProduct from '../AddProduct'
+import Navbar from '../navbar'
 
 const App = () => {
     return (
         <div className="app-container">
             <Router history={history}>
                 <div>
+                    <Navbar></Navbar>
                     <Route path="/" exact component={mainpage}/>
                     <Route path="/AddProduct" exact component={AddProduct}/>
                 </div>

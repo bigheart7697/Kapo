@@ -1,0 +1,25 @@
+@import '../../../scss/base/variables.scss';
+
+.navitem__container{
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: 0.4s;
+    cursor: pointer;
+    margin: 0 1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    direction: rtl;
+}
+
+.navitem__container:hover{
+    background-color: $primary-color;
+    color: $secondary-color;
+}
+
+@media(max-width: 550px){
+    .navitem__container{
+        padding: 0.2rem;
+        font-size: 90%;
+    }
+}
