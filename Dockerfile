@@ -2,7 +2,7 @@
 FROM python:3.7-alpine
 
 # set work directory
-WORKDIR /app
+WORKDIR /Kapo_Back
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
