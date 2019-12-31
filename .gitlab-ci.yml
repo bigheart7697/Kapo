@@ -66,18 +66,18 @@ python-testing:
     - apt install -y nodejs npm
     - chmod +x ./test.sh
     - ./test.sh -i backend
-  artifacts:
-    paths:
-      - src/htmlcov
+#   artifacts:
+#     paths:
+#       - src/htmlcov
 
 react-testing:
   image: node:8
   stage: testing
   script:
     - ./test.sh -i frontend
-  artifacts:
-    paths:
-      - src/front/coverage
+#   artifacts:
+#     paths:
+#       - src/front/coverage
 
 # python-lint:
 #   stage: styling
