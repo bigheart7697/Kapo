@@ -168,4 +168,5 @@ heroku:
     - docker push $IMAGE:production
     - docker login -u _ -p $HEROKU_AUTH_TOKEN registry.heroku.com
     - docker push $HEROKU_REGISTRY_IMAGE
+    - chmod +x ./release.sh
     - ./release.sh
