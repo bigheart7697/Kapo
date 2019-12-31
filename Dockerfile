@@ -1,6 +1,6 @@
 FROM python:3.7-alpine AS build-python
 COPY ./Kapo_Back/requirements.txt /
-RUN apt-get install zlib
+RUN apk add install zlib
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /wheels -r requirements.txt
 
 FROM python:3.7-alpine
