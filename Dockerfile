@@ -20,4 +20,4 @@ WORKDIR /app
 COPY . .
 RUN adduser -D myuser
 USER myuser
-CMD gunicorn Kapo_Back.wsgi.application --bind 0.0.0.0:$PORT
+CMD cd .. && gunicorn Kapo_Back.wsgi:application --bind 0.0.0.0:$PORT
