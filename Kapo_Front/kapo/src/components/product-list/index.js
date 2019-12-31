@@ -14,7 +14,7 @@ class ProductList extends React.Component {
 
   renderList() {
 	  console.log(this.props.products)
-    return (this.props.products ? this.props.products.map((product, index) => {
+    return (this.props.products ? Object.values(this.props.products).map((product, index) => {
       return (
         <Product
           key={index}

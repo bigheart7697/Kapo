@@ -5,7 +5,7 @@ import "./style.scss";
 
 import CustomInput from "../basic/customInput";
 import CustomButton from "../basic/customButton";
-import WhiteSpace from '../basic/whitespace';
+import WhiteSpace from "../basic/whitespace";
 
 class Form extends React.Component {
   setComponent = type => {
@@ -20,8 +20,10 @@ class Form extends React.Component {
         className="form__container"
         onSubmit={this.props.handleSubmit(this.props.onSubmit)}
       >
-        { this.props.title ? <div className="form__title">{this.props.title}</div> : null}
-        <div className={'form__input-container'}>
+        {this.props.title ? (
+          <div className="form__title">{this.props.title}</div>
+        ) : null}
+        <div className={"form__input-container"}>
           {this.props.formValues.map((element, index) => {
             return (
               <Field
@@ -34,7 +36,9 @@ class Form extends React.Component {
           })}
         </div>
         <WhiteSpace space="2" />
-        {this.props.submitText ? <CustomButton text={this.props.submitText}/> : null}
+        {this.props.submitText ? (
+          <CustomButton text={this.props.submitText} />
+        ) : null}
       </form>
     );
   }
@@ -42,6 +46,18 @@ class Form extends React.Component {
 
 const validate = formValues => {
   const errors = {};
+  if (!formValues.name) {
+    errors.name = "لطفا نام کالا را وارد کنید";
+  }
+  if (!formValues.quantity) {
+    errors.quantity = "لطفا تعداد وارد کنید";
+  }
+  if (!formValues.price) {
+    errors.price = "لطفا قیمت وارد کنید";
+  }
+  if (!formValues.description) {
+    errors.description = "لطفا توضیحات محصول را وارد کنید";
+  }
   return errors;
 };
 

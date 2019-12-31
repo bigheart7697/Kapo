@@ -10,49 +10,24 @@ const FORM_VALUES = {
   title: "اضافه کردن کالای جدید",
   form_inputs: [
     {
-      title: "username",
-      label: "نام کاربری",
-      error: "لطفا نام خود را وارد کنید"
+      title: "name",
+      label: "نام کالا",
+      error: "لطفا نام کالا را وارد کنید"
     },
     {
-      title: "first_name",
-      label: "نام",
-      error: "لطفا نام خود را وارد کنید"
+      title: "quantity",
+      label: "تعداد",
+      error: "لطفا تعداد وارد کنید"
     },
     {
-      title: "last_name",
-      label: "نام خانوادگی",
-      error: "لطفا نام خانوادگی خود را وارد کنید"
+      title: "price",
+      label: "قیمت",
+      error: "لطفا قیمت وارد کنید"
     },
     {
-      title: "password",
-      label: "پسورد",
-      inputType: "password",
-      error: "لطفا پسورد خود را وارد نمایید"
-    },
-    {
-      title: "confirmPassword",
-      label: "تایید پسورد",
-      inputType: "password",
-      error: "لطفا پسورد خود را وارد نمایید"
-    },
-    {
-      title: "phone",
-      label: "شماره تلفن همراه",
-      error: "لطفا شماره همراه خود را وارد کنید"
-    },
-    {
-      title: "email",
-      label: "ایمیل",
-      error: "لطفا ایمیل خود را وارد کنید"
-    },
-    {
-      title: "city",
-      label: "شهر"
-    },
-    {
-      title: "province",
-      label: "استان"
+      title: "description",
+      label: "توضیحات",
+      error: "لطفا توضیحات محصول را وارد کنید"
     }
   ]
 };

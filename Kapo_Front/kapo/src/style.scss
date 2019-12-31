@@ -38,23 +38,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
-  font-family: 'BNazanin';
+  // font-family: 'BNazanin';
   text-align: right;
   margin: 0;
   background-color: $white;
 }
 
-a, span {
-  text-decoration: none;
-  font-family: 'BNazanin';
-}
+// a, span {
+//   text-decoration: none;
+//   font-family: 'BNazanin';
+// }
 
-h1, h2, h3, h4, h5 {
-  font-family: 'BNazanin';
-  font-weight: 300;
-}
+// h1, h2, h3, h4, h5 {
+//   font-family: 'BNazanin';
+//   font-weight: 300;
+// }
 
-.row {
-  max-width: 900px;
-  margin: 50px auto 0;
-}
+// .row {
+//   max-width: 900px;
+//   margin: 50px auto 0;
+// }
