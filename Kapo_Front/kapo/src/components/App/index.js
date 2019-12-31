@@ -6,6 +6,7 @@ import '../../style.scss'
 import './index.scss'
 
 import mainpage from '../mainpage'
+import AddProduct from '../AddProduct'
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
             <Router history={history}>
                 <div>
                     <Route path="/" exact component={mainpage}/>
+                    <Route path="/AddProduct" exact component={AddProduct}/>
                 </div>
             </Router>
         </div>
