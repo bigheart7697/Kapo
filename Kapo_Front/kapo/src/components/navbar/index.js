@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 import "./style.scss";
 
@@ -6,19 +7,24 @@ import NavItem from "../basic/navItem";
 
 const navItems = [
   {
-    text: "صفحه اصلی"
+    text: "صفحه اصلی",
+    link: "/"
   },
   {
-    text: "درباره ما"
+    text: "اضافه کردن محصول",
+    link: "/addProduct"
   },
   {
-    text: "محصولات"
+    text: "محصولات",
+    link: "/"
   },
   {
-    text: "ورود"
+    text: "ورود",
+    link: "/"
   },
   {
-    text: "خروج"
+    text: "خروج",
+    link: "/"
   }
 ];
 
@@ -28,7 +34,8 @@ class Navbar extends React.Component {
       <div className="navbar__container">
         <div className="navbar__content">
           {navItems.map((element, index) => {
-            return <NavItem key={index}>{element.text}</NavItem>;
+              //TODO wtf? =)))
+            return <Link to={element.link} key={index} className="navbar__link" style={{ color: 'inherit', textDecoration: 'inherit'}}><NavItem>{element.text}</NavItem></Link>;
           })}
         </div>
       </div>
