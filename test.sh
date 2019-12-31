@@ -70,7 +70,7 @@ function pythonlint {
 }
 
 function pythontest {
-  cd ./Backend
+  cd Kapo_Back
 #   npm install -g yarn yarnpkg webpack@1.12.13
 #   yarn install
 #   timeout 20 npm start || true
