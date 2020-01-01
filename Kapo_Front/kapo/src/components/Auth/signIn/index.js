@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux"
+import { SignIn as signInAction } from '../../../actions'
 
 import "./style.scss";
 
@@ -24,7 +26,7 @@ const FORM_VALUES = {
 
 class SignIn extends React.Component {
   onSubmit = (formValues) => {
-    console.log("signIn")
+    this.props.signInAction(formValues)
   };
   render() {
     return (
@@ -40,4 +42,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default connect(null, { signInAction })(SignIn);

@@ -8,6 +8,15 @@
       "price": "2333333333333",
       "second_hand": "True",
       "id": 1
+    },
+    {
+      "name": "reza",
+      "description": "asdasd",
+      "quantity": "4",
+      "production_year": "1963",
+      "price": "122",
+      "second_hand": "False",
+      "id": 2
     }
   ]
 }
