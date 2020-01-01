@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from django.utils.translation import ugettext_lazy as _
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cky)4vk1(2sfkatfazii^s8e!4o%1zxj23d&o5%-xi*u0ad6%j'
+# SECRET_KEY = 'cky)4vk1(2sfkatfazii^s8e!4o%1zxj23d&o5%-xi*u0ad6%j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#
+SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
-ALLOWED_HOSTS = []
+DEBUG = int(os.environ.get('DEBUG', default=0))
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/']
 
 
 # Application definition
@@ -51,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'Kapo_Back.urls'
@@ -133,3 +138,7 @@ LANGUAGES = [
     ('fa', _('Persian')),
     ('en', _('English')),
 ]
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# django_heroku.settings(locals())

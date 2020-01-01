@@ -5,3 +5,10 @@ asgiref>=3.2.3
 pytz>=2019.3
 setuptools>=42.0.2
 sqlparse>=0.3.0
+django-phonenumber-field>=4.0.0
+phonenumbers>=8.11.1
+Pillow>=6.2.1
+python-gettext>=4.0
+gunicorn==19.9.0
+whitenoise==4.1.2
+dj-database-url==0.5.0
