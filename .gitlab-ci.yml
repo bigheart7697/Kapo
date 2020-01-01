@@ -111,7 +111,7 @@ react-testing:
   stage: testing
   script:
     - cd Kapo_Front/kapo/src
-    - npm install -g yarn yarnpkg
+    # - npm install -g yarn yarnpkg
     - yarn install
     - yarn test
   artifacts:
