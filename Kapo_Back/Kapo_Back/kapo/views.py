@@ -1,3 +1,6 @@
+from django.http import HttpResponseRedirect
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics, status
 from rest_framework.response import Response
 from django.db.models import Q
@@ -6,6 +9,7 @@ from Kapo_Back.kapo.serializers import *
 from rest_framework import filters
 from rest_framework import permissions
 from django.core.exceptions import ValidationError
+from django.contrib.auth.views import LoginView
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -52,3 +56,14 @@ class ProductSearchView(generics.ListAPIView):
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'description']
+
+
+class DangerousLoginView(LoginView):
+    '''A LoginView with no CSRF protection.'''
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        if self.redirect_authenticated_user and self.request.user.is_authenticated:
+            redirect_to = self.get_success_url()
+            return HttpResponseRedirect(redirect_to)
+        return super(LoginView, self).dispatch(request, *args, **kwargs)
