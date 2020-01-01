@@ -1,0 +1,25 @@
+@import '../../../scss/base/variables.scss';
+
+.searchBar__item {
+    width: 100%;
+    text-align: center;
+    .searchBar__input {
+        padding: 5px 20px;
+        text-align: right;
+        width: 50%;
+        border: $borders 1px solid;
+        border-radius: 10px;
+        margin: 15px auto;
+        height: 30px;
+    }
+    .searchBar__input:focus{
+        outline: none;
+    }
+    .searchBar__icon {
+        position: relative;
+        top: 2px;
+        left: 30px;
+        color: $borders;
+    }
+}
+

@@ -102,18 +102,21 @@ python-testing:
     - apt install -y nodejs npm
     - chmod +x ./test.sh
     - ./test.sh -i backend
-#   artifacts:
-#     paths:
-#       - src/htmlcov
+  artifacts:
+    paths:
+      - src/htmlcov
 
-# react-testing:
-#   image: node:8
-#   stage: testing
-#   script:
-#     - ./test.sh -i frontend
-#   artifacts:
-#     paths:
-#       - src/front/coverage
+react-testing:
+  image: node:8
+  stage: testing
+  script:
+    - cd Kapo_Front/kapo
+    # - npm install -g yarn yarnpkg
+    - yarn install
+    - yarn test
+  artifacts:
+    paths:
+      - src/front/coverage
 
 # python-lint:
 #   stage: styling

@@ -1,0 +1,13 @@
+{
+  "products": [
+    {
+      "name": "poopoo",
+      "description": "AKA poopiii",
+      "quantity": "2",
+      "production_year": "1376",
+      "price": "2333333333333",
+      "second_hand": "True",
+      "id": 1
+    }
+  ]
+}

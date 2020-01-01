@@ -1,8 +1,28 @@
 import React from 'react'
+import ProductDetails from '../product-details';
+import faker from 'faker';
 
 const mainpage = () => {
     return(
-        <div> welcome to the project! </div>
+        <div>
+            <ProductDetails 
+                product={{
+                    name:'غذا',
+                    image:faker.image.food(), 
+                    details:'بسیار خوشمزه و سالم است',
+                    price:'200,000',
+                    second_hand: 'دست دوم',
+                    type: 'غذا',
+                    availability: 'موجود',
+                    year_produced: '1398',
+                    user: {
+                        name: 'محمد محمدی',
+                        address: 'تهران - تهران پارس',
+                        type: 'شخصی'
+                    }
+                }}
+            />
+		</div>
     )
 }
 
