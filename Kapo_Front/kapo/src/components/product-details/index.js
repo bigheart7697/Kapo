@@ -8,6 +8,7 @@ import "./style.scss";
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace'
+import { stat } from "fs";
 
 class ProductDetails extends React.Component {
 
@@ -102,7 +103,7 @@ class ProductDetails extends React.Component {
               <div
                 className="productDetails__image"
                 style={{
-                  backgroundImage: "url(" + this.state.image + ")"
+                  backgroundImage: "url(" + this.state.imag + ")"
                 }}
               ></div>
             </div>
@@ -121,7 +122,14 @@ class ProductDetails extends React.Component {
 
 const mapStatToProps = (state, ownProps) => {
   // return { product: state.products.products[ownProps.match.params.id] }
-  return { product: state.products.products[ownProps.match.params.id] }
+  let productItem = null
+  if(ownProps.match)
+  {
+    productItem = state.products.products[ownProps.match.params.id]
+  }else{
+    productItem = null
+  }
+  return { product: productItem}
 }
 
 export default connect(mapStatToProps, { addToCart, fetchProduct })(ProductDetails);
