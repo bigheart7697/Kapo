@@ -17,6 +17,7 @@ class ProductDetails extends React.Component {
     if(this.props.product){
       productImage = this.props.product.image
     }
+    console.log(this.props.product)
     return (
       <>
         <div className="productDetails__container">
@@ -55,7 +56,7 @@ class ProductDetails extends React.Component {
                   <td>سال ساخت</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? (this.props.product.user.type ? this.props.product.user.type : '-') : '-'}</td>
+                  <td>{this.props.product ? this.props.product.user ? (this.props.product.user.type ? this.props.product.user.type : '-') : '-' : '-'}</td>
                   <td>نوع آگهی</td>
                 </tr>
                 <tr>
@@ -106,7 +107,8 @@ class ProductDetails extends React.Component {
 }
 
 const mapStatToProps = (state, ownProps) => {
+  // return { product: state.products.products[ownProps.match.params.id] }
   return { product: state.products.products[ownProps.match.params.id] }
 }
 
-export default connect(null, { addToCart, fetchProduct })(ProductDetails);
+export default connect(mapStatToProps, { addToCart, fetchProduct })(ProductDetails);
