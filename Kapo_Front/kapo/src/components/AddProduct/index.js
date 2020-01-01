@@ -14,25 +14,6 @@ const FORM_VALUES = {
     {
       title: "name",
       label: "نام کالا",
-<<<<<<< HEAD
-      error: "لطفا نام کالا را وارد کنید"
-    },
-    {
-      title: "quantity",
-      label: "تعداد",
-      error: "لطفا تعداد وارد کنید"
-    },
-    {
-      title: "price",
-      label: "قیمت",
-      error: "لطفا قیمت وارد کنید"
-    },
-    {
-      title: "description",
-      label: "توضیحات",
-      error: "لطفا توضیحات محصول را وارد کنید"
-    }
-=======
       error: "لطفا نام کالای خود را وارد کنید"
     },
     {
@@ -70,7 +51,6 @@ const FORM_VALUES = {
       inputType: "checkbox",
       error: "لطفا نوع کالای خود را وارد نمایید"
     },
->>>>>>> 36663e9d5389f48a4283e57a90944b1a7892028d
   ]
 };
 

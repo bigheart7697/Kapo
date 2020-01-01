@@ -1,9 +1,6 @@
 import React from 'react'
-<<<<<<< HEAD
 import { Dimmer, Image } from 'semantic-ui-react'
 
-=======
->>>>>>> 36663e9d5389f48a4283e57a90944b1a7892028d
 import './style.scss'
 
 import history from "../../history"
