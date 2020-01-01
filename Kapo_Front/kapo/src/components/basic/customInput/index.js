@@ -3,7 +3,6 @@ import React from "react";
 import './style.scss'
 
 const BasicInput = props => {
-    console.log(props.input)
   return (
     <div className="custom-input__container">
       <div className="custom-input__inner-container">

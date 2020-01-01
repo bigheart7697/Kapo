@@ -1,6 +1,9 @@
 import React from 'react'
 import { Dimmer, Image } from 'semantic-ui-react'
+
 import './style.scss'
+
+import history from "../../history"
 
 class Product extends React.Component {
   state = { active: false, zIndex: -1, top: "30px" }
@@ -18,7 +21,7 @@ class Product extends React.Component {
 
   render () {
     return (
-      <div className='product__example-1 product__card'>
+      <div className='product__example-1 product__card' onClick={this.props.onClick}>
         <div className='product__wrapper' style={{ backgroundImage: 'url(' + this.props.image + ')' }}>
           <div className='product__date'>
             <span className='product__day'>{this.props.day}</span>

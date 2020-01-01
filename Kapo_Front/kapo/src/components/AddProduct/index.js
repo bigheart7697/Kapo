@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { addProduct } from '../../actions'
 
 import "./style.scss";
 
@@ -33,8 +35,8 @@ const FORM_VALUES = {
 };
 
 class AddProduct extends React.Component {
-  onSubmit = () => {
-    console.log("do action here");
+  onSubmit = (formValues) => {
+    this.props.addProduct(formValues)
   };
   render() {
     return (
@@ -50,4 +52,4 @@ class AddProduct extends React.Component {
   }
 }
 
-export default AddProduct;
+export default connect(null, { addProduct })(AddProduct);

@@ -2,7 +2,7 @@ import { FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_VALUE = {
-  products: []
+  products: {}
 };
 
 const productReducer = (state = INITIAL_VALUE, action) => {

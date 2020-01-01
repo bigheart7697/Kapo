@@ -2,25 +2,31 @@
   "products": [
     {
       "id": 1,
-      "title": "product1"
+      "name": "product1"
     },
     {
       "id": 2,
-      "title": "product2"
+      "name": "product2"
     },
     {
       "id": 3,
-      "title": "product3"
+      "name": "product3"
     },
     {
       "id": 4,
-      "title": "product4"
+      "name": "product4"
     },
     {
       "id": 5,
-      "title": "product5"
+      "name": "product5"
+    },
+    {
+      "name": "pooopoooo",
+      "quantity": "2",
+      "price": "3999",
+      "description": "this is pooopooo AKA pooopoooi",
+      "id": 7
     }
   ],
-  "cart": [
-  ]
+  "cart": []
 }

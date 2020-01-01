@@ -37,7 +37,7 @@ class Form extends React.Component {
         </div>
         <WhiteSpace space="2" />
         {this.props.submitText ? (
-          <CustomButton text={this.props.submitText} />
+          <CustomButton text={this.props.submitText} type="submit" />
         ) : null}
       </form>
     );
