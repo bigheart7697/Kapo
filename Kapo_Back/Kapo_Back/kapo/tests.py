@@ -148,3 +148,19 @@ class OrderModelTests(TestCase):
     def test_negative_count_order(self):
         response = self.client.post(self.url, {'count': -2}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class SearchTests(TestCase):
+    def setUp(self):
+        self.username = 'dummy'
+        self.password = 'dummy'
+        self.email = 'dummy@gmail.com'
+        create_profile(username=self.username, password=self.password, email=self.email)
+        self.profile = Profile.objects.get(user=User.objects.get(username=self.username))
+        self.client.force_login(self.profile.user)
+        self.data = {'query': 'adorable'}
+        self.url = reverse('search')
+
+    def test_search(self):
+        response = self.client.get(self.url, self.data, format='json')
+        print(response)

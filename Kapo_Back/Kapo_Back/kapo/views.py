@@ -1,8 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-
+from django.db.models import Q
 from Kapo_Back.kapo.models import *
 from Kapo_Back.kapo.serializers import *
+from rest_framework import filters
 from rest_framework import permissions
 from django.core.exceptions import ValidationError
 
@@ -44,3 +45,10 @@ class OrderCreateView(generics.CreateAPIView):
                                 product=product)
         except Product.DoesNotExist:
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+class ProductSearchView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'description']
