@@ -9,21 +9,9 @@ class RightPanel extends React.Component {
 	render() {
 		return (
 			<div className="rightPanel__menu">
-				<a className="rightPanel__item">
-					<div className="rightPanel__counter">1</div>
-					<div className="rightPanel__text">Inbox</div>
-				 </a>
-				 <a className="rightPanel__item">
-					<div className="rightPanel__counter">1</div>
-					<div className="rightPanel__text">Inbox</div>
-				 </a>
-				 <a className="rightPanel__item">
-					<div className="rightPanel__counter">1</div>
-					<div className="rightPanel__text">Inbox</div>
-				 </a>
-				 <a className="rightPanel__item">
-					<div className="rightPanel__counter">1</div>
-					<div className="rightPanel__text">Inbox</div>
+				<a className="rightPanel__item" href="/">
+					<div className="rightPanel__counter">10</div>
+					<div className="rightPanel__text">محصولات</div>
 				 </a>
 			</div>
 		);

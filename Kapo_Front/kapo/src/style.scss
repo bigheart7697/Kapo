@@ -1,60 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
-// Variables
-$regal-blue: #034378;
-$san-juan: #2d4e68;
-$bermuda: rgb(0, 86, 123);
-$lightgreen: rgb(83, 203, 255);
-$white: #eee;
-$superwhite: #fff;
-$black: #000;
-$borders: #aaa;
-$gray: #999;
-$open-sans: 'Open Sans',
-sans-serif;
 // clear-fix mixin
 @mixin cf {
-  &::before,
-  &::after {
-    content: '';
-    display: table;
-  }
-  &::after {
-    clear: both;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@font-face {
-    font-family: 'BNazanin';
-    src: url('./fonts/BNazanin.eot?#') format('eot'),  /* IE6–8 */
-            url('./fonts/BNazanin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-            url('./fonts/BNazanin.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
-}
-
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
-  font-family: 'BNazanin';
-  text-align: right;
-  margin: 0;
-  background-color: $white;
-}
-
-a, span {
-  text-decoration: none;
-  font-family: 'BNazanin';
-}
-
-h1, h2, h3, h4, h5 {
-  font-family: 'BNazanin';
-  font-weight: 300;
-}
-
-.row {
-  max-width: 900px;
-  margin: 50px auto 0;
+    &::before,
+    &::after {
+        content: '';
+        display: table;
+    }
+    &::after {
+        clear: both;
+    }
 }

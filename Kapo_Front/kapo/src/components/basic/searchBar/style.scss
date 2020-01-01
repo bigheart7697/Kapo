@@ -1,4 +1,4 @@
-@import '../../../style.scss';
+@import '../../../scss/base/variables.scss';
 
 .searchBar__item {
     width: 100%;
@@ -13,9 +13,9 @@
         height: 30px;
     }
     .searchBar__icon {
-        position: absolute;
-        top: 20px;
-        left: 21%;
+        position: relative;
+        top: 2px;
+        left: 30px;
         color: $borders;
     }
 }

@@ -6,54 +6,49 @@ import Form from '../form'
 import FormWrapper from '../formWrapper'
 
 const FORM_VALUES = {
-  submitText: "اضافه",
+  submitText: "ثبت",
   title: "اضافه کردن کالای جدید",
   form_inputs: [
     {
-      title: "username",
-      label: "نام کاربری",
-      error: "لطفا نام خود را وارد کنید"
+      title: "name",
+      label: "نام کالا",
+      error: "لطفا نام کالای خود را وارد کنید"
     },
     {
-      title: "first_name",
-      label: "نام",
-      error: "لطفا نام خود را وارد کنید"
+      title: "description",
+      label: "توضیحات",
+      type: "password",
+      error: "لطفا توضیحات مربوط به کالای خود را وارد کنید"
     },
     {
-      title: "last_name",
-      label: "نام خانوادگی",
-      error: "لطفا نام خانوادگی خود را وارد کنید"
+      title: "quantity",
+      label: "تعداد کالای موجود",
+      inputType: "number",
+      error: "لطفا تعداد کالای موجود را وارد کنید"
     },
     {
-      title: "password",
-      label: "پسورد",
-      inputType: "password",
-      error: "لطفا پسورد خود را وارد نمایید"
+      title: "production_year",
+      label: "سال تولید",
+      inputType: "number",
+      error: "لطفا سال تولید کالای خود را وارد نمایید"
     },
     {
-      title: "confirmPassword",
-      label: "تایید پسورد",
-      inputType: "password",
-      error: "لطفا پسورد خود را وارد نمایید"
+      title: "second_hand",
+      label: "آیا کالا دست دوم است؟",
+      error: "لطفا نوع کالای خود را وارد نمایید"
     },
     {
-      title: "phone",
-      label: "شماره تلفن همراه",
-      error: "لطفا شماره همراه خود را وارد کنید"
+      title: "second_hand",
+      label: "دست دوم",
+      inputType: "checkbox",
+      error: "لطفا نوع کالای خود را وارد نمایید"
     },
     {
-      title: "email",
-      label: "ایمیل",
-      error: "لطفا ایمیل خود را وارد کنید"
+      title: "second_hand",
+      label: "نو",
+      inputType: "checkbox",
+      error: "لطفا نوع کالای خود را وارد نمایید"
     },
-    {
-      title: "city",
-      label: "شهر"
-    },
-    {
-      title: "province",
-      label: "استان"
-    }
   ]
 };
 

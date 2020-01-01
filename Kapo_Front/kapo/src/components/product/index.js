@@ -1,5 +1,4 @@
 import React from 'react'
-import { Dimmer, Image } from 'semantic-ui-react'
 import './style.scss'
 
 class Product extends React.Component {
@@ -29,7 +28,7 @@ class Product extends React.Component {
             <div className='product__content'>
               <span className='product__author'>{this.props.address}</span>
               <h1 className='product__title'>
-                <a href='#'>{this.props.title}</a>
+                <a href='/'>{this.props.title}</a>
               </h1>
               <p className='product__text'>{this.props.description}</p>
               {/*
