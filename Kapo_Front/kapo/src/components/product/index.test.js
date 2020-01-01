@@ -38,21 +38,4 @@ describe('ProductList component', () => {
         expect(wrapper.find('.product__month').text()).toEqual('08');
         expect(wrapper.find('.product__year').text()).toEqual('1398');
     });
-
-    it('check if panel goes up on hover', () => {
-        const wrapper = shallow(
-            <Product 
-                title= 'تست'
-                description= 'تست'
-                price= '120000'
-                year= '1398'
-                month= '08'
-                day= '1'
-                address= 'نیاوران'
-            />
-        );
-        const product_content = wrapper.find('.product__wrapper');
-        product_content.simulate('hover');
-        expect(wrapper.find('.product__data').get(0)).toHaveStyleRule('transform', 'translateY(0)');
-    });
 });
