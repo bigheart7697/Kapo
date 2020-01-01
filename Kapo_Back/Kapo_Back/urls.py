@@ -15,15 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import views
-from Kapo_Back.kapo.views import DangerousLoginView
-from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^login/$', csrf_exempt(DangerousLoginView.as_view()), name='login'),
-    url(r'^logout/$', csrf_exempt(views.LogoutView.as_view()), name='logout'),
     path('', include('Kapo_Back.kapo.urls')),
-    # path('', include('rest_framework.urls')),
+    path('', include('rest_framework.urls')),
 ]
