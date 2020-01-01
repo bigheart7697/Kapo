@@ -4,6 +4,8 @@ from Kapo_Back.kapo.serializers import *
 from rest_framework import filters
 from rest_framework import permissions
 from django.core.exceptions import ValidationError
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -50,3 +52,11 @@ class ProductSearchView(generics.ListAPIView):
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'description']
+
+
+def csrf(request):
+    return JsonResponse({'csrfToken': get_token(request)})
+
+
+def ping(request):
+    return JsonResponse({'result': 'OK'})

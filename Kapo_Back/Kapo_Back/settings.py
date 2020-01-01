@@ -151,3 +151,5 @@ LANGUAGES = [
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # django_heroku.settings(locals())
+
+CSRF_TRUSTED_ORIGINS = ['localhost:3000']
