@@ -4,15 +4,21 @@ import { addToCart, fetchProduct } from '../../actions'
 
 import "./style.scss";
 
+import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 
 class ProductDetails extends React.Component {
+
+  state = {
+    count: 0
+  }
 
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
   }
 
   render() {
+    console.log(this.state.count)
     let productImage = null
     if(this.props.product){
       productImage = this.props.product.image
@@ -76,12 +82,12 @@ class ProductDetails extends React.Component {
               <tbody>
                 <tr>
                   <td className="productDetails__column">
-                    {this.props.user ? this.props.product.user.name ? this.props.product.user.name : '-' : '-'}
+                    {this.props.product ?  this.props.product.owner :'-'}
                   </td>
                   <td className="productDetails__column">نام</td>
                 </tr>
                 <tr>
-                  <td>{this.props.user ? this.props.product.user.address ? this.props.product.user.address : '-' : '-'}</td>
+                  <td>{this.props.product ? this.props.product.user ? this.props.product.user.address ? this.props.product.user.address : '-' : '-' : '-'}</td>
                   <td>آدرس</td>
                 </tr>
               </tbody>
@@ -99,7 +105,8 @@ class ProductDetails extends React.Component {
           </div>
         </div>
         <div className="productDetails__button-container">
-          <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.name)}/>
+          <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
+          <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
         </div>
       </>
     );
