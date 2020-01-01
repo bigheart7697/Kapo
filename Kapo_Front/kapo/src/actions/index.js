@@ -19,7 +19,10 @@ export const addProduct = product => async dispatch => {
 };
 
 export const fetchProduct = id => async dispatch => {
-  const response = await server.get(`/products/${id}`)
+  console.log("id")
+  console.log(id)
+  const response = await server.get(`/product/${id}`)
+  console.log(response)
   dispatch({ type: FETCH_PRODUCT, payload: response.data })
 }
 

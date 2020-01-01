@@ -6,6 +6,7 @@ import "./style.scss";
 
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
+import Whitespace from '../basic/whitespace'
 
 class ProductDetails extends React.Component {
 
@@ -50,11 +51,11 @@ class ProductDetails extends React.Component {
                   <td className="productDetails__column">نوع کالا</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.type : '-'}</td>
+                  <td>{this.props.product ? this.props.product.type ? this.props.product.type : '-' : '-'}</td>
                   <td>دسته کالا</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.availability : '-'}</td>
+                  <td>{this.props.product ? this.props.product.availability ? this.props.product.availability : '-' : '-'}</td>
                   <td>در دسترس بودن</td>
                 </tr>
                 <tr>
@@ -106,7 +107,9 @@ class ProductDetails extends React.Component {
         </div>
         <div className="productDetails__button-container">
           <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
+          <Whitespace space="1"/>
           <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
+          <Whitespace space="1"/>
         </div>
       </>
     );
