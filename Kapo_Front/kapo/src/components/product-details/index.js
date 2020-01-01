@@ -12,10 +12,12 @@ import Whitespace from '../basic/whitespace'
 class ProductDetails extends React.Component {
 
   state = {
-    count: 0
+    count: 0,
+    image: ""
   }
 
   componentDidMount() {
+    this.setState({ image: faker.image.image() })
     this.props.fetchProduct(this.props.match.params.id);
   }
 
@@ -100,7 +102,7 @@ class ProductDetails extends React.Component {
               <div
                 className="productDetails__image"
                 style={{
-                  backgroundImage: "url(" + faker.image.image() + ")"
+                  backgroundImage: "url(" + this.state.image + ")"
                 }}
               ></div>
             </div>
