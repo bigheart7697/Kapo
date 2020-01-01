@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToCart, fetchProduct } from '../../actions'
+import { addToCart, fetchProduct } from '../../actions';
+import faker from 'faker';
 
 import "./style.scss";
 
@@ -99,7 +100,7 @@ class ProductDetails extends React.Component {
               <div
                 className="productDetails__image"
                 style={{
-                  backgroundImage: "url(" + productImage + ")"
+                  backgroundImage: "url(" + faker.image.image() + ")"
                 }}
               ></div>
             </div>
