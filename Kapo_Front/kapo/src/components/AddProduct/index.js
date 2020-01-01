@@ -37,20 +37,13 @@ const FORM_VALUES = {
     {
       title: "second_hand",
       label: "آیا کالا دست دوم است؟",
+      type: "select",
+      content:[
+        {text: "بله", value: "True"},
+        {text: "خیر", value: "False"}
+      ],
       error: "لطفا نوع کالای خود را وارد نمایید"
-    },
-    {
-      title: "second_hand",
-      label: "دست دوم",
-      inputType: "checkbox",
-      error: "لطفا نوع کالای خود را وارد نمایید"
-    },
-    {
-      title: "second_hand",
-      label: "نو",
-      inputType: "checkbox",
-      error: "لطفا نوع کالای خود را وارد نمایید"
-    },
+    }
   ]
 };
 

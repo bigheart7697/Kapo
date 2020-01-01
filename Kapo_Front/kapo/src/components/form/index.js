@@ -5,11 +5,14 @@ import "./style.scss";
 
 import CustomInput from "../basic/customInput";
 import CustomButton from "../basic/customButton";
+import CustomSelect from "../basic/customSelect"
 import WhiteSpace from "../basic/whitespace";
 
 class Form extends React.Component {
   setComponent = type => {
     switch (type) {
+      case "select":
+        return CustomSelect
       default:
         return CustomInput;
     }
@@ -30,6 +33,9 @@ class Form extends React.Component {
                 name={element.title}
                 component={this.setComponent(element.type)}
                 label={element.label}
+                type={element.inputType}
+                content={element.content}
+                full={true}
                 key={index}
               />
             );
@@ -57,6 +63,12 @@ const validate = formValues => {
   }
   if (!formValues.description) {
     errors.description = "لطفا توضیحات محصول را وارد کنید";
+  }
+  if (!formValues.production_year){
+    errors.production_year = "لطفا سال تولید کالای خود را وارد نمایید"
+  }
+  if (!formValues.production_year){
+    errors.production_year = "لطفا نوع کالای خود را وارد نمایید"
   }
   return errors;
 };
