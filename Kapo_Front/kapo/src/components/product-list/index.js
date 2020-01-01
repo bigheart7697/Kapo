@@ -21,11 +21,11 @@ class ProductList extends React.Component {
             image={product.image}
             title={product.name}
             price={product.price}
-            month={product.created.month}
-            day={product.created.day}
-            year={product.created.year}
+            month={product.created ? product.created.month : null}
+            day={product.created ? product.created.day : null}
+            year={product.created ? product.created.year : null}
             description={product.description}
-            address={product.user.address}
+            address={product.user ? product.user.address : null}
             onClick={() => history.push(`/product/${product.id}`)}
           />
         );
