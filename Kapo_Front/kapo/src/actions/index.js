@@ -30,9 +30,9 @@ export const searchProducts = search => async dispatch => {
   console.log(search)
   let response
   if(search !== ""){
-    response = await server.get(`/products/?name=${search}/`);
+    response = await server.get(`/search?search=${search}/`);
   }else{
-    response = await server.get(`/products/`)
+    response = await server.get(`/`)
   }
   console.log(response)
   dispatch({ type: SEARCH_ITEM, payload: response.data });
