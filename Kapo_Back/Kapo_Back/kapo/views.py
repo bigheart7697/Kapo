@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 
 class ProductCreateView(generics.CreateAPIView):
     serializer_class = ProductSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(owner=Profile.objects.get(user=self.request.user))
@@ -23,12 +23,12 @@ class ProductListView(generics.ListAPIView):
 class ProductDetailView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         try:
