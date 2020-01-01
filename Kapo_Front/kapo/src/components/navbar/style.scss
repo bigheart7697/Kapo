@@ -1,0 +1,19 @@
+@import '../../scss/base/variables.scss';
+
+.navbar__container{
+    border-radius: 3rem 5rem;
+    border: 1px solid $primary-color;
+    margin: 2rem 5rem;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.navbar__content{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.navbar__link{
+    text-decoration: inherit;
+    color: inherit;
+}
