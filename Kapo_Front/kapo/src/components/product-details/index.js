@@ -1,18 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToCart } from '../../actions'
+import { addToCart, fetchProduct } from '../../actions'
 
 import "./style.scss";
 
 import Button from "../basic/customButton";
 
 class ProductDetails extends React.Component {
+
+  componentDidMount() {
+    this.props.fetchProduct(this.props.match.params.id);
+  }
+
   render() {
     return (
       <>
         <div className="productDetails__container">
           <div className="productDetails__leftPanel">
-            <h1>{this.props.product.name}</h1>
+            <h1>{ this.props.product.name}</h1>
 
             <h4 className="ui horizontal divider header">
               <i className="tags icon"></i>
@@ -95,4 +100,8 @@ class ProductDetails extends React.Component {
   }
 }
 
-export default connect(null, { addToCart })(ProductDetails);
+const mapStatToProps = (state, ownProps) => {
+  return { product: state.products.products[ownProps.match.params.id] }
+}
+
+export default connect(null, { addToCart, fetchProduct })(ProductDetails);

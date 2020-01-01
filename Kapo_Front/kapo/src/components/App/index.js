@@ -5,7 +5,7 @@ import '../../style.scss'
 
 import './index.scss'
 
-import mainpage from '../mainpage'
+import productDetails from '../product-details'
 import AddProduct from '../AddProduct'
 import Navbar from '../navbar'
 import productList from '../product-list'
@@ -19,7 +19,7 @@ const App = () => {
                 <div>
                     <Navbar></Navbar>
                     <Route path="/" exact component={productList}/>
-                    <Route path="/product/:id" exact component={mainpage}/>
+                    <Route path="/product/:id" exact component={productDetails}/>
                     <Route path="/AddProduct" exact component={AddProduct}/>
                     <Route path="/Auth/SignIn" exact component={SignIn}/>
                     <Route path="/Auth/SignUp" exact component={SignUp}/>

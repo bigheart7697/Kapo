@@ -1,6 +1,6 @@
 import server from "../apis/server";
 
-import { FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM } from "./types";
+import { FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/products/");
@@ -17,7 +17,13 @@ export const addProduct = product => async dispatch => {
   }
 };
 
+export const fetchProduct = id => async dispatch => {
+  const response = await server.get(`/products/${id}`)
+  dispatch({ type: FETCH_PRODUCT, payload: response.data })
+}
+
 export const searchProducts = search => async dispatch => {
+  console.log(search)
   let response
   if(search !== ""){
     response = await server.get(`/products/?name=${search}/`);

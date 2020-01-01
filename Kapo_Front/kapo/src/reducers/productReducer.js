@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM } from "../actions/types";
+import { FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_VALUE = {
@@ -15,7 +15,7 @@ const productReducer = (state = INITIAL_VALUE, action) => {
     // case DELETE_PRODUCT:
     //   return { ...state, products: _.omit(state.products, action.payload) };
     case ADD_PRODUCT:
-      // case FETCH_PRODUCT:
+    case FETCH_PRODUCT:
       // case EDIT_PRODUCT:
       return {
         ...state,
