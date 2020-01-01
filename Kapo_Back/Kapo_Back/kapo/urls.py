@@ -23,7 +23,8 @@ urlpatterns = [
     path('', views.ProductListView.as_view()),
     url(r'add-product', views.ProductCreateView.as_view(), name='add_product'),
     url(r'^product/(?P<pk>\d+)$', views.ProductDetailView.as_view()),
-    url(r'^product/(?P<pk>\d+)/order', views.OrderCreateView.as_view(), name='order')
+    url(r'^product/(?P<pk>\d+)/order', views.OrderCreateView.as_view(), name='order'),
+    url(r'search', views.ProductSearchView.as_view(), name='search')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
