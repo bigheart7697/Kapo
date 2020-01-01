@@ -35,6 +35,12 @@ const FORM_VALUES = {
       error: "لطفا سال تولید کالای خود را وارد نمایید"
     },
     {
+      title: "price",
+      label: "قیمت",
+      inputType: "number",
+      error: "لطفا قیمت کالای موجود را وارد کنید"
+    },
+    {
       title: "second_hand",
       label: "آیا کالا دست دوم است؟",
       type: "select",

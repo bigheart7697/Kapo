@@ -20,7 +20,11 @@ const navItems = [
   },
   {
     text: "ورود",
-    link: "/"
+    link: "/Auth/SignIn"
+  },
+  {
+    text: "ثبت نام",
+    link: "/Auth/SignUp"
   },
   {
     text: "خروج",

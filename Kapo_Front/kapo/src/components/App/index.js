@@ -9,6 +9,8 @@ import mainpage from '../mainpage'
 import AddProduct from '../AddProduct'
 import Navbar from '../navbar'
 import productList from '../product-list'
+import SignIn from '../Auth/signIn'
+import SignUp from '../Auth/signUp'
 
 const App = () => {
     return (
@@ -19,6 +21,8 @@ const App = () => {
                     <Route path="/" exact component={productList}/>
                     <Route path="/product/:id" exact component={mainpage}/>
                     <Route path="/AddProduct" exact component={AddProduct}/>
+                    <Route path="/Auth/SignIn" exact component={SignIn}/>
+                    <Route path="/Auth/SignUp" exact component={SignUp}/>
                 </div>
             </Router>
         </div>

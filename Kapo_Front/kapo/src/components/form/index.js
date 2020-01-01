@@ -53,7 +53,7 @@ class Form extends React.Component {
 const validate = formValues => {
   const errors = {};
   if (!formValues.name) {
-    errors.name = "لطفا نام کالا را وارد کنید";
+    errors.name = "لطفا نام را وارد کنید";
   }
   if (!formValues.quantity) {
     errors.quantity = "لطفا تعداد وارد کنید";
@@ -69,6 +69,21 @@ const validate = formValues => {
   }
   if (!formValues.production_year){
     errors.production_year = "لطفا نوع کالای خود را وارد نمایید"
+  }
+  if(!formValues.price){
+    errors.production_year = "لطفا قیمت کالای موجود را وارد کنید"
+  }
+  if(!formValues.username){
+    errors.username = "لطفا نام کاربری خود را وارد کنید"
+  }
+  if(!formValues.password){
+    errors.password = "لطفا رمز عبور خود را وارد کنید"
+  }
+  if(!formValues.city){
+    errors.city = "لطفا شهر خود را وارد کنید"
+  }
+  if(!formValues.phone_number){
+    errors.phone_number = "لطفا شماره تلفن خود را وارد کنید"
   }
   return errors;
 };
