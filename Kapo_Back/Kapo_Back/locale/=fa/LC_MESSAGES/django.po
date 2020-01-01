@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-23 15:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: Kapo_Back/kapo/models.py:8
+msgid "Digital"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:9
+msgid "Health-Care"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:10
+msgid "Tools, office supplies and car"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:11
+msgid "Fashion"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:12
+msgid "Home appliance"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:13
+msgid "Book, stationary and art"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:14
+msgid "Toys and baby"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:15
+msgid "Sport and traveling"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:16
+msgid "Food and drink"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:46
+msgid "creation date"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:47
+msgid "name"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:48
+msgid "image"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:49
+msgid "description"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:51
+msgid "category"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:54
+msgid "price"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:55
+msgid "second hand"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:56
+msgid "available"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:57
+msgid "visit count"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:61
+msgid "Product"
+msgstr ""
+
+#: Kapo_Back/kapo/models.py:62
+msgid "Products"
+msgstr ""
+
+#: Kapo_Back/settings.py:133
+msgid "Persian"
+msgstr ""
+
+#: Kapo_Back/settings.py:134
+msgid "English"
+msgstr ""

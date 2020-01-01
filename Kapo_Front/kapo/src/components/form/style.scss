@@ -1,0 +1,12 @@
+.form__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form__title{
+    padding-bottom: 2rem;
+    font-size: 20px;
+    font-weight: 600;
+}

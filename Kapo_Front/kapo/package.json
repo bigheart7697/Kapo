@@ -7,6 +7,8 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.0",
+    "faker": "^4.1.0",
+    "lodash": "^4.17.15",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -15,7 +17,9 @@
     "react-scripts": "3.3.0",
     "redux": "^4.0.4",
     "redux-form": "^8.2.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.88.2",
+    "vazir-font": "^21.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest-styled-components": "^7.0.0-2",
+    "redux-mock-store": "^1.5.4",
+    "styled-components": "^4.4.1"
   }
 }
