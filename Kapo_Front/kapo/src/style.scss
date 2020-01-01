@@ -1,18 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
-// Variables
-$regal-blue: #034378;
-$san-juan: #2d4e68;
-$bermuda: rgb(0, 86, 123);
-$lightgreen: rgb(83, 203, 255);
-$white: #eee;
-$superwhite: #fff;
-$black: #000;
-$borders: #aaa;
-$gray: #999;
-$open-sans: 'Open Sans',
-sans-serif;
 // clear-fix mixin
 @mixin cf {
+<<<<<<< HEAD
   &::before,
   &::after {
     content: '';
@@ -58,3 +46,14 @@ body {
 //   max-width: 900px;
 //   margin: 50px auto 0;
 // }
+=======
+    &::before,
+    &::after {
+        content: '';
+        display: table;
+    }
+    &::after {
+        clear: both;
+    }
+}
+>>>>>>> 36663e9d5389f48a4283e57a90944b1a7892028d

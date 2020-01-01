@@ -1,6 +1,9 @@
 import React from 'react'
+<<<<<<< HEAD
 import { Dimmer, Image } from 'semantic-ui-react'
 
+=======
+>>>>>>> 36663e9d5389f48a4283e57a90944b1a7892028d
 import './style.scss'
 
 import history from "../../history"
@@ -32,7 +35,7 @@ class Product extends React.Component {
             <div className='product__content'>
               <span className='product__author'>{this.props.address}</span>
               <h1 className='product__title'>
-                <a href='#'>{this.props.title}</a>
+                <a href='/'>{this.props.title}</a>
               </h1>
               <p className='product__text'>{this.props.description}</p>
               {/*

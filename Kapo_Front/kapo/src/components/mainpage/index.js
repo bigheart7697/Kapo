@@ -1,5 +1,4 @@
 import React from 'react'
-import ProductList from '../product-list';
 import ProductDetails from '../product-details';
 import faker from 'faker';
 

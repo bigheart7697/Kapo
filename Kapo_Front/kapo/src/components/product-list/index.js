@@ -1,5 +1,4 @@
 import React from "react";
-import faker from "faker";
 import { connect } from "react-redux";
 import Product from "../product";
 import RightPanel from "../right-panel";
@@ -9,10 +8,11 @@ import history from "../../history";
 import "./style.scss";
 
 class ProductList extends React.Component {
-  componentDidMount = () => {
-    this.props.fetchProducts();
-  };
+	componentDidMount = () => {
+		this.props.fetchProducts();
+	};
 
+<<<<<<< HEAD
   renderList() {
     console.log(this.props.products);
     return (!this.isEmpty(this.props.products)
@@ -58,6 +58,39 @@ class ProductList extends React.Component {
         </div>
       </div>
     );
+=======
+	renderList() {
+		return (this.props.products ? this.props.products.map((product, index) => {
+			return (
+				<Product 
+					image={product.image}
+					title={product.name}
+					price={product.price}
+					month={product.created.month}
+					day={product.created.day}
+					year={product.created.year}
+					description={product.description}
+					address={product.user.address}
+				/>
+			);
+		}) : null)
+	} 
+
+	onSubmit = (query) => {
+		this.props.searchProducts(query)
+	};
+
+	render() {
+		return (
+		<div>
+			<RightPanel />
+			<div className="productList__container">
+				<SearchBar onSubmit={this.onSubmit} />
+				{this.renderList()}
+			</div>
+		</div>
+		);
+>>>>>>> 36663e9d5389f48a4283e57a90944b1a7892028d
   }
 }
 
