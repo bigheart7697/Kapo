@@ -12,16 +12,14 @@ class ProductList extends React.Component {
 		return this.props.products.map(product => {
 			return (
 				<Product 
-					image={faker.image.image()}
-					title='ملک'
-					price={faker.commerce.price()}
-					month='مهر'
-					day='1'
-					year='1398'
-					description='طبقه دوم همراه با یک عدد پارکینگ و یک واحد ۵۵ متری حیاط دار در همکف و قابل اجاره دادن.'
-					comments={faker.random.number()}
-					likes={faker.random.number()}
-					address='نیاوران'	
+					image={product.image}
+					title={product.name}
+					price={product.price}
+					month={product.month}
+					day={product.day}
+					year={product.year}
+					description={product.description}
+					address={product.user.address}
 				/>
 			);
 		});
