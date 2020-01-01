@@ -18,15 +18,12 @@ const FORM_VALUES = {
 };
 
 class SetPrice extends React.Component {
-  onSubmit = (formValues) => {
-    this.props.addProduct(formValues)
-  };
   render() {
     return (
       <FormWrapper>
         <Form
           formValues={FORM_VALUES.form_inputs}
-          onSubmit={this.onSubmit}
+          onSubmit={this.props.onSubmit}
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
         ></Form>
