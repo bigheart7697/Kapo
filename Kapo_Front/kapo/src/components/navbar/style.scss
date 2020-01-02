@@ -5,6 +5,7 @@ $circle-radius : 7rem;
 $nav-height: 7rem;
 $tail-width : 10rem;
 $tail-height: 5.5rem;
+$transition-time: 0.4s;
 
 .navbar__container{
     max-width: 1000px;
@@ -40,6 +41,10 @@ $tail-height: 5.5rem;
     left: $circle-radius/2;
     top: -$tail-top-relative;
     border: 3px solid $second-color;
+    transition: $transition-time;
+    background-image: url('../../assets/user.png');
+    background-repeat: none;
+    background-size: 100% 100%;
 }
 
 .navbar__tail{
@@ -51,4 +56,15 @@ $tail-height: 5.5rem;
     width: $tail-width;
     background-color: $third-color;
     border-radius: 2rem;
+    transition: $transition-time;
+    cursor: pointer;
+}
+
+.navbar__tail:hover{
+    top: 0;
+    background-color: $second-color;
+    height: $nav-height;
+    .navbar__circle{
+        top: 0
+    }
 }

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./style.scss";
 
 import NavItem from "../basic/navItem";
+import NavDropDown from '../basic/navDropDown';
 
 const navItems = [
   {
@@ -56,6 +57,7 @@ class Navbar extends React.Component {
           </div>
           <div className="navbar__tail">
             <div className="navbar__circle"></div>
+            <NavDropDown/>
           </div>
         </div>
       </div>
