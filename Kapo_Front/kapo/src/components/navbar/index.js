@@ -34,7 +34,7 @@ const navItems = [
 ];
 
 class Navbar extends React.Component {
-  state = { active: 0 };
+  state = { active: 0, dropActive: false };
   navItemOnClick = (index) => {
     this.setState({ active : index })
   }
@@ -55,9 +55,9 @@ class Navbar extends React.Component {
               }
             })}
           </div>
-          <div className="navbar__tail">
+          <div className="navbar__tail" onClick={() => this.setState({ dropActive: !this.state.dropActive })}>
             <div className="navbar__circle"></div>
-            <NavDropDown/>
+            <NavDropDown active={this.state.dropActive}/>
           </div>
         </div>
       </div>

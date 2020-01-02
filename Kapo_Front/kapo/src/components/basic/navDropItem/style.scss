@@ -1,0 +1,10 @@
+@import '../../../scss/base/variables.scss';
+
+.nav-drop-item__container{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background-color: $seventh-color;
+    border: 2px solid $third-color;
+    margin: 0.5rem 0;
+}
