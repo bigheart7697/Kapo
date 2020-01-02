@@ -1,4 +1,5 @@
 import React from 'react'
+import anime from 'animejs'
 
 import './style.scss'
 
@@ -14,15 +15,14 @@ const navItems = [
     }
 ]
 
-class NavDropDown extends React.Component {
-    componentDidMount(){
-        
-    }
-    render(){
+const NavDropDown = (props) => {
+        let tl = anime.timeline({
+            easing: 'easeOutExpo',
+            duration: 1500
+        })
         return(<div className="nav-drop-down__container">
-            {this.props.active ? navItems.map((element, index) => <Item/>) : null}
+            {props.active ? navItems.map((element, index) => <Item key={index} tl={tl} delay={anime.stagger(200)}/>) : null}
         </div>)
-    }
 }
 
 export default NavDropDown
