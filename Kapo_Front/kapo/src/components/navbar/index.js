@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import "./style.scss";
 
 import NavItem from "../basic/navItem";
+import NavDropDown from '../basic/navDropDown';
 
 const navItems = [
   {
@@ -33,14 +34,31 @@ const navItems = [
 ];
 
 class Navbar extends React.Component {
+  state = { active: 0, dropActive: false };
+  navItemOnClick = (index) => {
+    this.setState({ active : index })
+  }
   render() {
     return (
-      <div className="navbar__container">
-        <div className="navbar__content">
-          {navItems.map((element, index) => {
-              //TODO wtf? =)))
-            return <Link to={element.link} key={index} className="navbar__link" style={{ color: 'inherit', textDecoration: 'inherit'}}><NavItem>{element.text}</NavItem></Link>;
-          })}
+      <div className="navbar__flex">
+        <div className="navbar__container">
+          <div className="navbar__content">
+            {navItems.map((element, index) => {
+              if (this.state.active === index) {
+                return (
+                  <NavItem key={index} active>
+                    {element.text}
+                  </NavItem>
+                );
+              } else {
+                return <NavItem key={index} onClick={() => this.navItemOnClick(index)}>{element.text}</NavItem>;
+              }
+            })}
+          </div>
+          <div className="navbar__tail" onClick={() => this.setState({ dropActive: !this.state.dropActive })}>
+            <div className="navbar__circle"></div>
+            <NavDropDown active={this.state.dropActive}/>
+          </div>
         </div>
       </div>
     );

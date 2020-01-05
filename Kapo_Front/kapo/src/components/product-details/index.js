@@ -1,20 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToCart, fetchProduct } from '../../actions'
+import { addToCart, fetchProduct } from '../../actions';
+import faker from 'faker';
 
 import "./style.scss";
 
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace'
+import { stat } from "fs";
 
 class ProductDetails extends React.Component {
 
   state = {
-    count: 0
+    count: 0,
+    image: ""
   }
 
   componentDidMount() {
+    this.setState({ image: faker.image.image() })
     this.props.fetchProduct(this.props.match.params.id);
   }
 
@@ -99,7 +103,7 @@ class ProductDetails extends React.Component {
               <div
                 className="productDetails__image"
                 style={{
-                  backgroundImage: "url(" + productImage + ")"
+                  backgroundImage: "url(" + this.state.imag + ")"
                 }}
               ></div>
             </div>
@@ -118,7 +122,14 @@ class ProductDetails extends React.Component {
 
 const mapStatToProps = (state, ownProps) => {
   // return { product: state.products.products[ownProps.match.params.id] }
-  return { product: state.products.products[ownProps.match.params.id] }
+  let productItem = null
+  if(ownProps.match)
+  {
+    productItem = state.products.products[ownProps.match.params.id]
+  }else{
+    productItem = null
+  }
+  return { product: productItem}
 }
 
 export default connect(mapStatToProps, { addToCart, fetchProduct })(ProductDetails);

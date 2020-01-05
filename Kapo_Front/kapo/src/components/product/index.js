@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimmer, Image } from 'semantic-ui-react'
+import faker from 'faker'
 
 import './style.scss'
 
@@ -22,7 +22,7 @@ class Product extends React.Component {
   render () {
     return (
       <div className='product__example-1 product__card' onClick={this.props.onClick ? this.props.onClick : null}>
-        <div className='product__wrapper' style={{ backgroundImage: 'url(' + this.props.image + ')' }}>
+        <div className='product__wrapper' style={{ backgroundImage: 'url(' + faker.image.image() + ')' }}>
           <div className='product__date'>
             <span className='product__day'>{this.props.day ? this.props.day : 1}</span>
             <span className='product__month'>{this.props.month ? this.props.month : "مهر"}</span>

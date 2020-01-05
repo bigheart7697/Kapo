@@ -8,9 +8,9 @@ import './index.scss'
 import productDetails from '../product-details'
 import AddProduct from '../AddProduct'
 import Navbar from '../navbar'
-import productList from '../product-list'
 import SignIn from '../Auth/signIn'
 import SignUp from '../Auth/signUp'
+import MainPage from '../mainpage'
 
 const App = () => {
     return (
@@ -18,7 +18,7 @@ const App = () => {
             <Router history={history}>
                 <div>
                     <Navbar></Navbar>
-                    <Route path="/" exact component={productList}/>
+                    <Route path="/" exact component={MainPage}/>
                     <Route path="/product/:id" exact component={productDetails}/>
                     <Route path="/AddProduct" exact component={AddProduct}/>
                     <Route path="/Auth/SignIn" exact component={SignIn}/>

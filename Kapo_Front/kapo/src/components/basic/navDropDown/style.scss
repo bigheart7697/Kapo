@@ -1,0 +1,9 @@
+@import "../../../scss/base/variables.scss";
+
+.nav-drop-down__container{
+    position: absolute;    
+    top: 7rem;
+    right: -1.5rem;
+    color: white;
+    z-index: 2;
+}

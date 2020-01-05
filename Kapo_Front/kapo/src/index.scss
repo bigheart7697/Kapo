@@ -3,6 +3,7 @@
 
 * {
     box-sizing: border-box;
+    position: relative;
 }
 
 @font-face {
@@ -13,22 +14,22 @@
 }
 
 body {
+    background-color: $first-color;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100vh;
     // font-family: 'BNazanin';
     text-align: right;
     margin: 0;
-    background-color: $white;
 }
 
 a, span {
     text-decoration: none;
-    font-family: 'BNazanin';
+    // font-family: 'BNazanin';
 }
 
 h1, h2, h3, h4, h5 {
-    font-family: 'BNazanin';
+    // font-family: 'BNazanin';
     font-weight: 300;
 }
 

@@ -1,0 +1,20 @@
+@import "../../../scss/base/variables.scss";
+
+.defenition-card__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    color: $white;
+}
+
+.defenition-card__title{
+    padding: 1rem 0;
+    font-weight: bold;
+}
+
+.defenition-card__text{
+    padding: 1rem 0;
+    line-height: 2.5rem;
+}
