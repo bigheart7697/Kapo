@@ -7,7 +7,11 @@ from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
 import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
+import os
 
+
+product_images_dir = 'static/products/'
+profile_images_dir = 'static/users/'
 PRODUCT_CATEGORIES = [("0", _("Default")),
                       ("1", _("Digital")),
                       ("2", _("Health-Care")),
@@ -23,7 +27,7 @@ PRODUCT_CATEGORIES = [("0", _("Default")),
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image_dir = random.randint(0, 1e20)
-    image = models.ImageField(upload_to='users/{}/'.format(image_dir), null=True, blank=True)
+    image = models.ImageField(upload_to=profile_images_dir, null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     phone_number = PhoneNumberField(unique=True)
     city = models.CharField(max_length=100, default='')
@@ -60,7 +64,7 @@ class Product(models.Model):
     created = models.DateTimeField(_("creation date"), auto_now_add=True)
     name = models.CharField(_("name"), max_length=100, default="")
     image_dir = random.randint(0, 1e20)
-    image = models.ImageField(_("image"), upload_to='products/{}/'.format(image_dir), height_field=None,
+    image = models.ImageField(_("image"), upload_to=product_images_dir, height_field=None,
                               width_field=None, null=True, blank=True)
     description = models.TextField(_("description"), default="")
     owner = models.ForeignKey(Profile, related_name=_('products'), on_delete=models.CASCADE)
