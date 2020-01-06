@@ -6,7 +6,9 @@ import ProductCard from '../basic/productCard'
 
 class ProductList extends React.Component{
     render(){
-        return(<ProductCard></ProductCard>)   
+        return(<div className="product-list__container">
+            <ProductCard></ProductCard>
+        </div>)
     }
 }
 

@@ -35,7 +35,7 @@ const navItems = [
 ];
 
 class Navbar extends React.Component {
-  state = { active: 0, dropActive: false };
+  state = { active: 2, dropActive: false };
   navItemOnClick = (index, link) => {
     this.setState({ active : index })
     history.push(link)
