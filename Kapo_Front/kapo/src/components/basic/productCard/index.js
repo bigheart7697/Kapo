@@ -1,10 +1,10 @@
 import React from 'react'
-import faker from 'faker'
+import faker from 'faker/locale/en'
 
 import './style.scss'
 
 class productCard extends React.Component {
-    state={mouseOver: false, image: faker.image.image()}
+    state={mouseOver: false, image: this.props.image}
     render() {
         return (<div className="product-card__container" onMouseEnter={() => this.setState({ mouseOver: true})} onMouseLeave={() => this.setState({ mouseOver: false })}>
             <div className="product-card__content">

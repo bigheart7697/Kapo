@@ -39,6 +39,7 @@ const mainpage = () => {
             <div className="main-page__slider">
                 <Slider heading="Example Slider" slides={slideData} /> 
             </div>
+            <ProductCard/>
             <DogAnimation/>
 		</div>
     )

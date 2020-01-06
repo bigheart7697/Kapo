@@ -143,7 +143,7 @@ class Slider extends React.Component {
         return (
             <div className='slider' aria-labelledby={headingId}>
                 <ul className="slider__wrapper" style={wrapperTransform}>
-                    <h3 id={headingId} class="visuallyhidden">{heading}</h3>
+                    <h3 id={headingId} className="visuallyhidden">{heading}</h3>
 
                     {slides.map(slide => {
                         return (
