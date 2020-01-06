@@ -5,6 +5,7 @@ import "./style.scss";
 
 import NavItem from "../basic/navItem";
 import NavDropDown from '../basic/navDropDown';
+import history from '../../history';
 
 const navItems = [
   {
@@ -17,7 +18,7 @@ const navItems = [
   },
   {
     text: "محصولات",
-    link: "/"
+    link: "/ProductList"
   },
   {
     text: "ورود",
@@ -35,8 +36,9 @@ const navItems = [
 
 class Navbar extends React.Component {
   state = { active: 0, dropActive: false };
-  navItemOnClick = (index) => {
+  navItemOnClick = (index, link) => {
     this.setState({ active : index })
+    history.push(link)
   }
   render() {
     return (
@@ -51,7 +53,7 @@ class Navbar extends React.Component {
                   </NavItem>
                 );
               } else {
-                return <NavItem key={index} onClick={() => this.navItemOnClick(index)}>{element.text}</NavItem>;
+                return <NavItem key={index} onClick={() => this.navItemOnClick(index, element.link)}>{element.text}</NavItem>;
               }
             })}
           </div>
