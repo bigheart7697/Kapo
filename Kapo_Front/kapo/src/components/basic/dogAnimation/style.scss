@@ -697,3 +697,10 @@ div:before, div:after {
 .dog-animation__content{
     
 }
+
+@media (max-width:600px){
+  .husky{
+    height: 30vmin;
+    width: 42vmin;
+  }
+}
