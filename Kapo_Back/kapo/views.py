@@ -1,8 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from Kapo_Back.kapo.serializers import *
+from kapo.serializers import *
 from rest_framework import filters
 from rest_framework import permissions
+from .permissions import IsOwnerOrReadOnly
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
@@ -13,7 +14,7 @@ class ProductCreateView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(owner=Profile.objects.get(user=self.request.user))
+        serializer.save(owner=self.request.user)
 
 
 class ProductListView(generics.ListAPIView):
@@ -21,10 +22,17 @@ class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
 
 
+class OwnerProductListView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        return Product.objects.filter(owner=self.request.user)
+
+
 class ProductDetailView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-    # permission_classes = [permissions.IsAuthenticated]
 
 
 class OrderCreateView(generics.CreateAPIView):
@@ -41,7 +49,7 @@ class OrderCreateView(generics.CreateAPIView):
             else:
                 product.quantity = remaining_quantity - order_count
                 product.save()
-                serializer.save(customer=Profile.objects.get(user=self.request.user),
+                serializer.save(customer=User.objects.get(id=self.request.user.id),
                                 product=product)
         except Product.DoesNotExist:
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)

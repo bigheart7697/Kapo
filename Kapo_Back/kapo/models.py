@@ -1,13 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from accounts.models import User
 import random
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from phonenumber_field.modelfields import PhoneNumberField
 import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
-import os
 
 
 product_images_dir = 'static/products/'
@@ -22,33 +19,6 @@ PRODUCT_CATEGORIES = [("0", _("Default")),
                       ("7", _("Toys and baby")),
                       ("8", _("Sport and traveling")),
                       ("9", _("Food and drink"))]
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image_dir = random.randint(0, 1e20)
-    image = models.ImageField(upload_to=profile_images_dir, null=True, blank=True)
-    bio = models.TextField(max_length=500, blank=True)
-    phone_number = PhoneNumberField(unique=True)
-    city = models.CharField(max_length=100, default='')
-    address = models.CharField(max_length=100, default='')
-
-    # visited_products = models.ManyToManyField(Product)
-
-    class Meta:
-        verbose_name = _('Profile')
-        verbose_name_plural = _('Profiles')
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 
 def year_choices():
@@ -67,7 +37,7 @@ class Product(models.Model):
     image = models.ImageField(_("image"), upload_to=product_images_dir, height_field=None,
                               width_field=None, null=True, blank=True)
     description = models.TextField(_("description"), default="")
-    owner = models.ForeignKey(Profile, related_name=_('products'), on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name=_('products'), on_delete=models.CASCADE)
     main_category = models.CharField(_("category"), choices=PRODUCT_CATEGORIES, max_length=100, default=0)
     # if main_category == "Digital devices":
     #     sub_category = models.CharField()
@@ -88,7 +58,7 @@ class Product(models.Model):
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
-    customer = models.ForeignKey(Profile, related_name=_("orders"), on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, related_name=_("orders"), on_delete=models.CASCADE)
     count = models.IntegerField(_('quantity'), default=1, validators=[MinValueValidator(1)])
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 

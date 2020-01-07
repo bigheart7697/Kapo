@@ -1,17 +1,10 @@
 from rest_framework import serializers
-from Kapo_Back.kapo.models import *
-
-
-class UserSerializer(serializers.ModelSerializer):
-    products = serializers.PrimaryKeyRelatedField(many=True, queryset=Product.objects.all())
-
-    class Meta:
-        model = Profile
-        fields = ['user', 'image', 'phone_number', 'city', 'address', 'products']
+from kapo.models import *
+from accounts.serializers import UserSerializer
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    owner = UserSerializer()
+    owner = UserSerializer(read_only=True)
 
     class Meta:
         model = Product
@@ -20,7 +13,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    customer = serializers.ReadOnlyField(source='customer.user.username')
+    customer = serializers.ReadOnlyField(source='customer.email')
     product = serializers.ReadOnlyField(source='product.id')
 
     class Meta:
