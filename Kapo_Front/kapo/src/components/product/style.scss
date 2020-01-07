@@ -133,22 +133,22 @@
       position: relative;
       display: inline-block;
       border-radius: 50%;
-      &::after,
-      &::before {
-        content: '';
-        display: block;
-        width: 5px;
-        height: 5px;
-        background-color: currentColor;
-        position: absolute;
-        border-radius: 50%;
-      }
-      &::before {
-        left: -10px;
-      }
-      &::after {
-        right: -10px;
-      }
+      // &::after,
+      // &::before {
+      //   content: '';
+      //   display: block;
+      //   width: 5px;
+      //   height: 5px;
+      //   background-color: currentColor;
+      //   position: absolute;
+      //   border-radius: 50%;
+      // }
+      // &::before {
+      //   left: -10px;
+      // }
+      // &::after {
+      //   right: -10px;
+      // }
     }
   }
   .product__menu-content {

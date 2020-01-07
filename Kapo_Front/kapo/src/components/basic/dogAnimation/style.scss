@@ -684,6 +684,7 @@ div:before, div:after {
     background-color: $color-bg;
     padding: 1rem;
     border-radius: 1rem;
+    margin-bottom: 2rem;
 }
 
 .dog-animation__definition{
@@ -696,4 +697,11 @@ div:before, div:after {
 
 .dog-animation__content{
     
+}
+
+@media (max-width:600px){
+  .husky{
+    height: 30vmin;
+    width: 42vmin;
+  }
 }
