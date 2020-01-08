@@ -14,17 +14,16 @@
 }
 
 .basic-select__inner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   text-align: center;
 }
 
 .basic-select__input {
-  border: none;
-  background-color: $primary-color;
-  height: 2.5rem;
+  background-color: $white;
+  height: 3.2rem;
   border-radius: 0.5rem;
   width: 95%;
   max-width: 20rem;
@@ -32,7 +31,6 @@
   transition: 0.4s;
   box-sizing: border-box;
   padding: 0 1rem;
-  color: white;
   cursor: pointer;
 }
 
@@ -47,9 +45,10 @@
 }
 
 .basic-select__label {
-  padding: 1.3rem 1rem;
+  padding: 1.3rem 0;
   width: 10rem;
   display: inline-block;
+  color: $white;
 }
 
 @media (max-width: 650px) {
