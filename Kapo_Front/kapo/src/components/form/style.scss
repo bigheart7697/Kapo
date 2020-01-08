@@ -1,3 +1,5 @@
+@import '../../scss/base/variables.scss';
+
 .form__container{
     display: flex;
     align-items: center;
@@ -9,4 +11,5 @@
     padding-bottom: 2rem;
     font-size: 20px;
     font-weight: 600;
+    color: $white;
 }

@@ -41,11 +41,11 @@
     overflow: hidden;
     white-space: nowrap;
     transition: 0.5s;
+    color: $white;
 }
 
 .product-card__container:hover .product-card__name{
     font-size: 2rem;
-    color: $second-color;
 }
 
 .product-card__description{
@@ -58,6 +58,7 @@
     padding: 1rem 2rem;
     font-size: 1.5rem;
     direction: rtl;
+    color: $white;
 }
 
 .product-card__image-container{
@@ -110,14 +111,14 @@
 }
 
 .product-card__details-button{
-    border: 1px solid $second-color;
+    border: 1px solid $white;
     padding: 1rem;
     border-radius: 0.5rem;
     transition: 0.5s;
-    color: $second-color;
+    color: $white;
 }
 
 .product-card__details-button:hover{
-    background-color: $second-color;
+    background-color: $white;
     color: $first-color;
 }

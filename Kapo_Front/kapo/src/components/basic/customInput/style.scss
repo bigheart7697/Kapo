@@ -15,7 +15,6 @@
 }
 
 .custom-input__input {
-  border: none;
   background-color: $secondary-color;
   height: 3.2rem;
   border-radius: 0.5rem;
@@ -24,7 +23,6 @@
   border: 2px solid $primary-color;
   transition: 0.4s;
   box-sizing: border-box;
-  padding: 1rem;
   padding: 1rem;
 }
 
@@ -43,6 +41,7 @@
   padding: 1.3rem 0;
   width: 10rem;
   display: inline-block;
+  color: $white;
 }
 
 @media (max-width: 650px) {
