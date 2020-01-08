@@ -5,10 +5,12 @@ from accounts.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name',
-                  'city', 'address', 'phone_number', 'photo')
+        fields = ('email', 'country', 'city', 'address', 'phone_number', 'photo',
+                  'is_corporate', 'first_name', 'last_name', 'is_corporate', 'corporate_name',
+                  'corporate_number')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
@@ -34,5 +36,8 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'password',
-                  'city', 'address', 'phone_number', 'photo', 'token')
+        fields = ('email', 'password',
+                  'country', 'city', 'address', 'phone_number', 'photo', 'token',
+                  'is_corporate', 'first_name', 'last_name', 'corporate_name',
+                  'corporate_number',
+                  )

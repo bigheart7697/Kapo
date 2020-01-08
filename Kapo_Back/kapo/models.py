@@ -39,8 +39,6 @@ class Product(models.Model):
     description = models.TextField(_("description"), default="")
     owner = models.ForeignKey(User, related_name=_('products'), on_delete=models.CASCADE)
     main_category = models.CharField(_("category"), choices=PRODUCT_CATEGORIES, max_length=100, default=0)
-    # if main_category == "Digital devices":
-    #     sub_category = models.CharField()
     price = models.PositiveIntegerField(_("price"), validators=[MinValueValidator(0)])
     quantity = models.PositiveIntegerField(_("quantity"), default=1, validators=[MinValueValidator(0)])
     production_year = models.IntegerField(_('production year'), choices=year_choices(), default=current_year,
