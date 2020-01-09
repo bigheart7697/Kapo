@@ -1,26 +1,18 @@
-from django.core.exceptions import ValidationError
-from django.test import TestCase
 from django.urls import reverse
-from rest_framework import status
 from rest_framework.test import APITestCase
 
 from .views import *
 
 
-def create_product(profile, price=100, quantity=1):
-    """
-    Create a product with the given `owner_id` by the given `quantity` and at the
-    given `price`. Title & Description are not need now
-    """
-
-
 class ProductModelTests(APITestCase):
 
     def setUp(self):
-        self.data = {'name': 'woody', 'description': 'test', 'category': 'Digital', 'price': 100, 'quantity': 1,
+        self.data = {'name': 'woody', 'description': 'test', 'main_category': '2', 'price': 100, 'quantity': 1,
                      'production_year': 1980}
         self.user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
                           'last_name': 'Shirkavand', 'phone_number': '+989124920819',
+                          'is_corporate': False, 'corporate_name': '',
+                          'corporate_number': None, 'country': 'Iran',
                           'city': 'Tehran', 'address': 'Azadi Ave'}
 
         response = self.client.post(reverse('register'), data=self.user_data, format='json')
@@ -48,7 +40,8 @@ class ProductModelTests(APITestCase):
         self.assertEqual(Product.objects.count(), 1)
         self.assertEqual(product.name, self.data['name'])
         self.assertEqual(product.description, self.data['description'])
-        self.assertEqual(product.main_category, '0')
+        self.assertEqual(product.main_category, '2')
+        self.assertEqual(product.get_main_category_display(), "Health-Care")
         self.assertEqual(product.owner, User.objects.last())
         self.assertEqual(product.price, self.data['price'])
         self.assertEqual(product.quantity, self.data['quantity'])
@@ -83,6 +76,8 @@ class OrderModelTests(APITestCase):
     def setUp(self, name='woody', description='test', category='Digital', price=100, quantity=1, production_year=1980):
         self.user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
                           'last_name': 'Shirkavand', 'phone_number': '+989124920819',
+                          'is_corporate': False, 'corporate_name': '',
+                          'corporate_number': None, 'country': 'Iran',
                           'city': 'Tehran', 'address': 'Azadi Ave'}
         response = self.client.post(reverse('register'), data=self.user_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -119,4 +114,3 @@ class OrderModelTests(APITestCase):
     def test_negative_count_order(self):
         response = self.client.post(self.url, {'count': -2}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-

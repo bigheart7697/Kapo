@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from kapo.serializers import *
 from rest_framework import filters
 from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
+from .permissions import *
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
@@ -22,7 +22,7 @@ class ProductListView(generics.ListAPIView):
     queryset = Product.objects.all()
 
 
-class OwnerProductListView(generics.ListAPIView):
+class OwnerProductListView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
@@ -30,9 +30,10 @@ class OwnerProductListView(generics.ListAPIView):
         return Product.objects.filter(owner=self.request.user)
 
 
-class ProductDetailView(generics.RetrieveAPIView):
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+    permission_classes = [IsOwnerOrReadOnly]
 
 
 class OrderCreateView(generics.CreateAPIView):

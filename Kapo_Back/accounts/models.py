@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext as _
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 profile_images_dir = 'static/users/'
@@ -17,11 +18,12 @@ class User(AbstractUser):
     photo = models.ImageField(_('photo'), upload_to=profile_images_dir, null=True, blank=True)
     is_corporate = models.BooleanField(default=False)
     corporate_name = models.CharField(_('corporate name'), max_length=200, null=True, blank=True)
-    corporate_number = models.CharField(_('corporate number'), max_length=12, null=True, blank=True)
+    corporate_number = models.PositiveIntegerField(_('corporate number'), unique=True, null=True, blank=True,
+                                                   validators=[MaxValueValidator(999999999999),
+                                                               MinValueValidator(100000000000)])
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'phone_number']
 
     def __str__(self):
         return "{}".format(self.email)
-

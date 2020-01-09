@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'country', 'city', 'address', 'phone_number', 'photo',
-                  'is_corporate', 'first_name', 'last_name', 'is_corporate', 'corporate_name',
+                  'is_corporate', 'first_name', 'last_name', 'corporate_name',
                   'corporate_number')
 
 
@@ -41,3 +41,20 @@ class UserSerializerWithToken(serializers.ModelSerializer):
                   'is_corporate', 'first_name', 'last_name', 'corporate_name',
                   'corporate_number',
                   )
+
+    def validate(self, data):
+        """
+        Check for the user type data to be valid
+        """
+        is_corporate = data['is_corporate']
+        if is_corporate:
+            if data['first_name'] != "" or data['last_name'] != "":
+                raise serializers.ValidationError("corporate users cannot have first name and last name.")
+            if data['corporate_name'] == "" or data['corporate_number'] is None:
+                raise serializers.ValidationError("corporate users must have corporate name and corporate number.")
+        else:
+            if data['corporate_name'] != "" or data['corporate_number'] is not None:
+                raise serializers.ValidationError("individual users cannot have corporate name and corporate number.")
+            if data['first_name'] == "" or data['last_name'] == "":
+                raise serializers.ValidationError("individual users must have first name and last name.")
+        return data
