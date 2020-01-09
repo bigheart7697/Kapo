@@ -1,14 +1,15 @@
-from rest_framework import generics, status
-from rest_framework.response import Response
-from kapo.serializers import *
-from rest_framework import filters
-from rest_framework import permissions
-from .permissions import *
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from rest_framework import generics, status
+from rest_framework.response import Response
+from .tasks import update_order_state
+
+from kapo.serializers import *
 from .filters import *
+from .permissions import *
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -40,7 +41,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsNotOwnerOfOrderedProduct]
 
     def perform_create(self, serializer):
         try:
@@ -52,8 +53,10 @@ class OrderCreateView(generics.CreateAPIView):
             else:
                 product.quantity = remaining_quantity - order_count
                 product.save()
-                serializer.save(customer=User.objects.get(id=self.request.user.id),
-                                product=product)
+                order = serializer.save(customer=self.request.user,
+                                        product=product)
+                update_order_state(order.id)
+
         except Product.DoesNotExist:
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
 

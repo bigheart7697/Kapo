@@ -14,8 +14,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    customer = serializers.ReadOnlyField(source='customer.email')
-    product = serializers.ReadOnlyField(source='product.id')
+    customer = UserSerializer(read_only=True, many=False)
+    product = ProductSerializer(read_only=True, many=False)
 
     class Meta:
         model = Order

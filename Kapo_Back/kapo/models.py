@@ -54,11 +54,18 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+
+    class State(models.IntegerChoices):
+        AWAITING = 1
+        COMPLETED = 2
+        FAILED = 3
+
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
     customer = models.ForeignKey(User, related_name=_("orders"), on_delete=models.CASCADE)
     count = models.IntegerField(_('quantity'), default=1, validators=[MinValueValidator(1)])
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
+    state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
 
     class Meta:
         ordering = ['created']
