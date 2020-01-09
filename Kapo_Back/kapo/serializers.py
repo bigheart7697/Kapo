@@ -16,7 +16,8 @@ class ProductSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     customer = UserSerializer(read_only=True, many=False)
     product = ProductSerializer(read_only=True, many=False)
+    state = serializers.CharField(source='get_state_display', read_only=True)
 
     class Meta:
         model = Order
-        fields = ['customer', 'product', 'count', 'created']
+        fields = ['id', 'state', 'customer', 'product', 'count', 'created']

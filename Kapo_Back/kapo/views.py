@@ -70,6 +70,38 @@ class ProductSearchView(generics.ListAPIView):
     ordering_fields = ['production_year', 'price', 'created']
 
 
+class CustomerOrderListView(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated, IsCustomerOfOrderedProduct]
+
+    def get_queryset(self):
+        return Order.objects.filter(customer=self.request.user)
+
+
+class CustomerOrderDetailView(generics.RetrieveAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated, IsCustomerOfOrderedProduct]
+
+    def get_queryset(self):
+        return Order.objects.filter(customer=self.request.user)
+
+
+class OwnerOrderListView(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfOrderedProduct]
+
+    def get_queryset(self):
+        return Order.objects.filter(product__owner=self.request.user)
+
+
+class OwnerOrderDetailView(generics.RetrieveAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated, IsCustomerOfOrderedProduct]
+
+    def get_queryset(self):
+        return Order.objects.filter(product__owner=self.request.user)
+
+
 def csrf(request):
     return JsonResponse({'csrfToken': get_token(request)})
 

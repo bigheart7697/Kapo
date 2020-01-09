@@ -16,7 +16,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return obj.owner == request.user
 
 
-class IsOwner(permissions.BasePermission):
+class IsProductOwner(permissions.BasePermission):
     """
     Custom permission to only allow owners of an object to edit it.
     """
@@ -28,3 +28,13 @@ class IsOwner(permissions.BasePermission):
 class IsNotOwnerOfOrderedProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.product.owner != request.user
+
+
+class IsCustomerOfOrderedProduct(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.customer == request.user
+
+
+class IsOwnerOfOrderedProduct(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.product.owner == request.user
