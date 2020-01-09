@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'kapo',
     'rest_framework',
+    'django_filters',
     'corsheaders',
 ]
 

@@ -7,6 +7,8 @@ from .permissions import *
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from django_filters.rest_framework import DjangoFilterBackend
+from .filters import *
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -59,8 +61,10 @@ class OrderCreateView(generics.CreateAPIView):
 class ProductSearchView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filter_class = ProductFilter
     search_fields = ['name', 'description']
+    ordering_fields = ['production_year', 'price', 'created']
 
 
 def csrf(request):
