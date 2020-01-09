@@ -1,0 +1,118 @@
+@import "../../scss/base/variables.scss";
+
+.bank__header-container {
+    background-color: $primary-color;
+    width: 100%;
+    border-bottom: 1px solid $second-color;
+    height: 20vh;
+}
+
+.bank__header-title {
+    color: $white;
+    font-size: 25px;
+    text-align: center;
+    display: block;
+    padding-top: 5vh;
+}
+
+.bank__container{
+    background-color: $white;
+    width: 100%;
+    direction: rtl;
+    height: 100vh;
+}
+
+.bank__rightside {
+    width: 50%;
+    float: right;
+    border-left: 1px solid $second-color;
+    background-color: inherit;
+    height: 60vh;
+    padding-top: 5rem;
+}
+
+.bank__leftside {
+    width: 50%;
+    float: left;
+    background-color: inherit;
+    height: 60vh;
+    vertical-align: middle;
+    padding-top: 10rem;
+}
+
+.bank__details {
+    padding: 1rem 2rem;
+    display: flex;
+
+    .bank__label {
+        display: inline-block;
+        color: $second-color;
+        padding: 0 1rem;
+        min-width: 20%;
+        text-align: center;
+    }
+    .bank__value {
+        display: inline-block;
+        color: $first-color;
+    }
+}
+
+.bank__input--card-no{
+    width: 20%;
+}
+
+.bank__input--full-width{
+    max-width: 45rem;
+}
+
+.bank__dash{
+    height: 1px;
+    border: 1px solid $first-color;
+    width: 5px;
+    margin: 0 0.5rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.bank__button-containers {
+    width: 100%;
+    direction: ltr;
+    margin-top: 5rem;
+}
+
+.bank__button {
+    border: 2px solid $white;
+    padding: .6rem 2.5rem;
+    border-radius: .5rem;
+    color: $white;
+    transition: 0.5s;
+    float: left;   
+}
+
+.bank__button:hover {
+    color: $white;
+
+}
+
+.bank__button--accept {
+    background-color: $green;
+}
+
+.bank__button--accept:hover {
+    background-color: $dark-green;
+}
+
+.bank__button--reject {
+    background-color: $fifth-color;
+}
+
+.bank__button--reject:hover {
+    background-color: $third-color;
+}
+
+.bank__footer-container {
+    width: 100%;
+    height: 20vh;
+    background-color: $second-color;
+    display: flow-root;
+}
