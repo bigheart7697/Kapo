@@ -12,6 +12,9 @@ import SignIn from '../Auth/signIn'
 import SignUp from '../Auth/signUp'
 import MainPage from '../mainpage'
 import ProductList from '../productList'
+import Bank from '../bank'
+import PreviewOrder from '../previewOrder'
+import OrderList from '../orderList'
 
 const App = () => {
     return (
@@ -25,6 +28,9 @@ const App = () => {
                     <Route path="/AddProduct" exact component={AddProduct}/>
                     <Route path="/Auth/SignIn" exact component={SignIn}/>
                     <Route path="/Auth/SignUp" exact component={SignUp}/>
+                    <Route path="/order/preview/:id" exact component={PreviewOrder}/>
+                    <Route path="/bank" exact component={Bank}/>
+                    <Route path="/order/list" exact component={OrderList}/>
                 </div>
             </Router>
         </div>

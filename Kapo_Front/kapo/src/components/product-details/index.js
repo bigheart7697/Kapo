@@ -7,8 +7,7 @@ import "./style.scss";
 
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
-import Whitespace from '../basic/whitespace'
-import { stat } from "fs";
+import Whitespace from '../basic/whitespace';
 
 class ProductDetails extends React.Component {
 

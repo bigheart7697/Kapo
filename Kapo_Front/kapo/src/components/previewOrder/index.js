@@ -7,7 +7,8 @@ const PreviewOrder = props => {
         <div className="preview-order__container">
             <div className="preview-order__product-details">
                 <div className="preview-order__image-container">
-                    <img src={props.order ? props.order.product ? props.order.product.image : '' : ''} className="preview-order__image"></img>
+                    <img src={props.order ? props.order.product ? props.order.product.image : '' : ''} className="preview-order__image"
+                        alt={props.order ? props.order.product ? props.order.product.name : '' : ''}></img>
                 </div>
                 <div className="preview-order__details">
                     <div className="preview-order__name">{props.order ? props.order.product ? props.order.product.name : '' : ''}</div>

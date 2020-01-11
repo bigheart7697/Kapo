@@ -1,0 +1,19 @@
+@import '../../../scss/base/variables.scss';
+
+.order-card__container {
+    width: 100%;
+    border: 1px solid $second-color;
+    display: flex;
+    direction: rtl;
+}
+
+.order-card__container--gray-background {
+    background-color: $second-color;
+}
+
+.order-card__section {
+    width: 33%;
+    text-align: center;
+    padding: 2rem 2rem;
+    color: $seventh-color;
+}
