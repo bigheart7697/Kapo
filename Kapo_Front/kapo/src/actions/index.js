@@ -1,4 +1,5 @@
 import server from "../apis/server";
+import setAuthToken from '../components/basic/setAuthToken'
 
 import { FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT } from "./types";
 
@@ -53,9 +54,16 @@ export const addToCart = (id, count) => async dispatch => {
 export const SignIn = (auth) => async dispatch => {
   try{
     console.log(auth)
-    const response = await server.post('/login/', auth)
+    const response = await server.post('/auth-token/', auth)
+    // localStorage.setItem("jwtToken", data)
+    // setAuthToken(data)
     console.log(response)
   } catch{
     alert("error")
   }
+}
+
+export const SignOut = () => async dispatch => {
+  setAuthToken()
+  delete localStorage.jwtToken
 }
