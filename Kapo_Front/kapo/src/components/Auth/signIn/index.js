@@ -12,8 +12,8 @@ const FORM_VALUES = {
   title: "وارد شوید",
   form_inputs: [
     {
-      title: "username",
-      label: "نام کاربری",
+      title: "email",
+      label: "email",
       error: "لطفا نام کاربری خود را وارد کنید"
     },{
         title: "password",
