@@ -69,7 +69,7 @@ export const SignOut = () => async dispatch => {
 }
 
 export const SignUp = (formValues) => async dispatch => {
-  const response = await server.post("/accounts/register/", {...formValues, "corporate_name": "", "corporate_number":null})
+  const response = await server.post("/accounts/register/", formValues)
   localStorage.setItem("jwtToken", response.data.token)
   setAuthToken(response.data.token)
   console.log(response)

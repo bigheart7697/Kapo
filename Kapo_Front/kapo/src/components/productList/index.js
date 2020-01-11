@@ -40,4 +40,8 @@ class ProductList extends React.Component{
     }
 }
 
-export default connect(null, { fetchProducts })(ProductList)
+const mapStateToProps = (state) => {
+    return {products: state.products.products}
+}
+
+export default connect(mapStateToProps, { fetchProducts })(ProductList)
