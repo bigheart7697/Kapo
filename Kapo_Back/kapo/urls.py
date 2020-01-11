@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^ordered-products/(?P<pk>\d+)/$', views.OwnerOrderDetailView.as_view(), name='owner-order-detail'),
     path('csrf/', views.csrf),
     path('ping/', views.ping),
+    path('prod-categories/', views.categories),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

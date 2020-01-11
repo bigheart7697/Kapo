@@ -108,3 +108,8 @@ def csrf(request):
 
 def ping(request):
     return JsonResponse({'result': 'OK'})
+
+
+def categories(request):
+    return JsonResponse({'categories': Product.Category.choices})
+

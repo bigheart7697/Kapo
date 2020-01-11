@@ -2,7 +2,7 @@ from background_task import background
 from .models import Order, Product
 
 
-@background(schedule=30)
+@background(schedule=30*60)
 def update_order_state(user_id):
     order = Order.objects.get(pk=user_id)
     product = order.product

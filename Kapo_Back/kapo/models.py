@@ -9,16 +9,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 product_images_dir = 'static/products/'
 profile_images_dir = 'static/users/'
-PRODUCT_CATEGORIES = [("0", _("Default")),
-                      ("1", _("Digital")),
-                      ("2", _("Health-Care")),
-                      ("3", _("Tools, office supplies and car")),
-                      ("4", _("Fashion")),
-                      ("5", _("Home appliance")),
-                      ("6", _("Book, stationary and art")),
-                      ("7", _("Toys and baby")),
-                      ("8", _("Sport and traveling")),
-                      ("9", _("Food and drink"))]
 
 
 def year_choices():
@@ -30,6 +20,19 @@ def current_year():
 
 
 class Product(models.Model):
+
+    class Category(models.TextChoices):
+        DEFAULT = '0', _('Default')
+        DIGITAL = '1', _('Digital')
+        HEALTHCARE = '2', _('Health-Care')
+        TOOLS = '3', _('Tools, Office Supplies, Car')
+        FASHION = '4', _('Fashion')
+        HOME = '5', _('Home Appliance')
+        CULTURE = '6', _('Books, Stationary, Arts')
+        BABY = '7', _('Toys, Baby')
+        SPORT = '8', _('Sport')
+        FOOD = '9', _('Food, Drink')
+
     id = models.AutoField(primary_key=True)
     created = models.DateTimeField(_("creation date"), auto_now_add=True)
     name = models.CharField(_("name"), max_length=100, default="")
@@ -38,7 +41,7 @@ class Product(models.Model):
                               width_field=None, null=True, blank=True)
     description = models.TextField(_("description"), default="")
     owner = models.ForeignKey(User, related_name=_('products'), on_delete=models.CASCADE)
-    main_category = models.CharField(_("category"), choices=PRODUCT_CATEGORIES, max_length=100, default=0)
+    main_category = models.CharField(_("category"), choices=Category.choices, max_length=100, default=Category.DEFAULT)
     price = models.PositiveIntegerField(_("price"), validators=[MinValueValidator(0)])
     quantity = models.PositiveIntegerField(_("quantity"), default=1, validators=[MinValueValidator(0)])
     production_year = models.IntegerField(_('production year'), choices=year_choices(), default=current_year,
