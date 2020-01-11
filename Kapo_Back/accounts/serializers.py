@@ -48,12 +48,12 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         """
         is_corporate = data['is_corporate']
         if is_corporate:
-            if data['first_name'] != "" or data['last_name'] != "":
+            if 'first_name' in data or 'last_name' in data:
                 raise serializers.ValidationError("corporate users cannot have first name and last name.")
             if data['corporate_name'] == "" or data['corporate_number'] is None:
                 raise serializers.ValidationError("corporate users must have corporate name and corporate number.")
         else:
-            if data['corporate_name'] != "" or data['corporate_number'] is not None:
+            if 'corporate_name' in data or 'corporate_number' in data:
                 raise serializers.ValidationError("individual users cannot have corporate name and corporate number.")
             if data['first_name'] == "" or data['last_name'] == "":
                 raise serializers.ValidationError("individual users must have first name and last name.")
