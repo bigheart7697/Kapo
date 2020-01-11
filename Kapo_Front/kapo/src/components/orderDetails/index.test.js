@@ -1,22 +1,23 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import PreviewOrder from './index.js';
+import OrderDetails from './index.js';
 import ReactDOM from 'react-dom';
 
-describe('PreviewOrder component', () => {
+describe('OrderDetails component', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<PreviewOrder 
+        ReactDOM.render(<OrderDetails 
             order={{'product': {'name': 'تست', 'price': '120000', 'user': {'name': 'علی', 'address': 'نیاوران'}},
                     'count': '3', 
-                    'price': '360000'}}
+                    'price': '360000',
+                    }}
                 />, div);
         ReactDOM.unmountComponentAtNode(div);
     });
 
     it('renders without crashing while there are missing data 1 ', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<PreviewOrder 
+        ReactDOM.render(<OrderDetails 
             order={{'product': {'name': 'تست', 'price': '120000'},
                     'price': '360000'}}
                 />, div);
@@ -25,7 +26,7 @@ describe('PreviewOrder component', () => {
 
     it('renders without crashing while there are missing data 2 ', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<PreviewOrder 
+        ReactDOM.render(<OrderDetails 
             order={{'count': '3', 
                     'price': '360000'}}
                 />, div);

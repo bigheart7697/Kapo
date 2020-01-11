@@ -17,3 +17,15 @@
     padding: 2rem 2rem;
     color: $seventh-color;
 }
+
+.order-card__state--awaiting {
+    color: lightyellow;
+}
+
+.order-card__state--completed {
+    color: lightgreen;
+}
+
+.order-card__state--failed {
+    color: lightcoral;
+}
