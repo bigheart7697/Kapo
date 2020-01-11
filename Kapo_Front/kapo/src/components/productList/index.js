@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { fetchProducts } from '../../actions'
 
 import './style.scss'
 
@@ -28,6 +30,9 @@ const PRODUCT_LIST = [
 ]
 
 class ProductList extends React.Component{
+    componentDidMount(){
+        this.props.fetchProducts()
+    }
     render(){
         return(<div className="product-list__container">
             {PRODUCT_LIST.map((element) => <ProductCard image={element.image}></ProductCard>)}
@@ -35,4 +40,4 @@ class ProductList extends React.Component{
     }
 }
 
-export default ProductList
+export default connect(null, { fetchProducts })(ProductList)
