@@ -14,7 +14,7 @@ const PreviewOrder = props => {
                     <div className="preview-order__name">{props.order ? props.order.product ? props.order.product.name : '' : ''}</div>
                     <div className="preview-order__details-line">آدرس: {props.order ? props.order.product ? props.order.product.user ? props.order.product.user.address : '' : '' : ''}</div>
                     <div className="preview-order__details-line">تعداد: {props.order ? props.order.number : 0} عدد</div>
-                    <div className="preview-order__details-line">مهلت پرداخت: {props.order ? props.order.remaining : '-'}</div>
+                    <div className="preview-order__details-line">مهلت پرداخت: {props.order ? props.order.deadline : '-'}</div>
                 </div>
                 <div className="preview-order__price">
                     <div className="preview-order__price-section">
