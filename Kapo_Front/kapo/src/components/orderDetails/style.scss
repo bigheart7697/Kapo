@@ -2,5 +2,27 @@
 
 .order-details__container {
     width: 100%;
+    transition: .5s;
+    transition-delay: 0s;
+    height: 100px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.order-details__container--hidden {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: .2s;
+}
+
+.order-details__container-text {
     color: $seventh-color;
+    transition: .5s;
+    transition-delay: .2s;
+}
+
+.order-details__container-text--hidden {
+    color: $first-color;
+    transition-delay: 0s;
 }

@@ -19,7 +19,9 @@ class OrderCard extends React.Component {
                     </div>
                 </div>
                 <div className="order-card__section">
-                    {this.props.details == '-' ? '' : 'نمایش جزئیات'}
+                    <div className="order-card__dropdown-toggle" onClick={this.props.onClick}>
+                        {this.props.details == '-' ? '' : 'نمایش جزئیات'}
+                    </div>
                 </div>
             </div>
         );

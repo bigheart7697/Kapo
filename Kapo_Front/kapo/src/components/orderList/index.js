@@ -19,14 +19,18 @@ class OrderList extends React.Component {
                                 'customer': {'name': 'محمد', 'address': 'پاسداران'}, 'count': '3', 'deadline': '18:52', 'created': '2020/01/01'}]})
     }
 
+    clickChild = (index) => {
+        this.refs[index].onButtonClick();
+    }
+
     render() {
         return (
             <div className="order-list__container">
                 <OrderCard details="-"></OrderCard>
                 {this.state.orders.map((element, index) => 
                     <div key={index}>
-                        <OrderCard key={2*index + 1} order={element}></OrderCard>
-                        <OrderDetails key={-1-index} order={element}></OrderDetails>
+                        <OrderCard key={2*index + 1} order={element} onClick={() => this.clickChild(index)}></OrderCard>
+                        <OrderDetails key={-1-index} order={element} ref={index}></OrderDetails>
                     </div>)}
             </div>
         );
