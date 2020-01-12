@@ -34,14 +34,14 @@
 }
 
 .preview-order__name {
-    color: $white;
+    color: $seventh-color;
     font-size: 25px;
     font-weight: 700;
     margin-bottom: 2rem;
 }
 
 .preview-order__details-line {
-    color: $gray;
+    color: $second-color;
     padding: 5px 10px;
 }
 
@@ -53,13 +53,13 @@
 }
 
 .preview-order__price-label {
-    color: $gray;
+    color: $second-color;
     text-align: right;
     margin-top: 1rem;
 }
 
 .preview-order__price-value {
-    color: $white;
+    color: $seventh-color;
     font-size: 18px;
     text-align: end;
 }
@@ -82,7 +82,7 @@
 
 
 .preview-order__title {
-    color: $white;
+    color: $seventh-color;
     font-size: 25px;
     display: block;
     padding: 2rem;
@@ -100,13 +100,13 @@
 .preview-order__input-label {
     display: inline-block;
     padding: 0 1rem;
-    color: $white;
+    color: $seventh-color;
 }
 
 .preview-order__button {
     padding: 1rem 3rem;
     background-color: $primary-color;
-    color: $white;
+    color: $seventh-color;
     border-radius: 1rem;
     margin: 1rem 0;
     float: left;

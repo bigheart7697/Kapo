@@ -43,7 +43,7 @@ const PreviewOrder = props => {
                     </div>
                 </div>
                 <div className="preview-order__one-third-container">
-                    <a className="preview-order__button">انتقال به درگاه بانک</a>
+                    <a href="/bank" className="preview-order__button">انتقال به درگاه بانک</a>
                 </div>
             </div>
         </div>

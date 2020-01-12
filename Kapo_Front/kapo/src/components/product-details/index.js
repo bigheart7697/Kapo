@@ -23,10 +23,6 @@ class ProductDetails extends React.Component {
 
   render() {
     console.log(this.state.count)
-    let productImage = null
-    if(this.props.product){
-      productImage = this.props.product.image
-    }
     console.log(this.props.product)
     return (
       <>
