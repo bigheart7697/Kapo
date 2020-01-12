@@ -4,25 +4,128 @@
     width: 100%;
     transition: .5s;
     transition-delay: 0s;
-    height: 100px;
+    height: 40rem;
     opacity: 1;
     visibility: visible;
+    display: flex;
+    flex-direction: row;
+    direction: rtl;
 }
 
 .order-details__container--hidden {
     height: 0;
     opacity: 0;
     visibility: hidden;
-    transition-delay: .2s;
+    transition-delay: .5s;
 }
 
 .order-details__container-text {
     color: $seventh-color;
-    transition: .5s;
-    transition-delay: .2s;
+    transition: .3s;
+    display: flex;
+    width: 60%;
+}
+
+.order-details__image-container {
+    width: 40%;
+    padding: 2rem;
+    transition-duration: .3s;
+    opacity: 1;
+    visibility: visible;
+}
+
+.order-details__image-container--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.order-details__image {
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.order-details__product-details{
+    width: 30%;
+    padding: 2rem;
+}
+
+.order-details__details {
+    width: 100%;
+    padding: 2rem;
+}
+
+.order-details__detail {
+    margin: 1rem;
+}
+
+.order-details__row {
+    border: 1px solid $second-color;
+    z-index: 1;
+    display: flex;
+    opacity: 1;
+    transition-duration: .3s;
+    height: 10rem;
+}
+
+.order-details__label {
+    vertical-align: middle;
+    text-align: center;
+    border-left: 1px solid $second-color;
+    background-color: $second-color;
+    margin-left: -1px;
+    padding: 0 1rem;
+    width: 30%;
+    display: grid;
+    opacity: 1;
+    transition-duration: .3s;
+}
+
+.order-details__values {
+    padding: 1rem;
+    width: 70%;
+}
+
+.order-details__label--vertical-align {
+    display: table-cell;
+    vertical-align: middle;
+    margin: auto;
 }
 
 .order-details__container-text--hidden {
     color: $first-color;
     transition-delay: 0s;
+    .order-details__row {
+        border: none;
+        opacity: 0;
+    }
+    .order-details__label {
+        background-color: $first-color;
+        border: none;
+        opacity: 0;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .order-details__container {
+        flex-direction: column;
+        height: 60rem;
+    }
+
+    .order-details__container--hidden {
+        height: 0;
+    }
+
+    .order-details__container-text {
+        width: 100%;
+    }
+    
+    .order-details__image-container {
+        width: 100%;
+        height: 25rem;
+        text-align: center;
+    }
 }

@@ -5,22 +5,25 @@ import './style.scss';
 import OrderCard from '../basic/orderCard';
 import OrderDetails from '../orderDetails';
 
+import image5 from '../../assets/5.png'
+
 class OrderList extends React.Component {
     state = {orders: []}
 
     componentDidMount() {
-        this.setState({orders: [{'product': {'name': 'تست', 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'completed',
+        this.setState({orders: [{'product': {'name': 'تست', 'image': image5, 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'completed',
                                 'customer': {'name': 'محمد', 'address': 'پاسداران'}, 'count': '3', 'deadline': '18:52', 'created': '2020/01/01'}, 
-                                {'product': {'name': 'تست', 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'completed',
+                                {'product': {'name': 'تست', 'image': image5, 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'completed',
                                 'customer': {'name': 'محمد', 'address': 'پاسداران'}, 'count': '3', 'deadline': '18:52', 'created': '2020/01/01'},
-                                {'product': {'name': 'تست', 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'failed',
+                                {'product': {'name': 'تست', 'image': image5, 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'failed',
                                 'customer': {'name': 'محمد', 'address': 'پاسداران'}, 'count': '3', 'deadline': '18:52', 'created': '2020/01/01'}, 
-                                {'product': {'name': 'تست', 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'awaiting',
+                                {'product': {'name': 'تست', 'image': image5, 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران'}}, 'state': 'awaiting',
                                 'customer': {'name': 'محمد', 'address': 'پاسداران'}, 'count': '3', 'deadline': '18:52', 'created': '2020/01/01'}]})
     }
 
     clickChild = (index) => {
-        this.refs[index].onButtonClick();
+        this.refs[-1-index].onButtonClick();
+        this.refs[2*index + 1].onButtonClick();
     }
 
     render() {
@@ -29,8 +32,8 @@ class OrderList extends React.Component {
                 <OrderCard details="-"></OrderCard>
                 {this.state.orders.map((element, index) => 
                     <div key={index}>
-                        <OrderCard key={2*index + 1} order={element} onClick={() => this.clickChild(index)}></OrderCard>
-                        <OrderDetails key={-1-index} order={element} ref={index}></OrderDetails>
+                        <OrderCard key={2*index + 1} order={element} ref={2*index + 1} onClick={() => this.clickChild(index)}></OrderCard>
+                        <OrderDetails key={-1-index} order={element} ref={-1-index}></OrderDetails>
                     </div>)}
             </div>
         );

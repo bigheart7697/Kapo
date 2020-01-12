@@ -2,7 +2,6 @@
 
 .order-card__container {
     width: 100%;
-    border: 1px solid $second-color;
     display: flex;
     direction: rtl;
 }
@@ -12,10 +11,24 @@
 }
 
 .order-card__section {
-    width: 33%;
+    width: 25%;
     text-align: center;
-    padding: 2rem 2rem;
+    padding: 2rem;
     color: $seventh-color;
+    transition-duration: .5s;
+    border-top: 1px solid $second-color;
+}
+
+@media only screen and (max-width: 1000px) {
+    .order-card__section {
+            padding: 2rem 0;
+    }
+}
+
+.order-card__section--bold {
+    font-weight: 600;
+    font-size: 20px;
+    transition-duration: .5s;
 }
 
 .order-card__state--awaiting {
@@ -32,5 +45,5 @@
 
 .order-card__dropdown-toggle {
     display: inline;
-    
+    cursor: pointer;
 }

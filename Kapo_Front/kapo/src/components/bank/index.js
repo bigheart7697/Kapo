@@ -54,8 +54,8 @@ const Bank = props => {
             </div>
             <div className="bank__details">
             <div className="bank__button-containers">
-                <a className="bank__button bank__button--accept">پرداخت</a>
-                <a className="bank__button bank__button--reject">انصراف</a>
+                <a href="/" className="bank__button bank__button--accept">پرداخت</a>
+                <a href="/" className="bank__button bank__button--reject">انصراف</a>
             </div>
             </div>
         </div>
