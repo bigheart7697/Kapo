@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<title>ثبت پروژه جدید </title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="css/ionicons.min.css">
+</head>
+<body>
+	<div class="main">
+		<div class="header">
+			<div class="topmenu">
+				<div class="container">
+					<div class="topPhoto">
+						<img src="images/parsa.jpg">
+					</div>
+					<div class="topmenuelements">
+						<a href="http://google.com" class="name"> پارسا مرسل </a>
+					</div>
+					<div class="topmenudate">
+						<a href="#">خروج</a>
+					</div>
+					<div class="logo"> <img src="images/logo.jpg"></div>
+				</div>
+			</div>
+		</div>
+		<div class="mainPage">
+			<div class="wrapper"></div>
+			<div class="formm">
+				<form>
+					<h2>مشخصات</h2>
+					<div class="controls">
+						<input type="text" id="projectname" class="floatlabel" placeholder="نام پروژه">
+					</div>
+					
+					<div class="controls">
+						<input type="text" id="lastname" class="floatlabel" placeholder="مبلغ مورد نیاز جهت تکمیل پروژه (تومان)">
+					</div>
+	
+
+					<div class="controls">
+						<i class="ion-navicon"></i>
+						<select id="city" class="floatlabel">
+							<option value="blank">شهر</option>
+							<option value="Tehran">تهران</option>
+							<option value="Mashad">مشهد</option>
+							<option value="Esfehan">اصفهان</option>
+							<option value="Tabriz">تبریز</option>
+							<option value="Shiraz">شیراز</option>
+						</select>
+					</div>
+
+		
+					<div class="controls">
+						<textarea id="cm" class="floatlabel" placeholder="توضیحات مربوط به پروژه"></textarea>
+					</div>
+
+					<h2>زمینه کار پروژه</h2>
+					<div class="controlsAbility">
+						<select id="candidate" class="floatlabel">
+							<option value="blank"></option>
+							<option value="رانندگی">کودکان کار</option>
+							<option value="حسابداری">زنان سرپرست خانوار</option>
+							<option value="آموزش">آموزش</option>
+							<option value="سالمندان">سالمندان</option>
+						</select>
+	    				<button id="add" onclick="addItem()"><h3>+</h3></button>
+						<ul id="dynamiclist"></ul>
+						<br><br>
+					</div>
+					
+					<div class="controls">
+						<input type="checkbox" id="checkbox" class="checkbox">
+						<label for="checkbox"><span></span>قوانین را قبول دارم</label>
+					</div>
+					
+					<button>ثبت</button>
+				</form>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="container">
+				<div class="addr">
+					<h4> خیابان آزادی، بلوار اکبری، خیابان قاسمی، پلاک ۳۶، واحد ۲ </h4>
+					<h4>تلفن: ۰۲۱۸۸۳۴۲۸۹۱</h4>
+				</div>
+			</div>
+			<div class="copy">
+				<h4>کپی‌رایت رعایت شود.</h4>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script src="js/jquery.min.js"></script>
+</body>
+</html>

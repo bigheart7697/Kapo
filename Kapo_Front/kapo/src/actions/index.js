@@ -1,11 +1,16 @@
 import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 
-import { FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT } from "./types";
+import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/");
   dispatch({ type: FETCH_PRODUCTS, payload: response.data });
+};
+
+export const fetchMyProducts = () => async dispatch => {
+  const response = await server.get("/products/");
+  dispatch({ type: FETCH_MY_PRODUCTS, payload: response.data });
 };
 
 export const addProduct = product => async dispatch => {

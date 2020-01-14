@@ -12,6 +12,7 @@ import SignIn from '../Auth/signIn'
 import SignUp from '../Auth/signUp'
 import MainPage from '../mainpage'
 import ProductList from '../productList'
+import MyProductList from '../myProductList'
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
                     <Route path="/AddProduct" exact component={AddProduct}/>
                     <Route path="/Auth/SignIn" exact component={SignIn}/>
                     <Route path="/Auth/SignUp" exact component={SignUp}/>
+                    <Route path="/MyProductList" exact component={MyProductList} />
                 </div>
             </Router>
         </div>
