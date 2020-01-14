@@ -29,6 +29,10 @@ DEBUG = int(os.environ.get('DEBUG', default=1))
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/']
 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
 # Application definition
 
 INSTALLED_APPS = [
