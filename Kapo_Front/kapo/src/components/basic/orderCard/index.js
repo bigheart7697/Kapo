@@ -19,8 +19,8 @@ class OrderCard extends React.Component {
                     {this.props.details === '-' ? 'تاریخ' : this.props.order ? this.props.order.created : '-'}
                 </div>
                 <div className={this.state.active ? "order-card__section" : "order-card__section"}>
-                    <div className={this.props.details === '-' ? '' : this.props.order ? this.props.order.state ? this.props.order.state === "awaiting" ? 'order-card__state--awaiting' : this.props.order.state === "completed" ? 'order-card__state--completed' : 'order-card__state--failed' : '' : ''}>
-                        {this.props.details === '-' ? 'وضعیت' : this.props.order ? this.props.order.state ? this.props.order.state === "awaiting" ? 'در انتظار' : this.props.order.state === "completed" ? 'کامل شده' : this.props.order.state === "failed" ? 'نا موفق' : 'لغو شده' : '-' : '-'}
+                    <div className={this.props.details === '-' ? '' : this.props.order ? this.props.order.state ? this.props.order.state === "Awaiting" ? 'order-card__state--awaiting' : this.props.order.state === "Completed" ? 'order-card__state--completed' : 'order-card__state--failed' : '' : ''}>
+                        {this.props.details === '-' ? 'وضعیت' : this.props.order ? this.props.order.state ? this.props.order.state === "Awaiting" ? 'در انتظار' : this.props.order.state === "Completed" ? 'کامل شده' : this.props.order.state === "Failed" ? 'نا موفق' : 'لغو شده' : '-' : '-'}
                     </div>
                 </div>
                 <div className={this.state.active ? "order-card__section" : "order-card__section"}>
