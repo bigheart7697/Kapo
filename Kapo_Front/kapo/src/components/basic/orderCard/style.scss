@@ -1,0 +1,49 @@
+@import '../../../scss/base/variables.scss';
+
+.order-card__container {
+    width: 100%;
+    display: flex;
+    direction: rtl;
+}
+
+.order-card__container--gray-background {
+    background-color: $second-color;
+}
+
+.order-card__section {
+    width: 25%;
+    text-align: center;
+    padding: 2rem;
+    color: $seventh-color;
+    transition-duration: .5s;
+    border-top: 1px solid $second-color;
+}
+
+@media only screen and (max-width: 1000px) {
+    .order-card__section {
+            padding: 2rem 0;
+    }
+}
+
+.order-card__section--bold {
+    font-weight: 600;
+    font-size: 20px;
+    transition-duration: .5s;
+}
+
+.order-card__state--awaiting {
+    color: lightyellow;
+}
+
+.order-card__state--completed {
+    color: lightgreen;
+}
+
+.order-card__state--failed {
+    color: lightcoral;
+}
+
+.order-card__dropdown-toggle {
+    display: inline;
+    cursor: pointer;
+}
