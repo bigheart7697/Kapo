@@ -22,9 +22,9 @@ from django.conf.urls import url
 urlpatterns = [
     path('', views.ProductListView.as_view(), name='index'),
     url(r'^add-product/', views.ProductCreateView.as_view(), name='add_product'),
+    url(r'^products/$', views.OwnerProductListView.as_view(), name='my-products'),
     url(r'^products/(?P<pk>\d+)/$', views.ProductDetailView.as_view()),
     url(r'^products/(?P<pk>\d+)/order/', views.OrderCreateView.as_view(), name='order'),
-    url(r'^products/$', views.OwnerProductListView.as_view(), name='my-products'),
     url(r'^search/', views.ProductSearchView.as_view(), name='search'),
     url(r'^orders/$', views.CustomerOrderListView.as_view(), name='customer-orders'),
     url(r'^orders/(?P<pk>\d+)/$', views.CustomerOrderDetailView.as_view(), name='customer-order-detail'),
@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^ordered-products/(?P<pk>\d+)/$', views.OwnerOrderDetailView.as_view(), name='owner-order-detail'),
     path('csrf/', views.csrf),
     path('ping/', views.ping),
+    path('prod-categories/', views.categories),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -21,3 +21,5 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'state', 'customer', 'product', 'count', 'created']
+
+
