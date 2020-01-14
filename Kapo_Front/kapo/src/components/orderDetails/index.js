@@ -32,15 +32,15 @@ class OrderDetails extends React.Component {
                         <div className={this.state.active ? "order-details__row" : "order-details__row order-details__row--hidden"}>
                         <div className="order-details__label"><div className="order-details__label--vertical-align">فروشنده</div></div>
                             <div className="order-details__values">
-                                <div className="order-details__detail">نام: {this.props.order ? this.props.order.product ? this.props.order.product.owner ? this.props.order.product.owner.name : '-' : '-' : '-'}</div>
-                                <div className="order-details__detail" id="order-details__address">آدرس: {this.props.order ? this.props.order.product ? this.props.order.product.owner ? this.props.order.product.owner.address : '-' : '-' : '-'}</div>
+                                <div className="order-details__detail">نام: {this.props.order ? this.props.order.product ? this.props.order.product.owner ? this.props.order.product.owner.first_name + " " + this.props.order.product.owner.last_name : '-' : '-' : '-'}</div>
+                                <div className="order-details__detail" id="order-details__address">آدرس: {this.props.order ? this.props.order.product ? this.props.order.product.owner ? this.props.order.product.owner.country + "، " + this.props.order.product.owner.city + "، " + this.props.order.product.owner.address : '-' : '-' : '-'}</div>
                             </div>
                         </div>
                         <div className={this.state.active ? "order-details__row" : "order-details__row order-details__row--hidden"}>
                             
                             <div className="order-details__values">
-                                <div className="order-details__detail">نام: {this.props.order ? this.props.order.customer ? this.props.order.customer.name : '-' : '-'}</div>
-                                <div className="order-details__detail" id="order-details__address">آدرس: {this.props.order ? this.props.order.customer ? this.props.order.customer.address : '-' : '-'}</div>
+                                <div className="order-details__detail">نام: {this.props.order ? this.props.order.customer ? this.props.order.customer.first_name + " " + this.props.order.customer.last_name : '-' : '-'}</div>
+                                <div className="order-details__detail" id="order-details__address">آدرس: {this.props.order ? this.props.order.customer ? this.props.order.customer.country + "، " + this.props.order.customer.city + "، " + this.props.order.customer.address : '-' : '-'}</div>
                             </div>
                             <div className="order-details__label"><div className="order-details__label--vertical-align">خریدار</div></div>
                         </div>
