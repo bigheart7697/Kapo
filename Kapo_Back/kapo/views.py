@@ -4,6 +4,7 @@ from django.middleware.csrf import get_token
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework import generics, status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .tasks import update_order_state
 
@@ -104,58 +105,55 @@ class OwnerOrderDetailView(generics.RetrieveAPIView):
         return Order.objects.filter(product__owner=self.request.user)
 
 
-class OrderCompleteView(generics.UpdateAPIView):
-    serializer_class = [OrderSerializer]
-    permission_classes = [permissions.IsAuthenticated, IsCustomerOfOrderedProduct]
-
-    def perform_update(self, serializer):
-        try:
-            order = Order.objects.get(id=self.kwargs['pk'])
-            if order.state != order.State.AWAITING:
-                raise ValidationError("Operation failed. This order is {}".format(order.state))
-            else:
-                order.state = order.State.COMPLETED
-                order.save()
-        except Order.DoesNotExist:
-            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
-
-
-class OrderFailView(generics.UpdateAPIView):
-    serializer_class = [OrderSerializer]
-    permission_classes = [permissions.IsAuthenticated, IsCustomerOfOrderedProduct]
-
-    def perform_update(self, serializer):
-        try:
-            order = Order.objects.get(id=self.kwargs['pk'])
-            product = order.product
-            if order.state != order.State.AWAITING:
-                raise ValidationError("Operation failed. This order is {}".format(order.state))
-            else:
-                order.state = order.State.FAILED
-                product.quantity += order.count
-                order.save()
-                product.save()
-        except Order.DoesNotExist:
-            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
+def order_complete_view(request, pk):
+    try:
+        order = Order.objects.get(id=pk)
+        if order.state != order.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(order.state))
+        else:
+            order.state = order.State.COMPLETED
+            order.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Order.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
-class OrderCancelView(generics.UpdateAPIView):
-    serializer_class = [OrderSerializer]
-    permission_classes = [permissions.IsAuthenticated, IsCustomerOfOrderedProduct]
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
+def order_fail_view(request, pk):
+    try:
+        order = Order.objects.get(id=pk)
+        product = order.product
+        if order.state != order.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(order.state))
+        else:
+            order.state = order.State.FAILED
+            product.quantity += order.count
+            order.save()
+            product.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Order.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
-    def perform_update(self, serializer):
-        try:
-            order = Order.objects.get(id=self.kwargs['pk'])
-            product = order.product
-            if order.state != order.State.AWAITING:
-                raise ValidationError("Operation failed. This order is {}".format(order.state))
-            else:
-                order.state = order.State.CANCELED
-                product.quantity += order.count
-                order.save()
-                product.save()
-        except Order.DoesNotExist:
-            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
+def order_cancel_view(request, pk):
+    try:
+        order = Order.objects.get(id=pk)
+        product = order.product
+        if order.state != order.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(order.state))
+        else:
+            order.state = order.State.CANCELED
+            product.quantity += order.count
+            order.save()
+            product.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Order.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
 def csrf(request):
