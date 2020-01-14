@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Product from './index.js';
 import ReactDOM from 'react-dom';
-import 'jest-styled-components'
 
 describe('ProductList component', () => {
     it('renders without crashing', () => {

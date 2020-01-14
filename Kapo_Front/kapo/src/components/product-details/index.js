@@ -7,8 +7,7 @@ import "./style.scss";
 
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
-import Whitespace from '../basic/whitespace'
-import { stat } from "fs";
+import Whitespace from '../basic/whitespace';
 
 class ProductDetails extends React.Component {
 
@@ -24,10 +23,6 @@ class ProductDetails extends React.Component {
 
   render() {
     console.log(this.state.count)
-    let productImage = null
-    if(this.props.product){
-      productImage = this.props.product.image
-    }
     console.log(this.props.product)
     return (
       <>

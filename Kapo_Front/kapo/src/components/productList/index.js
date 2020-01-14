@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { fetchProducts } from '../../actions'
+
+import _ from "lodash";
 
 import './style.scss'
 
@@ -28,11 +32,24 @@ const PRODUCT_LIST = [
 ]
 
 class ProductList extends React.Component{
+    componentDidMount(){
+        this.props.fetchProducts()
+    }
     render(){
+        const newArray = _.map(this.props.products, (item, key) => {
+            return item
+          })
+        console.log(this.props.products)
         return(<div className="product-list__container">
-            {PRODUCT_LIST.map((element) => <ProductCard image={element.image}></ProductCard>)}
+            {newArray.map((element) => <ProductCard product={element}></ProductCard>)}
         </div>)
     }
 }
 
-export default ProductList
+
+
+const mapStateToProps = (state) => {
+    return {products: state.products.products}
+}
+
+export default connect(mapStateToProps, { fetchProducts })(ProductList)
