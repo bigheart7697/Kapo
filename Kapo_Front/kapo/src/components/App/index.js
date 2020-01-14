@@ -12,13 +12,10 @@ import SignIn from '../Auth/signIn'
 import SignUp from '../Auth/signUp'
 import MainPage from '../mainpage'
 import ProductList from '../productList'
-<<<<<<< HEAD
 import MyProductList from '../myProductList'
-=======
 import Bank from '../bank'
 import PreviewOrder from '../previewOrder'
 import OrderList from '../orderList'
->>>>>>> front-end
 
 const App = () => {
     return (
