@@ -11,8 +11,7 @@ class ProductModelTests(APITestCase):
                      'production_year': 1980}
         self.user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
                           'last_name': 'Shirkavand', 'phone_number': '+989124920819',
-                          'is_corporate': False, 'corporate_name': '',
-                          'corporate_number': None, 'country': 'Iran',
+                          'is_corporate': False, 'country': 'Iran',
                           'city': 'Tehran', 'address': 'Azadi Ave'}
 
         response = self.client.post(reverse('register'), data=self.user_data, format='json')
@@ -74,18 +73,22 @@ class ProductModelTests(APITestCase):
 
 class OrderModelTests(APITestCase):
     def setUp(self, name='woody', description='test', category='Digital', price=100, quantity=1, production_year=1980):
-        self.user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
-                          'last_name': 'Shirkavand', 'phone_number': '+989124920819',
-                          'is_corporate': False, 'corporate_name': '',
-                          'corporate_number': None, 'country': 'Iran',
-                          'city': 'Tehran', 'address': 'Azadi Ave'}
-        response = self.client.post(reverse('register'), data=self.user_data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        response = self.client.post(reverse('token-auth'), data={'email': 'dummy@gmail.com', 'password': '@123reshG'})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.token = response.data['token']
-        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + self.token)
+        self.prod_user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
+                               'last_name': 'Shirkavand', 'phone_number': '+989124920819',
+                               'is_corporate': False, 'country': 'Iran',
+                               'city': 'Tehran', 'address': 'Azadi Ave'}
 
+        self.order_user_data = {'email': 'dummy2@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
+                                'last_name': 'Shirkavand', 'phone_number': '+989124920810',
+                                'is_corporate': False, 'country': 'Iran',
+                                'city': 'Tehran', 'address': 'Azadi Ave'}
+
+        response = self.client.post(reverse('register'), data=self.prod_user_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        response = self.client.post(reverse('register'), data=self.order_user_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        self.register_and_authorize(self.prod_user_data['email'], self.prod_user_data['password'])
         self.product_data = {'name': 'woody', 'description': 'test', 'category': 'Digital', 'price': 100, 'quantity': 1,
                              'production_year': 1980}
 
@@ -95,7 +98,19 @@ class OrderModelTests(APITestCase):
         self.product = Product.objects.last()
         self.url = reverse('order', kwargs={'pk': self.product.id})
 
+    def register_and_authorize(self, email, password):
+        response = self.client.post(reverse('token-auth'), data={'email': email, 'password': password})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.token = response.data['token']
+        self.client.credentials(HTTP_AUTHORIZATION='JWT ' + self.token)
+
+    def test_order_own_product(self):
+        """Test if we can order our own product"""
+        response = self.client.post(self.url, {'count': 1}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_order(self):
+        self.register_and_authorize(self.order_user_data['email'], self.order_user_data['password'])
         response = self.client.post(self.url, {'count': 1}, format='json')
         order = Order.objects.last()
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -108,9 +123,11 @@ class OrderModelTests(APITestCase):
         """
         Test if we can order a quantity more than the remaining quantity of the product
         """
+        self.register_and_authorize(self.order_user_data['email'], self.order_user_data['password'])
         with self.assertRaises(ValidationError):
             self.client.post(self.url, {'count': 2}, format='json')
 
     def test_negative_count_order(self):
+        self.register_and_authorize(self.order_user_data['email'], self.order_user_data['password'])
         response = self.client.post(self.url, {'count': -2}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
