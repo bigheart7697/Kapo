@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from django.core.exceptions import PermissionDenied
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -16,25 +17,22 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return obj.owner == request.user
 
 
-class IsProductOwner(permissions.BasePermission):
-    """
-    Custom permission to only allow owners of an object to edit it.
-    """
-
-    def has_object_permission(self, request, view, obj):
-        return obj.owner == request.user
-
-
 class IsNotOwnerOfOrderedProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        return obj.product.owner != request.user
+        if obj.product.owner == request.user:
+            raise PermissionDenied()
+        return True
 
 
 class IsCustomerOfOrderedProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        return obj.customer == request.user
+        if obj.customer != request.user:
+            raise PermissionDenied()
+        return True
 
 
 class IsOwnerOfOrderedProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        return obj.product.owner == request.user
+        if obj.product.owner != request.user:
+            raise PermissionDenied()
+        return True

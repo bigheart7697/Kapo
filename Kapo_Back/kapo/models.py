@@ -62,6 +62,7 @@ class Order(models.Model):
         AWAITING = 1
         COMPLETED = 2
         FAILED = 3
+        CANCELED = 4
 
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
