@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { fetchProducts } from '../../actions'
+import { fetchProducts, searchProducts } from '../../actions'
 
 import _ from "lodash";
 
 import './style.scss'
 
+import SearchBar from '../../components/basic/searchBar'
 import ProductCard from '../basic/productCard'
 
 import image1 from '../../assets/1.png'
@@ -18,38 +19,45 @@ import image6 from '../../assets/6.png'
 const PRODUCT_LIST = [
     {
         image: image6
-    },{
+    }, {
         image: image5
-    },{
+    }, {
         image: image4
-    },{
+    }, {
         image: image3
-    },{
+    }, {
         image: image2
-    },{
+    }, {
         image: image1
     }
 ]
 
-class ProductList extends React.Component{
-    componentDidMount(){
+class ProductList extends React.Component {
+    componentDidMount() {
         this.props.fetchProducts()
     }
-    render(){
+    onSearch = query => {
+        console.log('yo')
+        this.props.searchProducts(query);
+    };
+    render() {
         const newArray = _.map(this.props.products, (item, key) => {
             return item
-          })
+        })
         console.log(this.props.products)
-        return(<div className="product-list__container">
-            {newArray.map((element, index) => <ProductCard key={index} product={element}></ProductCard>)}
-        </div>)
+        return (<>
+            <SearchBar onSearch={this.onSearch} />
+            <div className="product-list__container">
+                {newArray.map((element, index) => <ProductCard key={index} product={element}></ProductCard>)}
+            </div>
+        </>)
     }
 }
 
 
 
 const mapStateToProps = (state) => {
-    return {products: state.products.products}
+    return { products: state.products.products }
 }
 
-export default connect(mapStateToProps, { fetchProducts })(ProductList)
+export default connect(mapStateToProps, { fetchProducts, searchProducts })(ProductList)
