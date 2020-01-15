@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { fetchProducts, searchProducts } from '../../actions'
+import { fetchProducts, searchProducts, fetchCategories } from '../../actions'
+import history from '../../history'
 
 import _ from "lodash";
 
@@ -8,6 +9,7 @@ import './style.scss'
 
 import SearchBar from '../../components/basic/searchBar'
 import ProductCard from '../basic/productCard'
+import CustomSelect from '../basic/customSelect'
 
 import image1 from '../../assets/1.png'
 import image2 from '../../assets/2.png'
@@ -33,22 +35,33 @@ const PRODUCT_LIST = [
 ]
 
 class ProductList extends React.Component {
+    state = {query: "", category: 0}
     componentDidMount() {
         this.props.fetchProducts()
+        this.props.fetchCategories()
     }
-    onSearch = query => {
-        console.log('yo')
-        this.props.searchProducts(query);
+    onSearch = (query, category=null) => {
+        if(query){
+            this.setState({query})
+        }
+        this.props.searchProducts(query, category);
     };
     render() {
         const newArray = _.map(this.props.products, (item, key) => {
             return item
         })
-        console.log(this.props.products)
+        let array = []
+        for(let i = 0 ; i < this.props.categories.length ; i++)
+        {
+            array.push({value: this.props.categories[i][0], text: this.props.categories[i][1]})
+        }
         return (<>
             <SearchBar onSearch={this.onSearch} />
+            <div className="product-list__search">
+                <CustomSelect content={array} label="دسته‌بندی‌ها" input={{onChange: () => this.setState({category:0})}}/>
+            </div>
             <div className="product-list__container">
-                {newArray.map((element, index) => <ProductCard key={index} product={element}></ProductCard>)}
+                {newArray.map((element, index) => <ProductCard key={index} onClick={() => history.push(`/product/${element.id}`)} product={element}></ProductCard>)}
             </div>
         </>)
     }
@@ -57,7 +70,7 @@ class ProductList extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    return { products: state.products.products }
+    return { products: state.products.products, categories: state.products.categories }
 }
 
-export default connect(mapStateToProps, { fetchProducts, searchProducts })(ProductList)
+export default connect(mapStateToProps, { fetchProducts, searchProducts, fetchCategories })(ProductList)
