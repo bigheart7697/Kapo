@@ -26,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,5 +50,9 @@
     "jest-styled-components": "^7.0.0-2",
     "redux-mock-store": "^1.5.4",
     "styled-components": "^4.4.1"
+  },
+  "engines" :{
+    "node" : "10.16.3",
+    "npm" : "6.9.0"
   }
 }

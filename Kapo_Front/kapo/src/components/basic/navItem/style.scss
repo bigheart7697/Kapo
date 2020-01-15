@@ -17,11 +17,11 @@
 }
 
 .navitem__active{
-    background-color: $first-color;
+    background-color: $hover-color;
 }
 
 .navitem__container:hover{
-    background-color: $first-color;
+    background-color: $hover-color;
 }
 
 @media(max-width: 550px){
