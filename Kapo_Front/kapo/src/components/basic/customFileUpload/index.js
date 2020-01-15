@@ -14,18 +14,18 @@ export default class CustomFileUpload  extends React.Component{
   }
 
   render(){
-    const { input: { value } } = this.props
-    const {input,label, required, meta, } = this.props  //whatever props you send to the component from redux-form Field
     return(
-     <div><label>{label}</label>
-     <div>
-       <input
-        type='file'
-        accept='.jpg, .png, .jpeg'
-        onChange={this.onChange}
-       />
-     </div>
-     </div>
+      <div className="custom-file-upload__container">
+        <div className="custom-file-upload__inner-container">
+          <label className="custom-file-upload__label">{this.props.label}</label>
+          <input
+            className="custom-file-upload__input"
+            type='file'
+            accept='.jpg, .png, .jpeg'
+            onChange={this.onChange}
+          />
+        </div>
+      </div>
     )
   }
 }
