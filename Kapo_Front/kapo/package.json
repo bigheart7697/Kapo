@@ -50,9 +50,5 @@
     "jest-styled-components": "^7.0.0-2",
     "redux-mock-store": "^1.5.4",
     "styled-components": "^4.4.1"
-  },
-  "engines" :{
-    "node" : "8.17.0",
-    "npm" : "6.9.0"
   }
 }
