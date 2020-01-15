@@ -1,5 +1,6 @@
 import React from 'react'
 import faker from 'faker/locale/en'
+import defaultImg from '../../../assets/default.jpg'
 
 import './style.scss'
 
@@ -16,7 +17,7 @@ class productCard extends React.Component {
                 </div>)}
                 <div className="product-card__image-container">
                     <div className="product-card__image-before" />
-                    <div className="product-card__image" style={{ backgroundImage: `url(${this.state.element.image})` }}></div>
+                    <div className="product-card__image" style={{ backgroundImage: `url(${defaultImg})` }}></div>
                 </div>
             </div>
         </div>)

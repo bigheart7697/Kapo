@@ -41,7 +41,7 @@ class ProductList extends React.Component{
           })
         console.log(this.props.products)
         return(<div className="product-list__container">
-            {newArray.map((element) => <ProductCard product={element}></ProductCard>)}
+            {newArray.map((element, index) => <ProductCard key={index} product={element}></ProductCard>)}
         </div>)
     }
 }
