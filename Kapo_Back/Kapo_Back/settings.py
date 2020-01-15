@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import datetime
 import os
 from django.utils.translation import ugettext_lazy as _
 
@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='cky)4vk1(2sfkatfazii^s8e!4o%1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=1))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/', 'kapo-testgit .herokuapp.com/']
 
 
 STATICFILES_DIRS = [
@@ -165,5 +165,9 @@ LANGUAGES = [
 CSRF_TRUSTED_ORIGINS = ['localhost:3000']
 
 JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'Kapo_Back.utils.custom_jwt_response_handler'
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'Kapo_Back.utils.custom_jwt_response_handler',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=2*60*60),
 }
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
