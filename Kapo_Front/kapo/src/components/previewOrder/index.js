@@ -6,7 +6,7 @@ import "./style.scss";
 
 class PreviewOrder extends React.Component {
     componentDidMount() {
-        this.props.fetchOrder(this.props.match.params.id);
+        this.props.fetchOrder(this.props.match ? this.props.match.params ? this.props.match.params.id : '0' : '0');
       }
     render() {
         return (
@@ -49,7 +49,7 @@ class PreviewOrder extends React.Component {
                         </div>
                     </div>
                     <div className="preview-order__one-third-container">
-                        <a href={"/bank/" + this.props.match.params.id} className="preview-order__button">انتقال به درگاه بانک</a>
+                        <a href={"/bank/" + this.props.match ? this.props.match.params ? this.props.match.params.id : 0 : 0} className="preview-order__button">انتقال به درگاه بانک</a>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@ const mapStatToProps = (state, ownProps) => {
     let orderItem = null
     if(ownProps.match)
     {
-      orderItem = state.orders.orders[ownProps.match.params.id]
+      orderItem = state.orders.orders[ownProps ? ownProps.match ? ownProps.match.params ? ownProps.match.params.id: '0': '0': '0']
     }else{
       orderItem = null
     }
