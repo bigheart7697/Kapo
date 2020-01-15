@@ -46,7 +46,6 @@ describe('OrderDetails component', () => {
                         'created': '2020/01/01'}}
                 />
         );
-        expect(wrapper.find('#order-details__name').text()).toEqual('تست');
         expect(wrapper.find('#order-details__address').text()).toEqual('آدرس: نیاوران');
         expect(wrapper.find('#order-details__count').text()).toEqual('تعداد: 3 عدد');
         expect(wrapper.find('#order-details__price').text()).toEqual('هزینه: 360000 تومان');
