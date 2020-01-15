@@ -102,7 +102,8 @@ class ProductOrderListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOfOrderedProduct]
 
     def get_queryset(self):
-        Order.objects.filter(product__id=self.kwargs['pk'])
+        print(self.kwargs['pk'])
+        return Order.objects.filter(product__id=self.kwargs['pk'])
 
 
 class OwnerOrderDetailView(generics.RetrieveAPIView):
