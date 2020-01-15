@@ -26,6 +26,27 @@ export const fetchOrder = id => async dispatch => {
   dispatch({ type: FETCH_ORDER, payload: response.data })
 }
 
+export const completeOrder = id => async dispatch => {
+  try {
+    console.log("$id")
+	const response = await server.post(`/orders/${id}/complete/`);
+	console.log(response)
+    alert("سفارش پرداخت شد");
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+};
+
+export const cancelOrder = id => async dispatch => {
+  try {
+	const response = await server.post(`/orders/${id}/cancel/`);
+	console.log(response)
+    alert("سفارش لغو شد");
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+};
+
 export const addProduct = product => async dispatch => {
   try {
     console.log(product)
