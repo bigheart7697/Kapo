@@ -40,7 +40,7 @@ class OrderDetails extends React.Component {
                             
                             <div className="order-details__values">
                                 <div className="order-details__detail">نام: {this.props.order ? this.props.order.customer ? this.props.order.customer.first_name + " " + this.props.order.customer.last_name : '-' : '-'}</div>
-                                <div className="order-details__detail" id="order-details__address">آدرس: {this.props.order ? this.props.order.customer ? this.props.order.customer.country + "، " + this.props.order.customer.city + "، " + this.props.order.customer.address : '-' : '-'}</div>
+                                <div className="order-details__detail">آدرس: {this.props.order ? this.props.order.customer ? this.props.order.customer.country + "، " + this.props.order.customer.city + "، " + this.props.order.customer.address : '-' : '-'}</div>
                             </div>
                             <div className="order-details__label"><div className="order-details__label--vertical-align">خریدار</div></div>
                         </div>
