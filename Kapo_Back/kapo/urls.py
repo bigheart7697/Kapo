@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^products/(?P<pk>\d+)/order/', views.OrderCreateView.as_view(), name='order'),
     url(r'^search/', views.ProductSearchView.as_view(), name='search'),
     url(r'^orders/$', views.CustomerOrderListView.as_view(), name='customer-orders'),
+    url(r'^products/(?P<pk>\d+)/orders/$', views.ProductOrderListView.as_view(), name='owner-product-orders'),
     url(r'^orders/(?P<pk>\d+)/$', views.CustomerOrderDetailView.as_view(), name='customer-order-detail'),
     url(r'^orders/(?P<pk>\d+)/complete/$', views.order_complete_view, name='customer-order-complete'),
     url(r'^orders/(?P<pk>\d+)/cancel/$', views.order_cancel_view, name='customer-order-cancel'),
