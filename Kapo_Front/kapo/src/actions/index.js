@@ -1,5 +1,6 @@
 import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
+import history from '../history'
 
 import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER } from "./types";
 
@@ -29,8 +30,8 @@ export const fetchOrder = id => async dispatch => {
 export const addProduct = product => async dispatch => {
   try {
     console.log(product)
-	const response = await server.post("/add-product/", product);
-	console.log(response)
+    const response = await server.post("/add-product/", product);
+    console.log(response)
     alert("کالا اضافه شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -48,9 +49,9 @@ export const fetchProduct = id => async dispatch => {
 export const searchProducts = search => async dispatch => {
   console.log(search)
   let response
-  if(search !== ""){
+  if (search !== "") {
     response = await server.get(`/search?search=${search}`);
-  }else{
+  } else {
     response = await server.get(`/`)
   }
   console.log(response)
@@ -58,7 +59,7 @@ export const searchProducts = search => async dispatch => {
 };
 
 export const addToCart = (id, count) => async dispatch => {
-  let payload = {count : parseInt(count)}
+  let payload = { count: parseInt(count) }
   console.log(payload)
   try {
     const response = await server.post(`/product/${id}/order`, payload);
@@ -70,13 +71,15 @@ export const addToCart = (id, count) => async dispatch => {
 };
 
 export const SignIn = (auth) => async dispatch => {
-  try{
+  try {
     console.log(auth)
     setAuthToken()
     const response = await server.post('/token-auth/', auth)
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
     console.log(response.data.token)
+    alert("ورود با موفقیت انجام شد")
+    history.push('/')
   } catch{
     alert("error")
   }
@@ -88,9 +91,14 @@ export const SignOut = () => async dispatch => {
 }
 
 export const SignUp = (formValues) => async dispatch => {
-  setAuthToken()
-  const response = await server.post("/accounts/register/", formValues)
-  localStorage.setItem("jwtToken", response.data.token)
-  setAuthToken(response.data.token)
-  console.log(response)
+  try {
+    setAuthToken()
+    const response = await server.post("/accounts/register/", formValues)
+    localStorage.setItem("jwtToken", response.data.token)
+    setAuthToken(response.data.token)
+    console.log(response)
+    alert("ثبت‌نام با موفقیت انجام شد")
+  } catch{
+    alert("error")
+  }
 }
