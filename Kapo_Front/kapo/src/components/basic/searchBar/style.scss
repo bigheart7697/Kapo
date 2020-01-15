@@ -7,10 +7,11 @@
         padding: 5px 20px;
         text-align: right;
         width: 50%;
-        border: $borders 1px solid;
+        border: 1px solid $second-color;
         border-radius: 10px;
         margin: 15px auto;
         height: 30px;
+        padding: 2rem 1rem;
     }
     .searchBar__input:focus{
         outline: none;
@@ -20,6 +21,7 @@
         top: 2px;
         left: 30px;
         color: $borders;
+        z-index: 1;
     }
 }
 
