@@ -6,7 +6,7 @@ export default props => {
   return (
     <div className={`basic-select__container ${props.full ? "basic-select__container--full" : null}`}>
       <div className="basic-select__inner-container">
-        <label className="basic-select__label">{props.label}</label>
+  {props.label ? <label className="basic-select__label">{props.label}</label> : null}
         <select className="basic-select__input" {...props.input}>
           {props.noEmpty ? null :<option></option>}
           {props.content ? props.content.map((element, index) => {
