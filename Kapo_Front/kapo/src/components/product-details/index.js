@@ -116,7 +116,6 @@ class ProductDetails extends React.Component {
 }
 
 const mapStatToProps = (state, ownProps) => {
-  // return { product: state.products.products[ownProps.match.params.id] }
   let productItem = null
   if(ownProps.match)
   {

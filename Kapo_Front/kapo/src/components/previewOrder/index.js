@@ -70,4 +70,3 @@ const mapStatToProps = (state, ownProps) => {
   }
   
   export default connect(mapStatToProps, { fetchOrder })(PreviewOrder);
-// export default PreviewOrder;
