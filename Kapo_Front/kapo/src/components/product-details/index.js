@@ -82,12 +82,12 @@ class ProductDetails extends React.Component {
               <tbody>
                 <tr>
                   <td className="productDetails__column">
-                    {this.props.product ?  this.props.product.owner :'-'}
+                    {this.props.product ?  this.props.product.owner ? this.props.product.owner.first_name : '-' :'-'}
                   </td>
                   <td className="productDetails__column">نام</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.user ? this.props.product.user.address ? this.props.product.user.address : '-' : '-' : '-'}</td>
+                  <td>{this.props.product ?  this.props.product.owner ? this.props.product.owner.address : '-' :'-'}</td>
                   <td>آدرس</td>
                 </tr>
               </tbody>

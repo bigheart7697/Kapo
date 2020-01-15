@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
-$primary-color: #034378;
+// $primary-color: #034378;
 $secondary-color: #eee;
 $regal-blue: #034378;
 $san-juan: #2d4e68;
@@ -13,14 +13,21 @@ $gray: #999;
 $open-sans: 'Open Sans',
 sans-serif;
 
-$first-color: #1A1A1D;
-$second-color: #4E4E50;
-$third-color: #6F2232;
+// $first-color: #1A1A1D;
+// $first-color: rgb(216, 216, 206);
+$first-color: rgb(196, 202, 212);
+// $first-color: rgb(175, 185, 201);
+$second-color: rgb(33, 33, 75);
+$primary-color: $second-color;
+// $second-color: #4E4E50;
+$third-color: rgb(59, 28, 58);
+// $third-color: #6F2232;
 $fourth-color: #950740;
 $fifth-color: #C3073F;
 $sixth-color: #0E2130;
 $seventh-color: #F5EEE5;
 $eighth-color: #F2CEA5;
+$hover-color: #61669b;
 
 $green: forestgreen;
 $dark-green: rgb(27, 109, 27);

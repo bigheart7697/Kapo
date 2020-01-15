@@ -72,6 +72,7 @@ export const addToCart = (id, count) => async dispatch => {
 export const SignIn = (auth) => async dispatch => {
   try{
     console.log(auth)
+    setAuthToken()
     const response = await server.post('/token-auth/', auth)
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
@@ -87,6 +88,7 @@ export const SignOut = () => async dispatch => {
 }
 
 export const SignUp = (formValues) => async dispatch => {
+  setAuthToken()
   const response = await server.post("/accounts/register/", formValues)
   localStorage.setItem("jwtToken", response.data.token)
   setAuthToken(response.data.token)
