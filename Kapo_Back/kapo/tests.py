@@ -100,7 +100,7 @@ class OrderModelTests(APITestCase):
         response = self.client.post(url, self.product_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.product = Product.objects.last()
-        self.url = reverse('order', kwargs={'pk': self.product.id})
+        self.url = reverse('order', kwargs={'pk': self.product .id})
 
     def register_and_authorize(self, email, password):
         response = self.client.post(reverse('token-auth'), data={'email': email, 'password': password})
@@ -135,3 +135,39 @@ class OrderModelTests(APITestCase):
         self.register_and_authorize(self.order_user_data['email'], self.order_user_data['password'])
         response = self.client.post(self.url, {'count': -2}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_cancel_order(self):
+        self.register_and_authorize(self.order_user_data['email'], self.order_user_data['password'])
+        response = self.client.post(self.url, {'count': 1}, format='json')
+        order = Order.objects.last()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(order.state, order.State.AWAITING)
+        cancel_url = reverse('customer-order-cancel', kwargs={'pk': order.id})
+        response = self.client.post(cancel_url)
+        order = Order.objects.last()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(order.state, order.State.CANCELED)
+
+    def test_complete_order(self):
+        self.register_and_authorize(self.order_user_data['email'], self.order_user_data['password'])
+        response = self.client.post(self.url, {'count': 1}, format='json')
+        order = Order.objects.last()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(order.state, order.State.AWAITING)
+        complete_url = reverse('customer-order-complete', kwargs={'pk': order.id})
+        response = self.client.post(complete_url)
+        order = Order.objects.last()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(order.state, order.State.COMPLETED)
+
+    def test_order_fail(self):
+        self.register_and_authorize(self.order_user_data['email'], self.order_user_data['password'])
+        response = self.client.post(self.url, {'count': 1}, format='json')
+        order = Order.objects.last()
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(order.state, order.State.AWAITING)
+        fail_url = reverse('customer-order-fail', kwargs={'pk': order.id})
+        response = self.client.post(fail_url)
+        order = Order.objects.last()
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(order.state, order.State.FAILED)

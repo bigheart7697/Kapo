@@ -105,7 +105,7 @@ class OwnerOrderDetailView(generics.RetrieveAPIView):
         return Order.objects.filter(product__owner=self.request.user)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
 def order_complete_view(request, pk):
     try:
@@ -120,7 +120,7 @@ def order_complete_view(request, pk):
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
 def order_fail_view(request, pk):
     try:
@@ -138,7 +138,7 @@ def order_fail_view(request, pk):
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
 def order_cancel_view(request, pk):
     try:
