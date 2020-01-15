@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='cky)4vk1(2sfkatfazii^s8e!4o%1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=1))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/', 'kapo-testgit .herokuapp.com/']
 
 
 STATICFILES_DIRS = [
@@ -169,3 +169,5 @@ JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=2*60*60),
 }
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
