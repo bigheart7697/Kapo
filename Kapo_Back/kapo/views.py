@@ -97,6 +97,14 @@ class OwnerOrderListView(generics.ListAPIView):
         return Order.objects.filter(product__owner=self.request.user)
 
 
+class ProductOrderListView(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfOrderedProduct]
+
+    def get_queryset(self):
+        Order.objects.filter(product__id=self.kwargs['pk'])
+
+
 class OwnerOrderDetailView(generics.RetrieveAPIView):
     serializer_class = OrderSerializer
     permission_classes = [permissions.IsAuthenticated, IsCustomerOfOrderedProduct]
