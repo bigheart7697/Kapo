@@ -31,7 +31,7 @@ const App = () => {
                     <Route path="/Auth/SignUp" exact component={SignUp}/>
                     <Route path="/MyProductList" exact component={MyProductList} />
                     <Route path="/order/preview/:id" exact component={PreviewOrder}/>
-                    <Route path="/bank" exact component={Bank}/>
+                    <Route path="/bank/:id" exact component={Bank}/>
                     <Route path="/order/list" exact component={OrderList}/>
                 </div>
             </Router>
