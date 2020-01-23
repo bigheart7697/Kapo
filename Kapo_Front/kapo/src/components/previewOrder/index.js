@@ -6,8 +6,9 @@ import "./style.scss";
 
 class PreviewOrder extends React.Component {
     componentDidMount() {
+        console.log(this.props);
         this.props.fetchOrder(this.props.match ? this.props.match.params ? this.props.match.params.id : '0' : '0');
-      }
+    }
     render() {
         return (
             <div className="preview-order__container">
@@ -17,20 +18,20 @@ class PreviewOrder extends React.Component {
                             alt={this.props.order ? this.props.order.product ? this.props.order.product.name : '' : ''}></img>
                     </div>
                     <div className="preview-order__details">
-                        <div className="preview-order__name">{this.props.order ? this.props.order.product ? this.props.order.product.name : '' : ''}</div>
-                        <div className="preview-order__details-line">آدرس: {this.props.order ? this.props.order.product ? this.props.order.product.owner ? this.props.order.product.owner.country + "، " + this.props.order.product.owner.city + "، " +this.props.order.product.owner.address : '' : '' : ''}</div>
-                        <div className="preview-order__details-line">تعداد: {this.props.order ? this.props.order.count : 0} عدد</div>
-                        <div className="preview-order__details-line">مهلت پرداخت: {this.props.order ? this.props.order.deadline : '-'}</div>
+                        <div className="preview-order__name" id='preview-order__name'>{this.props.order ? this.props.order.product ? this.props.order.product.name : '' : ''}</div>
+                        <div className="preview-order__details-line" id='preview-order__address'>آدرس: {this.props.order ? this.props.order.product ? this.props.order.product.owner ? this.props.order.product.owner.country + "، " + this.props.order.product.owner.city + "، " +this.props.order.product.owner.address : '' : '' : ''}</div>
+                        <div className="preview-order__details-line" id='preview-order__count'>تعداد: {this.props.order ? this.props.order.count : 0} عدد</div>
+                        <div className="preview-order__details-line" id='preview-order__deadline'>مهلت پرداخت: {this.props.order ? this.props.order.deadline : '-'}</div>
                     </div>
                     <div className="preview-order__price">
                         <div className="preview-order__price-section">
                             <div className="preview-order__price-label">قیمت هر واحد:</div>
-                            <div className="preview-order__price-value">{this.props.order ? this.props.order.product ? this.props.order.product.price : '-' : '-'} تومان</div>
+                            <div className="preview-order__price-value" id='preview-order__unit-price'>{this.props.order ? this.props.order.product ? this.props.order.product.price : '-' : '-'} تومان</div>
                         </div>
                         <div className="preview-order__line"></div>
                         <div className="preview-order__price-section">
                             <div className="preview-order__price-label">قابل پرداخت:</div>
-                            <div className="preview-order__price-value">{this.props.order ? this.props.order.product.price * this.props.order.count : '-'} تومان</div>
+                            <div className="preview-order__price-value" id='preview-order__total-price'>{this.props.order ? this.props.order.product.price * this.props.order.count : '-'} تومان</div>
                         </div>
                     </div>
                 </div>
@@ -62,11 +63,11 @@ const mapStatToProps = (state, ownProps) => {
     let orderItem = null
     if(ownProps.match)
     {
-      orderItem = state.orders.orders[ownProps ? ownProps.match ? ownProps.match.params ? ownProps.match.params.id: '0': '0': '0']
+      orderItem = state ? state.orders ? state.orders.orders ? state.orders.orders[ownProps ? ownProps.match ? ownProps.match.params ? ownProps.match.params.id: 0: 0: 0] : null : null : null
     }else{
       orderItem = null
     }
     return { order: orderItem}
   }
   
-  export default connect(mapStatToProps, { fetchOrder })(PreviewOrder);
+export default connect(mapStatToProps, { fetchOrder })(PreviewOrder);
