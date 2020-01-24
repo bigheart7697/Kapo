@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./style-new.scss";
+import "./style.scss";
 
 import NavItem from "../basic/navItem";
 import NavDropDown from '../basic/navDropDown';
 import history from '../../history';
+import SearchBar from '../basic/searchBar';
+
+import logo from '../../assets/Logo1.png';
 
 const navItems = [
   {
@@ -42,25 +45,18 @@ class Navbar extends React.Component {
   }
   render() {
     return (
-      <div className="navbar__flex">
-        <div className="navbar__container">
-          <div className="navbar__content">
-            {navItems.map((element, index) => {
-              if (this.state.active === index) {
-                return (
-                  <NavItem key={index} active>
-                    {element.text}
-                  </NavItem>
-                );
-              } else {
-                return <NavItem key={index} onClick={() => this.navItemOnClick(index, element.link)}>{element.text}</NavItem>;
-              }
-            })}
+      <div className='nav-bar__container'>
+        <div className='nav-bar__row nav-bar__row--tall'>
+          <div className='nav-bar__item nav-bar__item--image'>
+            <img src={logo} className='nav-bar__logo'/>
           </div>
-          <div className="navbar__tail" onClick={() => this.setState({ dropActive: !this.state.dropActive })}>
-            <div className="navbar__circle"></div>
-            <NavDropDown active={this.state.dropActive}/>
+          <div className='nav-bar__item nav-bar__item--display-table nav-bar__item--long'>
+            <SearchBar />
           </div>
+          <div className='nav-bar__item'>
+          </div>
+        </div>
+        <div className='nav-bar__row nav-bar__row--short'>
         </div>
       </div>
     );

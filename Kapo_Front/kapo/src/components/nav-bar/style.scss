@@ -1,0 +1,46 @@
+@import '../../scss/base/variables.scss';
+
+.nav-bar__container {
+    width: 100%;
+    height: 16rem;
+    padding: 1rem 1rem 0 1rem;
+    display: flex;
+    direction: rtl;
+    border-bottom: 1px solid $gray;
+    flex-direction: column;
+}
+
+.nav-bar__row {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-bar__row--tall {
+    height: 10rem;
+}
+
+.nav-bar__row--short {
+    height: 5rem;
+}
+
+.nav-bar__item {
+    float: right;
+}
+
+.nav-bar__item--image {
+    max-width: 20rem;
+}
+
+.nav-bar__item--display-table {
+    display: table;
+    height: 100%;
+}
+
+.nav-bar__item--long {
+    width: 50%;
+}
+
+img.nav-bar__logo {
+    height: 100%;
+    width: auto;
+}
