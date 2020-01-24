@@ -1,12 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "./style.scss";
 
-import NavItem from "../basic/navItem";
-import NavDropDown from '../basic/navDropDown';
-import history from '../../history';
 import SearchBar from '../basic/searchBar';
+import MegaDropDown from '../basic/megaDropDown';
 
 import logo from '../../assets/Logo1.png';
 
@@ -15,50 +12,58 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     this.setState({categories : [
-      {name: 'املاک', categories: []},
-      {name: 'ماشین', categories: []},
-      {name: 'کالای برقی', categories: []},
-      {name: 'لباس', categories: []},
+      {name: 'املاک', categories: [
+        {name: 'رهن', categories: [{name: 'نیاوران'}, {name: 'پاسداران'}]},
+        {name: 'اجاره', categories: [{name: 'دو خوابه'}, {name: 'سه خوابه'}, {name: 'بیشتر'}]}
+      ]},
+      {name: 'ماشین', categories: [
+        {name: 'لوکس', categories: [{name: 'بنتلی'}, {name: 'بنز'}]},
+        {name: 'اسپورت', categories: [{name: 'لامبورگینی'}, {name: 'بوگاتی'}]},
+        {name: 'ایرانی', categories: [{name: 'پراید'}, {name: 'پیکان'}]}
+      ]},
+      {name: 'کالای برقی', categories: [
+        {name: 'خانگی', categories: [{name: 'جاروبرقی'}, {name: 'ماکروفر'}]},
+        {name: 'لوازم جانبی', categories: [{name: 'شارژر'}]}
+      ]},
+      {name: 'لباس', categories: [
+        {name: 'زنانه', categories: [{name: 'کفش'}, {name: 'شلوار'}]},
+        {name: 'مردانه', categories: [{name: 'شلوار'}, {name: 'پیراهن'}]},
+        {name: 'بچگانه', categories: [{name: 'پسرانه'}, {name: 'دخترانه'}]}
+      ]},
       {name: 'موسیقی', categories: []}
     ]})
   }
 
-
   render() {
     return (
-      <div className='nav-bar__container'>
-        <div className='nav-bar__image'>
-          <img src={logo} className='nav-bar__logo'/>
-        </div>
-        <div className='nav-bar__content'>
-          <div className='nav-bar__row nav-bar__row--tall'>
-            
-            <div className='nav-bar__item nav-bar__item--display-table nav-bar__item--long'>
-              <SearchBar />
+      <div>
+        <div className='nav-bar__container'>
+          <div className='nav-bar__image'>
+            <img src={logo} className='nav-bar__logo' alt='لوگو'/>
+          </div>
+          <div className='nav-bar__content'>
+            <div className='nav-bar__row nav-bar__row--tall'>
+              
+              <div className='nav-bar__item nav-bar__item--display-table nav-bar__item--long'>
+                <SearchBar />
+              </div>
+              <div className='nav-bar__item nav-bar__item--items'>
+                <div className='nav-bar__button nav-bar__button--red'>
+                  ثبت محصول جدید
+                </div>
+                <div className='nav-bar__button'>
+                  ثبت‌نام / ورود
+                </div>
+              </div>
             </div>
-            <div className='nav-bar__item nav-bar__item--items'>
-              <div className='nav-bar__button nav-bar__button--red'>
-                ثبت محصول جدید
-              </div>
-              <div className='nav-bar__button'>
-                ثبت‌نام / ورود
-              </div>
+            <div className='nav-bar__row nav-bar__row--short'>
+              {this.state.categories.map((element, index) => {
+                return <div className='nav-bar__category' key={index} onMouseOver={() => this.refs.mega.changeCategories({categories: element.categories})} onMouseLeave={() => this.refs.mega.changeDeActive()}>{element.name}</div>;
+              })}
             </div>
           </div>
-          <div className='nav-bar__row nav-bar__row--short'>
-            {this.state.categories.map((element, index) => {
-              if (this.state.active === index) {
-                return (
-                  <NavItem key={index} active>
-                    {element.text}
-                  </NavItem>
-                );
-              } else {
-                return <div className='nav-bar__category' key={index}>{element.name}</div>;
-              }
-            })}
-          </div>
         </div>
+        <MegaDropDown ref='mega'/>
       </div>
     );
   }
