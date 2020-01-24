@@ -37,7 +37,7 @@ class MegaDropDown extends React.Component {
                         })}
                     </div>
                     <ItemsColumn ref='itemscolumn' categories={this.state.categories ? this.state.categories[0] ? this.state.categories[0].categories : [] : []}/>
-                    <div className='mega-drop-down__column'>
+                    <div className='mega-drop-down__column mega-drop-down__column--padding'>
                         <img src={this.state.image} alt={this.state.name} className='mega-drop-down__image'></img>
                     </div>
                 </div>

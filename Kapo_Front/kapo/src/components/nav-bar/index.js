@@ -13,7 +13,7 @@ import image4 from '../../assets/4.png';
 import image5 from '../../assets/5.png';
 
 class Navbar extends React.Component {
-  state = { active: 10, dropActive: false, categories: [] };
+  state = { active: [], dropActive: false, categories: [] };
 
   componentDidMount() {
     this.setState({categories : [

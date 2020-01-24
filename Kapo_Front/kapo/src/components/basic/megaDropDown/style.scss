@@ -2,9 +2,10 @@
 
 
 .mega-drop-down__container {
-    width: 100%;
+    width: 70%;
+    margin: auto;
     display: block;
-    background: $white;
+    background: $first-color;
     transition: .5s all ease;
 }
 
@@ -30,8 +31,8 @@
 }
 
 .mega-drop-down__column {
-    width: 33%;
-    background: $white;
+    width: 33.4%;
+    background: $first-color;
 }
 
 .mega-drop-down__column--background-hover {
@@ -39,7 +40,7 @@
 }
 
 .mega-drop-down__column-header {
-    color: $white;
+    color: $first-color;
     text-align: center;
     padding: 1rem 0;
     background: $hover-color;
@@ -48,15 +49,19 @@
 
 .mega-drop-down__column-header:hover {
     color: $hover-color;
-    background: $white;
+    background: $first-color;
 }
 
 .mega-drop-down__column-items {
     text-align: center;
 }
 
+.mega-drop-down__column--padding {
+    padding: 2rem 5rem;
+}
+
 .mega-drop-down__image {
     width: 100%;
     height: auto;
-    padding: 2rem 5rem;
+    border-radius: 1rem;
 }
