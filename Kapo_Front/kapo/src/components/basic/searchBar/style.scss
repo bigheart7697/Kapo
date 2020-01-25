@@ -3,6 +3,7 @@
 .searchBar__form {
     display: table-cell;
     vertical-align: middle;
+    width: 100%;
 }
 
 .searchBar__item {
@@ -23,7 +24,7 @@
     .searchBar__icon {
         position: relative;
         top: .2rem;
-        right: 88%;
+        left: 3rem;
         color: $borders;
         z-index: 1;
     }

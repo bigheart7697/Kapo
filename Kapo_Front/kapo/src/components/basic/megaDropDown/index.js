@@ -8,7 +8,7 @@ class MegaDropDown extends React.Component {
     state = {name: '', categories: [], active: false, image: null}
 
     changeCategories = (props) => {
-        this.setState({categories: props.categories, image: props.image, name: props.name})
+        this.setState({categories: props.categories})
         this.setState({active: true})
         this.refs.itemscolumn.changeCategories([])
     }
@@ -28,13 +28,13 @@ class MegaDropDown extends React.Component {
                 className={this.state.active ? 'mega-drop-down__container mega-drop-down__container--active' : 'mega-drop-down__container mega-drop-down__container--hide'}>
                 <div className={this.state.active ? 'mega-drop-down__content mega-drop-down__content--active' : 'mega-drop-down__content mega-drop-down__content--hide'}>
                     <div className="mega-drop-down__column mega-drop-down__column--background-hover">
-                        {this.state.categories.map((element, index) => {
+                        {this.state.categories ? this.state.categories.map((element, index) => {
                             return (
                                 <div key={1+2*index} className="mega-drop-down__column-header" 
                                     onMouseOver={() => this.changeSubCategories(element.categories)} 
                                     onMouseLeave={() => this.changeSubCategories(element.categories)}>{element.name}</div>
                             );
-                        })}
+                        }) : <div></div>}
                     </div>
                     <ItemsColumn ref='itemscolumn' categories={this.state.categories ? this.state.categories[0] ? this.state.categories[0].categories : [] : []}/>
                     <div className='mega-drop-down__column mega-drop-down__column--padding'>

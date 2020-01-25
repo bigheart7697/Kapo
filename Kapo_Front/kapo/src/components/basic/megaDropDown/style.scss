@@ -2,10 +2,10 @@
 
 
 .mega-drop-down__container {
-    width: 70%;
+    width: 100%;
     margin: auto;
     display: block;
-    background: $first-color;
+    background: $white;
     transition: .5s all ease;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .mega-drop-down__container--active, .mega-drop-down__container:hover {
-    opacity: 1;
+    opacity: 0.8;
     visibility: visible;
 }
 
@@ -31,8 +31,8 @@
 }
 
 .mega-drop-down__column {
-    width: 33.4%;
-    background: $first-color;
+    width: 25%;
+    background: $white;
 }
 
 .mega-drop-down__column--background-hover {

@@ -12,20 +12,23 @@ $transition-time: 0.4s;
     padding: 0;
     display: flex;
     flex-direction: row-reverse;
-    position: fixed;
-    z-index: 1;
+    background-color: $second-color;
+    align-items: center;
 }
 
 .navbar__flex{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 .navbar__content{
     display: flex;
     flex-direction: row-reverse;
-    background-color: $second-color;
     align-items: center;
     height: $nav-height;
     color: $white;
@@ -60,11 +63,30 @@ $transition-time: 0.4s;
     cursor: pointer;
 }
 
-// .navbar__tail:hover{
-//     top: 0;
-//     background-color: $second-color;
-//     height: $nav-height;
-//     .navbar__circle{
-//         top: 0
-//     }
-// }
+.navbar__searchbar {
+    width: 40%;
+    display: table;
+}
+
+.navbar__auth {
+    width: 10%;
+}
+
+.navbar__new-product {
+    width: 10%;
+    margin-left: 2%;
+}
+
+.nav-bar__button {
+    padding: 1rem 0;
+    border-radius: 1rem;
+    width: 90%;
+    margin: auto;
+    background-color: $hover-color;
+    color: $white;
+    text-align: center;
+}
+
+.nav-bar__button--red {
+    background-color: $fourth-color;
+}
