@@ -13,23 +13,21 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <form className="searchBar__form" onSubmit={(event) => event.preventDefault()}>
-          <div className="searchBar__item">
-            <i className="search icon searchBar__icon"></i>
-            <input
-              className="searchBar__input"
-              type="text"
-              placeholder="جستجوی عبارت"
-              value={this.state.term}
-              onChange={e => {
-				this.setState({ term: e.target.value });
-				this.typeTimeout()
-              }}
-            />
-          </div>
-        </form>
-      </div>
+      <form className="searchBar__form" onSubmit={(event) => event.preventDefault()}>
+        <div className="searchBar__item">
+          <i className="search icon searchBar__icon"></i>
+          <input
+            className="searchBar__input"
+            type="text"
+            placeholder="جستجوی عبارت"
+            value={this.state.term}
+            onChange={e => {
+              this.setState({ term: e.target.value });
+              this.typeTimeout()
+            }}
+          />
+        </div>
+      </form>
     );
   }
 }

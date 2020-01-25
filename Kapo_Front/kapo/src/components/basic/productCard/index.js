@@ -1,5 +1,4 @@
 import React from 'react'
-import faker from 'faker/locale/en'
 import defaultImg from '../../../assets/default.jpg'
 
 import './style.scss'
