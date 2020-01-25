@@ -1,5 +1,11 @@
 @import '../../../scss/base/variables.scss';
 
+.navitem__box {
+    height: 100%;
+    display: table;
+    padding: 1.5rem 1rem;
+}
+
 .navitem__container{
     padding: 1.5rem 1rem;
     border-radius: 1rem;
@@ -14,6 +20,8 @@
     animation: border-transform 10s linear infinite alternate forwards;
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .navitem__active{

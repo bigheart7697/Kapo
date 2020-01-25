@@ -11,7 +11,7 @@ class ItemsColumn extends React.Component {
 
     render() {
         return (
-            <div className='mega-drop-down__column'>
+            <div className='mega-drop-down__column' onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseLeave}>
                 {this.state.categories.map((e, index) => {
                     return <div className='items-column__item' key={index}>{e.name}</div>
                 })}
