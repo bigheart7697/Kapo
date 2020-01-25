@@ -7,7 +7,7 @@ import './index.scss'
 
 import productDetails from '../product-details'
 import AddProduct from '../AddProduct'
-import Navbar from '../nav-bar'
+import Navbar from '../navbar'
 import SignIn from '../Auth/signIn'
 import SignUp from '../Auth/signUp'
 import MainPage from '../mainpage'
