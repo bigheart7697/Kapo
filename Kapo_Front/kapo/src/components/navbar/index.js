@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./style.scss";
+import "./style-new.scss";
 
 import NavItem from "../basic/navItem";
 import NavDropDown from '../basic/navDropDown';

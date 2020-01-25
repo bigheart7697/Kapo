@@ -1,25 +1,31 @@
 @import '../../../scss/base/variables.scss';
 
+.searchBar__form {
+    display: table-cell;
+    vertical-align: middle;
+}
+
 .searchBar__item {
     width: 100%;
     text-align: center;
     .searchBar__input {
-        padding: 5px 20px;
         text-align: right;
-        width: 50%;
-        border: $borders 1px solid;
-        border-radius: 10px;
-        margin: 15px auto;
-        height: 30px;
+        width: 90%;
+        border: 1px solid $second-color;
+        border-radius: 1rem;
+        margin: 1.5rem auto;
+        height: 3rem;
+        padding: 2rem 1rem;
     }
     .searchBar__input:focus{
         outline: none;
     }
     .searchBar__icon {
         position: relative;
-        top: 2px;
-        left: 30px;
+        top: .2rem;
+        right: 88%;
         color: $borders;
+        z-index: 1;
     }
 }
 

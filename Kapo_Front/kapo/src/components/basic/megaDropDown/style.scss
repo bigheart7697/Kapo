@@ -1,0 +1,67 @@
+@import '../../../scss/base/variables.scss';
+
+
+.mega-drop-down__container {
+    width: 70%;
+    margin: auto;
+    display: block;
+    background: $first-color;
+    transition: .5s all ease;
+}
+
+.mega-drop-down__container--hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.mega-drop-down__container--active, .mega-drop-down__container:hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mega-drop-down__content--hide {
+    display: none;
+    transition-duration: 1s;
+}
+
+.mega-drop-down__content--active, .mega-drop-down__container:hover .mega-drop-down__content {
+    display: flex;
+    transition-duration: 0;
+    direction: rtl;
+}
+
+.mega-drop-down__column {
+    width: 33.4%;
+    background: $first-color;
+}
+
+.mega-drop-down__column--background-hover {
+    background-color: $hover-color;
+}
+
+.mega-drop-down__column-header {
+    color: $first-color;
+    text-align: center;
+    padding: 1rem 0;
+    background: $hover-color;
+    transition: .3s all ease;
+}
+
+.mega-drop-down__column-header:hover {
+    color: $hover-color;
+    background: $first-color;
+}
+
+.mega-drop-down__column-items {
+    text-align: center;
+}
+
+.mega-drop-down__column--padding {
+    padding: 2rem 5rem;
+}
+
+.mega-drop-down__image {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+}

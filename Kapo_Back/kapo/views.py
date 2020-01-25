@@ -39,6 +39,11 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     permission_classes = [IsOwnerOrReadOnly]
 
+    def perform_destroy(self, instance):
+        instance.available = False
+        instance.save()
+        return instance
+
 
 class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializer

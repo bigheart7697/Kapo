@@ -1,0 +1,12 @@
+@import '../../../scss/base/variables.scss';
+
+.items-column__item {
+    padding: 1rem 0;
+    background-color: $first-color;
+    text-align: center;
+    text-decoration: none;
+}
+
+.items-column__item:hover {
+    text-decoration: underline;
+}

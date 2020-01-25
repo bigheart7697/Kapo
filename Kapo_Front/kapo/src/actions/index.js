@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER } from "./types";
+import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/");
@@ -13,6 +13,11 @@ export const fetchMyProducts = () => async dispatch => {
   const response = await server.get("/products/");
   dispatch({ type: FETCH_MY_PRODUCTS, payload: response.data });
 };
+
+export const fetchCategories = () => async dispatch => {
+  const response = await server.get("/prod-categories/");
+  dispatch({ type: FETCH_PRODUCT_CATEGORIES, payload: response.data })
+}
 
 export const fetchMyOrders = () => async dispatch => {
   const response = await server.get("/orders/");
@@ -26,6 +31,27 @@ export const fetchOrder = id => async dispatch => {
   console.log(response)
   dispatch({ type: FETCH_ORDER, payload: response.data })
 }
+
+export const completeOrder = id => async dispatch => {
+  try {
+    console.log("$id")
+	const response = await server.post(`/orders/${id}/complete/`);
+	console.log(response)
+    alert("سفارش پرداخت شد");
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+};
+
+export const cancelOrder = id => async dispatch => {
+  try {
+	const response = await server.post(`/orders/${id}/cancel/`);
+	console.log(response)
+    alert("سفارش لغو شد");
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+};
 
 export const addProduct = product => async dispatch => {
   try {
@@ -46,7 +72,7 @@ export const fetchProduct = id => async dispatch => {
   dispatch({ type: FETCH_PRODUCT, payload: response.data })
 }
 
-export const searchProducts = search => async dispatch => {
+export const searchProducts = (search, category = null) => async dispatch => {
   console.log(search)
   let response
   if (search !== "") {
@@ -62,7 +88,7 @@ export const addToCart = (id, count) => async dispatch => {
   let payload = { count: parseInt(count) }
   console.log(payload)
   try {
-    const response = await server.post(`/product/${id}/order`, payload);
+    const response = await server.post(`/products/${id}/order/`, payload);
     console.log(response);
     alert("سفارش شما ثبت شد");
   } catch (e) {
