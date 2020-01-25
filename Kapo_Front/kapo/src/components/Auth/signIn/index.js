@@ -13,7 +13,7 @@ const FORM_VALUES = {
   form_inputs: [
     {
       title: "email",
-      label: "email",
+      label: "ایمیل",
       error: "لطفا نام کاربری خود را وارد کنید"
     },{
         title: "password",

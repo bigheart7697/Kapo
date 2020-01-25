@@ -61,7 +61,7 @@ const FORM_VALUES = {
 
 class AddProduct extends React.Component {
   onSubmit = (formValues) => {
-    console.log(formValues)
+    // console.log(formValues)
     this.props.addProduct(formValues)
   };
   render() {

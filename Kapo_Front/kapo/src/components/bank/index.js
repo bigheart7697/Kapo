@@ -10,7 +10,7 @@ class Bank extends React.Component {
         this.props.fetchOrder(this.props.match.params.id);
       }
     render() {
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
         return (
             <div className="bank__container">
             <div className="bank__header-container">

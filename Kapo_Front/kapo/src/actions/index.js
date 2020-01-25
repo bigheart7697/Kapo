@@ -1,6 +1,8 @@
 import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 
+import history from '../history'
+
 import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES } from "./types";
 
 export const fetchProducts = () => async dispatch => {
@@ -86,6 +88,8 @@ export const SignIn = (auth) => async dispatch => {
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
     console.log(response.data.token)
+    alert('success')
+    history.push('/')
   } catch{
     alert("error")
   }
@@ -97,9 +101,15 @@ export const SignOut = () => async dispatch => {
 }
 
 export const SignUp = (formValues) => async dispatch => {
-  setAuthToken()
-  const response = await server.post("/accounts/register/", formValues)
-  localStorage.setItem("jwtToken", response.data.token)
-  setAuthToken(response.data.token)
-  console.log(response)
+  try{
+    setAuthToken()
+    const response = await server.post("/accounts/register/", formValues)
+    localStorage.setItem("jwtToken", response.data.token)
+    setAuthToken(response.data.token)
+    console.log(response)
+    alert("success")
+    history.push("/")
+  }catch{
+    alert("error")
+  }
 }
