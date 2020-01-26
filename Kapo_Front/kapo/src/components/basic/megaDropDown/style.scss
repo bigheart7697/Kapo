@@ -34,6 +34,7 @@
 .mega-drop-down__column {
     width: 25%;
     background: $white;
+    border-left: 1px solid $gray;
 }
 
 .mega-drop-down__column--background-hover {
@@ -59,10 +60,15 @@
 
 .mega-drop-down__column--padding {
     padding: 2rem 5rem;
+    display: table;
 }
 
 .mega-drop-down__image {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 15rem;
+    max-width: 100%;
     border-radius: 1rem;
+    margin: auto;
+    display: table-cell;
+    vertical-align: middle;
 }

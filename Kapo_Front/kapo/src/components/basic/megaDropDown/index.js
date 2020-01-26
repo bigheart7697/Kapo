@@ -8,8 +8,7 @@ class MegaDropDown extends React.Component {
     state = {name: '', categories: [], active: false, image: null, inside: false}
 
     changeCategories = (props) => {
-        this.setState({categories: props.categories})
-        this.setState({active: true})
+        this.setState({categories: props.categories, active: true, image: null})
         this.refs.itemscolumn1.changeCategories(props.categories)
         this.refs.itemscolumn2.changeCategories([])
         this.refs.itemscolumn3.changeCategories([])
@@ -27,8 +26,17 @@ class MegaDropDown extends React.Component {
         this.setState({inside: false})
     }
 
-    changeSubCategories = (categories) => {
-        this.refs.itemscolumn.changeCategories(categories)
+    changeSubCategories = (categories, id, index) => {
+        if (id==='1') {
+            this.refs.itemscolumn1.changeActiveState(index);
+            this.refs.itemscolumn2.changeCategories(categories.categories)
+            this.refs.itemscolumn3.changeCategories([])
+            this.refs.itemscolumn2.changeActiveState(-1);
+            this.setState({image: categories.image})
+        } else if (id==='2') {
+            this.refs.itemscolumn2.changeActiveState(index);
+            this.refs.itemscolumn3.changeCategories(categories.categories)
+        }
     }
 
     render() {
@@ -36,11 +44,11 @@ class MegaDropDown extends React.Component {
             <div
                 className={this.state.active || this.state.inside ? 'mega-drop-down__container mega-drop-down__container--active' : 'mega-drop-down__container mega-drop-down__container--hide'}>
                 <div className={this.state.active || this.state.inside ? 'mega-drop-down__content mega-drop-down__content--active' : 'mega-drop-down__content mega-drop-down__content--hide'}>
-                    <ItemsColumn onMouseOver={this.inside} onMouseLeave={this.outside}
+                    <ItemsColumn onMouseOver={this.inside} onMouseLeave={this.outside} id='1' func={this.changeSubCategories}
                         ref='itemscolumn1' categories={this.state.categories ? this.state.categories[0] ? this.state.categories[0].categories : [] : []}/>
-                    <ItemsColumn onMouseOver={this.inside} onMouseLeave={this.outside}
+                    <ItemsColumn onMouseOver={this.inside} onMouseLeave={this.outside} id='2' func={this.changeSubCategories}
                         ref='itemscolumn2' categories={this.state.categories ? this.state.categories[0] ? this.state.categories[0].categories : [] : []}/>
-                    <ItemsColumn onMouseOver={this.inside} onMouseLeave={this.outside} 
+                    <ItemsColumn onMouseOver={this.inside} onMouseLeave={this.outside} id='3' func={this.changeSubCategories}
                         ref='itemscolumn3' categories={this.state.categories ? this.state.categories[0] ? this.state.categories[0].categories : [] : []}/>
                     <div className='mega-drop-down__column mega-drop-down__column--padding'>
                         <img src={this.state.image} alt={this.state.name} className='mega-drop-down__image'></img>

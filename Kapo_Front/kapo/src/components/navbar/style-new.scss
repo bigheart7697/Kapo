@@ -85,6 +85,11 @@ $transition-time: 0.4s;
     background-color: $hover-color;
     color: $white;
     text-align: center;
+    cursor: pointer;
+}
+
+.nav-bar__button:hover {
+    opacity: 0.7;
 }
 
 .nav-bar__button--red {
