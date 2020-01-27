@@ -20,3 +20,30 @@
     padding: 3rem 0;
 }
 
+.order-factor__row {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 80%;
+    margin: 5rem auto;
+
+}
+
+.order-factor__element {
+    flex-grow: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    text-align: center;
+}
+
+.order-factor__element-title {
+    font-weight: 600;
+    direction: rtl;
+    display: inline;
+}
+
+.order-factor__element-value {
+    display: inline;
+    padding: 0 1rem;
+}
