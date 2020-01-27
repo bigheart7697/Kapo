@@ -5,6 +5,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+    padding: 1rem 2rem;
 }
 
 .form__title{
@@ -12,4 +14,8 @@
     font-size: 20px;
     font-weight: 600;
     color: black;
+}
+
+.form__input-container {
+    width: 100%;
 }

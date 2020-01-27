@@ -6,10 +6,10 @@ const BasicInput = props => {
   return (
     <div className="custom-input__container">
       <div className="custom-input__inner-container">
-        <label className="custom-input__label">{props.label}</label>
+        <label className="custom-input__label">{props.label}</label>{props.meta ? renderError(props.meta) : null}
         <input className="custom-input__input" {...props.input} type={props.type ? props.type : 'text'}/>
       </div>
-      {props.meta ? renderError(props.meta) : null}
+      
     </div>
   );
 };
