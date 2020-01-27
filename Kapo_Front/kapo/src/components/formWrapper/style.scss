@@ -1,8 +1,8 @@
 @import "../../scss/base/variables.scss";
 
 .form-wrapper__container{
-    margin: 10rem auto;
-    width: 50%;
+    margin: 20rem auto;
+    width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@
 
 .form-wrapper__form{
     padding: 4rem 2.5rem;
-    border: 1px solid $second-color;
+    border: 1px solid $borders;
     border-radius: 1rem;
     width: 100%;
 }

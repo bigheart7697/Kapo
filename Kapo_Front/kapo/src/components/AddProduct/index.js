@@ -19,7 +19,7 @@ const FORM_VALUES = {
     {
       title: "description",
       label: "توضیحات",
-      type: "password",
+      inputType: "textbox",
       error: "لطفا توضیحات مربوط به کالای خود را وارد کنید"
     },
     {

@@ -14,20 +14,16 @@
 }
 
 .basic-select__inner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  text-align: center;
+  text-align: right;
 }
 
 .basic-select__input {
-  background-color: $white;
+  background-color: $secondary-color;
   height: 3.2rem;
   border-radius: 0.5rem;
-  width: 95%;
-  max-width: 20rem;
-  border: 2px solid $primary-color;
+  width: 100%;
+  border: 2px solid $borders;
   transition: 0.4s;
   box-sizing: border-box;
   padding: 0 1rem;
@@ -35,20 +31,22 @@
 }
 
 .basic-select__input:focus {
+  background-color: $first-color;
   outline: none;
 }
 
 .basic-select__error {
   color: red;
-  padding: 0.5rem;
   font-size: 0.9rem;
+  display: inline;
+  margin: 0 2rem;
 }
 
 .basic-select__label {
-  padding: 1.3rem 0;
-  width: 10rem;
+  padding: 3rem 1rem 0 0;
   display: inline-block;
-  color: black;
+  color: $black;
+  text-align: right;
 }
 
 @media (max-width: 650px) {
