@@ -1,5 +1,5 @@
 from background_task import background
-from .models import Order, Product
+from .models import Order
 
 
 @background(schedule=30*60)

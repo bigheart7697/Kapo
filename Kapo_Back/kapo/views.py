@@ -1,4 +1,4 @@
-from django.core.exceptions import ValidationError, PermissionDenied
+from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django_filters.rest_framework import DjangoFilterBackend
