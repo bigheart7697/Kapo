@@ -11,7 +11,7 @@ from .views import *
 class ProductModelTests(APITestCase):
 
     def setUp(self):
-        self.data = {'name': 'woody', 'description': 'test', 'main_category': '2', 'price': 100, 'quantity': 1,
+        self.data = {'name': 'woody', 'description': 'test', 'cat1': '2', 'price': 100, 'quantity': 1,
                      'production_year': 1980}
         self.user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
                           'last_name': 'Shirkavand', 'phone_number': '+989124920819',
@@ -43,8 +43,8 @@ class ProductModelTests(APITestCase):
         self.assertEqual(Product.objects.count(), 1)
         self.assertEqual(product.name, self.data['name'])
         self.assertEqual(product.description, self.data['description'])
-        self.assertEqual(product.main_category, '2')
-        self.assertEqual(product.get_main_category_display(), "Health-Care")
+        self.assertEqual(product.cat1, '2')
+        self.assertEqual(product.get_cat1_display(), "personal")
         self.assertEqual(product.owner, User.objects.last())
         self.assertEqual(product.price, self.data['price'])
         self.assertEqual(product.quantity, self.data['quantity'])
@@ -76,7 +76,7 @@ class ProductModelTests(APITestCase):
 
 
 class OrderModelTests(APITestCase):
-    def setUp(self, name='woody', description='test', category='Digital', price=100, quantity=1, production_year=1980):
+    def setUp(self):
         self.prod_user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
                                'last_name': 'Shirkavand', 'phone_number': '+989124920819',
                                'is_corporate': False, 'country': 'Iran',
@@ -93,7 +93,8 @@ class OrderModelTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         self.register_and_authorize(self.prod_user_data['email'], self.prod_user_data['password'])
-        self.product_data = {'name': 'woody', 'description': 'test', 'category': 'Digital', 'price': 100, 'quantity': 1,
+        self.product_data = {'name': 'woody', 'description': 'test', 'cat1': '1', 'price': 100,
+                             'quantity': 1,
                              'production_year': 1980}
 
         url = reverse('add_product')

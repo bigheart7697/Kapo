@@ -18,6 +18,18 @@ class ProductCreateView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
+        cat1 = self.request.data['cat1']
+        cat2 = self.request.data['cat2']
+        cat3 = self.request.data['cat3']
+
+        if cat2 != "" and cat2 not in Product.category_hierarchy[cat1]:
+            raise ValidationError('{} is not a sub-category of {}'.format(cat2, cat1))
+        if cat3 != "":
+            if cat2 == "":
+                raise ValidationError('Level 2 category not entered')
+            elif cat3 not in Product.category_hierarchy[cat1][cat2]:
+                raise ValidationError('{} is not a sub-category of {}'.format(cat3, cat2))
+
         serializer.save(owner=self.request.user)
 
 
@@ -178,5 +190,20 @@ def ping(request):
     return JsonResponse({'result': 'OK'})
 
 
-def categories(request):
-    return JsonResponse({'categories': Product.Category.choices})
+def cat1_categories(request):
+    return JsonResponse({'categories': Product.Cat1.choices})
+
+
+def cat2_categories(request, cat1):
+    labels = Product.Cat2.labels
+    indices = list(Product.category_hierarchy[cat1].keys())
+    cats = [(i, labels[int(i) - 1]) for i in indices]
+    return JsonResponse({'categories': cats})
+
+
+def cat3_categories(request, cat1, cat2):
+    labels = Product.Cat3.labels
+    indices = Product.category_hierarchy[cat1][cat2]
+    cats = [(i, labels[int(i) - 1]) for i in indices]
+    return JsonResponse({'categories': cats})
+

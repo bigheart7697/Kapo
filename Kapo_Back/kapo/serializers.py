@@ -5,12 +5,15 @@ from accounts.serializers import UserSerializer
 
 class ProductSerializer(serializers.ModelSerializer):
     owner = UserSerializer(read_only=True)
-    category = serializers.CharField(source='get_main_category_display', read_only=True)
+    first_category = serializers.CharField(source='get_cat1_display', read_only=True)
+    second_category = serializers.CharField(source='get_cat2_display', read_only=True)
+    third_category = serializers.CharField(source='get_cat3_display', read_only=True)
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'category', 'description', 'image', 'main_category', 'price', 'second_hand', 'quantity',
-                  'owner', 'production_year', 'available']
+        fields = ['id', 'name', 'first_category', 'second_category', 'third_category', 'cat1', 'cat2', 'cat3',
+                  'description', 'image', 'price', 'second_hand',
+                  'quantity', 'owner', 'production_year', 'available']
 
 
 class OrderSerializer(serializers.ModelSerializer):
