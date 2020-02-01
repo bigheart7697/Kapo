@@ -14,7 +14,7 @@ const FORM_VALUES = {
     //corporate_name, corporate_number
     {
       title: "email",
-      label: "email",
+      label: "ایمیل",
       error: "لطفا نام کاربری خود را وارد کنید"
     }, {
       title: "password",
@@ -27,17 +27,17 @@ const FORM_VALUES = {
       error: "لطفا شماره تلفن خود را وارد کنید"
     }, {
       title: "country",
-      label: "country"
+      label: "کشور"
     }, {
       title: "city",
       label: "شهر",
       error: "لطفا شهر خود را وارد کنید"
     }, {
       title: "Address",
-      label: "Address"
+      label: "آدرس"
     }, {
       title: "is_corporate",
-      label: "is it seller?",
+      label: "آیا فروشنده هستید",
       type: "select",
       content: [
         { text: "بله", value: "True" },
@@ -45,16 +45,16 @@ const FORM_VALUES = {
       ]
     }, {
       title: "corporate_name",
-      label: "corporate name"
+      label: "اسم شرکت"
     }, {
       title: "corporate_number",
-      label: "corporate num"
+      label: "شماره شرکت"
     }, {
       title: "first_name",
-      label: "first name"
+      label: "نام"
     }, {
       title: "last_name",
-      label: "last name"
+      label: "نام خانوادگی"
     }
   ]
 };

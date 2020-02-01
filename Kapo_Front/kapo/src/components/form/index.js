@@ -5,14 +5,17 @@ import "./style.scss";
 
 import CustomInput from "../basic/customInput";
 import CustomButton from "../basic/customButton";
-import CustomSelect from "../basic/customSelect"
+import CustomSelect from "../basic/customSelect";
+import CustomFileUpload from '../basic/customFileUpload';
 import WhiteSpace from "../basic/whitespace";
 
 class Form extends React.Component {
   setComponent = type => {
     switch (type) {
       case "select":
-        return CustomSelect
+        return CustomSelect;
+      case "file":
+        return CustomFileUpload;
       default:
         return CustomInput;
     }

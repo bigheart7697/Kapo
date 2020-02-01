@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchOrder } from '../../actions';
+import { fetchOrder, completeOrder, cancelOrder } from '../../actions';
 
 
 import "./style.scss";
@@ -10,7 +10,7 @@ class Bank extends React.Component {
         this.props.fetchOrder(this.props.match.params.id);
       }
     render() {
-        console.log(this.props.match.params.id)
+        // console.log(this.props.match.params.id)
         return (
             <div className="bank__container">
             <div className="bank__header-container">
@@ -62,8 +62,8 @@ class Bank extends React.Component {
                 </div>
                 <div className="bank__details">
                 <div className="bank__button-containers">
-                    <a href="/" className="bank__button bank__button--accept">پرداخت</a>
-                    <a href="/" className="bank__button bank__button--reject">انصراف</a>
+                    <button className="bank__button bank__button--accept" onClick={() => this.props.completeOrder(this.props.match.params.id)}>پرداخت</button>
+                    <button className="bank__button bank__button--reject" onClick={() => this.props.cancelOrder(this.props.match.params.id)}>انصراف</button>
                 </div>
                 </div>
             </div>
@@ -106,5 +106,5 @@ const mapStatToProps = (state, ownProps) => {
     return { order: orderItem}
   }
   
-  export default connect(mapStatToProps, { fetchOrder })(Bank);
+  export default connect(mapStatToProps, { fetchOrder, completeOrder, cancelOrder })(Bank);
 // export default Bank;

@@ -49,12 +49,19 @@ const FORM_VALUES = {
         {text: "خیر", value: "False"}
       ],
       error: "لطفا نوع کالای خود را وارد نمایید"
+    },
+    {
+      title: "image",
+      label: "تصویر کالا",
+      type: "file",
+      error: "لطفا تصویر کالا را بارگذاری کنید"
     }
   ]
 };
 
 class AddProduct extends React.Component {
   onSubmit = (formValues) => {
+    // console.log(formValues)
     this.props.addProduct(formValues)
   };
   render() {

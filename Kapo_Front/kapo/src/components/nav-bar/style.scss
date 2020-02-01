@@ -1,0 +1,92 @@
+@import '../../scss/base/variables.scss';
+
+.nav-bar__container {
+    width: 100%;
+    height: 13rem;
+    padding: 1rem 1rem 0 1rem;
+    display: flex;
+    direction: rtl;
+    flex-direction: row;
+    border-bottom: 1px solid $gray;
+    background-color: $first-color;
+}
+
+.nav-bar__image {
+    max-width: 20rem;
+}
+
+.nav-bar__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.nav-bar__row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0 .5rem;
+}
+
+.nav-bar__row--tall {
+    height: 7rem;
+}
+
+.nav-bar__row--short {
+    height: 5rem;
+    margin-right: 5rem;
+}
+
+.nav-bar__item {
+    float: right;
+}
+
+.nav-bar__item--display-table {
+    display: table;
+    height: 100%;
+}
+
+.nav-bar__item--long {
+    width: 70%;
+}
+
+.nav-bar__item--items {
+    display: flex;
+    width: 30%;
+    padding: 1.5rem 0;
+    direction: ltr;
+}
+
+img.nav-bar__logo {
+    height: 100%;
+    width: auto;
+}
+
+.nav-bar__button {
+    padding: 1rem 0;
+    border-radius: 1rem;
+    width: 40%;
+    margin: auto;
+    background-color: $hover-color;
+    color: $white;
+    text-align: center;
+}
+
+.nav-bar__button--red {
+    background-color: $fourth-color;
+}
+
+.nav-bar__category {
+    width: 10%;
+    text-align: center;
+    padding-top: 1.5rem;
+    cursor: pointer;
+    border-top: 1px solid $gray;
+    border-left: 1px solid $gray;
+    border-right: 1px solid $gray;
+}
+
+.nav-bar__category:hover {
+    background-color: $hover-color;
+    color: $white;
+}

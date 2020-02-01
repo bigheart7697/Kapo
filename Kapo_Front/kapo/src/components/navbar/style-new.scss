@@ -1,0 +1,97 @@
+@import '../../scss/base/variables.scss';
+
+$tail-top-relative : 0;
+$circle-radius : 7rem;
+$nav-height: 7rem;
+$tail-width : 10rem;
+$tail-height: 7rem;
+$transition-time: 0.4s;
+
+.navbar__container{
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: $second-color;
+    align-items: center;
+}
+
+.navbar__flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+.navbar__content{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: $nav-height;
+    color: $white;
+    flex: auto;
+    padding: 0 1rem;
+}
+
+.navbar__circle{
+    height: $circle-radius;
+    width: $circle-radius;
+    background-color: $third-color;
+    border-radius: 50%;
+    position: relative;
+    left: $circle-radius/2;
+    top: -$tail-top-relative;
+    border: 3px solid $second-color;
+    transition: $transition-time;
+    background-image: url('../../assets/user.png');
+    background-repeat: none;
+    background-size: 100% 100%;
+}
+
+.navbar__tail{
+    position: relative;
+    top: $tail-top-relative;
+    display: flex;
+    flex-direction: row-reverse;
+    height: $tail-height;
+    width: $tail-width;
+    background-color: $second-color;
+    transition: $transition-time;
+    cursor: pointer;
+}
+
+.navbar__searchbar {
+    width: 40%;
+    display: table;
+}
+
+.navbar__auth {
+    width: 10%;
+}
+
+.navbar__new-product {
+    width: 10%;
+    margin-left: 2%;
+}
+
+.nav-bar__button {
+    padding: 1rem 0;
+    border-radius: 1rem;
+    width: 90%;
+    margin: auto;
+    background-color: $hover-color;
+    color: $white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nav-bar__button:hover {
+    opacity: 0.7;
+}
+
+.nav-bar__button--red {
+    background-color: $fourth-color;
+}
