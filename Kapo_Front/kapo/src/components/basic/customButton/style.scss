@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 70%;
+    width: 50%;
 }
 
 .custom-button__container:focus{
@@ -19,6 +19,7 @@
 }
 
 .custom-button__container:hover{
-    background-color: $secondary-color;
+    background-color: $first-color;
     color: $primary-color;
+    border-color: $borders;
 }

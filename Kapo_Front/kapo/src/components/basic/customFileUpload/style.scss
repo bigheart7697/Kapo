@@ -4,39 +4,36 @@
   direction: rtl;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+  align-items: right;
   width: 100%;
 }
 
 .custom-file-upload__inner-container {
   width: 100%;
-  text-align: center;
 }
 
 .custom-file-upload__input {
   height: 3.2rem;
   border-radius: 0.5rem;
-  width: 70vw;
-  max-width: 20rem;
-  color: $black;
+  width: 100%;
   transition: 0.4s;
   box-sizing: border-box;
   padding: 1rem;
-  display: inline-block !important;
 }
 
 .custom-file-upload__error {
   color: red;
-  padding: 0.5rem;
   font-size: 0.9rem;
+  display: inline;
+  margin: 0 2rem;
 }
 
 .custom-file-upload__label {
-  padding: 1.3rem 0;
-  width: 10rem;
+  padding: 3rem 1rem 0 0;
   display: inline-block;
   color: $black;
+  text-align: right;
 }
 
 @media (max-width: 650px) {

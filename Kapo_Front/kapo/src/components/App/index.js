@@ -16,6 +16,7 @@ import MyProductList from '../myProductList'
 import Bank from '../bank'
 import PreviewOrder from '../previewOrder'
 import OrderList from '../orderList'
+import OrderFactor from '../orderDetails/factor'
 
 const App = () => {
     return (
@@ -33,6 +34,7 @@ const App = () => {
                     <Route path="/order/preview/:id" exact component={PreviewOrder}/>
                     <Route path="/bank/:id" exact component={Bank}/>
                     <Route path="/order/list" exact component={OrderList}/>
+                    <Route path="/order/factor" exact component={OrderFactor}/>
                 </div>
             </Router>
         </div>
