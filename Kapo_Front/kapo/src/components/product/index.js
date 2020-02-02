@@ -22,40 +22,19 @@ class Product extends React.Component {
   render () {
     return (
       <div className='product__example-1 product__card' onClick={this.props.onClick ? this.props.onClick : null}>
-        <div className='product__wrapper' style={{ backgroundImage: 'url(' + faker.image.image() + ')' }}>
+        <div className='product__wrapper' style={{ backgroundImage: 'url(' + this.props.product.image + ')' }}>
           <div className='product__date'>
-            <span className='product__day'>{this.props.day ? this.props.day : 1}</span>
-            <span className='product__month'>{this.props.month ? this.props.month : "مهر"}</span>
-            <span className='product__year'>{this.props.year ? this.props.year : "1398" }</span>
+            <span className='product__month'>قیمت</span>
+            <span className='product__month'>{this.props.product ? this.props.product.price : "-"}</span>
           </div>
           <div className='product__data'>
             <div className='product__content'>
-              <span className='product__author'>{this.props.address ? this.props.address : "no address"}</span>
+              <span className='product__author'>{this.props.product ? this.props.product.owner ? this.props.product.owner.address : '-' : '-'}</span>
               <h1 className='product__title'>
-                <a href='/'>{this.props.title ? this.props.title : null}</a>
+                <a href='/'>{this.props.product ? this.props.product.name : null}</a>
               </h1>
-              <p className='product__text'>{this.props.description ? this.props.description : null}</p>
-              {/*
-              <label for='show-menu' className='product__menu-button' onClick={this.changeState}>
-                <span></span>
-              </label>
-              */}
+              <p className='product__text'>{this.props.product ? this.props.product.description : '-'}</p>
             </div>
-            {/*
-              <ul className='product__menu-content' style={{zIndex: this.state.zIndex, top: this.state.top}}>
-              <li>
-                <i class="bookmark icon product__i--no-margin"></i>
-              </li>
-              <li>
-                <i class="heart icon"></i>
-                <span>{this.props.likes}</span>
-              </li>
-              <li>
-                <i class="comment icon"></i>
-                <span>{this.props.comments}</span>
-              </li>
-            </ul>
-            */}
           </div>
         </div>
       </div>

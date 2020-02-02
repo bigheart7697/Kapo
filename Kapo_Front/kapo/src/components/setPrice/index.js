@@ -2,10 +2,17 @@ import React from 'react'
 
 import './style.scss'
 
+import FormWrapper from '../formWrapper'
 import Form from '../form'
 import PriceCard from '../basic/priceCard'
+import Product from '../product'
 
-import image from '../../assets/1.png'
+import image1 from '../../assets/1.png'
+import image2 from '../../assets/2.png'
+import image3 from '../../assets/3.png'
+import image4 from '../../assets/4.png'
+import image5 from '../../assets/5.png'
+import image6 from '../../assets/6.png'
 
 const FORM_VALUES = {
   submitText: "ثبت",
@@ -25,13 +32,13 @@ class SetPrice extends React.Component {
 
     componentDidMount() {
         this.setState({products: [
-            {'name': 'تست', 'price': 120000, 'image': image, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-            {'name': 'تست', 'price': 120000, 'image': image, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-            {'name': 'تست', 'price': 120000, 'image': image, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-            {'name': 'تست', 'price': 120000, 'image': image, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-            {'name': 'تست', 'price': 120000, 'image': image, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-            {'name': 'تست', 'price': 120000, 'image': image, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-            {'name': 'تست', 'price': 120000, 'image': image, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}}
+            {'name': 'تست', 'price': 120000, 'image': image1, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
+            {'name': 'تست', 'price': 120000, 'image': image2, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
+            {'name': 'تست', 'price': 120000, 'image': image3, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
+            {'name': 'تست', 'price': 120000, 'image': image4, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
+            {'name': 'تست', 'price': 120000, 'image': image5, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
+            {'name': 'تست', 'price': 120000, 'image': image6, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
+            {'name': 'تست', 'price': 120000, 'image': image1, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}}
         ]})
     }
 
@@ -42,6 +49,16 @@ class SetPrice extends React.Component {
     render() {
         return (
             <div className='set-price__container'>
+                <div className='set-price__section set-price__section--products'>
+                    <div className='set-price__title'>لیست کالاهای مشابه</div>
+                    <div className='set-price__product-list-container'>
+                        <div className='set-price__product-list'>
+                            {this.state.products ? this.state.products.map((element, index) => {
+                                return <Product product={element} key={-2-index}></Product>
+                            }) : <div></div>}
+                        </div>
+                    </div>
+                </div>
                 <div className='set-price__section'>
                     <div className='set-price__form-wrapper'>
                         <Form
@@ -51,13 +68,6 @@ class SetPrice extends React.Component {
                             title={FORM_VALUES.title}
                         ></Form>
                     </div>
-                </div>
-                <div className='set-price__section set-price__section--wide'>
-                    <div className='set-price__title'>لیست کالاهای مشابه</div>
-                    <PriceCard product={{name: 'نام', image: 'تصویر', price: 'قیمت'}} key={-1} index={0}></PriceCard>
-                    {this.state.products ? this.state.products.map((element, index) => {
-                        return <PriceCard product={element} key={-2-index} index={index + 1}></PriceCard>
-                    }) : <div></div>}
                 </div>
             </div>
         );
