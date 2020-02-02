@@ -26,3 +26,12 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ['id', 'state', 'customer', 'product', 'count', 'created']
 
 
+class SponsoredSearchSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True, many=False)
+    remaining_count = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = SponsoredSearch
+        fields = ['id', 'product', 'count', 'remaining_count', 'search_phrases']
+
+
