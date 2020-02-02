@@ -1,0 +1,37 @@
+@import '../../scss/base/variables.scss';
+
+.set-price__container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.set-price__section {
+    width: 30%;
+    margin: 0 5%;
+    padding: 5rem 2rem;
+    border-radius: 1rem;
+    padding-top: 20rem;
+}
+
+.set-price__section--wide {
+    width: 50%;
+    padding-top: 10rem;
+}
+
+.set-price__form-wrapper {
+    border-radius: 1rem;
+    border: 1px solid $borders;
+    padding: 3rem 0;
+    background-color: $white;
+}
+
+.set-price__title {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    text-align: center;
+    display: block;
+    padding-bottom: 5rem;
+}

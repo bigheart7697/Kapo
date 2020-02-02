@@ -17,6 +17,7 @@ import Bank from '../bank'
 import PreviewOrder from '../previewOrder'
 import OrderList from '../orderList'
 import OrderFactor from '../orderDetails/factor'
+import SetPrice from '../setPrice'
 
 const App = () => {
     return (
@@ -35,6 +36,7 @@ const App = () => {
                     <Route path="/bank/:id" exact component={Bank}/>
                     <Route path="/order/list" exact component={OrderList}/>
                     <Route path="/order/factor" exact component={OrderFactor}/>
+                    <Route path="/AddProduct/SetPrice" exact component={SetPrice}/>
                 </div>
             </Router>
         </div>
