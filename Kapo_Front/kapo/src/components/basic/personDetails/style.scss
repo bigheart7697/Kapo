@@ -1,0 +1,48 @@
+@import '../../../scss/base/variables.scss';
+
+.person-details__person-container {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.person-details__person-title {
+    background-color: $white;
+    width: 10%;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid $black;
+    padding: 3.5rem 0;
+}
+
+.person-details__content {
+    border: 1px solid $black;
+    margin: 0 2px;
+    width: 90%;
+}
+
+.person-details__row {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.person-details__element {
+    flex-grow: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    text-align: center;
+}
+
+.person-details__element-title {
+    font-weight: 600;
+    direction: rtl;
+    display: inline;
+}
+
+.person-details__element-value {
+    display: inline;
+    padding: 0 1rem;
+}

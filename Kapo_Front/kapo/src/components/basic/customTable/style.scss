@@ -1,0 +1,29 @@
+@import '../../../scss/base/variables.scss';
+
+.custom-table__container {
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.custom-table__table {
+    width: 100%;
+    direction: rtl;
+    border: 1px solid $black;
+}
+
+.custom-table__thead {
+    background-color: $first-color;
+    width: 100%;
+}
+
+.custom-table__td {
+    text-align: center;
+    flex-grow: 1;
+    width: 20%;
+    padding: 2rem;
+    border: 1px solid $borders;
+}
+
+.custom-table__tr, .custom-table__thead {
+    display: flex;
+}
