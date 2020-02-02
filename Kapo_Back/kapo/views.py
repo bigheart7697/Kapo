@@ -190,6 +190,10 @@ def ping(request):
     return JsonResponse({'result': 'OK'})
 
 
+def cat_hierarchy(request):
+    return JsonResponse(Product.category_hierarchy)
+
+
 def cat1_categories(request):
     return JsonResponse({'categories': Product.Cat1.choices})
 

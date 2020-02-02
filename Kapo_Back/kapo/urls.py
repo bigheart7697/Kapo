@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^ordered-products/(?P<pk>\d+)/$', views.OwnerOrderDetailView.as_view(), name='owner-order-detail'),
     path('csrf/', views.csrf),
     path('ping/', views.ping),
+    url(r'^cat-hierarchy/$', views.cat_hierarchy, name='cat-hierarchy'),
     url(r'^prod-cats/$', views.cat1_categories, name='cat1'),
     url(r'^prod-cats/(?P<cat1>\d+)/$', views.cat2_categories, name='cat2'),
     url(r'^prod-cats/(?P<cat1>\d+)/(?P<cat2>\d+)/$', views.cat3_categories, name='cat3'),
