@@ -20,7 +20,7 @@
 }
 
 .order-details__container-text {
-    color: $seventh-color;
+    color: black;
     transition: .3s;
     display: flex;
     width: 60%;
@@ -96,7 +96,7 @@
 }
 
 .order-details__container-text--hidden {
-    color: $first-color;
+    color: black;
     transition-delay: 0s;
     .order-details__row {
         border: none;

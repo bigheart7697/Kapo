@@ -19,6 +19,7 @@ import OrderList from '../orderList'
 import OrderFactor from '../orderDetails/factor'
 import SetPrice from '../setPrice'
 import Page404 from '../basic/404'
+import ChangeProduct from '../changeProduct'
 
 const App = () => {
     return (
@@ -39,6 +40,7 @@ const App = () => {
                     <Route path="/order/factor" exact component={OrderFactor}/>
                     <Route path="/AddProduct/SetPrice" exact component={SetPrice}/>
                     <Route path="/404" exact component={Page404}/>
+                    <Route path="/changeProduct" exact component={ChangeProduct}/>
                 </div>
             </Router>
         </div>
