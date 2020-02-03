@@ -31,7 +31,7 @@ class IsCustomerOfOrderedProduct(permissions.BasePermission):
         return True
 
 
-class IsOwnerOfOrderedProduct(permissions.BasePermission):
+class IsOwnerOfProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if obj.product.owner != request.user:
             raise PermissionDenied()

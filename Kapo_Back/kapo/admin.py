@@ -10,3 +10,8 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     model = Order
+
+
+@admin.register(SponsoredSearch)
+class OrderAdmin(admin.ModelAdmin):
+    model = SponsoredSearch

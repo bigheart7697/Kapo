@@ -1,0 +1,45 @@
+@import '../../../scss/base/variables.scss';
+
+$item-hieght: 10rem;
+
+.price-card__container {
+    width: 90%;
+    margin: auto;
+    padding: 1rem;
+    border-top: 1px solid $borders;
+    display: flex;
+    flex-direction: row-reverse;
+    background: $white;
+}
+
+.price-card__container--header {
+    border: none;
+    font-weight: 600;
+    background-color: $second-color;
+    color: $white;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.price-card__section {
+    width: 33%;
+    height: $item-hieght;
+    text-align: center;
+    display: table;
+}
+
+.price-card__section--header {
+    height: 3rem;
+}
+
+.price-card__section-value {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.price-card__image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: $item-hieght;
+    border-radius: 1rem;
+}

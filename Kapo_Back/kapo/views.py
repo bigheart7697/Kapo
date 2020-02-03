@@ -82,7 +82,7 @@ class OrderCreateView(generics.CreateAPIView):
 
 
 class ProductSearchView(generics.ListAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().filter(available=True)
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filter_class = ProductFilter
@@ -108,7 +108,7 @@ class CustomerOrderDetailView(generics.RetrieveAPIView):
 
 class OwnerOrderListView(generics.ListAPIView):
     serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOfOrderedProduct]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
 
     def get_queryset(self):
         return Order.objects.filter(product__owner=self.request.user)
@@ -116,7 +116,7 @@ class OwnerOrderListView(generics.ListAPIView):
 
 class ProductOrderListView(generics.ListAPIView):
     serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOfOrderedProduct]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
 
     def get_queryset(self):
         print(self.kwargs['pk'])
@@ -129,6 +129,37 @@ class OwnerOrderDetailView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         return Order.objects.filter(product__owner=self.request.user)
+
+
+class SponsoredSearchCreateView(generics.CreateAPIView):
+    serializer_class = SponsoredSearchSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def perform_create(self, serializer):
+        try:
+            product = Product.objects.get(id=self.kwargs['pk'])
+            count = int(self.request.data['count'])
+            phrases = self.request.data['search_phrases']
+            remaining_count = count
+            serializer.save(product=product, count=count, remaining_count=remaining_count,
+                            search_phrases=phrases)
+
+        except Product.DoesNotExist:
+            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+class SponsoredSearch(generics.ListAPIView):
+    queryset = SponsoredSearch.objects.all().filter(valid=True)
+    serializer_class = SponsoredSearchSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['search_phrases']
+    ordering_fields = ['remaining_count']
+
+    def get(self, request, *args, **kwargs):
+        for sponsored_search in self.get_queryset():
+            sponsored_search.remaining_count -= 1
+            sponsored_search.save()
+        return super(SponsoredSearch, self).get(request, *args, **kwargs)
 
 
 @api_view(['POST'])

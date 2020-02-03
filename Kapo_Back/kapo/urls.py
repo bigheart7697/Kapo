@@ -21,11 +21,13 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('', views.ProductListView.as_view(), name='index'),
-    url(r'^add-product/', views.ProductCreateView.as_view(), name='add_product'),
+    url(r'^add-product/$', views.ProductCreateView.as_view(), name='add_product'),
     url(r'^products/$', views.OwnerProductListView.as_view(), name='my-products'),
     url(r'^products/(?P<pk>\d+)/$', views.ProductDetailView.as_view()),
-    url(r'^products/(?P<pk>\d+)/order/', views.OrderCreateView.as_view(), name='order'),
-    url(r'^search/', views.ProductSearchView.as_view(), name='search'),
+    url(r'^products/(?P<pk>\d+)/order/$', views.OrderCreateView.as_view(), name='order'),
+    url(r'^products/(?P<pk>\d+)/sponsor/$', views.SponsoredSearchCreateView.as_view(), name='sponsor'),
+    url(r'^search/$', views.ProductSearchView.as_view(), name='search'),
+    url(r'^sponsored-search/$', views.SponsoredSearch.as_view(), name='sponsored_search'),
     url(r'^orders/$', views.CustomerOrderListView.as_view(), name='customer-orders'),
     url(r'^products/(?P<pk>\d+)/orders/$', views.ProductOrderListView.as_view(), name='owner-product-orders'),
     url(r'^orders/(?P<pk>\d+)/$', views.CustomerOrderDetailView.as_view(), name='customer-order-detail'),

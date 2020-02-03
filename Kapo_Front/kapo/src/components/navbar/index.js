@@ -5,7 +5,6 @@ import "./style-new.scss";
 import NavItem from "../basic/navItem";
 import NavDropDown from '../basic/navDropDown';
 import history from '../../history';
-import MageDropDown from '../basic/megaDropDown';
 import SearchBar from '../basic/searchBar';
 import MegaDropDown from "../basic/megaDropDown";
 
@@ -74,7 +73,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="navbar__component--padding-top">
         <div className="navbar__flex">
           <div className="navbar__container">
             <div className="navbar__content">

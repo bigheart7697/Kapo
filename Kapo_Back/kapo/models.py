@@ -218,6 +218,15 @@ class Product(models.Model):
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.quantity > 0:
+            self.available = True
+        else:
+            self.available = False
+        super(Product, self).save(force_insert=force_insert, force_update=force_update, using=None,
+                                  update_fields=None)
+
 
 class Order(models.Model):
     class State(models.IntegerChoices):
@@ -237,3 +246,21 @@ class Order(models.Model):
         ordering = ['created']
         verbose_name = _('Order')
         verbose_name_plural = _('Orders')
+
+
+class SponsoredSearch(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, related_name=_("sponsored_searches"), on_delete=models.CASCADE)
+    count = models.IntegerField(_('search count'), validators=[MinValueValidator(1000)])
+    remaining_count = models.IntegerField(_('remaining count'), validators=[MinValueValidator(0)])
+    valid = models.BooleanField(_("valid"), default=True)
+    search_phrases = models.CharField(_('search phrases'), max_length=20)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.remaining_count > 0:
+            self.valid = True
+        else:
+            self.valid = False
+        super(SponsoredSearch, self).save(force_insert=force_insert, force_update=force_update, using=None,
+                                          update_fields=None)
