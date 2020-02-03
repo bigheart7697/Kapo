@@ -17,6 +17,7 @@ import Bank from '../bank'
 import PreviewOrder from '../previewOrder'
 import OrderList from '../orderList'
 import OrderFactor from '../orderDetails/factor'
+import AllProducts from '../AllProducts'
 
 const App = () => {
     return (
@@ -25,7 +26,7 @@ const App = () => {
                 <div>
                     <Navbar></Navbar>
                     <Route path="/" exact component={MainPage}/>
-                    <Route path="/ProductList" exact component={ProductList} />
+                    <Route path="/ProductList" exact component={AllProducts} />
                     <Route path="/product/:id" exact component={productDetails}/>
                     <Route path="/AddProduct" exact component={AddProduct}/>
                     <Route path="/Auth/SignIn" exact component={SignIn}/>
