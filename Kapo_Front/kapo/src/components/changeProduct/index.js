@@ -9,7 +9,7 @@ import FormWrapper from '../formWrapper'
 
 const FORM_VALUES = {
   submitText: "ثبت",
-  title: "اضافه کردن کالای جدید",
+  title: "تغییر مشخصات کالای",
   form_inputs: [
     {
       title: "name",
@@ -59,10 +59,17 @@ const FORM_VALUES = {
   ]
 };
 
-class AddProduct extends React.Component {
+class ChangeProduct extends React.Component {
+  state = {initialValues: {}}
+
   onSubmit = (formValues) => {
     this.props.addProduct(formValues)
   };
+
+  componentDidMount() {
+    this.setState({initialValues: this.props.product})
+  }
+
   render() {
     return (
       <FormWrapper>
@@ -71,10 +78,11 @@ class AddProduct extends React.Component {
           onSubmit={this.onSubmit}
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
+          initialValue={this.state.initialValues}
         ></Form>
       </FormWrapper>
     );
   }
 }
 
-export default connect(null, { addProduct })(AddProduct);
+export default connect(null, { addProduct })(ChangeProduct);
