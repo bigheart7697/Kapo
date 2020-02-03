@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { fetchMyProducts } from '../../actions'
+import Productlist from "../product-list"
 
 import _ from "lodash";
 
@@ -10,17 +11,16 @@ import ProductCard from '../basic/productCard'
 
 
 class MyProductList extends React.Component{
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchMyProducts()
     }
-    render(){
+    render() {
         const newArray = _.map(this.props.products, (item, key) => {
             return item
-          })
-        console.log(this.props.products)
-        return(<div className="product-list__container">
-            {newArray.map((element) => <ProductCard product={element}></ProductCard>)}
-        </div>)
+        })
+        return (<>
+            <Productlist newArray={newArray}></Productlist>
+        </>)
     }
     
 }
