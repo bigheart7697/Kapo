@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='creation date')),
                 ('name', models.CharField(default='', max_length=100, verbose_name='name')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='static/products/', verbose_name='image')),
+                ('image', models.ImageField(blank=True, null=True, upload_to='media/products/', verbose_name='image')),
                 ('description', models.TextField(default='', verbose_name='description')),
                 ('cat1', models.CharField(choices=[('1', 'electronics'), ('2', 'personal'), ('3', 'businesses'), ('4', 'vehicle'), ('5', 'home-appliance'), ('6', 'leisure-and-hobbies')], max_length=100, verbose_name='cat1')),
                 ('cat2', models.CharField(blank=True, choices=[('1', 'furniture-and-home-decor'), ('2', 'cars'), ('3', 'baby-and-toys'), ('4', 'parts-accessories'), ('5', 'utensils-and-appliances'), ('6', 'clothing-and-shoes'), ('7', 'mobile-tablet'), ('8', 'children-clothing-and-shoe'), ('9', 'game-consoles-and-video-games'), ('10', 'audio-video'), ('11', 'building-and-garden'), ('12', 'jewelry-and-watches'), ('13', 'equipments-and-machinery'), ('14', 'bicycle'), ('15', 'animals'), ('16', 'batch'), ('17', 'musical-instruments'), ('18', 'health-beauty'), ('19', 'motorcycles'), ('20', 'computers'), ('21', 'sport-leisure'), ('22', 'book-student-literature'), ('23', 'utility'), ('24', 'travel-packages'), ('25', 'hobby-collectibles'), ('26', 'leisure-hobbies-toys'), ('27', 'phone')], max_length=100, null=True, verbose_name='cat2')),

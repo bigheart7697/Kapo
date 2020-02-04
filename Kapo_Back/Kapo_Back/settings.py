@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Application definition
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'background_task',
+    'webpack_loader',
     'corsheaders',
 ]
 
@@ -170,4 +171,3 @@ JWT_AUTH = {
 }
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

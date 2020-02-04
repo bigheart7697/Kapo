@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('city', models.CharField(blank=True, default='', max_length=100, null=True, verbose_name='city')),
                 ('address', models.CharField(default='', max_length=100, verbose_name='address')),
                 ('phone_number', phonenumber_field.modelfields.PhoneNumberField(max_length=128, region=None, unique=True, verbose_name='phone number')),
-                ('photo', models.ImageField(blank=True, null=True, upload_to='static/users/', verbose_name='photo')),
+                ('photo', models.ImageField(blank=True, null=True, upload_to='media/users/', verbose_name='photo')),
                 ('is_corporate', models.BooleanField(default=False)),
                 ('corporate_name', models.CharField(blank=True, max_length=200, null=True, verbose_name='corporate name')),
                 ('corporate_number', models.PositiveIntegerField(blank=True, null=True, unique=True, validators=[django.core.validators.MaxValueValidator(999999999999), django.core.validators.MinValueValidator(100000000000)], verbose_name='corporate number')),

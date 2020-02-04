@@ -11,7 +11,7 @@ from .views import *
 class ProductModelTests(APITestCase):
 
     def setUp(self):
-        self.data = {'name': 'woody', 'description': 'test', 'cat1': '2', 'price': 100, 'quantity': 1,
+        self.data = {'name': 'woody', 'description': 'test', 'cat1': '2', 'cat2': '', 'cat3': '', 'price': 100, 'quantity': 1,
                      'production_year': 1980}
         self.user_data = {'email': 'dummy@gmail.com', 'password': '@123reshG', 'first_name': 'Reza',
                           'last_name': 'Shirkavand', 'phone_number': '+989124920819',
@@ -94,7 +94,7 @@ class OrderModelTests(APITestCase):
 
         self.register_and_authorize(self.prod_user_data['email'], self.prod_user_data['password'])
         self.product_data = {'name': 'woody', 'description': 'test', 'cat1': '1', 'price': 100,
-                             'quantity': 1,
+                             'quantity': 1, 'cat2': '', 'cat3': '',
                              'production_year': 1980}
 
         url = reverse('add_product')

@@ -8,8 +8,8 @@ from django.utils.translation import ugettext as _
 
 from accounts.models import User
 
-product_images_dir = 'static/products/'
-profile_images_dir = 'static/users/'
+product_images_dir = 'media/products/'
+profile_images_dir = 'media/users/'
 
 
 def year_choices():
@@ -196,7 +196,6 @@ class Product(models.Model):
     id = models.AutoField(primary_key=True)
     created = models.DateTimeField(_("creation date"), auto_now_add=True)
     name = models.CharField(_("name"), max_length=100, default="")
-    image_dir = random.randint(0, 1e20)
     image = models.ImageField(_("image"), upload_to=product_images_dir, height_field=None,
                               width_field=None, null=True, blank=True)
     description = models.TextField(_("description"), default="")
