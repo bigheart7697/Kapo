@@ -6,6 +6,9 @@ services:
       - ./Kapo_Back:/app/backend
     ports:
       - "8000:8000"
+    environment:
+      - DEBUG = 0
+      
     stdin_open: true
     tty: true
     command: python3 manage.py runserver 0.0.0.0:8000
