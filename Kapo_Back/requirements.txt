@@ -16,3 +16,4 @@ djangorestframework-jwt>=1.11.0
 django-filter>=2.2.0
 django-background-tasks>=1.2.5
 coverage>=5.0.3
+whitenoise==4.1.2
