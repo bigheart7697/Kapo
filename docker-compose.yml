@@ -3,16 +3,16 @@ services:
   backend:
     build: ./Kapo_Back
     volumes:
-      - ./Kapo_back:/app/backend
+      - ./Kapo_Back:/app/backend
     ports:
       - "8000:8000"
     stdin_open: true
     tty: true
-    command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: python3 manage.py runserver 0.0.0.0:8000
   frontend:
     build: ./Kapo_Front/kapo
     volumes:
-      - ./Kapo_front/kapo:/app/frontend
+      - ./Kapo_front/kapo:/app
       - /app/node_modules
     ports:
       - "3000:3000"
