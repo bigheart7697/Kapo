@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'background_task',
-    'webpack_loader',
     'corsheaders',
 ]
 
