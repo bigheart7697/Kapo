@@ -3,7 +3,7 @@ stages:
  # - testing
 #   - styling
   - build
-#  - deploy
+  - deploy
 
 variables:
   IMAGE: ${CI_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}
