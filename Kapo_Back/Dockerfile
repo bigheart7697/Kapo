@@ -8,7 +8,7 @@ RUN apt-get update \
 WORKDIR /app/backend
 
 COPY requirements.txt /app/backend
-RUN pip3 install --upgrade pip -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 COPY . /app/backend
 
