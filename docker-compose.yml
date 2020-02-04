@@ -12,7 +12,7 @@ services:
   frontend:
     build: ./Kapo_Front/kapo
     volumes:
-      - ./Kapo_front/kapo:/app
+      - ./Kapo_Front/kapo:/app
       - /app/node_modules
     ports:
       - "3000:3000"
