@@ -10,7 +10,7 @@ services:
     tty: true
     command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
   frontend:
-    build: ./frontend
+    build: ./Kapo_Front/kapo
     volumes:
       - ./Kapo_front/kapo:/app/frontend
       - ./Kapo_front/kapo/node-modules:/app/frontend/node_modules
