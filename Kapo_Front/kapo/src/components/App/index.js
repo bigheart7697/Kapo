@@ -44,7 +44,7 @@ const App = () => {
                     <Route path="/AddProduct/SetPrice" exact component={SetPrice}/>
                     <Route path="/404" exact component={Page404}/>
                     <Route path="/ProductOrders/:id" exact component={ProductOrders}/>
-                    <Route path="/changeProduct" exact component={ChangeProduct}/>
+                    <Route path="/changeProduct/:id" exact component={ChangeProduct}/>
                 </div>
             </Router>
         </div>

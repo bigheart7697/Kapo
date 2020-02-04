@@ -41,9 +41,11 @@ class AllProducts extends React.Component {
         this.props.fetchProducts()
     }
     render() {
+        
         const newArray = _.map(this.props.products, (item, key) => {
             return item
         })
+        console.log(newArray);
         return (<>
             <Productlist newArray={newArray}></Productlist>
         </>)

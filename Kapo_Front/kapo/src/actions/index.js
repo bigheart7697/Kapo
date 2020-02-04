@@ -136,3 +136,13 @@ export const SignUp = (formValues) => async dispatch => {
     alert("error")
   }
 }
+
+export const ChangeProductAction = (id, formValues) => async dispatch => {
+  try {
+    const response = await server.post(`/products/${id}/`, formValues)
+    alert("ویرایش کالا با موفقست انجام شد")
+  }
+  catch{
+    alert("error")
+  }
+}

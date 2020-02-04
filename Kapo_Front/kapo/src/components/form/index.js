@@ -22,10 +22,12 @@ class Form extends React.Component {
   };
 
   componentDidMount() {
+    
     this.props.initialize (this.props.initialValues ? this.props.initialValues : {})
   }
 
   render() {
+    console.log(this.props.initialValues)
     return (
       <form
         className="form__container"
@@ -38,7 +40,7 @@ class Form extends React.Component {
           {this.props.formValues.map((element, index) => {
             return (
               <Field
-                name={element.title}
+                name={element.title? element.title : (this.props.initialValues ? this.props.initialValues : "")}
                 component={this.setComponent(element.type)}
                 label={element.label}
                 type={element.inputType}

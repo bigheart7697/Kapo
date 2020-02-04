@@ -51,6 +51,8 @@ class Productlist extends React.Component {
         {
             array.push({value: this.props.categories[i][0], text: this.props.categories[i][1]})
         }
+        console.log(this.props.newArray);
+        
         return (<>
             <SearchBar onSearch={this.onSearch} />
             <div className="product-list__search">
