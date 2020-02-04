@@ -15,7 +15,7 @@ export const fetchMyProducts = () => async dispatch => {
 };
 
 export const fetchCategories = () => async dispatch => {
-  const response = await server.get("/prod-categories/");
+  const response = await server.get("/prod-cats/");
   dispatch({ type: FETCH_PRODUCT_CATEGORIES, payload: response.data })
 }
 
@@ -71,6 +71,16 @@ export const addProduct = product => async dispatch => {
     alert("خطایی رخ داد");
   }
 };
+
+export const setPrice = (category = null) => async dispatch => {
+  let response
+  if (category != null) {
+    response = await server.get(`/search?cat3=${category}`);
+  } else {
+    response = await server.get(`/`);
+  }
+  dispatch({ type: SEARCH_ITEM, payload: response.data });
+}
 
 export const fetchProduct = id => async dispatch => {
   console.log("id")
@@ -140,7 +150,7 @@ export const SignUp = (formValues) => async dispatch => {
 export const ChangeProductAction = (id, formValues) => async dispatch => {
   try {
     const response = await server.post(`/products/${id}/`, formValues)
-    alert("ویرایش کالا با موفقست انجام شد")
+    alert("ویرایش کالا با موفقیت انجام شد")
   }
   catch{
     alert("error")

@@ -43,7 +43,7 @@ class Form extends React.Component {
           {this.props.formValues.map((element, index) => {
             return (
               <Field
-                name={element.title? element.title : (this.props.initialValues ? this.props.initialValues : "")}
+                name={element.title}
                 component={this.setComponent(element.type)}
                 label={element.label}
                 type={element.inputType}

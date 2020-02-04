@@ -67,7 +67,7 @@ class ChangeProduct extends React.Component {
 
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
-    this.refs.changeInitialValues(this.props.product)
+    // this.refs.form.changeInitialValues(this.props.product)
   }
 
   render() {
