@@ -76,13 +76,13 @@ docker-image:
     DOCKER_DRIVER: overlay2
     
   before_script:
-    - sudo apk update
-    - sudo apk upgrade
-    - sudo apk add python python-dev py-pip build-base
-    - sudo apk add --update curl && rm -rf /var/cache/apk/*
-    - sudo curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-    - sudo chmod +x /usr/local/bin/docker-compose
-    - sudo pip install docker-compose
+    - apk update
+    - apk upgrade
+    - apk add python python-dev py-pip build-base
+    - apk add --update curl && rm -rf /var/cache/apk/*
+    - curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    - chmod +x /usr/local/bin/docker-compose
+    - pip install docker-compose
 
   script:
     # - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
