@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='cky)4vk1(2sfkatfazii^s8e!4o%1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=1))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/', 'kapo-testgit .herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'backend']
 
 
 STATICFILES_DIRS = [
