@@ -1,9 +1,9 @@
 version: "3.2"
 services:
   backend:
-    build: ./backend
+    build: ./Kapo_Back
     volumes:
-      - ./backend:/app/backend
+      - ./Kapo_back:/app/backend
     ports:
       - "8000:8000"
     stdin_open: true
@@ -12,8 +12,8 @@ services:
   frontend:
     build: ./frontend
     volumes:
-      - ./frontend:/app/frontend
-      - node-modules:/app/frontend/node_modules
+      - ./Kapo_front/kapo:/app/frontend
+      - ./Kapo_front/kapo/node-modules:/app/frontend/node_modules
     ports:
       - "3000:3000"
     depends_on:
