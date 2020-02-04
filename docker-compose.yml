@@ -1,0 +1,21 @@
+version: "3.2"
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app/frontend
+      - node-modules:/app/frontend/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: ["npm", "start"]
