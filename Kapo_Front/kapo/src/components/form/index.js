@@ -10,6 +10,8 @@ import CustomFileUpload from '../basic/customFileUpload';
 import WhiteSpace from "../basic/whitespace";
 
 class Form extends React.Component {
+  state = {category1: {}, category2: {}, category3: {}}
+
   setComponent = type => {
     switch (type) {
       case "select":
@@ -23,6 +25,20 @@ class Form extends React.Component {
 
   componentDidMount() {
     this.props.initialize (this.props.initialValues ? this.props.initialValues : {})
+  }
+
+  onChangeCategory = (value, id) => {
+    console.log(this.refs.category2)
+    console.log(id)
+    if (id==='1') {
+      let obj = this.props.categories ? this.props.categories.find(o => o.value === value) : [];
+      this.refs.category2.setContent({content: obj.categories})
+    }
+    if (id==='2') {
+      let obj = this.state.category1 ? this.state.category1.categories ? 
+        this.state.category1.categories.find(o => o.value === value) : [] : [];
+      this.refs.category3.setContent({content: obj.categories})
+    }
   }
 
   render() {
@@ -49,6 +65,40 @@ class Form extends React.Component {
             );
           })}
         </div>
+        {this.props.categories ? (
+          <div className={"form__input-container"}>
+            <Field
+              name='first'
+              component={CustomSelect}
+              label='دسته اول'
+              content={this.props.categories}
+              full={true}
+              ref='category1'
+              id='1'
+              onChange={this.onChangeCategory}
+            />
+            <Field
+              name='second'
+              component={CustomSelect}
+              label='دسته دوم'
+              content={[]}
+              full={true}
+              ref='category2'
+              id='2'
+              onChange={this.onChangeCategory}
+            />
+            <Field
+              name='third'
+              component={CustomSelect}
+              label='دسته سوم'
+              content={[]}
+              full={true}
+              ref='category3'
+              id='3'
+              onChange={this.onChangeCategory}
+            />
+          </div>
+        ) : null}
         <WhiteSpace space="2" />
         {this.props.submitText ? (
           <CustomButton text={this.props.submitText} type="submit" />

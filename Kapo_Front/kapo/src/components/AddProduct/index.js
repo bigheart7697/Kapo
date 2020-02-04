@@ -71,6 +71,27 @@ class AddProduct extends React.Component {
           onSubmit={this.onSubmit}
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
+          categories= {[
+            {text: 'املاک', value: '1', categories: [
+              {text: 'رهن', value: '1', categories: [{text: 'نیاوران'}, {text: 'پاسداران'}]},
+              {text: 'اجاره', value: '2', categories: [{text: 'دو خوابه'}, {text: 'سه خوابه'}, {text: 'بیشتر'}]}
+            ]},
+            {text: 'ماشین', value: '2', categories: [
+              {text: 'لوکس', value: '1', categories: [{text: 'بنتلی'}, {text: 'بنز'}]},
+              {text: 'اسپورت', value: '2', categories: [{text: 'لامبورگینی'}, {text: 'بوگاتی'}]},
+              {text: 'ایرانی', value: '3', categories: [{text: 'پراید'}, {text: 'پیکان'}]}
+            ]},
+            {text: 'کالای برقی', value: '3', categories: [
+              {text: 'خانگی', value: '1', categories: [{text: 'جاروبرقی'}, {text: 'ماکروفر'}]},
+              {text: 'لوازم جانبی', value: '2', categories: [{text: 'شارژر'}]}
+            ]},
+            {text: 'لباس', value: '4', categories: [
+              {text: 'زنانه', value: '1', categories: [{text: 'کفش'}, {text: 'شلوار'}]},
+              {text: 'مردانه', value: '2', categories: [{text: 'شلوار'}, {text: 'پیراهن'}]},
+              {text: 'بچگانه', value: '3', categories: [{text: 'پسرانه'}, {text: 'دخترانه'}]}
+            ]},
+            {text: 'موسیقی', value: '5', categories: []}
+          ]}
         ></Form>
       </FormWrapper>
     );
