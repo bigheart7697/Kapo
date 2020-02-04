@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { addProduct } from '../../actions'
+import { ChangeProductAction, fetchProduct } from '../../actions'
 
 import "./style.scss";
 
@@ -60,29 +60,45 @@ const FORM_VALUES = {
 };
 
 class ChangeProduct extends React.Component {
-  state = {initialValues: {}}
-
+  initialValues={};
   onSubmit = (formValues) => {
-    this.props.addProduct(formValues)
+    this.props.ChangeProductAction(formValues, this.props.product.id)
   };
 
   componentDidMount() {
-    this.setState({initialValues: this.props.product})
+    this.props.fetchProduct(this.props.match.params.id);
+    // this.refs.form.changeInitialValues(this.props.product)
   }
 
   render() {
-    return (
+    console.log(this.props.product)
+    this.initialValues=(this.props.product? this.props.product : {})
+    console.log(this.initialValues)
+    
+    return (<>
       <FormWrapper>
         <Form
           formValues={FORM_VALUES.form_inputs}
           onSubmit={this.onSubmit}
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
-          initialValue={this.state.initialValues}
+          initialValues={this.initialValues}
+          ref='form'
         ></Form>
       </FormWrapper>
-    );
+    </>);
   }
 }
 
-export default connect(null, { addProduct })(ChangeProduct);
+const mapStatToProps = (state, ownProps) => {
+  let productItem = null
+  if(ownProps.match)
+  {
+    productItem = state.products.products[ownProps.match.params.id]
+  }else{
+    productItem = null
+  }
+  return { product: productItem}
+}
+
+export default connect(mapStatToProps, { ChangeProductAction, fetchProduct })(ChangeProduct);

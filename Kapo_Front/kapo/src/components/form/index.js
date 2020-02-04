@@ -25,7 +25,12 @@ class Form extends React.Component {
     this.props.initialize (this.props.initialValues ? this.props.initialValues : {})
   }
 
+  changeInitialValues = (props) => {
+    this.props.initialize (props.initialValues ? props.initialValues : {})
+  }
+
   render() {
+    console.log(this.props.initialValues)
     return (
       <form
         className="form__container"

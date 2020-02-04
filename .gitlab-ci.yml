@@ -1,175 +1,75 @@
 image: python:latest
 stages:
-  - testing
+ # - testing
 #   - styling
-  - build
+#   - build
   - deploy
 
 variables:
   IMAGE: ${CI_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}
-  HEROKU_APP_NAME: floating-bayou-61534 
+  HEROKU_APP_NAME: kapokala
   HEROKU_REGISTRY_IMAGE: registry.heroku.com/${HEROKU_APP_NAME}/web
 
-# variables:
-#   CONTAINER_DEPLOY_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
-#   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
-#   IMAGE_NAME: kapo
-  
- 
 
-# pages:
-#   stage: deploy
-#   script:
-#   - mkdir .public
-#   - cp -r docs/. .public
-#   - mv .public public
-#   artifacts:
-#     paths:
-#     - public
-#   only:
-#   - master
 
-# heroku:
-#   stage: deploy
-#   image: ruby:2.2
-#   script:
-#     - gem install dpl
-#     - cp heroku/webpack.local.config.js ./workshop/front/webpack.local.config.js
-#     - cp heroku/webpack.prod.config.js ./workshop/front/webpack.prod.config.js
-#     - cp heroku/settings.py ./workshop/workshop/settings.py
-#     - cp heroku/package.json ./package.json
-#     - cp heroku/yarn.lock ./yarn.lock
-#     - cp heroku/deploy.sh ./deploy.sh
-#     - cp heroku/Procfile ./Procfile
-#     - mkdir -p workshop/links/static
-#     - mkdir -p workshop/workshop/static
-#     - mkdir -p workshop/front/workshop/static
-#     - sed -i -e "s@<Websocket url={LINKS_WS_URL} onMessage={this._onUpdate}/>@@g" workshop/front/src/containers/LinksDetail/index.jsx
-#     - dpl --skip_cleanup=true --strategy=api --provider=heroku --app=django-react-workshop --api-key=$HEROKU_API_KEY
-#   only:
-#   - master
-
-# docker_image:
+# docker-image:
 #   stage: build
-#   image: docker:git
+#   image: docker:stable
 #   services:
 #     - docker:dind
+    
+#   variables:
+#     DOCKER_DRIVER: overlay2
+    
+#   before_script:
+#     - apk update
+#     - apk upgrade
+#     - apk add python python-dev py-pip build-base libffi-dev openssl-dev gcc libc-dev make
+#     - apk add --update curl && rm -rf /var/cache/apk/*
+#     - curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+#     - chmod +x /usr/local/bin/docker-compose
+#     - pip install docker-compose
+
 #   script:
-#     - VERSION=$(date +"%y%m%d")
-#     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-#     - docker pull $CONTAINER_RELEASE_IMAGE || true
-#     - docker build --cache-from $CONTAINER_RELEASE_IMAGE -t $CONTAINER_RELEASE_IMAGE .
-#     - docker tag $CONTAINER_RELEASE_IMAGE $CI_REGISTRY_IMAGE:$VERSION
-#     - docker push $CONTAINER_RELEASE_IMAGE
-#     - docker push $CI_REGISTRY_IMAGE:$VERSION
-#   only:
-#     - master
-
-
-docker-image:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  variables:
-    DOCKER_DRIVER: overlay2
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker pull $IMAGE:build-python || true
-    - docker pull $IMAGE:production || true
-    - docker build
-        --target build-python
-        --cache-from $IMAGE:build-python
-        --tag $IMAGE:build-python
-        --file ./Dockerfile
-        "."
-    - docker build
-        --cache-from $IMAGE:production
-        --tag $IMAGE:production
-        --tag $HEROKU_REGISTRY_IMAGE
-        --file ./Dockerfile
-        "."
-    - docker push $IMAGE:build-python
-    - docker push $IMAGE:production
+#     - docker-compose build
 
 
 
 
-python-testing:
-  stage: testing
-  script:
-    - curl -sL https://deb.nodesource.com/setup_8.x | bash -
-    - apt install -y nodejs npm
-    - chmod +x ./test.sh
-    - ./test.sh -i backend
-  artifacts:
-    paths:
-      - src/htmlcov
-
-react-testing:
-  image: node:8
-  stage: testing
-  script:
-    - cd Kapo_Front/kapo
-    # - npm install -g yarn yarnpkg
-    - yarn install
-    - yarn test
-  artifacts:
-    paths:
-      - src/front/coverage
-
-# python-lint:
-#   stage: styling
+# python-testing:
+#   stage: testing
 #   script:
-#     - ./test.sh -i pythonlint
-
-# react-lint-report:
-#   image: node:8
-#   stage: styling
-#   script:
-#     - ./test.sh -i lint-report
+#     - curl -sL https://deb.nodesource.com/setup_8.x | bash -
+#     - apt install -y nodejs npm
+#     - chmod +x ./test.sh
+#     - ./test.sh -i backend
 #   artifacts:
 #     paths:
-#       - src/front/report.html
+#       - src/htmlcov
 
-# react-lint:
+# react-testing:
 #   image: node:8
-#   stage: styling
+#   stage: testing
 #   script:
-#     - ./test.sh -i lint
+#     - cd Kapo_Front/kapo
+#     # - npm install -g yarn yarnpkg
+#     - yarn install
+#     - yarn test
+#   artifacts:
+#     paths:
+#       - src/front/coverage
 
 
 
 
 
 
-heroku:
+staging:
   stage: deploy
-  image: docker:stable
-  services:
-    - docker:dind
-  variables:
-    DOCKER_DRIVER: overlay2
   script:
-    - apk add --no-cache curl
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker pull $IMAGE:build-python || true
-    - docker pull $IMAGE:production || true
-    - docker build
-        --target build-python
-        --cache-from $IMAGE:build-python
-        --tag $IMAGE:build-python
-        --file ./Dockerfile
-        "."
-    - docker build
-        --cache-from $IMAGE:production
-        --tag $IMAGE:production
-        --tag $HEROKU_REGISTRY_IMAGE
-        --file ./Dockerfile
-        "."
-    - docker push $IMAGE:build-python
-    - docker push $IMAGE:production
-    - docker login -u _ -p $HEROKU_AUTH_TOKEN registry.heroku.com
-    - docker push $HEROKU_REGISTRY_IMAGE
-    - chmod +x ./release.sh
-    - ./release.sh
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_AUTHENTICATION_TOKEN
+  only:
+  - master
