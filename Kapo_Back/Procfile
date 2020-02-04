@@ -1,1 +1,0 @@
-web: gunicorn Kapo_Back.wsgi --log-file -
