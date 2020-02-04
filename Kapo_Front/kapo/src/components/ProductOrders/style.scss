@@ -1,0 +1,9 @@
+@import '../../scss/base/variables.scss';
+
+.order-list__container {
+    width: 80%;
+    margin: 5rem auto;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid $second-color;
+}

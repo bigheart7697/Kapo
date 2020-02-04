@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES } from "./types";
+import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/");
@@ -30,6 +30,14 @@ export const fetchOrder = id => async dispatch => {
   const response = await server.get(`/orders/${id}`)
   console.log(response)
   dispatch({ type: FETCH_ORDER, payload: response.data })
+}
+
+export const fetchProductOrders = id => async dispatch => {
+  console.log("id")
+  console.log(id)
+  const response = await server.get(`/products/${id}/orders`);
+  console.log(response)
+  dispatch({type: FETCH_PRODUCT_ORDERS, payload: response.data})
 }
 
 export const completeOrder = id => async dispatch => {

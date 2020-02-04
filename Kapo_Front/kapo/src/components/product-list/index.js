@@ -1,71 +1,72 @@
-import React from "react";
-import { connect } from "react-redux";
-import Product from "../product";
-import RightPanel from "../right-panel";
-import SearchBar from "../basic/searchBar";
-import { fetchProducts, searchProducts } from "../../actions";
-import history from "../../history";
-import "./style.scss";
+import React from 'react';
+import { connect } from 'react-redux'
+import { fetchProducts, searchProducts, fetchCategories } from '../../actions'
+import history from '../../history'
 
-class ProductList extends React.Component {
-  componentDidMount = () => {
-    this.props.fetchProducts();
-  };
-  renderList() {
-    console.log(this.props.products);
-    return !this.isEmpty(this.props.products) ? (
-      Object.values(this.props.products).map((product, index) => {
-        return (
-          <Product
-            key={index}
-            image={product.image}
-            title={product.name}
-            price={product.price}
-            month={product.created ? product.created.month : null}
-            day={product.created ? product.created.day : null}
-            year={product.created ? product.created.year : null}
-            description={product.description}
-            address={product.user ? product.user.address : null}
-            onClick={() => history.push(`/product/${product.id}`)}
-          />
-        );
-      })
-    ) : (
-      <div className="productList__no-obj-found">
-        کالایی با مشخصات وارد شده یافت نشد
-      </div>
-    );
-  }
+import _ from "lodash";
 
-  isEmpty = obj => {
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
+import './style.scss'
+
+import SearchBar from '../../components/basic/searchBar'
+import ProductCard from '../basic/productCard'
+import CustomSelect from '../basic/customSelect'
+
+import image1 from '../../assets/1.png'
+import image2 from '../../assets/2.png'
+import image3 from '../../assets/3.png'
+import image4 from '../../assets/4.png'
+import image5 from '../../assets/5.png'
+import image6 from '../../assets/6.png'
+
+const PRODUCT_LIST = [
+    {
+        image: image6
+    }, {
+        image: image5
+    }, {
+        image: image4
+    }, {
+        image: image3
+    }, {
+        image: image2
+    }, {
+        image: image1
     }
-    return true;
-  };
+]
 
-  onSearch = query => {
-    this.props.searchProducts(query);
-  };
-
-  render() {
-    return (
-      <div>
-        <RightPanel />
-        <div className="productList__container">
-          <SearchBar onSearch={this.onSearch} />
-          {this.renderList()}
-        </div>
-      </div>
-    );
-  }
+class Productlist extends React.Component {
+    state = {query: "", category: 0}
+    componentDidMount() {
+        this.props.fetchCategories()
+    }
+    onSearch = (query, category=null) => {
+        if(query){
+            this.setState({query})
+        }
+        this.props.searchProducts(query, category);
+    };
+    render() {
+        let array = []
+        for(let i = 0 ; i < this.props.categories.length ; i++)
+        {
+            array.push({value: this.props.categories[i][0], text: this.props.categories[i][1]})
+        }
+        return (<>
+            <SearchBar onSearch={this.onSearch} />
+            <div className="product-list__search">
+                <CustomSelect content={array} label="دسته‌بندی‌ها" input={{onChange: () => this.setState({category:0})}}/>
+            </div>
+            <div className="product-list__container">
+                {this.props.newArray.map((element, index) => <ProductCard key={index} onClick={() => history.push(`/product/${element.id}`)} product={element}></ProductCard>)}
+            </div>
+        </>)
+    }
 }
 
-const mapStateToProps = state => {
-  return { products: state.products.products };
-};
 
-export default connect(mapStateToProps, {
-  fetchProducts,
-  searchProducts
-})(ProductList);
+
+const mapStateToProps = (state) => {
+    return {categories: state.products.categories }
+}
+
+export default connect(mapStateToProps, {searchProducts, fetchCategories })(Productlist)
