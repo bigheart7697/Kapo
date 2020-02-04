@@ -22,8 +22,11 @@ class Form extends React.Component {
   };
 
   componentDidMount() {
-    
     this.props.initialize (this.props.initialValues ? this.props.initialValues : {})
+  }
+
+  changeInitialValues = (props) => {
+    this.props.initialize (props.initialValues ? props.initialValues : {})
   }
 
   render() {

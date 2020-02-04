@@ -67,12 +67,10 @@ class ChangeProduct extends React.Component {
 
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id);
+    this.refs.changeInitialValues(this.props.product)
   }
 
-  
-
   render() {
-    // this.props.fetchProduct(this.props.match.params.id);
     console.log(this.props.product)
     this.initialValues=(this.props.product? this.props.product : {})
     console.log(this.initialValues)
@@ -85,6 +83,7 @@ class ChangeProduct extends React.Component {
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
           initialValues={this.initialValues}
+          ref='form'
         ></Form>
       </FormWrapper>
     </>);
