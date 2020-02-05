@@ -1,21 +1,24 @@
 version: "3.2"
 services:
   backend:
-    build: ./backend
+    build: ./Kapo_Back
     volumes:
-      - ./backend:/app/backend
+      - ./Kapo_Back:/app/backend
     ports:
       - "8000:8000"
+    environment:
+      - DEBUG=0
+      
     stdin_open: true
     tty: true
-    command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: python3 manage.py runserver 0.0.0.0:8000
   frontend:
-    build: ./frontend
+    build: ./Kapo_Front/kapo
     volumes:
-      - ./frontend:/app/frontend
-      - node-modules:/app/frontend/node_modules
+      - ./Kapo_Front/kapo:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
     depends_on:
       - backend
-    command: ["npm", "start"]
+    command: npm start

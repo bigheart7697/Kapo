@@ -2,16 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { fetchProducts, searchProducts, fetchCategories } from '../../actions'
 import Productlist from "../product-list"
-import history from '../../history'
-import ProductList from "../productList"
-
 import _ from "lodash";
-
 import './style.scss'
 
-import SearchBar from '../../components/basic/searchBar'
-import ProductCard from '../basic/productCard'
-import CustomSelect from '../basic/customSelect'
+
 
 import image1 from '../../assets/1.png'
 import image2 from '../../assets/2.png'
