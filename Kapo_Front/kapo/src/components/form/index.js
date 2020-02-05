@@ -19,7 +19,7 @@ class Form extends React.Component {
       default:
         return CustomInput;
     }
-  };
+  }
 
   componentDidMount() {
     this.props.initialize (this.props.initialValues ? this.props.initialValues : {})
