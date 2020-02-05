@@ -3,7 +3,7 @@ FROM python:3.6
 # Install curl, node, & yarn
 RUN apt-get -y install curl \
   && curl -sL https://deb.nodesource.com/setup_8.x | bash \
-  && apt-get install nodejs \
+  && apt-get -y install nodejs \
   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /app/backend
@@ -19,7 +19,8 @@ COPY ./Kapo_Front/kapo/package.json ./Kapo_Front/kapo/yarn.lock /app/frontend/
 RUN $HOME/.yarn/bin/yarn install
 
 # Add the rest of the code
-COPY . /app/
+COPY ./Kapo_Back /app/backend
+COPY ./Kapo_Front/kapo /app/frontend
 
 # Build static files
 RUN $HOME/.yarn/bin/yarn build
@@ -43,4 +44,6 @@ RUN DEBUG=0\
 
 EXPOSE $PORT
 
+CMD python3 backend/manage.py makemigrations
+CMD python3 backend/manage.py migrate
 CMD python3 backend/manage.py runserver 0.0.0.0:$PORT

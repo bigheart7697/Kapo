@@ -1,5 +1,5 @@
 import React from "react";
-
+import { connect } from 'react-redux'
 import "./style-new.scss";
 
 import NavItem from "../basic/navItem";
@@ -13,6 +13,7 @@ import image2 from '../../assets/category2.png';
 import image3 from '../../assets/category3.png';
 import image4 from '../../assets/category4.png';
 import image5 from '../../assets/category5.png';
+import { searchProducts } from "../../actions";
 
 const navItems = [
   {
@@ -34,6 +35,13 @@ class Navbar extends React.Component {
     this.setState({ active : index })
     history.push(link)
   }
+
+  onSearch = (query, category=null) => {
+    if(query){
+        this.setState({query})
+    }
+    this.props.searchProducts(query, category);
+};
 
   componentDidMount() {
     this.setState({categories : [
@@ -95,7 +103,7 @@ class Navbar extends React.Component {
               })}
             </div>
             <div className='navbar__searchbar'>
-              <SearchBar />
+              <SearchBar onSearch={this.onSearch}/>
             </div>
             <div className='navbar__auth'>
               {this.state.logged_in ? 
@@ -120,4 +128,5 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+
+export default connect(null, {searchProducts})(Navbar)
