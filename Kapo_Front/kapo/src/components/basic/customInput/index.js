@@ -7,7 +7,7 @@ const BasicInput = props => {
     <div className="custom-input__container">
       <div className="custom-input__inner-container">
         <label className="custom-input__label">{props.label}</label>{props.meta ? renderError(props.meta) : null}
-        {props.type==='textbox' ? <textarea className="custom-input__input custom-input__textarea"></textarea> :
+        {props.type==='textbox' ? <textarea {...props.input} className="custom-input__input custom-input__textarea"></textarea> :
           <input className="custom-input__input" {...props.input} type={props.type ? props.type : 'text'}/>}
       </div>
       
