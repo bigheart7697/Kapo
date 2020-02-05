@@ -10,7 +10,7 @@ import CustomFileUpload from '../basic/customFileUpload';
 import WhiteSpace from "../basic/whitespace";
 
 class Form extends React.Component {
-  state = {category1: {}, category2: {}, category3: {}}
+  state = {categories1: [], categories2: [], categories3: []}
 
   setComponent = type => {
     switch (type) {
@@ -24,7 +24,11 @@ class Form extends React.Component {
   };
 
   componentDidMount() {
+    console.log('0000')
+    console.log(this.props.categories)
+    this.setState({categories1: this.props.categories})
     this.props.initialize (this.props.initialValues ? this.props.initialValues : {})
+    console.log(this.state)
   }
 
   onChangeCategory = (value, id) => {
@@ -71,7 +75,7 @@ class Form extends React.Component {
               name='first'
               component={CustomSelect}
               label='دسته اول'
-              content={this.props.categories}
+              content={this.state.categories1}
               full={true}
               ref='category1'
               id='1'
@@ -81,7 +85,7 @@ class Form extends React.Component {
               name='second'
               component={CustomSelect}
               label='دسته دوم'
-              content={[]}
+              content={this.state.categories2}
               full={true}
               ref='category2'
               id='2'
@@ -91,7 +95,7 @@ class Form extends React.Component {
               name='third'
               component={CustomSelect}
               label='دسته سوم'
-              content={[]}
+              content={this.state.categories3}
               full={true}
               ref='category3'
               id='3'
