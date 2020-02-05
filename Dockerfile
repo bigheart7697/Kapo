@@ -44,4 +44,6 @@ RUN DEBUG=0\
 
 EXPOSE $PORT
 
+CMD python3 backend/manage.py makemigrations
+CMD python3 backend/manage.py migrate
 CMD python3 backend/manage.py runserver 0.0.0.0:$PORT
