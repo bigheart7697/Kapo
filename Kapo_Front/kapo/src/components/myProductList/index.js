@@ -7,8 +7,6 @@ import _ from "lodash";
 
 import './style.scss'
 
-import ProductCard from '../basic/productCard'
-
 
 class MyProductList extends React.Component{
     componentDidMount() {
