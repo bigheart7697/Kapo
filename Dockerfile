@@ -19,7 +19,7 @@ COPY ./Kapo_Front/kapo/package.json ./Kapo_Front/kapo/yarn.lock /app/frontend/
 RUN $HOME/.yarn/bin/yarn install
 
 # Add the rest of the code
-COPY ./kapo /app/frontent
+COPY . /app/
 
 # Build static files
 RUN $HOME/.yarn/bin/yarn build
