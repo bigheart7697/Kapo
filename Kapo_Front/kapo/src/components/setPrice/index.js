@@ -1,10 +1,8 @@
 import React from 'react'
 
 import './style.scss'
-import { fetchProducts, searchProducts, fetchCategories, setPrice } from '../../actions'
-import FormWrapper from '../formWrapper'
+import { fetchProducts, setPrice } from '../../actions'
 import Form from '../form'
-import PriceCard from '../basic/priceCard'
 import Product from '../product'
 import { connect } from 'react-redux'
 import _ from "lodash";

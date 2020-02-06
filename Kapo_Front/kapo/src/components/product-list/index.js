@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { fetchProducts, searchProducts, fetchCategories } from '../../actions'
+import {searchProducts, fetchCategories } from '../../actions'
 import history from '../../history'
 
 import _ from "lodash";
