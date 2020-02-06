@@ -172,10 +172,10 @@ JWT_AUTH = {
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 if not DEBUG:
-    INSTALLED_APPS.extend(["whitenoise.runserver_nostatic"])
+    INSTALLED_APPS.insert(0, 'whitenoise.runserver_nostatic')
 
     # Must insert after SecurityMiddleware, which is first in settings/common.py
-    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
     TEMPLATES[0]["DIRS"] = [os.path.join(BASE_DIR, "../", "frontend", "build")]
 

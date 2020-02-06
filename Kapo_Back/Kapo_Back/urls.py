@@ -24,6 +24,6 @@ urlpatterns = [
     path('token-auth/', obtain_jwt_token, name='token-auth'),
 
     path('accounts/', include("accounts.urls")),
-    path('', include('kapo.urls')),
+    path('kapo/', include('kapo.urls')),
     re_path(".*", TemplateView.as_view(template_name="index.html")),
 ]
