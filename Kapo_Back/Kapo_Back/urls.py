@@ -25,5 +25,5 @@ urlpatterns = [
 
     path('accounts/', include("accounts.urls")),
     path('kapo/', include('kapo.urls')),
-    re_path(".*", TemplateView.as_view(template_name="index.html")),
+    # re_path(".*", TemplateView.as_view(template_name="index.html")),
 ]
