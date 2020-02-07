@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 from Kapo_Back.settings import BASE_DIR
 from accounts.models import User
 
-product_images_dir = os.path.join(BASE_DIR, 'media', 'products')
+product_images_dir = 'media/products/'
 profile_images_dir = 'media/users/'
 
 

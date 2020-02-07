@@ -78,7 +78,7 @@ class Productlist extends React.Component {
         console.log(this.props.newArray);
         
         return (<>
-            <SearchBar onSearch={this.onSearch} />
+            {/* <SearchBar onSearch={this.onSearch} /> */}
             <div className="product-list__search">
                 <CustomSelect content={array} label="دسته‌بندی‌ها" input={{onChange: () => this.setState({category:0})}}/>
             </div>
