@@ -56,7 +56,7 @@ class Form extends React.Component {
         {this.props.categories1 ? (
           <div className={"form__input-container"}>
             <Field
-              name='first'
+              name='cat1'
               component={CustomSelect}
               label='دسته اول'
               content={this.props.categories1}
@@ -65,7 +65,7 @@ class Form extends React.Component {
               onChange={this.props.onChangeCategory1}
             />
             <Field
-              name='second'
+              name='cat2'
               component={CustomSelect}
               label='دسته دوم'
               content={this.props.categories2}
@@ -74,7 +74,7 @@ class Form extends React.Component {
               onChange={this.props.onChangeCategory2}
             />
             <Field
-              name='third'
+              name='cat3'
               component={CustomSelect}
               label='دسته سوم'
               content={this.props.categories3}

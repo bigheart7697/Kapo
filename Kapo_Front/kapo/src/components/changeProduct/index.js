@@ -83,6 +83,7 @@ class ChangeProduct extends React.Component {
           title={FORM_VALUES.title}
           initialValues={this.initialValues}
           ref='form'
+          enableReinitialize
         ></Form>
       </FormWrapper>
     </>);
