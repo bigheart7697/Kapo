@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework_jwt.views import obtain_jwt_token
 from django.views.generic import TemplateView
+from .settings import DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +25,8 @@ urlpatterns = [
     path('token-auth/', obtain_jwt_token, name='token-auth'),
 
     path('accounts/', include("accounts.urls")),
-    path('', include('kapo.urls')),
-    re_path(".*", TemplateView.as_view(template_name="index.html")),
+    path('kapo/', include('kapo.urls')),
 ]
+
+if not DEBUG:
+    urlpatterns.append(re_path(".*", TemplateView.as_view(template_name="index.html")))
