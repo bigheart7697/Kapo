@@ -1,5 +1,5 @@
 import React from 'react';
-
+import defaultImg from '../../../assets/default.jpg'
 import './style.scss';
 
 class OrderDetails extends React.Component {
@@ -17,7 +17,7 @@ class OrderDetails extends React.Component {
         return (
             <div className={this.state.active ? "order-details__container" : "order-details__container order-details__container--hidden"}>
                 <div className={this.state.active ? "order-details__image-container" : "order-details__image-container order-details__image-container--hidden"}>
-                    <img src={this.props.order ? this.props.order.product ? this.props.order.product.image : '' : ''} 
+                    <img src={this.props.order ? this.props.order.product ? this.props.order.product.image : `url(${defaultImg})` : `url(${defaultImg})`} 
                         alt={this.props.order ? this.props.order.product ? this.props.order.product.name : '-' : '-'}
                         className="order-details__image"></img>
                 </div>

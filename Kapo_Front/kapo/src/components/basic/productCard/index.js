@@ -6,6 +6,11 @@ import './style.scss'
 class productCard extends React.Component {
     state={mouseOver: false, element: this.props.product}
     render() {
+        console.log(this.state.element.image);
+        console.log(`url(${defaultImg})`);
+        console.log(`url(${this.state.element.image})`);
+        
+        
         return (<div className="product-card__container" onClick={this.props.onClick} onMouseEnter={() => this.setState({ mouseOver: true})} onMouseLeave={() => this.setState({ mouseOver: false })}>
             <div className="product-card__content">
                 <div className="product-card__name">{this.state.element.name}</div>
@@ -16,7 +21,7 @@ class productCard extends React.Component {
                 </div>)}
                 <div className="product-card__image-container">
                     <div className="product-card__image-before" />
-                    <div className="product-card__image" style={{ backgroundImage: `url(${defaultImg})` }}></div>
+                    <div className="product-card__image" style={{ backgroundImage: this.state.element.image? `url(${this.state.element.image})` : `url(${defaultImg})` }}></div>
                 </div>
             </div>
         </div>)

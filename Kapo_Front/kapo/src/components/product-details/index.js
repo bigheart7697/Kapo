@@ -9,6 +9,8 @@ import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
 
+import defaultImg from '../../assets/default.jpg'
+
 class ProductDetails extends React.Component {
 
   state = {
@@ -22,6 +24,8 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    // console.log("url(" + this.props.product.image + ")");
+    
     console.log(this.state.count)
     console.log(this.props.product)
     return (
@@ -98,7 +102,7 @@ class ProductDetails extends React.Component {
               <div
                 className="productDetails__image"
                 style={{
-                  backgroundImage: "url(" + this.state.imag + ")"
+                  backgroundImage: this.props? this.props.product ? this.props.product.image? "url(" + this.props.product.image + ")" : `url(${defaultImg})` : `url(${defaultImg})` : `url(${defaultImg})`
                 }}
               ></div>
             </div>
