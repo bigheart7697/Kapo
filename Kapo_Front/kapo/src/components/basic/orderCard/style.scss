@@ -14,7 +14,7 @@
     width: 25%;
     text-align: center;
     padding: 2rem;
-    color: $seventh-color;
+    color: black;
     transition-duration: .5s;
     border-top: 1px solid $second-color;
 }
@@ -32,15 +32,15 @@
 }
 
 .order-card__state--awaiting {
-    color: lightyellow;
+    color: rgb(255, 196, 0);
 }
 
 .order-card__state--completed {
-    color: lightgreen;
+    color: rgb(0, 170, 14);
 }
 
 .order-card__state--failed {
-    color: lightcoral;
+    color: rgb(192, 0, 0);
 }
 
 .order-card__dropdown-toggle {
