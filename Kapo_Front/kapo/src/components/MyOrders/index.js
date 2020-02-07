@@ -7,9 +7,6 @@ import _ from "lodash";
 
 import './style.scss';
 
-import OrderCard from '../basic/orderCard';
-import OrderDetails from '../orderDetails/dropDown';
-
 class MyOrders extends React.Component {
     componentDidMount(){
         this.props.fetchMyOrders()

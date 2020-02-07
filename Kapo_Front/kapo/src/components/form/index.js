@@ -21,7 +21,7 @@ class Form extends React.Component {
       default:
         return CustomInput;
     }
-  };
+  }
 
   componentDidMount() {
     console.log('0000')
@@ -45,7 +45,12 @@ class Form extends React.Component {
     }
   }
 
+  changeInitialValues = (props) => {
+    this.props.initialize (props.initialValues ? props.initialValues : {})
+  }
+
   render() {
+    console.log(this.props.initialValues)
     return (
       <form
         className="form__container"

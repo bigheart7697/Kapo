@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='cky)4vk1(2sfkatfazii^s8e!4o%1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=1))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'floating-bayou-61534.herokuapp.com/', 'kapo-testgit .herokuapp.com/']
+ALLOWED_HOSTS = [os.environ.get("PRODUCTION_HOST", default='127.0.0.1')]
 
 
 STATICFILES_DIRS = [
@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'background_task',
-    'webpack_loader',
     'corsheaders',
 ]
 
@@ -171,3 +170,18 @@ JWT_AUTH = {
 }
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+if not DEBUG:
+    INSTALLED_APPS.extend(["whitenoise.runserver_nostatic"])
+
+    # Must insert after SecurityMiddleware, which is first in settings/common.py
+    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+
+    TEMPLATES[0]["DIRS"] = [os.path.join(BASE_DIR, "../", "frontend", "build")]
+
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "../", "frontend", "build", "static")]
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+    STATIC_URL = "/static/"
+    WHITENOISE_ROOT = os.path.join(BASE_DIR, "../", "frontend", "build", "root")

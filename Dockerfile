@@ -1,23 +1,47 @@
-FROM python:3.7-alpine AS build-python
-COPY ./Kapo_Back/requirements.txt /
-RUN apk add --no-cache jpeg-dev zlib-dev
-RUN apk add --no-cache --virtual .build-deps build-base linux-headers
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /wheels -r requirements.txt
+FROM python:3.6
 
-FROM python:3.7-alpine
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV DEBUG 0
-RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add postgresql-dev \
-    && pip install psycopg2 \
-    && apk del build-deps
-COPY --from=build-python /wheels /wheels
-COPY --from=build-python requirements.txt .
-RUN pip install --no-cache /wheels/*
+# Install curl, node, & yarn
+RUN apt-get -y install curl \
+  && curl -sL https://deb.nodesource.com/setup_8.x | bash \
+  && apt-get -y install nodejs \
+  && curl -o- -L https://yarnpkg.com/install.sh | bash
+
+WORKDIR /app/backend
+
+# Install Python dependencies
+COPY ./Kapo_Back/requirements.txt /app/backend/
+RUN pip3 install -r requirements.txt
+
+# Install JS dependencies
+WORKDIR /app/frontend
+
+COPY ./Kapo_Front/kapo/package.json ./Kapo_Front/kapo/yarn.lock /app/frontend/
+RUN $HOME/.yarn/bin/yarn install
+
+# Add the rest of the code
+COPY ./Kapo_Back /app/backend
+COPY ./Kapo_Front/kapo /app/frontend
+
+# Build static files
+RUN $HOME/.yarn/bin/yarn build
+
+# Have to move all static files other than index.html to root/
+# for whitenoise middleware
+WORKDIR /app/frontend/build
+
+RUN mkdir root && mv *.ico *.js *.json root
+
+# Collect static files
+RUN mkdir /app/backend/staticfiles
+
 WORKDIR /app
-COPY . .
-RUN adduser -D myuser
-USER myuser
-CMD cd Kapo_Back && gunicorn Kapo_Back.wsgi:application --bind 0.0.0.0:$PORT
+
+# SECRET_KEY is only included here to avoid raising an error when generating static files.
+# Be sure to add a real SECRET_KEY config variable in Heroku.
+RUN DEBUG=0\
+  SECRET_KEY=somethingsupersecret \
+  python3 backend/manage.py collectstatic --noinput
+
+EXPOSE $PORT
+
+CMD python3 backend/manage.py runserver 0.0.0.0:$PORT

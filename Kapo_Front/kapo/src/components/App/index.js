@@ -11,11 +11,9 @@ import Navbar from '../navbar'
 import SignIn from '../Auth/signIn'
 import SignUp from '../Auth/signUp'
 import MainPage from '../mainpage'
-import ProductList from '../productList'
 import MyProductList from '../myProductList'
 import Bank from '../bank'
 import PreviewOrder from '../previewOrder'
-import OrderList from '../orderList'
 import OrderFactor from '../orderDetails/factor'
 import AllProducts from '../AllProducts'
 import SetPrice from '../setPrice'
@@ -41,10 +39,10 @@ const App = () => {
                     <Route path="/bank/:id" exact component={Bank}/>
                     <Route path="/order/list" exact component={MyOrders}/>
                     <Route path="/order/factor" exact component={OrderFactor}/>
-                    <Route path="/AddProduct/SetPrice" exact component={SetPrice}/>
+                    <Route path="/AddProduct/SetPrice/:id" exact component={SetPrice}/>
                     <Route path="/404" exact component={Page404}/>
                     <Route path="/ProductOrders/:id" exact component={ProductOrders}/>
-                    <Route path="/changeProduct" exact component={ChangeProduct}/>
+                    <Route path="/changeProduct/:id" exact component={ChangeProduct}/>
                 </div>
             </Router>
         </div>

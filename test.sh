@@ -71,12 +71,6 @@ function pythonlint {
 
 function pythontest {
   cd Kapo_Back
-#   npm install -g yarn yarnpkg webpack@1.12.13
-#   yarn install
-#   timeout 20 npm start || true
-#   cd -
-#   cd workshop/
-#   py.test --cov-report term-missing --cov-report html --cov
   python manage.py test
   cd -
 }
