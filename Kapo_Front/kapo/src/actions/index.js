@@ -150,7 +150,7 @@ export const SignUp = (formValues) => async dispatch => {
   }
 }
 
-export const ChangeProductAction = (id, formValues) => async dispatch => {
+export const ChangeProductAction = (formValues, id) => async dispatch => {
   try {
     const response = await server.post(`/kapo/products/${id}/`, formValues)
     alert("ویرایش کالا با موفقیت انجام شد")
