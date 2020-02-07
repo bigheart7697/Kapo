@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import faker from 'faker'
 
 import './style.scss'
@@ -31,7 +32,7 @@ class Product extends React.Component {
             <div className='product__content'>
               <span className='product__author'>{this.props.product ? this.props.product.owner ? this.props.product.owner.address : '-' : '-'}</span>
               <h1 className='product__title'>
-                <a href='/'>{this.props.product ? this.props.product.name : null}</a>
+                <Link to='/'>{this.props.product ? this.props.product.name : null}</Link>
               </h1>
               <p className='product__text'>{this.props.product ? this.props.product.description : '-'}</p>
             </div>

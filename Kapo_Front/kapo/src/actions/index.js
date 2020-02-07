@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS } from "./types";
+import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/kapo/");
@@ -128,11 +128,13 @@ export const SignIn = (auth) => async dispatch => {
   } catch{
     alert("error")
   }
+  dispatch({ type: LOG_IN })
 }
 
 export const SignOut = () => async dispatch => {
   setAuthToken()
   delete localStorage.jwtToken
+  dispatch({ type: LOG_OUT })
 }
 
 export const SignUp = (formValues) => async dispatch => {
@@ -155,5 +157,11 @@ export const ChangeProductAction = (id, formValues) => async dispatch => {
   }
   catch{
     alert("error")
+  }
+}
+
+export const setIsLoggedInStatus = () => {
+  return {
+    type: LOG_IN
   }
 }
