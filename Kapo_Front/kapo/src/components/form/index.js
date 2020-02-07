@@ -30,7 +30,6 @@ class Form extends React.Component {
   }
 
   render() {
-    console.log(this.props.initialValues)
     return (
       <form
         className="form__container"
@@ -54,6 +53,36 @@ class Form extends React.Component {
             );
           })}
         </div>
+        {this.props.categories1 ? (
+          <div className={"form__input-container"}>
+            <Field
+              name='first'
+              component={CustomSelect}
+              label='دسته اول'
+              content={this.props.categories1}
+              full={true}
+              id='1'
+              onChange={this.props.onChangeCategory1}
+            />
+            <Field
+              name='second'
+              component={CustomSelect}
+              label='دسته دوم'
+              content={this.props.categories2}
+              full={true}
+              id='2'
+              onChange={this.props.onChangeCategory2}
+            />
+            <Field
+              name='third'
+              component={CustomSelect}
+              label='دسته سوم'
+              content={this.props.categories3}
+              full={true}
+              id='3'
+            />
+          </div>
+        ) : null}
         <WhiteSpace space="2" />
         {this.props.submitText ? (
           <CustomButton text={this.props.submitText} type="submit" />
