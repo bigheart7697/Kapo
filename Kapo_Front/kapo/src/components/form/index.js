@@ -62,7 +62,7 @@ class Form extends React.Component {
               content={this.props.categories1}
               full={true}
               id='1'
-              onChange={this.props.onChangeCategory}
+              onChange={this.props.onChangeCategory1}
             />
             <Field
               name='second'
@@ -71,7 +71,7 @@ class Form extends React.Component {
               content={this.props.categories2}
               full={true}
               id='2'
-              onChange={this.props.onChangeCategory}
+              onChange={this.props.onChangeCategory2}
             />
             <Field
               name='third'
@@ -80,7 +80,6 @@ class Form extends React.Component {
               content={this.props.categories3}
               full={true}
               id='3'
-              onChange={this.props.onChangeCategory}
             />
           </div>
         ) : null}

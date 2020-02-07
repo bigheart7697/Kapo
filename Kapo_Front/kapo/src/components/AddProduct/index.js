@@ -61,22 +61,22 @@ const FORM_VALUES = {
 
 const categories = [
   {text: 'املاک', value: '1', categories: [
-    {text: 'رهن', value: '1', categories: [{text: 'نیاوران'}, {text: 'پاسداران'}]},
-    {text: 'اجاره', value: '2', categories: [{text: 'دو خوابه'}, {text: 'سه خوابه'}, {text: 'بیشتر'}]}
+    {text: 'رهن', value: '1', categories: [{text: 'نیاوران', value: '1'}, {text: 'پاسداران', value: '2'}]},
+    {text: 'اجاره', value: '2', categories: [{text: 'دو خوابه', value: '1'}, {text: 'سه خوابه', value: '2'}, {text: 'بیشتر', value: '3'}]}
   ]},
   {text: 'ماشین', value: '2', categories: [
-    {text: 'لوکس', value: '1', categories: [{text: 'بنتلی'}, {text: 'بنز'}]},
-    {text: 'اسپورت', value: '2', categories: [{text: 'لامبورگینی'}, {text: 'بوگاتی'}]},
-    {text: 'ایرانی', value: '3', categories: [{text: 'پراید'}, {text: 'پیکان'}]}
+    {text: 'لوکس', value: '1', categories: [{text: 'بنتلی', value: '1'}, {text: 'بنز', value: '2'}]},
+    {text: 'اسپورت', value: '2', categories: [{text: 'لامبورگینی', value: '1'}, {text: 'بوگاتی', value: '2'}]},
+    {text: 'ایرانی', value: '3', categories: [{text: 'پراید', value: '1'}, {text: 'پیکان', value: '2'}]}
   ]},
   {text: 'کالای برقی', value: '3', categories: [
-    {text: 'خانگی', value: '1', categories: [{text: 'جاروبرقی'}, {text: 'ماکروفر'}]},
-    {text: 'لوازم جانبی', value: '2', categories: [{text: 'شارژر'}]}
+    {text: 'خانگی', value: '1', categories: [{text: 'جاروبرقی', value: '1'}, {text: 'ماکروفر', value: '2'}]},
+    {text: 'لوازم جانبی', value: '2', categories: [{text: 'شارژر', value: '1'}]}
   ]},
   {text: 'لباس', value: '4', categories: [
-    {text: 'زنانه', value: '1', categories: [{text: 'کفش'}, {text: 'شلوار'}]},
-    {text: 'مردانه', value: '2', categories: [{text: 'شلوار'}, {text: 'پیراهن'}]},
-    {text: 'بچگانه', value: '3', categories: [{text: 'پسرانه'}, {text: 'دخترانه'}]}
+    {text: 'زنانه', value: '1', categories: [{text: 'کفش', value: '1'}, {text: 'شلوار', value: '2'}]},
+    {text: 'مردانه', value: '2', categories: [{text: 'شلوار', value: '1'}, {text: 'پیراهن', value: '2'}]},
+    {text: 'بچگانه', value: '3', categories: [{text: 'پسرانه', value: '1'}, {text: 'دخترانه', value: '2'}]}
   ]},
   {text: 'موسیقی', value: '5', categories: []}
 ];
@@ -92,11 +92,13 @@ class AddProduct extends React.Component {
   };
 
   onChangeCategory1 = (event) => {
-    console.log(event.target.value)
-    let obj = categories.find(o => o.value === event.target.value);
-    this.setState({categories2: obj.categories})
-    console.log(obj)
-    console.log(this.state.categories2)
+    let obj = this.state.categories1.find(o => o.value === event.target.value);
+    this.setState({categories2: obj.categories, categories3: []})
+  }
+
+  onChangeCategory2 = (event) => {
+    let obj = this.state.categories2.find(o => o.value === event.target.value);
+    this.setState({categories3: obj.categories})
   }
 
   render() {
@@ -110,7 +112,8 @@ class AddProduct extends React.Component {
           categories1={this.state.categories1}
           categories2={this.state.categories2}
           categories3={this.state.categories3}
-          onChangeCategory={this.onChangeCategory1}
+          onChangeCategory1={this.onChangeCategory1}
+          onChangeCategory2={this.onChangeCategory2}
         ></Form>
       </FormWrapper>
     );

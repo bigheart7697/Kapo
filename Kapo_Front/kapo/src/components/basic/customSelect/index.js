@@ -9,10 +9,14 @@ class CustomSelect extends React.Component {
     this.setState({content: this.props.content ? this.props.content : [], id: this.props.id})
   }
 
+  componentDidUpdate() {
+    if(this.state.content != this.props.content) {
+      this.setState({content: this.props.content ? this.props.content : []})
+      this.refs.select.value = null
+    }
+  }
+
   changed = (event) => {
-    console.log(event.target.value)
-    console.log('id')
-    console.log(this.state.id)
     if (this.props.onChange) {
       this.props.onChange(event)
     }
@@ -27,7 +31,7 @@ class CustomSelect extends React.Component {
       <div className={`basic-select__container ${this.props.full ? "basic-select__container--full" : null}`}>
         <div className="basic-select__inner-container">
           {this.props.label ? <label className="basic-select__label">{this.props.label}</label> : null}
-          <select className="basic-select__input" {...this.props.input} onChangeCapture={this.changed}>
+          <select className="basic-select__input" {...this.props.input} onChangeCapture={this.changed} ref='select'>
             {this.props.noEmpty ? null :<option></option>}
             {this.state.content.map((element, index) => {
               return <option key={index} value={element.value ? element.value : ""}>{element.text}</option>;
