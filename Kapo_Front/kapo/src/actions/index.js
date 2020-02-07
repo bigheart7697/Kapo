@@ -98,6 +98,7 @@ export const searchProducts = (search, category = null) => async dispatch => {
   } else {
     response = await server.get(`/`)
   }
+  console.log('response')
   console.log(response)
   dispatch({ type: SEARCH_ITEM, payload: response.data });
 };

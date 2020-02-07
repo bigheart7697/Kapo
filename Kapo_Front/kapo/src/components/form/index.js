@@ -80,11 +80,11 @@ const validate = formValues => {
   if (!formValues.production_year){
     errors.production_year = "لطفا سال تولید کالای خود را وارد نمایید"
   }
-  if (!formValues.production_year){
-    errors.production_year = "لطفا نوع کالای خود را وارد نمایید"
-  }
+  // if (!formValues.production_year){
+  //   errors.production_year = "لطفا نوع کالای خود را وارد نمایید"
+  // }
   if(!formValues.price){
-    errors.production_year = "لطفا قیمت کالای موجود را وارد کنید"
+    errors.price = "لطفا قیمت کالای موجود را وارد کنید"
   }
   if(!formValues.username){
     errors.username = "لطفا نام کاربری خود را وارد کنید"
