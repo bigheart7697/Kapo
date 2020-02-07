@@ -106,6 +106,9 @@ const validate = formValues => {
   if (!formValues.description) {
     errors.description = "لطفا توضیحات محصول را وارد کنید";
   }
+  if(formValues.production_year < 1990){
+    errors.production_year = "سال تولید باید بعد از ۱۹۹۰ باشد."
+  }
   if (!formValues.production_year){
     errors.production_year = "لطفا سال تولید کالای خود را وارد نمایید"
   }
