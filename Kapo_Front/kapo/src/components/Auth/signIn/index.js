@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux"
+import { Link } from "react-router-dom"
 import { SignIn as signInAction } from '../../../actions'
 
 import "./style.scss";
@@ -37,6 +38,7 @@ class SignIn extends React.Component {
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
         ></Form>
+        <Link to="/auth/SignUp">ثبت نام کنید</Link>
       </FormWrapper>
     );
   }
