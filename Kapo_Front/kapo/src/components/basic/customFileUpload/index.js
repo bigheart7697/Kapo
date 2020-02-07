@@ -10,6 +10,7 @@ export default class CustomFileUpload  extends React.Component{
 
   onChange(e) {
     const { input: { onChange } } = this.props
+    console.log(e.target.files)
     onChange(e.target.files[0])
   }
 
