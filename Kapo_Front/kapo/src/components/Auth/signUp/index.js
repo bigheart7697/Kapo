@@ -75,7 +75,7 @@ class SignIn extends React.Component {
             submitText={FORM_VALUES.submitText}
             title={FORM_VALUES.title}
           ></Form>
-          <Link to="/auth/SignUp">وارد شوید</Link>
+          <Link to="/auth/SignIn">وارد شوید</Link>
         </FormWrapper>
       </div>
     );
