@@ -27,7 +27,7 @@ export const fetchMyOrders = () => async dispatch => {
 export const fetchOrder = id => async dispatch => {
   console.log("id")
   console.log(id)
-  const response = await server.get(`/kapo/orders/${id}`)
+  const response = await server.get(`/kapo/orders/${id}/`)
   console.log(response)
   dispatch({ type: FETCH_ORDER, payload: response.data })
 }
