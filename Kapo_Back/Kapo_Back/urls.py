@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('accounts/', include("accounts.urls")),
     path('kapo/', include('kapo.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
 if not DEBUG:
     urlpatterns.append(re_path(".*", TemplateView.as_view(template_name="index.html")))
