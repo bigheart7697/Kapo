@@ -116,9 +116,9 @@ class Navbar extends React.Component {
               }
             </div>
             <div className='navbar__new-product'>
-              <div className='nav-bar__button'>
+              <a href='/AddProduct' className='nav-bar__button'>
                 ثبت محصول جدید
-              </div>
+              </a>
             </div>
           </div>
           <MegaDropDown ref='megaDropDown' />

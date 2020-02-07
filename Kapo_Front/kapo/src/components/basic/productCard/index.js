@@ -13,7 +13,7 @@ class productCard extends React.Component {
         
         return (<div className="product-card__container" onClick={this.props.onClick} onMouseEnter={() => this.setState({ mouseOver: true})} onMouseLeave={() => this.setState({ mouseOver: false })}>
             <div className="product-card__content">
-                <div className="product-card__name">{this.state.element.name}</div>
+                <div className={!this.state.mouseOver ? "product-card__name" : "product-card__name product-card__name--hover"}>{this.state.element.name}</div>
                 {!this.state.mouseOver 
                 ? <div className="product-card__description">{this.state.element.description}</div>
                 : (<div className="product-card__details-button-container">

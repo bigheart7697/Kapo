@@ -2,17 +2,16 @@
 
 .product-card__container{
     background-color: $second-color;
-    height: 45rem;
-    width: 30rem;
+    height: 30rem;
+    width: 25rem;
     padding: 1rem;
     border-radius: 1rem;
     transition: 0.5s;
-    cursor: pointer;
-    margin: 5rem 5rem;
+    margin: 5rem 2rem;
 }
 
 .product-card__container:hover{
-    background-color: $first-color;
+    background-color: $white;
 }
 
 .product-card__content{
@@ -34,7 +33,8 @@
 }
 
 .product-card__name{
-    font-size: 1.5rem;
+    font-size: 20px;
+    font-weight: 600;
     text-align: center;
     padding: 1rem;
     text-overflow: ellipsis;
@@ -44,12 +44,16 @@
     color: $white;
 }
 
+.product-card__name--hover {
+    color: $second-color;
+}
+
 .product-card__container:hover .product-card__name{
     font-size: 2rem;
 }
 
 .product-card__description{
-    height: 40%;
+    height: 30%;
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -101,7 +105,7 @@
 }
 
 .product-card__details-button-container{
-    height: 40%;
+    height: 30%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -112,14 +116,14 @@
 }
 
 .product-card__details-button{
-    border: 1px solid $white;
+    border: 1px solid $second-color;
     padding: 1rem;
     border-radius: 0.5rem;
     transition: 0.5s;
-    color: $white;
+    color: $second-color;
+    cursor: pointer;
 }
 
 .product-card__details-button:hover{
-    background-color: $white;
-    color: $first-color;
+    background-color: $superwhite;
 }
