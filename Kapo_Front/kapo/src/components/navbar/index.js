@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import "./style-new.scss";
 
 import NavItem from "../basic/navItem";
@@ -13,7 +14,7 @@ import image2 from '../../assets/category2.png';
 import image3 from '../../assets/category3.png';
 import image4 from '../../assets/category4.png';
 import image5 from '../../assets/category5.png';
-import { searchProducts } from "../../actions";
+import { searchProducts, SignOut } from "../../actions";
 
 const navItems = [
   {
@@ -29,7 +30,7 @@ const navItems = [
 ];
 
 class Navbar extends React.Component {
-  state = { active: 0, dropActive: false, logged_in: true, categories: []};
+  state = { active: 0, dropActive: false, categories: []};
   
   navItemOnClick = (index, link) => {
     this.setState({ active : index })
@@ -106,20 +107,31 @@ class Navbar extends React.Component {
               <SearchBar onSearch={this.onSearch}/>
             </div>
             <div className='navbar__auth'>
-              {this.state.logged_in ? 
-                (<div><div className="navbar__circle" onClick={() => this.setState({ dropActive: !this.state.dropActive })}></div>
-                <NavDropDown active={this.state.dropActive}/></div>)
+              {this.props.loggedIn ? 
+                (<div>
+                    <div className="navbar__circle" onClick={() => this.setState({ dropActive: !this.state.dropActive })}></div>
+                    <NavDropDown active={this.state.dropActive}/>
+                  </div>)
               :
-                (<div className='nav-bar__button'>
-                  ورود/ثبت‌نام
+                (<div>
+                  <Link to='/auth/SignIn' className='nav-bar__button'>
+                    ورود/ثبت‌نام
+                  </Link>
                 </div>)
               }
             </div>
-            <div className='navbar__new-product'>
-              <a href='/AddProduct' className='nav-bar__button'>
-                ثبت محصول جدید
-              </a>
-            </div>
+            <div>
+                </div>
+              <div className='navbar__new-product'>
+                <Link to='/AddProduct' className='nav-bar__button'>
+                  ثبت محصول جدید
+                </Link>
+              </div>
+              <div>
+              {this.props.loggedIn ? <div onClick={this.props.SignOut} className='nav-bar__button'>
+                    خروج
+                  </div> : null}
+              </div>
           </div>
           <MegaDropDown ref='megaDropDown' />
         </div>
@@ -129,4 +141,4 @@ class Navbar extends React.Component {
 }
 
 
-export default connect(null, {searchProducts})(Navbar)
+export default connect(null, {searchProducts, SignOut})(Navbar)
