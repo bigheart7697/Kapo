@@ -33,7 +33,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_URL = ALLOWED_HOSTS[0] + "/"
+MEDIA_ROOT = 'media'
+MEDIA_URL = "/"
 
 # Application definition
 
