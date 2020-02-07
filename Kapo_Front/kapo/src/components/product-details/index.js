@@ -82,7 +82,7 @@ class ProductDetails extends React.Component {
               <tbody>
                 <tr>
                   <td className="productDetails__column">
-                    {this.props.product ?  this.props.product.owner ? this.props.product.owner.first_name : '-' :'-'}
+                    {this.props.product? this.props.product.owner ? this.props.product.owner.is_corporate ? this.props.product.owner.corporate_name? this.props.product.owner.corporate_name : '-' : this.props.product.owner.first_name + " " + this.props.product.owner.last_name  : '-' : '-'}
                   </td>
                   <td className="productDetails__column">نام</td>
                 </tr>

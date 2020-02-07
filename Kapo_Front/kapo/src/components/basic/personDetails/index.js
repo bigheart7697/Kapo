@@ -15,7 +15,7 @@ const PersonDetails = (props) => {
                             نام: 
                         </div>
                         <div className='person-details__element-value'>
-                            {props.person ? props.person.name ? props.person.name : props.person.corporate_name : '-'}
+                            {props.person ? props.person.is_corporate ? props.person.corporate_name? props.person.corporate_name : '-' : props.person.first_name + " " + props.person.last_name  : '-'}
                         </div>
                     </div>
                     <div className='person-details__element'>
