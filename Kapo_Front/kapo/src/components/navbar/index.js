@@ -26,6 +26,11 @@ const navItems = [
     text: "لیست محصولات",
     link: "/ProductList",
     onHover: true
+  },
+  {
+    text: "ثبت محصول جدید",
+    link: "/AddProduct",
+    onHover: false
   }
 ];
 
@@ -113,7 +118,7 @@ class Navbar extends React.Component {
                     <NavDropDown active={this.state.dropActive}/>
                   </div>)
               :
-                (<div>
+                (<div className='navbar__new-product'>
                   <Link to='/auth/SignIn' className='nav-bar__button'>
                     ورود/ثبت‌نام
                   </Link>
@@ -122,11 +127,6 @@ class Navbar extends React.Component {
             </div>
             <div>
                 </div>
-              <div className='navbar__new-product'>
-                <Link to='/AddProduct' className='nav-bar__button'>
-                  ثبت محصول جدید
-                </Link>
-              </div>
               <div>
               {this.props.loggedIn ? <div onClick={this.props.SignOut} className='nav-bar__button'>
                     خروج

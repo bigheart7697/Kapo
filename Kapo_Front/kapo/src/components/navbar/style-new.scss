@@ -66,6 +66,7 @@ $transition-time: 0.4s;
 .navbar__searchbar {
     width: 40%;
     display: table;
+    margin-left: 10%;
 }
 
 .navbar__auth {
@@ -77,8 +78,7 @@ $transition-time: 0.4s;
 }
 
 .nav-bar__button {
-    display: flex;
-    padding: 1rem;
+    padding: 1rem 2rem;
     border-radius: 1rem;
     width: 90%;
     margin: auto;
@@ -87,13 +87,12 @@ $transition-time: 0.4s;
     text-align: center;
     cursor: pointer;
     transition: .5s ease all;
+    text-decoration: none !important;
 }
 
 .nav-bar__button:hover {
     background-color: $first-color;
-    color: black;
-    text-decoration: none;
-    
+    color: black;    
 }
 
 .nav-bar__button--red {

@@ -5,10 +5,11 @@
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+    background-color: $superwhite;
 }
 
 .items-column__item--active, .items-column__item:hover {
-    background-color: $second-color;
+    background-color: $hover-color;
     color: $white;
 }
 
