@@ -10,8 +10,6 @@ import CustomFileUpload from '../basic/customFileUpload';
 import WhiteSpace from "../basic/whitespace";
 
 class Form extends React.Component {
-  state = {categories1: [], categories2: [], categories3: []}
-
   setComponent = type => {
     switch (type) {
       case "select":
@@ -24,25 +22,7 @@ class Form extends React.Component {
   }
 
   componentDidMount() {
-    console.log('0000')
-    console.log(this.props.categories)
-    this.setState({categories1: this.props.categories})
     this.props.initialize (this.props.initialValues ? this.props.initialValues : {})
-    console.log(this.state)
-  }
-
-  onChangeCategory = (value, id) => {
-    console.log(this.refs.category2)
-    console.log(id)
-    if (id==='1') {
-      let obj = this.props.categories ? this.props.categories.find(o => o.value === value) : [];
-      this.refs.category2.setContent({content: obj.categories})
-    }
-    if (id==='2') {
-      let obj = this.state.category1 ? this.state.category1.categories ? 
-        this.state.category1.categories.find(o => o.value === value) : [] : [];
-      this.refs.category3.setContent({content: obj.categories})
-    }
   }
 
   changeInitialValues = (props) => {
@@ -50,7 +30,6 @@ class Form extends React.Component {
   }
 
   render() {
-    console.log(this.props.initialValues)
     return (
       <form
         className="form__container"
@@ -74,37 +53,34 @@ class Form extends React.Component {
             );
           })}
         </div>
-        {this.props.categories ? (
+        {this.props.categories1 ? (
           <div className={"form__input-container"}>
             <Field
               name='first'
               component={CustomSelect}
               label='دسته اول'
-              content={this.state.categories1}
+              content={this.props.categories1}
               full={true}
-              ref='category1'
               id='1'
-              onChange={this.onChangeCategory}
+              onChange={this.props.onChangeCategory}
             />
             <Field
               name='second'
               component={CustomSelect}
               label='دسته دوم'
-              content={this.state.categories2}
+              content={this.props.categories2}
               full={true}
-              ref='category2'
               id='2'
-              onChange={this.onChangeCategory}
+              onChange={this.props.onChangeCategory}
             />
             <Field
               name='third'
               component={CustomSelect}
               label='دسته سوم'
-              content={this.state.categories3}
+              content={this.props.categories3}
               full={true}
-              ref='category3'
               id='3'
-              onChange={this.onChangeCategory}
+              onChange={this.props.onChangeCategory}
             />
           </div>
         ) : null}

@@ -3,16 +3,18 @@ import React from "react";
 import "./style.scss";
 
 class CustomSelect extends React.Component {
-  state = {content: []}
+  state = {content: [], id: '-1'}
 
   componentDidMount() {
-    this.setState({content: this.props.content ? this.props.content : []})
+    this.setState({content: this.props.content ? this.props.content : [], id: this.props.id})
   }
 
   changed = (event) => {
     console.log(event.target.value)
+    console.log('id')
+    console.log(this.state.id)
     if (this.props.onChange) {
-      this.props.onChange(event.target.value, this.props.id)
+      this.props.onChange(event)
     }
   }
 

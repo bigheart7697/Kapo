@@ -82,9 +82,23 @@ const categories = [
 ];
 
 class AddProduct extends React.Component {
+  constructor(props) {
+    super(props) 
+    this.state = {categories1: categories, categories2: [], categories3: []}
+  }
+
   onSubmit = (formValues) => {
     this.props.addProduct(formValues)
   };
+
+  onChangeCategory1 = (event) => {
+    console.log(event.target.value)
+    let obj = categories.find(o => o.value === event.target.value);
+    this.setState({categories2: obj.categories})
+    console.log(obj)
+    console.log(this.state.categories2)
+  }
+
   render() {
     return (
       <FormWrapper>
@@ -93,7 +107,10 @@ class AddProduct extends React.Component {
           onSubmit={this.onSubmit}
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
-          categories={categories}
+          categories1={this.state.categories1}
+          categories2={this.state.categories2}
+          categories3={this.state.categories3}
+          onChangeCategory={this.onChangeCategory1}
         ></Form>
       </FormWrapper>
     );
