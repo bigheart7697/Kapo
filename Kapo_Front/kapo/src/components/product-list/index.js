@@ -20,17 +20,41 @@ import image6 from '../../assets/6.png'
 
 const PRODUCT_LIST = [
     {
-        image: image6
+        image: image6,
+        name: 'تست',
+        description: 'خیلی خوبه',
+        price: '12000',
+        owner: {'corporate_name': 'شرکت علی بابا', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران', 'corporate_number': '123456789101', 'corporate_economic_number': '432198765', 'phone_number': '02122222222'}
     }, {
-        image: image5
+        image: image5,
+        name: 'تست',
+        description: 'خیلی خوبه',
+        price: '12000',
+        owner: {'corporate_name': 'شرکت علی بابا', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران', 'corporate_number': '123456789101', 'corporate_economic_number': '432198765', 'phone_number': '02122222222'}
     }, {
-        image: image4
+        image: image4,
+        name: 'تست',
+        description: 'خیلی خوبه',
+        price: '12000',
+        owner: {'corporate_name': 'شرکت علی بابا', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران', 'corporate_number': '123456789101', 'corporate_economic_number': '432198765', 'phone_number': '02122222222'}
     }, {
-        image: image3
+        image: image3,
+        name: 'تست',
+        description: 'خیلی خوبه',
+        price: '12000',
+        owner: {'corporate_name': 'شرکت علی بابا', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران', 'corporate_number': '123456789101', 'corporate_economic_number': '432198765', 'phone_number': '02122222222'}
     }, {
-        image: image2
+        image: image2,
+        name: 'تست',
+        description: 'خیلی خوبه',
+        price: '12000',
+        owner: {'corporate_name': 'شرکت علی بابا', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران', 'corporate_number': '123456789101', 'corporate_economic_number': '432198765', 'phone_number': '02122222222'}
     }, {
-        image: image1
+        image: image1,
+        name: 'تست',
+        description: 'خیلی خوبه',
+        price: '12000',
+        owner: {'corporate_name': 'شرکت علی بابا', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران', 'corporate_number': '123456789101', 'corporate_economic_number': '432198765', 'phone_number': '02122222222'}
     }
 ]
 
