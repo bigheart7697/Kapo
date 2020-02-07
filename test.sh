@@ -25,7 +25,6 @@ function install_js {
 function install_python {
    cd Kapo_Back
    pip3 install -r requirements.txt
-   pip3 install -r requirements-dev.txt
    cd -
 }
 

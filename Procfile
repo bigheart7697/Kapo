@@ -1,0 +1,1 @@
+web: gunicorn app.backend.Kapo_Back.wsgi

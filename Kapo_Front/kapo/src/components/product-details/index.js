@@ -8,12 +8,16 @@ import "./style.scss";
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
+import SubmitSponseredSearch from '../sponseredSearch/submit'
+
+import defaultImg from '../../assets/default.jpg'
 
 class ProductDetails extends React.Component {
 
   state = {
     count: 0,
-    image: ""
+    image: "",
+    owns: false
   }
 
   componentDidMount() {
@@ -22,35 +26,37 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    // console.log("url(" + this.props.product.image + ")");
+    
     console.log(this.state.count)
     console.log(this.props.product)
     return (
       <>
-        <div className="productDetails__container">
-          <div className="productDetails__leftPanel">
+        <div className="product-details__container">
+          <div className="product-details__leftPanel">
 
             <h1>{this.props.product ? this.props.product.name : '-'}</h1>
 
             <div className="ui horizontal divider header">
               <i className="tags icon"></i>
-              <h4 className="productDetails__h1--no-margin">توضیحات کالا</h4>
+              <h4 className="product-details__h1--no-margin">توضیحات کالا</h4>
             </div>
             <p>{this.props.product ? this.props.product.description : '-'}</p>
 
             <div className="ui horizontal divider header">
               <i className="bar chart icon"></i>
-              <h4 className="productDetails__h1--no-margin"> مشخصات کالا</h4>
+              <h4 className="product-details__h1--no-margin"> مشخصات کالا</h4>
             </div>
-            <table className="ui definition table productDetails__table">
+            <table className="ui definition table product-details__table">
               <tbody>
                 <tr>
-                  <td className="productDetails__column">
+                  <td className="product-details__column">
                     {this.props.product ? this.props.product.second_hand ? 'دست دوم' : 'نو' : '-'}
                   </td>
-                  <td className="productDetails__column">نوع کالا</td>
+                  <td className="product-details__column">نوع کالا</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.type ? this.props.product.type : '-' : '-'}</td>
+                  <td>{this.props.product ? this.props.product.first_category + '>' + this.props.product.second_category + '>' + this.props.product.third_category : '-'}</td>
                   <td>دسته کالا</td>
                 </tr>
                 <tr>
@@ -74,17 +80,17 @@ class ProductDetails extends React.Component {
 
             <div className="ui horizontal divider header">
               <i className="address card outline icon"></i>
-              <h4 className="productDetails__h1--no-margin">
+              <h4 className="product-details__h1--no-margin">
                 مشخصات تماس فروشنده
               </h4>
             </div>
-            <table className="ui definition table productDetails__table">
+            <table className="ui definition table product-details__table">
               <tbody>
                 <tr>
                   <td className="productDetails__column">
-                    {this.props.product ?  this.props.product.owner ? this.props.product.owner.first_name : '-' :'-'}
+                    {this.props.product? this.props.product.owner ? this.props.product.owner.is_corporate ? this.props.product.owner.corporate_name? this.props.product.owner.corporate_name : '-' : this.props.product.owner.first_name + " " + this.props.product.owner.last_name  : '-' : '-'}
                   </td>
-                  <td className="productDetails__column">نام</td>
+                  <td className="product-details__column">نام</td>
                 </tr>
                 <tr>
                   <td>{this.props.product ?  this.props.product.owner ? this.props.product.owner.address : '-' :'-'}</td>
@@ -93,23 +99,28 @@ class ProductDetails extends React.Component {
               </tbody>
             </table>
           </div>
-          <div className="productDetails__rightPanel">
-            <div className="productDetails__imageContainer">
+          <div className="product-details__rightPanel">
+            <div className="product-details__imageContainer">
               <div
-                className="productDetails__image"
+                className="product-details__image"
                 style={{
-                  backgroundImage: "url(" + this.state.imag + ")"
+                  backgroundImage: this.props? this.props.product ? this.props.product.image? "url(" + this.props.product.image + ")" : `url(${defaultImg})` : `url(${defaultImg})` : `url(${defaultImg})`
                 }}
               ></div>
             </div>
           </div>
         </div>
-        <div className="productDetails__button-container">
-          <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
-          <Whitespace space="1"/>
-          <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
-          <Whitespace space="1"/>
-        </div>
+        {this.state.owns ? 
+          <div className="product-details__button-container">
+            <div className="product-details__order-title">ثبت سفارش</div>
+            <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
+            <Whitespace space="1"/>
+            <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
+          </div>
+        :
+          <SubmitSponseredSearch product={this.props.product}/>
+        }
+        <Whitespace space="10"/>
       </>
     );
   }

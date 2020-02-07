@@ -30,7 +30,7 @@ const productReducer = (state = INITIAL_VALUE, action) => {
     case FETCH_PRODUCTS:
       return {
         ...state,
-        products: { ...state.products, ..._.mapKeys(action.payload, "id") }
+        products: { ..._.mapKeys(action.payload, "id") }
       };
       case FETCH_MY_PRODUCTS:
         return {

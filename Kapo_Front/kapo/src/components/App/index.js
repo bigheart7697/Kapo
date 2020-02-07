@@ -38,7 +38,7 @@ const App = () => {
                     <Route path="/order/preview/:id" exact component={PreviewOrder}/>
                     <Route path="/bank/:id" exact component={Bank}/>
                     <Route path="/order/list" exact component={MyOrders}/>
-                    <Route path="/order/factor" exact component={OrderFactor}/>
+                    <Route path="/order/factor/:id" exact component={OrderFactor}/>
                     <Route path="/AddProduct/SetPrice/:id" exact component={SetPrice}/>
                     <Route path="/404" exact component={Page404}/>
                     <Route path="/ProductOrders/:id" exact component={ProductOrders}/>

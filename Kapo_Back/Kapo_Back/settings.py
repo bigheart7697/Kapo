@@ -30,8 +30,12 @@ ALLOWED_HOSTS = [os.environ.get("PRODUCTION_HOST", default='127.0.0.1')]
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media'),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'root')
+
+MEDIA_URL = "http://127.0.0.1:8000/"
 
 # Application definition
 
@@ -151,7 +155,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/media/'
 
 
 LOCALE_PATHS = (
@@ -172,16 +176,16 @@ JWT_AUTH = {
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 if not DEBUG:
-    INSTALLED_APPS.extend(["whitenoise.runserver_nostatic"])
+    INSTALLED_APPS.insert(0, 'whitenoise.runserver_nostatic')
 
     # Must insert after SecurityMiddleware, which is first in settings/common.py
-    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
-    TEMPLATES[0]["DIRS"] = [os.path.join(BASE_DIR, "../", "frontend", "build")]
+    TEMPLATES[0]["DIRS"] = [os.path.join(BASE_DIR, "..", "frontend", "build")]
 
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, "../", "frontend", "build", "static")]
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    # STATICFILES_DIRS = [os.path.join(BASE_DIR, "..", "frontend", "build", "static")]
+    # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    # STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-    STATIC_URL = "/static/"
-    WHITENOISE_ROOT = os.path.join(BASE_DIR, "../", "frontend", "build", "root")
+    # STATIC_URL = "/media/"
+    # WHITENOISE_ROOT = os.path.join(BASE_DIR, "..", "frontend", "build", "root")

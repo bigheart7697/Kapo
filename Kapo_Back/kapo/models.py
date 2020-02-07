@@ -1,4 +1,5 @@
 import datetime
+import os
 import random
 
 from django.contrib.auth.models import User
@@ -6,9 +7,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from Kapo_Back.settings import BASE_DIR
 from accounts.models import User
 
-product_images_dir = 'media/products/'
+product_images_dir = os.path.join(BASE_DIR, 'media', 'products')
 profile_images_dir = 'media/users/'
 
 
