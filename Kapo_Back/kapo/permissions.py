@@ -14,7 +14,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # Write permissions are only allowed to the owner of the snippet.
-        return obj.owner == request.user
+        return obj.owner.email == request.user.email
 
 
 class IsNotOwnerOfOrderedProduct(permissions.BasePermission):
