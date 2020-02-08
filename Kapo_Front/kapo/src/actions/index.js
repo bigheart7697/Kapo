@@ -124,7 +124,7 @@ export const SignIn = (auth) => async dispatch => {
   try {
     console.log(auth)
     setAuthToken()
-    const response = await server.post('http://kapokala.herokuapp.com/accounts/register/', auth)
+    const response = await server.post('/token-auth/', auth)
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
     console.log(response.data.token)
