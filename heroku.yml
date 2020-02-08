@@ -5,5 +5,6 @@ build:
 run:
   web: python3 backend/manage.py makemigrations && python3 backend/manage.py migrate && python3 backend/manage.py runserver 0.0.0.0:$PORT
   worker:
-    command: python backend/manage.py process_tasks
+    command: 
+      - python backend/manage.py process_tasks
     image: web
