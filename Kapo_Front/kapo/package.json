@@ -51,5 +51,4 @@
     "redux-mock-store": "^1.5.4",
     "styled-components": "^4.4.1"
   }
-  // "proxy": "127.0.0.1:8000"
 }
