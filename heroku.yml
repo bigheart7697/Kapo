@@ -3,7 +3,6 @@ build:
     web: Dockerfile
 
 release:
-  image: worker
   command:
     - python3 backend/manage.py makemigrations && python3 backend/manage.py migrate
     
