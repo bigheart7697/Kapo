@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
+import { FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/kapo/");
@@ -19,6 +19,11 @@ export const fetchCategories = () => async dispatch => {
   dispatch({ type: FETCH_PRODUCT_CATEGORIES, payload: response.data })
 }
 
+export const fetchCategoryHierarchy = () => async dispatch => {
+  const response = await server.get("/kapo/cat-hierarchy/");
+  dispatch({type: FETCH_CATEGORY_HIERARCHY, payload: response.data})
+}
+
 export const fetchMyOrders = () => async dispatch => {
   const response = await server.get("/kapo/orders/");
   dispatch({ type: FETCH_ORDERS, payload: response.data });
@@ -27,7 +32,7 @@ export const fetchMyOrders = () => async dispatch => {
 export const fetchOrder = id => async dispatch => {
   console.log("id")
   console.log(id)
-  const response = await server.get(`/kapo/orders/${id}`)
+  const response = await server.get(`/kapo/orders/${id}/`)
   console.log(response)
   dispatch({ type: FETCH_ORDER, payload: response.data })
 }

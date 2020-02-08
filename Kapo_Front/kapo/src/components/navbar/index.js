@@ -14,7 +14,7 @@ import image2 from '../../assets/category2.png';
 import image3 from '../../assets/category3.png';
 import image4 from '../../assets/category4.png';
 import image5 from '../../assets/category5.png';
-import { searchProducts, SignOut } from "../../actions";
+import { searchProducts, SignOut, fetchCategoryHierarchy } from "../../actions";
 
 const navItems = [
   {
@@ -45,6 +45,7 @@ class Navbar extends React.Component {
 };
 
   componentDidMount() {
+    this.props.fetchCategoryHierarchy();
     this.setState({categories : [
       {name: 'املاک', image: image1, categories: [
         {name: 'رهن', categories: [{name: 'نیاوران'}, {name: 'پاسداران'}]},
@@ -81,6 +82,8 @@ class Navbar extends React.Component {
   }
 
   render() {
+    console.log(this.props.category_hierarchy);
+    
     return (
       <div className="navbar__component--padding-top">
         <div className="navbar__flex">
@@ -141,4 +144,8 @@ class Navbar extends React.Component {
 }
 
 
-export default connect(null, {searchProducts, SignOut})(Navbar)
+const mapStateToProps = (state) => {
+  return {category_hierarchy: state.products.category_hierarchy }
+}
+
+export default connect(mapStateToProps, {fetchCategoryHierarchy, searchProducts, SignOut})(Navbar)
