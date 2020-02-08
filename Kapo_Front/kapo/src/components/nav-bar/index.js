@@ -74,4 +74,9 @@ class Navbar extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {category_hierarchy: state.products.category_hierarchy }
+}
+
+
 export default Navbar;

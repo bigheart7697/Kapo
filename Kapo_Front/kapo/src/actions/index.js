@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
+import { FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/kapo/");
@@ -17,6 +17,11 @@ export const fetchMyProducts = () => async dispatch => {
 export const fetchCategories = () => async dispatch => {
   const response = await server.get("/kapo/prod-cats/");
   dispatch({ type: FETCH_PRODUCT_CATEGORIES, payload: response.data })
+}
+
+export const fetchCategoryHierarchy = () => async dispatch => {
+  const response = await server.get("/kapo/cat-hierarchy/");
+  dispatch({type: FETCH_CATEGORY_HIERARCHY, payload: response.data})
 }
 
 export const fetchMyOrders = () => async dispatch => {
@@ -119,7 +124,7 @@ export const SignIn = (auth) => async dispatch => {
   try {
     console.log(auth)
     setAuthToken()
-    const response = await server.post('/token-auth/', auth)
+    const response = await server.post('http://kapokala.herokuapp.com/accounts/register/', auth)
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
     console.log(response.data.token)
