@@ -1,6 +1,10 @@
 build:
   docker:
     web: Dockerfile
-    migrate: python3 backend/manage.py makemigrations && python3 backend/manage.py migrate
+
+release:
+  command:
+    - python3 backend/manage.py makemigrations && python3 backend/manage.py migrate
+    
 run:
   web: python3 backend/manage.py runserver 0.0.0.0:$PORT
