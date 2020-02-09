@@ -21,7 +21,7 @@ const CustomTable = (props) => {
                                 {element.map((e, i) =>
                                     {
                                         return (
-                                            <div className='custom-table__td' key={2 * i}>{e}</div>
+                                            <div className='custom-table__td' key={2 * i} id={'custom-table__td' + i}>{e}</div>
                                         );
                                     }    
                                 )}

@@ -5,8 +5,10 @@
     width: 100%;
     margin: auto;
     display: block;
-    background: $white;
+    background: $superwhite;
     transition: 1s all ease;
+    border-bottom: 1px solid black;
+    box-shadow: 1rem 1rem 1rem grey;
     
 }
 
@@ -33,7 +35,7 @@
 
 .mega-drop-down__column {
     width: 25%;
-    background: $white;
+    background: $superwhite;
     border-left: 1px solid $gray;
 }
 

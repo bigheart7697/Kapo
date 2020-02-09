@@ -26,6 +26,11 @@ const navItems = [
     text: "لیست محصولات",
     link: "/ProductList",
     onHover: true
+  },
+  {
+    text: "ثبت محصول جدید",
+    link: "/AddProduct",
+    onHover: false
   }
 ];
 
@@ -47,25 +52,25 @@ class Navbar extends React.Component {
   componentDidMount() {
     this.props.fetchCategoryHierarchy();
     this.setState({categories : [
-      {name: 'املاک', image: image1, categories: [
-        {name: 'رهن', categories: [{name: 'نیاوران'}, {name: 'پاسداران'}]},
-        {name: 'اجاره', categories: [{name: 'دو خوابه'}, {name: 'سه خوابه'}, {name: 'بیشتر'}]}
+      {text: 'املاک', value: '1', image: image1, categories: [
+        {text: 'رهن', value: '1', categories: [{text: 'نیاوران', value: '1'}, {text: 'پاسداران', value: '2'}]},
+        {text: 'اجاره', value: '2', categories: [{text: 'دو خوابه', value: '1'}, {text: 'سه خوابه', value: '2'}, {text: 'بیشتر', value: '3'}]}
       ]},
-      {name: 'ماشین', image: image2, categories: [
-        {name: 'لوکس', categories: [{name: 'بنتلی'}, {name: 'بنز'}]},
-        {name: 'اسپورت', categories: [{name: 'لامبورگینی'}, {name: 'بوگاتی'}]},
-        {name: 'ایرانی', categories: [{name: 'پراید'}, {name: 'پیکان'}]}
+      {text: 'ماشین', value: '2', image: image2, categories: [
+        {text: 'لوکس', value: '1', categories: [{text: 'بنتلی', value: '1'}, {text: 'بنز', value: '2'}]},
+        {text: 'اسپورت', value: '2', categories: [{text: 'لامبورگینی', value: '1'}, {text: 'بوگاتی', value: '2'}]},
+        {text: 'ایرانی', value: '3', categories: [{text: 'پراید', value: '1'}, {text: 'پیکان', value: '2'}]}
       ]},
-      {name: 'کالای برقی', image: image3, categories: [
-        {name: 'خانگی', categories: [{name: 'جاروبرقی'}, {name: 'ماکروفر'}]},
-        {name: 'لوازم جانبی', categories: [{name: 'شارژر'}]}
+      {text: 'کالای برقی', value: '3', image: image3, categories: [
+        {text: 'خانگی', value: '1', categories: [{text: 'جاروبرقی', value: '1'}, {text: 'ماکروفر', value: '2'}]},
+        {text: 'لوازم جانبی', value: '2', categories: [{text: 'شارژر', value: '1'}]}
       ]},
-      {name: 'لباس', image: image4, categories: [
-        {name: 'زنانه', categories: [{name: 'کفش'}, {name: 'شلوار'}]},
-        {name: 'مردانه', categories: [{name: 'شلوار'}, {name: 'پیراهن'}]},
-        {name: 'بچگانه', categories: [{name: 'پسرانه'}, {name: 'دخترانه'}]}
+      {text: 'لباس', value: '4', image: image4, categories: [
+        {text: 'زنانه', value: '1', categories: [{text: 'کفش', value: '1'}, {text: 'شلوار', value: '2'}]},
+        {text: 'مردانه', value: '2', categories: [{text: 'شلوار', value: '1'}, {text: 'پیراهن', value: '2'}]},
+        {text: 'بچگانه', value: '3', categories: [{text: 'پسرانه', value: '1'}, {text: 'دخترانه', value: '2'}]}
       ]},
-      {name: 'موسیقی', image: image5, categories: []}
+      {text: 'موسیقی', value: '5', image: image5, categories: []}
     ]})
   }
 
@@ -116,7 +121,7 @@ class Navbar extends React.Component {
                     <NavDropDown active={this.state.dropActive}/>
                   </div>)
               :
-                (<div>
+                (<div className='navbar__new-product'>
                   <Link to='/auth/SignIn' className='nav-bar__button'>
                     ورود/ثبت‌نام
                   </Link>
@@ -125,11 +130,6 @@ class Navbar extends React.Component {
             </div>
             <div>
                 </div>
-              <div className='navbar__new-product'>
-                <Link to='/AddProduct' className='nav-bar__button'>
-                  ثبت محصول جدید
-                </Link>
-              </div>
               <div>
               {this.props.loggedIn ? <div onClick={this.props.SignOut} className='nav-bar__button'>
                     خروج
