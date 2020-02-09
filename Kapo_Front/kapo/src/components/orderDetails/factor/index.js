@@ -51,7 +51,7 @@ class OrderFactor extends React.Component {
                             <div className='order-factor__element-title'>
                                 تاریخ:
                             </div>
-                            <div className='order-factor__element-value'>
+                            <div className='order-factor__element-value' id='order-factor__created'>
                                 {this.props.order ? this.props.order.created : '-'}
                             </div>
                         </div>
@@ -59,7 +59,7 @@ class OrderFactor extends React.Component {
                             <div className='order-factor__element-title'>
                                 آخرین مهلت پرداخت:
                             </div>
-                            <div className='order-factor__element-value'>
+                            <div className='order-factor__element-value' id='order-factor__deadline'>
                                 {this.props.order ? this.props.order.deadline : '-'}
                             </div>
                         </div>
@@ -67,7 +67,7 @@ class OrderFactor extends React.Component {
                             <div className='order-factor__element-title'>
                                 وضعیت:
                             </div>
-                            <div className='order-factor__element-value'>
+                            <div className='order-factor__element-value' id='order-factor__state'>
                                 {this.props.order ? this.props.order.state ? this.props.order.state === "Awaiting" ? 'در انتظار' : this.props.order.state === "Completed" ? 'کامل شده' : this.props.order.state === "Failed" ? 'نا موفق' : 'لغو شده' : '-' : '-'}
                             </div>
                         </div>
