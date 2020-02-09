@@ -71,7 +71,7 @@ class Navbar extends React.Component {
 
   activeMegaDropDown = (e) => {
     if(e.onHover) {
-      this.refs.megaDropDown.changeCategories({categories: this.state.categories})
+      this.refs.megaDropDown.changeCategories({categories: this.props.category_hierarchy.categories})
     }
   }
 
@@ -83,7 +83,8 @@ class Navbar extends React.Component {
 
   render() {
     console.log(this.props.category_hierarchy);
-    
+    console.log(this.state.categories);
+    // this.setState(this.props.category_hierarchy)
     return (
       <div className="navbar__component--padding-top">
         <div className="navbar__flex">

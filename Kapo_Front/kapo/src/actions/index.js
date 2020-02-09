@@ -108,6 +108,27 @@ export const searchProducts = (search, category = null) => async dispatch => {
   dispatch({ type: SEARCH_ITEM, payload: response.data });
 };
 
+export const categoryProducts = (category1 = null, category2 = null, category3 = null) => async dispatch => {
+  let response
+  if (category1 != null) {
+    if (category2 != null) {
+      if (category3 != null) {
+        response = await server.get(`https://kapokala.herokuapp.com/kapo/search/?cat1=${category1}&cat2=${category2}&cat3=${category3}`)
+      }
+      else {
+        response = await server.get(`https://kapokala.herokuapp.com/kapo/search/?cat1=${category1}&cat2=${category2}`)
+      }
+    }
+    else {
+      response = await server.get(`https://kapokala.herokuapp.com/kapo/search/?cat1=${category1}`)
+    }
+  }
+  else {
+    response = await server.get(`https://kapokala.herokuapp.com/kapo/`)
+  }
+  dispatch({ type: SEARCH_ITEM, payload: response.data });
+};
+
 export const addToCart = (id, count) => async dispatch => {
   let payload = { count: parseInt(count) }
   console.log(payload)
@@ -170,3 +191,14 @@ export const setIsLoggedInStatus = () => {
     type: LOG_IN
   }
 }
+
+export const createSponsoredSearch = (formValues, id) => async dispatch => {
+  try {
+    const response = await server.post(`https://kapokala.herokuapp.com//kapo/products/${id}/sponsor/`, formValues)
+    alert("درخواست اسپانسر کالا با موفقیت انجام شد")
+  }
+  catch {
+    alert("error")
+  }
+}
+  

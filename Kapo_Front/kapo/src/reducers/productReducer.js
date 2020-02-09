@@ -16,9 +16,10 @@ const productReducer = (state = INITIAL_VALUE, action) => {
       case FETCH_CATEGORY_HIERARCHY:
         return{
           ...state,
-          category_hierarchy:  _.map(action.payload, (item, key) => {
-            return item
-        })
+          // category_hierarchy:  _.map(action.payload, (item, key) => {
+            // return item
+        // })
+          category_hierarchy: action.payload
         }
     case SEARCH_ITEM:
       return {
