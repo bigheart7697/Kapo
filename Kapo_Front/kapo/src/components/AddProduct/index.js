@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { addProduct } from '../../actions'
+import { addProduct, fetchCategoryHierarchy } from '../../actions'
 
 import "./style.scss";
 
@@ -87,12 +87,19 @@ class AddProduct extends React.Component {
     this.state = {categories1: categories, categories2: [], categories3: []}
   }
 
+  componentDidMount() {
+    this.props.fetchCategoryHierarchy();
+    
+
+  }
+
   onSubmit = (formValues) => {
     this.props.addProduct(formValues)
   };
 
   onChangeCategory1 = (event) => {
-    let obj = this.state.categories1.find(o => o.value === event.target.value);
+    this.setState({categories1: this.props.category_hierarchy.categories})
+    let obj = this.props.category_hierarchy.categories.find(o => o.value === event.target.value);
     this.setState({categories2: obj.categories, categories3: []})
   }
 
@@ -109,7 +116,7 @@ class AddProduct extends React.Component {
           onSubmit={this.onSubmit}
           submitText={FORM_VALUES.submitText}
           title={FORM_VALUES.title}
-          categories1={this.state.categories1}
+          categories1={this.props.category_hierarchy? this.props.category_hierarchy.categories : this.state.categories1}
           categories2={this.state.categories2}
           categories3={this.state.categories3}
           onChangeCategory1={this.onChangeCategory1}
@@ -120,4 +127,8 @@ class AddProduct extends React.Component {
   }
 }
 
-export default connect(null, { addProduct })(AddProduct);
+const mapStateToProps = (state) => {
+  return {category_hierarchy: state.products.category_hierarchy }
+}
+
+export default connect(mapStateToProps, {fetchCategoryHierarchy, addProduct })(AddProduct);
