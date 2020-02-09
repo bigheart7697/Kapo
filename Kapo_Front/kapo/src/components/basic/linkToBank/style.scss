@@ -1,0 +1,38 @@
+@import '../../../scss/base/variables.scss';
+
+.link-to-bank__payment {
+    width: 70%;
+    margin: auto;
+}
+
+
+.link-to-bank__title {
+    color: black;
+    font-size: 25px;
+    display: block;
+    padding: 2rem;
+}
+
+.link-to-bank__input {
+    padding: 1rem 5rem;
+    direction: rtl;
+
+    input {
+        display: inline-block;
+    }
+}
+
+.link-to-bank__input-label {
+    display: inline-block;
+    padding: 0 1rem;
+    color: black;
+}
+
+.link-to-bank__button a {
+    padding: 1rem 3rem;
+    background-color: $primary-color;
+    color: $seventh-color;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    float: left;
+}

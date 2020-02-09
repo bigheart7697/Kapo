@@ -34,15 +34,15 @@
   width: 40%;
   height: 2rem;
   border: none;
-  background-color: $third-color;
+  background-color: $second-color;
   color: white;
   border-radius: 0.5rem;
   transition: 0.4s;
   cursor: pointer;
-  border: 1px solid $third-color;
+  border: 1px solid $second-color;
   &:hover {
     background-color: white;
-    color: $third-color;
+    color: $second-color;
   }
 }
 

@@ -38,6 +38,7 @@ const mainpage = () => {
     return(
         <div className="mainpage__container">
             <div className="main-page__slider">
+                {/* <Modal onSubmit={() => {console.log('yo')}}></Modal> */}
                 <Slider heading="Example Slider" slides={slideData} /> 
             </div>
             <DogAnimation/>
