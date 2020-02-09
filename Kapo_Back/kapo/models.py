@@ -124,7 +124,6 @@ class Product(models.Model):
         WINTER_SPORTS = '65', _('winter-sports')
         DRUMS_PERCUSSION = '66', _('drums-percussion')
 
-
     category_hierarchy = {
         str(Cat1.BUSINESSES): {str(Cat2.EQUIPMENTS_AND_MACHINERY): [str(Cat3.BARBERSHOP_AND_BEAUTY_SALON),
                                                                     str(Cat3.CAFE_AND_RESTAURANT),
@@ -232,6 +231,7 @@ class Order(models.Model):
         COMPLETED = 2
         FAILED = 3
         CANCELED = 4
+
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
     customer = models.ForeignKey(User, related_name=_("orders"), on_delete=models.CASCADE)
