@@ -1,4 +1,6 @@
 import React from 'react'
+import  {createSponsoredSearch} from "../../../actions"
+import { connect } from 'react-redux'
 
 import './style.scss'
 
@@ -25,7 +27,7 @@ const FORM_VALUES = {
 
 class SubmitSponseredSearch extends React.Component {
     onSubmit = (formValues) => {
-        //TODO complete this part
+        this.props.createSponsoredSearch(formValues, this.props.product.id)
     };
 
     render() {
@@ -42,4 +44,4 @@ class SubmitSponseredSearch extends React.Component {
       }
 }
 
-export default SubmitSponseredSearch;
+export default connect(null, { createSponsoredSearch })(SubmitSponseredSearch);

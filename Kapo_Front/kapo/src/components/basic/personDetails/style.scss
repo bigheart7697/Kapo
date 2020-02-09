@@ -2,7 +2,7 @@
 
 .person-details__person-container {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     width: 90%;
     margin: 2rem auto;
 }
@@ -24,14 +24,14 @@
 
 .person-details__row {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 .person-details__element {
     flex-grow: 1;
     padding: 1rem;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     text-align: center;
 }

@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-profile_images_dir = 'media/users/'
+profile_images_dir = 'users/'
 
 
 class User(AbstractUser):

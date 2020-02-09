@@ -7,8 +7,7 @@ from django.utils.translation import ugettext as _
 
 from accounts.models import User
 
-product_images_dir = 'media/products/'
-profile_images_dir = 'media/users/'
+product_images_dir = 'products/'
 
 
 def year_choices():
@@ -124,6 +123,7 @@ class Product(models.Model):
         REPAIR_TOOL = '64', _('repair-tool')
         WINTER_SPORTS = '65', _('winter-sports')
         DRUMS_PERCUSSION = '66', _('drums-percussion')
+
 
     category_hierarchy = {
         str(Cat1.BUSINESSES): {str(Cat2.EQUIPMENTS_AND_MACHINERY): [str(Cat3.BARBERSHOP_AND_BEAUTY_SALON),

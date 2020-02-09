@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from "redux-thunk";
 import configureStore from "redux-mock-store";
 import renderer from 'react-test-renderer';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const buildStore = configureStore([thunk]);
 
@@ -23,9 +24,9 @@ describe('PreviewOrder component', () => {
 
     it('renders without crashing', () => {
         const div = document.createElement('div');
-        ReactDOM.render(<Provider store={store}><PreviewOrder 
+        ReactDOM.render(<Router><Provider store={store}><PreviewOrder 
             match = {{'params': {'id': '0'}}}
-                /></Provider>, div);
+                /></Provider></Router>, div);
         ReactDOM.unmountComponentAtNode(div);
     });
 
@@ -34,9 +35,9 @@ describe('PreviewOrder component', () => {
                                             'created': '2020/01/01'}]}}
         const store1 = buildStore(orders);
         const div = document.createElement('div');
-        ReactDOM.render(<Provider store={store1}><PreviewOrder
+        ReactDOM.render(<Router><Provider store={store1}><PreviewOrder
             match = {{'params': {'id': '0'}}}
-                /></Provider>, div);
+                /></Provider></Router>, div);
         ReactDOM.unmountComponentAtNode(div);
     });
 
@@ -47,17 +48,17 @@ describe('PreviewOrder component', () => {
                                             'deadline': '18:52'}]}}
         const store1 = buildStore(orders);
         const div = document.createElement('div');
-        ReactDOM.render(<Provider store={store1}><PreviewOrder
+        ReactDOM.render(<Router><Provider store={store1}><PreviewOrder
             match = {{'params': {'id': '0'}}}
-                /></Provider>, div);
+                /></Provider></Router>, div);
         ReactDOM.unmountComponentAtNode(div);
     });
 
     it('check the data in the component', () => {
-        const component = renderer.create(<Provider store={store}>
+        const component = renderer.create(<Router><Provider store={store}>
             <PreviewOrder
                 match = {{'params': {'id': '0'}}} />
-        </Provider>);
+        </Provider></Router>);
         expect(component.root.find(e => e.props.id == 'preview-order__address').children[1]).toEqual('ایران، تهران، نیاوران');
         expect(component.root.find(e => e.props.id == 'preview-order__name').children[0]).toEqual('تست');
         expect(component.root.find(e => e.props.id == 'preview-order__count').children[1]).toEqual('3');

@@ -8,10 +8,13 @@ export default class CustomFileUpload  extends React.Component{
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange(e) {
+  onChange(event) {
     const { input: { onChange } } = this.props
-    console.log(e.target.files)
-    onChange(e.target.files[0])
+    console.log(event.target.files[0])
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    reader.onloadend = () => onChange(reader.result);
+    reader.readAsDataURL(file);
   }
 
   render(){

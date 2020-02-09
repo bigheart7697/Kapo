@@ -1,18 +1,21 @@
-@import '../../../scss/base/variables.scss';
+@import '../../scss/base/variables.scss';
 
-.order-factor__container {
+.pay-factor__container {
     width: 100%;
+    margin: 10rem auto 20rem auto;
 }
 
-.order-factor__inner-container {
+.pay-factor__inner-container {
     width: 80%;
     margin: auto;
     border: 1px solid $black;
     border-radius: .5rem;
-    background-color: $white;
+    background-color: $superwhite;
+    direction: rtl;
+    padding-bottom: 5rem;
 }
 
-.order-factor__title {
+.pay-factor__title {
     font-size: 20px;
     font-weight: 600;
     text-align: center;
@@ -20,7 +23,7 @@
     padding: 3rem 0;
 }
 
-.order-factor__row {
+.pay-factor__row {
     display: flex;
     flex-direction: row-reverse;
     width: 80%;
@@ -28,7 +31,7 @@
 
 }
 
-.order-factor__element {
+.pay-factor__element {
     flex-grow: 1;
     padding: 1rem;
     display: flex;
@@ -37,13 +40,13 @@
     text-align: center;
 }
 
-.order-factor__element-title {
+.pay-factor__element-title {
     font-weight: 600;
     direction: rtl;
     display: inline;
 }
 
-.order-factor__element-value {
+.pay-factor__element-value {
     display: inline;
     padding: 0 1rem;
 }

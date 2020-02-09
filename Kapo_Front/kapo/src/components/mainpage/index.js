@@ -4,6 +4,7 @@ import './style.scss'
 
 import DogAnimation from '../basic/dogAnimation'
 import Slider from '../basic/slider'
+import Modal from '../Modal'
 import ProductCard from '../basic/productCard'
 
 const slideData = [
@@ -37,6 +38,7 @@ const mainpage = () => {
     return(
         <div className="mainpage__container">
             <div className="main-page__slider">
+                {/* <Modal onSubmit={() => {console.log('yo')}}></Modal> */}
                 <Slider heading="Example Slider" slides={slideData} /> 
             </div>
             <DogAnimation/>

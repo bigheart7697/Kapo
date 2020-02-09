@@ -310,7 +310,19 @@ def ping(request):
 
 
 def cat_hierarchy(request):
-    return JsonResponse(Product.category_hierarchy)
+    cat_hierarchy = {"categories": []}
+    labels1 = Product.Cat1.labels
+    labels2 = Product.Cat2.labels
+    labels3 = Product.Cat3.labels
+    for cat1 in Product.category_hierarchy:
+        tmp_cat1 = {"name": labels1[int(cat1) - 1], "text": labels1[int(cat1) - 1], "value": cat1, "categories": []}
+        for cat2 in list(Product.category_hierarchy[cat1].keys()):
+            tmp_cat2 = {"name": labels2[int(cat2) - 1], "text": labels2[int(cat2) - 1], "value": cat2, "categories": []}
+            for cat3 in Product.category_hierarchy[cat1][cat2]:
+                tmp_cat2["categories"].append({"name": labels3[int(cat3) - 1], "text": labels3[int(cat3) - 1], "value": cat3})
+            tmp_cat1["categories"].append(tmp_cat2)
+        cat_hierarchy["categories"].append(tmp_cat1)
+    return JsonResponse(cat_hierarchy)
 
 
 def cat1_categories(request):
