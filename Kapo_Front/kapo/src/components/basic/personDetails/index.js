@@ -14,7 +14,7 @@ const PersonDetails = (props) => {
                         <div className='person-details__element-title'>
                             نام: 
                         </div>
-                        <div className='person-details__element-value'>
+                        <div className='person-details__element-value' id={'person-details__name' + props.id}>
                             {props.person ? props.person.is_corporate ? props.person.corporate_name? props.person.corporate_name : '-' : props.person.first_name + " " + props.person.last_name  : '-'}
                         </div>
                     </div>

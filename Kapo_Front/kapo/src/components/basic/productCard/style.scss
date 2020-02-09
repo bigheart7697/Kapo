@@ -7,10 +7,11 @@
     padding: 1rem;
     border-radius: 1rem;
     transition: 0.5s;
-    margin: 5rem 2rem;
+    margin: 4rem 2rem 2rem 2rem;
     background-blend-mode: darken;
     background-position-x: center;
     background-size: cover;
+    box-shadow: .5rem .5rem 1rem grey;
 }
 
 .product-card__container:hover{

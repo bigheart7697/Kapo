@@ -4,6 +4,7 @@ import './style.scss'
 
 import DogAnimation from '../basic/dogAnimation'
 import Slider from '../basic/slider'
+import Modal from '../Modal'
 import ProductCard from '../basic/productCard'
 
 const slideData = [
