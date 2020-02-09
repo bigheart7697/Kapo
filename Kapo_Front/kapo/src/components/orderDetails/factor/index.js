@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { fetchOrder } from '../../../actions';
 import './style.scss';
 
 import PersonDetails from '../../basic/personDetails'

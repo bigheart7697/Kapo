@@ -23,6 +23,7 @@ import Page404 from '../basic/404'
 import MyOrders from "../MyOrders"
 import ProductOrders from "../ProductOrders"
 import ChangeProduct from '../changeProduct'
+import PayFactor from '../payFactor'
 
 class App extends React.Component{
     componentDidMount(){
@@ -51,6 +52,7 @@ class App extends React.Component{
                         <Route path="/404" exact component={Page404}/>
                         <Route path="/ProductOrders/:id" exact component={ProductOrders}/>
                         <Route path="/changeProduct/:id" exact component={ChangeProduct}/>
+                        <Route path="/pay/factor" exact component={PayFactor}/>
                     </div>
                 </Router>
             </div>
