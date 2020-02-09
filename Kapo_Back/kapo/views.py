@@ -1,3 +1,6 @@
+import datetime
+
+from background_task.models import Task
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
@@ -6,11 +9,11 @@ from rest_framework import filters
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .tasks import update_order_state
 
 from kapo.serializers import *
 from .filters import *
 from .permissions import *
+from .tasks import update_order_state, update_banner
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -162,6 +165,31 @@ class SponsoredSearch(generics.ListAPIView):
         return super(SponsoredSearch, self).get(request, *args, **kwargs)
 
 
+class BannerCreateView(generics.CreateAPIView):
+    serializer_class = BannerSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def perform_create(self, serializer):
+        try:
+            product = Product.objects.get(id=self.kwargs['pk'])
+            days = int(self.request.data['days'])
+            place = self.request.data['place']
+            remaining_days = days
+            serializer.save(product=product, days=days, remaining_days=remaining_days,
+                            place=place)
+
+        except Product.DoesNotExist:
+            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+class BannerDetailView(generics.RetrieveAPIView):
+    serializer_class = BannerSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def get_queryset(self):
+        return Banner.objects.filter(product__owner=self.request.user)
+
+
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
 def order_complete_view(request, pk):
@@ -213,6 +241,66 @@ def order_cancel_view(request, pk):
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def sponsor_complete_view(request, pk):
+    try:
+        sponsored_search = SponsoredSearch.objects.get(id=pk)
+        if sponsored_search.state != sponsored_search.State.AWAITING:
+            raise ValidationError("Operation failed. This object is {}".format(sponsored_search.state))
+        else:
+            sponsored_search.state = sponsored_search.State.COMPLETED
+            sponsored_search.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except SponsoredSearch.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def sponsor_fail_view(request, pk):
+    try:
+        sponsored_search = SponsoredSearch.objects.get(id=pk)
+        if sponsored_search.state != sponsored_search.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(sponsored_search.state))
+        else:
+            sponsored_search.delete()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except SponsoredSearch.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def banner_complete_view(request, pk):
+    try:
+        banner = Banner.objects.get(id=pk)
+        if banner.state != banner.State.AWAITING:
+            raise ValidationError("Operation failed. This object is {}".format(banner.state))
+        else:
+            banner.state = banner.State.COMPLETED
+            update_banner(banner.id, repeat=Task.DAILY,
+                          repeat_until=datetime.datetime.now() + datetime.timedelta(days=banner.remaining_days))
+            banner.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Banner.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def banner_fail_view(request, pk):
+    try:
+        banner = Banner.objects.get(id=pk)
+        if banner.state != banner.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(banner.state))
+        else:
+            banner.delete()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Banner.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
 def csrf(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
@@ -241,4 +329,3 @@ def cat3_categories(request, cat1, cat2):
     indices = Product.category_hierarchy[cat1][cat2]
     cats = [(i, labels[int(i) - 1]) for i in indices]
     return JsonResponse({'categories': cats})
-

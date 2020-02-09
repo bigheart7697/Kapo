@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^products/$', views.OwnerProductListView.as_view(), name='my-products'),
     url(r'^products/(?P<pk>\d+)/$', views.ProductDetailView.as_view()),
     url(r'^products/(?P<pk>\d+)/order/$', views.OrderCreateView.as_view(), name='order'),
-    url(r'^products/(?P<pk>\d+)/sponsor/$', views.SponsoredSearchCreateView.as_view(), name='sponsor'),
+    url(r'^products/(?P<pk>\d+)/sponsor/$', views.SponsoredSearchCreateView.as_view(), name='banner'),
+    url(r'^products/(?P<pk>\d+)/banner/$', views.BannerCreateView.as_view(), name='sponsor'),
     url(r'^search/$', views.ProductSearchView.as_view(), name='search'),
     url(r'^sponsored-search/$', views.SponsoredSearch.as_view(), name='sponsored_search'),
     url(r'^orders/$', views.CustomerOrderListView.as_view(), name='customer-orders'),
@@ -36,6 +37,14 @@ urlpatterns = [
     url(r'^orders/(?P<pk>\d+)/fail/$', views.order_fail_view, name='customer-order-fail'),
     url(r'^ordered-products/$', views.OwnerOrderListView.as_view(), name='owner-orders'),
     url(r'^ordered-products/(?P<pk>\d+)/$', views.OwnerOrderDetailView.as_view(), name='owner-order-detail'),
+
+    url(r'^banners/(?P<pk>\d+)/$', views.BannerDetailView.as_view(), name='banner-detail'),
+    url(r'^banners/(?P<pk>\d+)/complete/$', views.banner_complete_view, name='banner-complete'),
+    url(r'^banners/(?P<pk>\d+)/fail/$', views.banner_fail_view, name='banner-fail'),
+
+    url(r'^sponsors/(?P<pk>\d+)/complete/$', views.sponsor_complete_view, name='sponsor-complete'),
+    url(r'^sponsors/(?P<pk>\d+)/fail/$', views.sponsor_fail_view, name='sponsor-fail'),
+
     path('csrf/', views.csrf),
     path('ping/', views.ping),
     url(r'^cat-hierarchy/$', views.cat_hierarchy, name='cat-hierarchy'),

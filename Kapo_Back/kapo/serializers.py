@@ -29,9 +29,20 @@ class OrderSerializer(serializers.ModelSerializer):
 class SponsoredSearchSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True, many=False)
     remaining_count = serializers.IntegerField(read_only=True)
+    state = serializers.CharField(source='get_state_display', read_only=True)
+    valid = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = SponsoredSearch
-        fields = ['id', 'product', 'count', 'remaining_count', 'search_phrases']
+        fields = ['id', 'product', 'count', 'remaining_count', 'search_phrases', 'state', 'created', 'valid']
 
 
+class BannerSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True, many=False)
+    remaining_days = serializers.IntegerField(read_only=True)
+    state = serializers.CharField(source='get_state_display', read_only=True)
+    valid = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = Banner
+        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created', 'place']

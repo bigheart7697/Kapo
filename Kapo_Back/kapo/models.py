@@ -232,7 +232,6 @@ class Order(models.Model):
         COMPLETED = 2
         FAILED = 3
         CANCELED = 4
-
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
     customer = models.ForeignKey(User, related_name=_("orders"), on_delete=models.CASCADE)
@@ -247,12 +246,18 @@ class Order(models.Model):
 
 
 class SponsoredSearch(models.Model):
+    class State(models.IntegerChoices):
+        AWAITING = 1
+        COMPLETED = 2
+
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("sponsored_searches"), on_delete=models.CASCADE)
     count = models.IntegerField(_('search count'), validators=[MinValueValidator(1000)])
     remaining_count = models.IntegerField(_('remaining count'), validators=[MinValueValidator(0)])
     valid = models.BooleanField(_("valid"), default=True)
     search_phrases = models.CharField(_('search phrases'), max_length=20)
+    state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
+    created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -262,3 +267,31 @@ class SponsoredSearch(models.Model):
             self.valid = False
         super(SponsoredSearch, self).save(force_insert=force_insert, force_update=force_update, using=None,
                                           update_fields=None)
+
+
+class Banner(models.Model):
+    class State(models.IntegerChoices):
+        AWAITING = 1
+        COMPLETED = 2
+
+    class Place(models.IntegerChoices):
+        FIRST = 1
+        SECOND = 2
+        THIRD = 3
+
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, related_name=_("banners"), on_delete=models.CASCADE)
+    valid = models.BooleanField(_("valid"), default=True)
+    state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
+    place = models.IntegerField(_("place"), choices=Place.choices, default=Place.FIRST)
+    days = models.IntegerField(_("days"), validators=[MinValueValidator(1), MaxValueValidator(7)])
+    remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
+    created = models.DateTimeField(_("registration date"), auto_now_add=True)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.remaining_days > 0:
+            self.valid = True
+        else:
+            self.valid = False
+        super(Banner, self).save(force_insert=force_insert, force_update=force_update, using=None, update_fields=None)
