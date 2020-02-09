@@ -1,0 +1,64 @@
+@import "../../../node_modules/vazir-font/dist/font-face.css";
+@import "../../scss/base/variables.scss";
+
+.modal__container {
+  font-family: Vazir;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content-container {
+  max-width: 50rem;
+  background-color: white;
+  width: 90%;
+  border-radius: 1rem;
+}
+
+.modal__actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px dashed #eee;
+}
+
+.modal__actions-button {
+  width: 40%;
+  height: 2rem;
+  border: none;
+  background-color: $third-color;
+  color: white;
+  border-radius: 0.5rem;
+  transition: 0.4s;
+  cursor: pointer;
+  border: 1px solid $third-color;
+  &:hover {
+    background-color: white;
+    color: $third-color;
+  }
+}
+
+.modal__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 120%;
+  font-weight: bold;
+  border-bottom: 1px dashed #eee;
+}
+
+.modal__children {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
