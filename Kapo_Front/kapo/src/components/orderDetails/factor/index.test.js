@@ -12,8 +12,8 @@ describe('OrderDetails component', () => {
     let store;
 
     beforeEach(() => {
-        const orders = {orders: {orders: [{'product': {'name': 'تست', 'price': 120000, 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-                                            'customer': {'name': 'محمد', 'address': 'پاسداران'},
+        const orders = {orders: {orders: [{'product': {'name': 'تست', 'price': 120000, 'owner': {'corporate_name': 'مبنا', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران', 'is_corporate': true}},
+                                            'customer': {'first_name': 'محمد', 'last_name': 'محمدی', 'address': 'پاسداران', 'country': 'ایران', 'city': 'تهران', 'is_corporate': false},
                                             'count': '3', 
                                             'deadline': '18:52',
                                             'state': 'Completed',
@@ -51,16 +51,5 @@ describe('OrderDetails component', () => {
             match={{params: {id: '2'}}}
         /></Provider>, div);
         ReactDOM.unmountComponentAtNode(div);
-    });
-
-    it('check the data in the component', () => {
-        const component = renderer.create(
-            <Provider store={store}><OrderFactor 
-                match={{params: {id: '0'}}}
-            /></Provider>
-        );
-        expect(component.root.find(e => e.props.id == 'order-factor__created').children[0]).toEqual('2020/01/01');
-        expect(component.root.find(e => e.props.id == 'order-factor__deadline').children[0]).toEqual('18:52');
-        expect(component.root.find(e => e.props.id == 'order-factor__state').children[0]).toEqual('کامل شده');
     });
 });

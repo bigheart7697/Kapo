@@ -5,7 +5,7 @@ import './style.scss';
 import ItemsColumn from '../itemsColumn';
 
 class MegaDropDown extends React.Component {
-    state = {name: '', categories: [], active: false, image: null, inside: false, prefix1: 'ProductList/', prefix2: '', prefix3: ''}
+    state = {name: '', categories: [], active: false, image: null, inside: false, prefix1: '/ProductList/', prefix2: '', prefix3: ''}
 
     changeCategories = (props) => {
         this.setState({categories: props.categories, active: true, image: null})

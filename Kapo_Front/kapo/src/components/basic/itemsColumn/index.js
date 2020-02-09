@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import './style.scss';
 
@@ -25,9 +25,9 @@ class ItemsColumn extends React.Component {
             <div className='mega-drop-down__column' onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseLeave}>
                 {this.state.categories ? this.state.categories.map((e, index) => {
                     if(this.state.activeState === index) {
-                        return <div className='items-column__item items-column__item--active' key={index} onMouseOver={() => this.categorySelected(e, index)}><Link to={this.props.urlPrefix ? this.props.urlPrefix + e.value : '/' + e.value}>{e.text}</Link></div>
+                        return <div className='items-column__item items-column__item--active' key={index} onMouseOver={() => this.categorySelected(e, index)}><NavLink to={this.props.urlPrefix ? this.props.urlPrefix + e.value : '/' + e.value}>{e.text}</NavLink></div>
                     } else {
-                        return <div className='items-column__item' key={index} onMouseOver={() => this.categorySelected(e, index)}><Link to={this.props.urlPrefix ? this.props.urlPrefix + e.value : '/' + e.value}>{e.text}</Link></div>
+                        return <div className='items-column__item' key={index} onMouseOver={() => this.categorySelected(e, index)}><NavLink to={this.props.urlPrefix ? this.props.urlPrefix + e.value : '/' + e.value}>{e.text}</NavLink></div>
                     }
                 }) : <div></div>}
             </div> 

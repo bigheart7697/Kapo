@@ -2,14 +2,14 @@
 
 .order-factor__container {
     width: 100%;
-    margin-top: 10rem;
 }
 
 .order-factor__inner-container {
     width: 80%;
     margin: auto;
     border: 1px solid $black;
-    background-color: $superwhite;
+    border-radius: .5rem;
+    background-color: $white;
 }
 
 .order-factor__title {
