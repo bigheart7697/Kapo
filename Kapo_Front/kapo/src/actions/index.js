@@ -201,4 +201,7 @@ export const createSponsoredSearch = (formValues, id) => async dispatch => {
     alert("error")
   }
 }
+
+export const createAdvertisingBanners = () => {};
+export const createAdvertisingCampaigns = () => {};
   
