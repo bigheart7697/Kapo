@@ -26,7 +26,6 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    // console.log("url(" + this.props.product.image + ")");
     
     console.log(this.state.count)
     console.log(this.props.product)
