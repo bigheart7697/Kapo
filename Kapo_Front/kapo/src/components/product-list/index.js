@@ -89,7 +89,7 @@ class Productlist extends React.Component {
                 <CustomSelect content={array} label="دسته‌بندی‌ها" input={{onChange: () => this.setState({category:0})}}/>
             </div>
             <div className="product-list__container">
-                {PRODUCT_LIST.map((element, index) => <ProductCard key={index} onClick={() => history.push(`/product/${element.id}`)} product={element} is_sponsered={element.is_sponsered}></ProductCard>)}
+                {this.props.newArray.map((element, index) => <ProductCard key={index} onClick={() => history.push(`/product/${element.id}`)} product={element} is_sponsered={element.is_sponsered}></ProductCard>)}
             </div>
         </>)
     }

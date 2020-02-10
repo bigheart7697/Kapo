@@ -8,7 +8,6 @@ import "./style.scss";
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
-import SubmitSponseredSearch from '../sponseredSearch/submit'
 
 import defaultImg from '../../assets/default.jpg'
 
@@ -118,7 +117,7 @@ class ProductDetails extends React.Component {
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
           </div>
         :
-          <SubmitSponseredSearch product={this.props.product}/>
+          <></>
         }
         <Whitespace space="10"/>
       </>
