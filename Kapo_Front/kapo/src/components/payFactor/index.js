@@ -7,7 +7,7 @@ import CustomTable from '../basic/customTable'
 import LinkToBank from '../basic/linkToBank'
 
 const factor = {
-    type: 'کمپین تبلیغاتی',
+    type: 'بنر تبلیغاتی',
     product: {name: 'لباس بچه'},
     days_number: 4
 }
@@ -27,13 +27,26 @@ class PayFactor extends React.Component {
     get_price = (type) => {
         switch(type) {
             case 'کمپین تبلیغاتی':
-                return 12000;
+                return 500000;
             case 'جست‌وجوی اسپانسر شده':
-                return 10000;
+                return 1000;
             case 'بنر تبلیغاتی':
-                return 15000;
+                return 1000000;
             default:
                 return 0;
+        }
+    }
+
+    get_unit = (type) => {
+        switch(type) {
+            case 'کمپین تبلیغاتی':
+                return 'تعداد روز';
+            case 'جست‌وجوی اسپانسر شده':
+                return 'تعداد بازدید';
+            case 'بنر تبلیغاتی':
+                return 'تعداد روز';
+            default:
+                return 'تعداد';
         }
     }
 
@@ -47,7 +60,7 @@ class PayFactor extends React.Component {
                     <PersonDetails title='در وجه' id='1'
                         person={kapo}/>
                     <CustomTable 
-                            headers={['ردیف', 'نوع خدمت/تبلیغات', 'نام کالا', 'تعداد روز', 'قیمت واحد', 'مبلغ کل']}
+                            headers={['ردیف', 'نوع خدمت/تبلیغات', 'نام کالا', this.props.factor ? this.get_unit(this.props.factor.type) : this.get_unit(factor.type), 'قیمت واحد', 'مبلغ کل']}
                             rows={[['1', this.props.factor ? this.props.factor.type : factor.type, 
                                 this.props.factor ? this.props.factor.product ? this.props.factor.product.name : '-' : factor.product.name, 
                                 this.props.factor ? this.props.factor.days_number : factor.days_number, 
