@@ -1,5 +1,7 @@
 import django_filters
-from .models import Product, SponsoredSearch
+from rest_framework import filters
+
+from .models import Product
 
 
 class ProductFilter(django_filters.FilterSet):

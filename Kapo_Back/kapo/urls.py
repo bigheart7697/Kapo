@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^add-product/$', views.ProductCreateView.as_view(), name='add_product'),
     url(r'^products/$', views.OwnerProductListView.as_view(), name='my-products'),
     url(r'^products/(?P<pk>\d+)/$', views.ProductDetailView.as_view()),
+    url(r'^products/(?P<pk>\d+)/rate$', views.ProductRateView.as_view(), name='rate'),
     url(r'^products/(?P<pk>\d+)/order/$', views.OrderCreateView.as_view(), name='order'),
     url(r'^products/(?P<pk>\d+)/sponsor/$', views.SponsoredSearchCreateView.as_view(), name='banner'),
     url(r'^products/(?P<pk>\d+)/banner/$', views.BannerCreateView.as_view(), name='sponsor'),

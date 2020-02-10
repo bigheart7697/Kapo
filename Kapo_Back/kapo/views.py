@@ -1,9 +1,10 @@
+import operator
+
 from background_task.models import Task
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -89,6 +90,20 @@ class ProductSearchView(generics.ListAPIView):
     filter_class = ProductFilter
     search_fields = ['name', 'description']
     ordering_fields = ['production_year', 'price', 'created']
+
+    def list(self, request, *args, **kwargs):
+        response = super(ProductSearchView, self).list(request, args, kwargs)
+        ordering = request.query_params.get('ordering')
+        if ordering and ordering == 'average_rating':
+            response.data = sorted(response.data, key=operator.itemgetter(ordering.replace('-', ''), ))
+
+            if "-" in ordering:
+                response.data = sorted(response.data,
+                                       key=lambda k: (k[ordering.replace('-', '')],),
+                                       reverse=True)
+            else:
+                response.data = sorted(response.data, key=lambda k: (k[ordering],))
+        return response
 
 
 class CustomerOrderListView(generics.ListAPIView):
@@ -204,6 +219,20 @@ class BannerThirdListView(generics.ListAPIView):
     serializer_class = BannerSerializer
     queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.THIRD).order_by(
         'created')[:Banner.MAX_THIRD_NUM]
+
+
+class ProductRateView(generics.CreateAPIView):
+    serializer_class = RateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        try:
+            product = Product.objects.get(id=self.kwargs['pk'])
+            user = self.request.user
+            rating = self.request.data['rating']
+            serializer.save(product=product, user=user, rating=rating)
+        except Product.DoesNotExist:
+            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET'])
