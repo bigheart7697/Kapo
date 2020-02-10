@@ -147,14 +147,15 @@ export const SignIn = (auth) => async dispatch => {
     setAuthToken()
     const response = await server.post('https://kapokala.herokuapp.com/token-auth/', auth)
     localStorage.setItem("jwtToken", response.data.token)
+    localStorage.setItem("user_email", response.data.user.email)
     setAuthToken(response.data.token)
     console.log(response.data.token)
     alert("ورود با موفقیت انجام شد")
     history.push('/')
+    dispatch({ type: LOG_IN })
   } catch{
     alert("error")
   }
-  dispatch({ type: LOG_IN })
 }
 
 export const SignOut = () => async dispatch => {

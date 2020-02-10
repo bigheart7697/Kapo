@@ -37,8 +37,6 @@ class ProductDetails extends React.Component {
 
   render() {
     
-    console.log(this.state.count)
-    console.log(this.props.product)
     return (
       <>
         <div className="product-details__container">
@@ -119,7 +117,7 @@ class ProductDetails extends React.Component {
             </div>
           </div>
         </div>
-        {this.state.owns ? 
+        {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
