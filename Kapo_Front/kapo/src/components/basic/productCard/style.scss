@@ -1,5 +1,9 @@
 @import "../../../scss/base/variables.scss";
 
+$lightgold: rgb(255, 238, 143);
+$gold: rgb(255,215,0);
+$darkgold: rgb(190, 162, 0);
+
 .product-card__container{
     background-color: #888;
     height: 30rem;
@@ -14,11 +18,15 @@
     box-shadow: .5rem .5rem 1rem grey;
 }
 
-.product-card__container:hover{
+.product-card__container--gold {
+    box-shadow: .5rem .5rem 1rem $darkgold;
+}
+
+.product-card__container:hover {
     background-color: #222;
 }
 
-.product-card__content{
+.product-card__content {
     height: 100%;
     width: 100%;
     border: 2px solid $first-color;
@@ -28,12 +36,24 @@
     color: $first-color;
 }
 
+.product-card__content--gold {
+    border-color: $gold;
+}
+
 .product-card__content:hover{
     color: $white;
 }
 
+.product-card__content--gold:hover{
+    color: $gold;
+}
+
 .product-card__content:hover{
     border: 2px solid $white;
+}
+
+.product-card__content--gold:hover{
+    border: 2px solid $gold;
 }
 
 .product-card__name{
@@ -50,6 +70,10 @@
 
 .product-card__name--hover {
     color: $superwhite;
+}
+
+.product-card__name--gold.product-card__name--hover {
+    color: $gold;
 }
 
 .product-card__container:hover .product-card__name{
@@ -74,13 +98,17 @@
     justify-content: center;
     align-items: center;
     height: 40%;
-    .product-card__image-before{
+    .product-card__image-before {
         height: 100%;
         width: 90%;
         background-color: $first-color;
         border-radius: 1rem;
         position: absolute;
         transition: 0.5s;
+    }
+
+    .product-card__image-before--gold {
+        background-color: $lightgold;
     }
 
     .product-card__image{
@@ -126,6 +154,11 @@
     transition: 0.5s;
     color: $white;
     cursor: pointer;
+}
+
+.product-card__details-button--gold {
+    color: $gold;
+    border-color: $gold;
 }
 
 .product-card__details-button:hover{
