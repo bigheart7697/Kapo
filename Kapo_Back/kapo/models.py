@@ -254,14 +254,14 @@ class SponsoredSearch(models.Model):
     product = models.ForeignKey(Product, related_name=_("sponsored_searches"), on_delete=models.CASCADE)
     count = models.IntegerField(_('search count'), validators=[MinValueValidator(1000)])
     remaining_count = models.IntegerField(_('remaining count'), validators=[MinValueValidator(0)])
-    valid = models.BooleanField(_("valid"), default=True)
+    valid = models.BooleanField(_("valid"), default=False)
     search_phrases = models.CharField(_('search phrases'), max_length=20)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.remaining_count > 0:
+        if self.remaining_count > 0 and self.state == self.State.COMPLETED:
             self.valid = True
         else:
             self.valid = False
@@ -270,6 +270,8 @@ class SponsoredSearch(models.Model):
 
 
 class Banner(models.Model):
+    MAX_NUM = 12
+
     class State(models.IntegerChoices):
         AWAITING = 1
         COMPLETED = 2
@@ -281,7 +283,7 @@ class Banner(models.Model):
 
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("banners"), on_delete=models.CASCADE)
-    valid = models.BooleanField(_("valid"), default=True)
+    valid = models.BooleanField(_("valid"), default=False)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     place = models.IntegerField(_("place"), choices=Place.choices, default=Place.FIRST)
     days = models.IntegerField(_("days"), validators=[MinValueValidator(1), MaxValueValidator(7)])
@@ -290,7 +292,7 @@ class Banner(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.remaining_days > 0:
+        if self.remaining_days > 0 and self.state == self.State.COMPLETED:
             self.valid = True
         else:
             self.valid = False
