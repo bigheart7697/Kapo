@@ -8,7 +8,8 @@ import "./style.scss";
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
-import SubmitAdvertisements from '../submitAdvertisements'
+import SubmitAdvertisements from '../submitAdvertisements';
+import CustomChoices from '../basic/customChoices';
 
 import defaultImg from '../../assets/default.jpg'
 
@@ -127,15 +128,11 @@ class ProductDetails extends React.Component {
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
           </div>
         :
-          <>
+          <div className='submit-advertisements__container'>
             <div className='submit-advertisements__title'>ثبت تبلیغات و خدمات</div>
-            <div className='submit-advertisements__choices-container'>
-                <div className='submit-advertisements__choice' onClick={() => this.callChild('1')}>hi1</div>
-                <div className='submit-advertisements__choice' onClick={() => this.callChild('2')}>hi2</div>
-                <div className='submit-advertisements__choice' onClick={() => this.callChild('3')}>hi3</div>
-            </div>
-            <SubmitAdvertisements product={this.props.product} setMethod={click => this.callChild = click}/>
-          </>
+            <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
+            <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
+          </div>
         }
         <Whitespace space="10"/>
       </>

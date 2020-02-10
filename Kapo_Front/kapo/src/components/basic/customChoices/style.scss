@@ -1,0 +1,28 @@
+@import '../../../scss/base/variables.scss';
+
+.custom-choices__choices-container {
+    display: block;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 5rem;
+}
+
+.custom-choices__choice {
+    cursor: pointer;
+    width: 34%;
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid grey;
+    transition: .5s ease all;
+    border-radius: 1rem;
+    margin: .5rem;
+    background-color: $superwhite;
+}
+
+.custom-choices__choice--active {
+    background-color: $hover-color;
+    color: $white;
+    transition: 1s ease all;
+}

@@ -17,23 +17,6 @@
     font-weight: 600;
 }
 
-.submit-advertisements__choices-container {
-    display: block;
-    width: 80%;
-    margin: auto;
-    display: flex;
-    flex-direction: row-reverse;
-    margin-top: 5rem;
-}
-
-.submit-advertisements__choice {
-    cursor: pointer;
-    flex-grow: 1;
-    text-align: center;
-    padding: 2rem;
-    border: 1px solid grey;
-}
-
 .submit-advertisements__form-wrapper--hidden {
     visibility: hidden;
     opacity: 0;
@@ -41,10 +24,14 @@
 }
 
 .submit-advertisements__form-wrapper .form-wrapper__container {
-    width: 90%;
-    margin: 2rem;
+    width: 60%;
+    margin: 2rem auto;
 
     .form-wrapper__form {
         border: none;
+
+        .form__title {
+            font-size: 17px;
+        }
     }
 }

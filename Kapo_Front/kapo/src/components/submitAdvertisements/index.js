@@ -15,11 +15,12 @@ class SubmitAdvertisements extends React.Component {
 
     change_active_state = (active) => {
         this.setState({active})
+        this.props.callChild(active)
     }
 
     render() {
         return (
-            <div className='submit-advertisements__container'>
+            <div>
                 <div className={`submit-advertisements__form-wrapper` + (this.state.active==='1' ? `` : ` submit-advertisements__form-wrapper--hidden`)}>
                     <SubmitSponseredSearch />
                 </div>
