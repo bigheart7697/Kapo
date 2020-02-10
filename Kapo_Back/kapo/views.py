@@ -152,7 +152,7 @@ class SponsoredSearchCreateView(generics.CreateAPIView):
 
 
 class SponsoredSearch(generics.ListAPIView):
-    queryset = SponsoredSearch.objects.all().filter(valid=True)
+    queryset = SponsoredSearch.objects.filter(valid=True)
     serializer_class = SponsoredSearchSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['search_phrases']
@@ -190,19 +190,18 @@ class BannerDetailView(generics.RetrieveAPIView):
         return Banner.objects.filter(product__owner=self.request.user)
 
 
-@api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
-def order_complete_view(request, pk):
-    try:
-        order = Order.objects.get(id=pk)
-        if order.state != order.State.AWAITING:
-            raise ValidationError("Operation failed. This order is {}".format(order.state))
-        else:
-            order.state = order.State.COMPLETED
-            order.save()
-            return Response(request.data, status=status.HTTP_200_OK)
-    except Order.DoesNotExist:
-        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+class BannerListView(generics.ListAPIView):
+    serializer_class = BannerSerializer
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED).order_by('created')[:Banner.MAX_NUM]
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_pending_banners_count(request):
+    total = len(Banner.objects.filter(valid=True))
+    if total > Banner.MAX_NUM:
+        return total - Banner.MAX_NUM
+    return 0
 
 
 @api_view(['POST'])
@@ -218,6 +217,21 @@ def order_fail_view(request, pk):
             product.quantity += order.count
             order.save()
             product.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Order.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
+def order_complete_view(request, pk):
+    try:
+        order = Order.objects.get(id=pk)
+        if order.state != order.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(order.state))
+        else:
+            order.state = order.State.COMPLETED
+            order.save()
             return Response(request.data, status=status.HTTP_200_OK)
     except Order.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
@@ -281,7 +295,7 @@ def banner_complete_view(request, pk):
             banner.state = banner.State.COMPLETED
             update_banner(banner.id, repeat=Task.DAILY,
                           repeat_until=datetime.datetime.now() + datetime.timedelta(days=banner.remaining_days))
-            banner.save()
+            banner.valid = True
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
