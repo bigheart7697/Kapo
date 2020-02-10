@@ -10,8 +10,11 @@ import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
 import SubmitAdvertisements from '../submitAdvertisements';
 import CustomChoices from '../basic/customChoices';
+import AdvertisingBanner from '../advertisingBanner';
 
 import defaultImg from '../../assets/default.jpg'
+
+import image from '../../assets/category4.png'
 
 class ProductDetails extends React.Component {
 
@@ -42,6 +45,7 @@ class ProductDetails extends React.Component {
     console.log(this.props.product)
     return (
       <>
+        <AdvertisingBanner product={{image: image, name: 'لباس گرم زمستانی', moto: 'با این لباس ها گرم بمانید', price: 120000}}/>
         <div className="product-details__container">
           <div className="product-details__leftPanel">
 
