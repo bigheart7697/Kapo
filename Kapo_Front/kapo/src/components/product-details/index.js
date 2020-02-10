@@ -8,6 +8,7 @@ import "./style.scss";
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
+import SubmitAdvertisements from '../submitAdvertisements'
 
 import defaultImg from '../../assets/default.jpg'
 
@@ -19,9 +20,18 @@ class ProductDetails extends React.Component {
     owns: false
   }
 
+  constructor(props) {
+    super(props);
+    this.childRef = React.createRef();
+  }
+
   componentDidMount() {
     this.setState({ image: faker.image.image() })
     this.props.fetchProduct(this.props.match.params.id);
+  }
+
+  change_active_state = (active) => {
+    this.childRef.current.change_active_state(active);
   }
 
   render() {
@@ -117,7 +127,15 @@ class ProductDetails extends React.Component {
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
           </div>
         :
-          <></>
+          <>
+            <div className='submit-advertisements__title'>ثبت تبلیغات و خدمات</div>
+            <div className='submit-advertisements__choices-container'>
+                <div className='submit-advertisements__choice' onClick={() => this.callChild('1')}>hi1</div>
+                <div className='submit-advertisements__choice' onClick={() => this.callChild('2')}>hi2</div>
+                <div className='submit-advertisements__choice' onClick={() => this.callChild('3')}>hi3</div>
+            </div>
+            <SubmitAdvertisements product={this.props.product} setMethod={click => this.callChild = click}/>
+          </>
         }
         <Whitespace space="10"/>
       </>

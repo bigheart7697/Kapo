@@ -1,0 +1,50 @@
+@import '../../scss/base/variables.scss';
+
+.submit-advertisements__container {
+    width: 50%;
+    margin: auto;
+    border: 1px solid grey;
+    background-color: $white;
+    border-radius: 1rem;
+    margin-top: 5rem;
+    padding: 4rem;
+}
+
+.submit-advertisements__title {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.submit-advertisements__choices-container {
+    display: block;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 5rem;
+}
+
+.submit-advertisements__choice {
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid grey;
+}
+
+.submit-advertisements__form-wrapper--hidden {
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+}
+
+.submit-advertisements__form-wrapper .form-wrapper__container {
+    width: 90%;
+    margin: 2rem;
+
+    .form-wrapper__form {
+        border: none;
+    }
+}
