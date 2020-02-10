@@ -57,3 +57,20 @@
     font-size: 20px;
     font-weight: 600;
 }
+
+.product-details__advertisements-container {
+    width: 50%;
+    margin: auto;
+    border: 1px solid grey;
+    background-color: $white;
+    border-radius: 1rem;
+    margin-top: 5rem;
+    padding: 4rem;
+}
+
+.product-details__advertisements-title {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}

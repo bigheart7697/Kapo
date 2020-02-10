@@ -8,7 +8,8 @@ import "./style.scss";
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
-import SubmitSponseredSearch from '../sponseredSearch/submit'
+import SubmitAdvertisements from '../submitAdvertisements';
+import CustomChoices from '../basic/customChoices';
 
 import defaultImg from '../../assets/default.jpg'
 
@@ -20,13 +21,21 @@ class ProductDetails extends React.Component {
     owns: false
   }
 
+  constructor(props) {
+    super(props);
+    this.childRef = React.createRef();
+  }
+
   componentDidMount() {
     this.setState({ image: faker.image.image() })
     this.props.fetchProduct(this.props.match.params.id);
   }
 
+  change_active_state = (active) => {
+    this.childRef.current.change_active_state(active);
+  }
+
   render() {
-    // console.log("url(" + this.props.product.image + ")");
     
     console.log(this.state.count)
     console.log(this.props.product)
@@ -118,7 +127,11 @@ class ProductDetails extends React.Component {
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
           </div>
         :
-          <SubmitSponseredSearch product={this.props.product}/>
+          <div className='product-details__advertisements-container'>
+            <div className='product-details__advertisements-title'>ثبت تبلیغات و خدمات</div>
+            <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
+            <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
+          </div>
         }
         <Whitespace space="10"/>
       </>
