@@ -1,5 +1,3 @@
-import datetime
-
 from background_task.models import Task
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
@@ -190,17 +188,39 @@ class BannerDetailView(generics.RetrieveAPIView):
         return Banner.objects.filter(product__owner=self.request.user)
 
 
-class BannerListView(generics.ListAPIView):
+class BannerFirstListView(generics.ListAPIView):
     serializer_class = BannerSerializer
-    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED).order_by('created')[:Banner.MAX_NUM]
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.FIRST).order_by(
+        'created')[:Banner.MAX_FIRST_NUM]
+
+
+class BannerSecondListView(generics.ListAPIView):
+    serializer_class = BannerSerializer
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.SECOND).order_by(
+        'created')[:Banner.MAX_SECOND_NUM]
+
+
+class BannerThirdListView(generics.ListAPIView):
+    serializer_class = BannerSerializer
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.THIRD).order_by(
+        'created')[:Banner.MAX_THIRD_NUM]
 
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
-def get_pending_banners_count(request):
-    total = len(Banner.objects.filter(valid=True))
-    if total > Banner.MAX_NUM:
-        return total - Banner.MAX_NUM
+def get_pending_banners_count(request, place_id):
+    if place_id == 1:
+        place = Banner.Place.FIRST
+        limit = Banner.MAX_FIRST_NUM
+    elif place_id == 2:
+        place = Banner.Place.SECOND
+        limit = Banner.MAX_SECOND_NUM
+    else:
+        place = Banner.Place.THIRD
+        limit = Banner.MAX_THIRD_NUM
+    total = len(Banner.objects.filter(valid=True, place=place))
+    if total > limit:
+        return total - limit
     return 0
 
 
@@ -333,7 +353,8 @@ def cat_hierarchy(request):
         for cat2 in list(Product.category_hierarchy[cat1].keys()):
             tmp_cat2 = {"name": labels2[int(cat2) - 1], "text": labels2[int(cat2) - 1], "value": cat2, "categories": []}
             for cat3 in Product.category_hierarchy[cat1][cat2]:
-                tmp_cat2["categories"].append({"name": labels3[int(cat3) - 1], "text": labels3[int(cat3) - 1], "value": cat3})
+                tmp_cat2["categories"].append(
+                    {"name": labels3[int(cat3) - 1], "text": labels3[int(cat3) - 1], "value": cat3})
             tmp_cat1["categories"].append(tmp_cat2)
         cat_hierarchy["categories"].append(tmp_cat1)
     return JsonResponse(cat_hierarchy)

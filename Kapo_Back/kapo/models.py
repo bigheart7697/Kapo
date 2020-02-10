@@ -270,7 +270,9 @@ class SponsoredSearch(models.Model):
 
 
 class Banner(models.Model):
-    MAX_NUM = 12
+    MAX_FIRST_NUM = 6
+    MAX_SECOND_NUM = 6
+    MAX_THIRD_NUM = 6
 
     class State(models.IntegerChoices):
         AWAITING = 1

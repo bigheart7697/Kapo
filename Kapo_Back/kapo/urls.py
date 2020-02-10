@@ -38,6 +38,10 @@ urlpatterns = [
     url(r'^ordered-products/$', views.OwnerOrderListView.as_view(), name='owner-orders'),
     url(r'^ordered-products/(?P<pk>\d+)/$', views.OwnerOrderDetailView.as_view(), name='owner-order-detail'),
 
+    url(r'^first-banners/$', views.BannerFirstListView.as_view(), name='first-banners'),
+    url(r'^second-banners/$', views.BannerSecondListView.as_view(), name='second-banners'),
+    url(r'^third-banners/$', views.BannerThirdListView.as_view(), name='third-banners'),
+    url(r'^banner-count/(?P<banner_id>\d+)/$', views.get_pending_banners_count, name='pending-banners'),
     url(r'^banners/(?P<pk>\d+)/$', views.BannerDetailView.as_view(), name='banner-detail'),
     url(r'^banners/(?P<pk>\d+)/complete/$', views.banner_complete_view, name='banner-complete'),
     url(r'^banners/(?P<pk>\d+)/fail/$', views.banner_fail_view, name='banner-fail'),
