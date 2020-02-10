@@ -5,6 +5,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from django.db.models import Avg
+
 from accounts.models import User
 
 product_images_dir = 'products/'
@@ -224,6 +226,13 @@ class Product(models.Model):
         super(Product, self).save(force_insert=force_insert, force_update=force_update, using=None,
                                   update_fields=None)
 
+    @property
+    def average_rating(self):
+        ratings = self.ratings.aggregate(Avg('rating'))['rating__avg']
+        if ratings is None:
+            return 0.
+        return ratings
+
 
 class Order(models.Model):
     class State(models.IntegerChoices):
@@ -299,3 +308,20 @@ class Banner(models.Model):
         else:
             self.valid = False
         super(Banner, self).save(force_insert=force_insert, force_update=force_update, using=None, update_fields=None)
+
+
+class Rate(models.Model):
+    RATING_RANGE = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5')
+    )
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
+    rating = models.IntegerField(choices=RATING_RANGE,)
+
+    class Meta:
+        unique_together = [["user", "product"]]
