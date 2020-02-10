@@ -128,8 +128,8 @@ class ProductDetails extends React.Component {
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
           </div>
         :
-          <div className='submit-advertisements__container'>
-            <div className='submit-advertisements__title'>ثبت تبلیغات و خدمات</div>
+          <div className='product-details__advertisements-container'>
+            <div className='product-details__advertisements-title'>ثبت تبلیغات و خدمات</div>
             <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
             <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
           </div>

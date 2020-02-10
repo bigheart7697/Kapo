@@ -13,8 +13,8 @@
     cursor: pointer;
     width: 34%;
     text-align: center;
-    padding: 2rem;
-    border: 1px solid grey;
+    padding: 1rem;
+    border: 2px solid grey;
     transition: .5s ease all;
     border-radius: 1rem;
     margin: .5rem;
@@ -25,4 +25,5 @@
     background-color: $hover-color;
     color: $white;
     transition: 1s ease all;
+    border-color: $hover-color;
 }

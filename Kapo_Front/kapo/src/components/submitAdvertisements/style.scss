@@ -1,22 +1,5 @@
 @import '../../scss/base/variables.scss';
 
-.submit-advertisements__container {
-    width: 50%;
-    margin: auto;
-    border: 1px solid grey;
-    background-color: $white;
-    border-radius: 1rem;
-    margin-top: 5rem;
-    padding: 4rem;
-}
-
-.submit-advertisements__title {
-    display: block;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 600;
-}
-
 .submit-advertisements__form-wrapper--hidden {
     visibility: hidden;
     opacity: 0;
