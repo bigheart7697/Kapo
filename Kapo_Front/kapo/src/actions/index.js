@@ -196,7 +196,7 @@ export const setIsLoggedInStatus = () => {
 
 export const createSponsoredSearch = (formValues, id) => async dispatch => {
   try {
-    const response = await server.post(`https:/kapokala.herokuapp.com//kapo/products/${id}/sponsor/`, formValues)
+    const response = await server.post(`https://kapokala.herokuapp.com/kapo/products/${id}/sponsor/`, formValues)
     alert("درخواست اسپانسر کالا با موفقیت انجام شد")
   }
   catch {
@@ -204,6 +204,14 @@ export const createSponsoredSearch = (formValues, id) => async dispatch => {
   }
 }
 
-export const createAdvertisingBanners = () => {};
+export const createAdvertisingBanners = (formValues, id) => async dispatch => {
+  try {
+    const response = await server.post(`https://kapokala.herokuapp.com/kapo/products/${id}/banner/`, formValues)
+    alert("درخواست ثبت بنر با موفقیت انجام شد")
+  }
+  catch {
+    alert("error")
+  }
+};
 export const createAdvertisingCampaigns = () => {};
   
