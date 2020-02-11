@@ -8,6 +8,7 @@ import './style.scss'
 import CustomRangeSlider from '../customRangeSlider'
 import CustomReactSwitch from '../customReactSwitch'
 import CustomSelect from '../customSelect'
+import AdvancedSorting from '../advancedSorting'
 
 const sth = [{text: 'sth', label: 'sth new'}, {text: 'sth1', label: 'sth1 new'}, {text: 'sth2', label: 'sth2 new'}]
 
@@ -35,6 +36,7 @@ class AdvancedFilter extends React.Component{
         }
         return(<div className="advanced-filter__container">
             <div className="advanced-filter__content">
+                <div className="advanced-filter__header">فیلتر</div>
                 <div className="advanced-filter__field">
                     <CustomRangeSlider min={0} max={100} header="بازه قیمت"/>
                 </div>
@@ -57,6 +59,8 @@ class AdvancedFilter extends React.Component{
                 <div>
                     <CustomSelect name='cat3' label='دسته سوم' content={categories3} full normal/>
                 </div>
+                <div className="advanced-filter__header">مرتب‌سازی</div>
+                <AdvancedSorting/>
             </div>
         </div>)
     }
