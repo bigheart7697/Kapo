@@ -12,6 +12,7 @@ import CustomSelect from '../customSelect'
 const sth = [{text: 'sth', label: 'sth new'}, {text: 'sth1', label: 'sth1 new'}, {text: 'sth2', label: 'sth2 new'}]
 
 class AdvancedFilter extends React.Component{
+    state = {cat1: null, cat2: null, cat3: null}
     componentDidMount(){
         this.props.fetchCategoryHierarchy()
     }
@@ -19,7 +20,17 @@ class AdvancedFilter extends React.Component{
         let categories1 = [], categories2 = [], categories3 =[]
         if(this.props.categories){
             this.props.categories.forEach((category) => {
-                categories1.push({ text: category.name, label: category.value })
+                categories1.push({ text: category.name, label: category.value, categories: category.categories })
+            })
+        }
+        if(this.props.categories1){
+            categories1.categories.forEach((category) => {
+               categories2.push({ text: category.name, label: category.value, categories: category.categories }) 
+            })
+        }
+        if(this.props.categories2){
+            categories2.categories.forEach((category) => {
+               categories3.push({ text: category.name, label: category.value, categories: category.categories }) 
             })
         }
         return(<div className="advanced-filter__container">
@@ -36,6 +47,7 @@ class AdvancedFilter extends React.Component{
                 <div className="advanced-filter__field">
                     <CustomReactSwitch label="فقط کالا‌های دسته دوم"/>
                 </div>
+                {/* TODO inputs should be fixed */}
                 <div className="advanced-filter__field">
                     <CustomSelect name='cat1' label='دسته اول' content={categories1} full normal/>
                 </div>
