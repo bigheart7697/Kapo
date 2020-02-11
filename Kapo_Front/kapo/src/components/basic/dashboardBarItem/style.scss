@@ -1,0 +1,29 @@
+@import "../../../scss/base/variables.scss";
+
+.dashboard-bar-item__container{
+    cursor: pointer;
+    height: 60px;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1rem;
+    border: 1px solid $sixth-color;
+    margin: 10px;
+}
+
+.dashboard-bar-item__label{
+    padding: 0 5px;
+}
+
+.dashboard-bar-item__container--active{
+    background-color: $gray;
+}
+
+.dashboard-bar-item__image{
+    height: 30px;
+    width: 30px;
+    margin: 10px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}

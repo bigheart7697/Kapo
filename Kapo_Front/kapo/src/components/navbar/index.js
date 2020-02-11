@@ -31,6 +31,11 @@ const navItems = [
     text: "ثبت محصول جدید",
     link: "/AddProduct",
     onHover: false
+  },
+  {
+    text: "دشبورد",
+    link: "/dashboard",
+    onHover: false
   }
 ];
 
