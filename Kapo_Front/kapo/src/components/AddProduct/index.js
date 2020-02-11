@@ -89,8 +89,6 @@ class AddProduct extends React.Component {
 
   componentDidMount() {
     this.props.fetchCategoryHierarchy();
-    
-
   }
 
   onSubmit = (formValues) => {

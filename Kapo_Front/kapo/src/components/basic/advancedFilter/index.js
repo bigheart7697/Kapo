@@ -1,13 +1,59 @@
 import React from 'react'
+import _ from 'lodash'
+import { connect } from 'react-redux'
+import { fetchCategoryHierarchy } from '../../../actions'
 
 import './style.scss'
 
+import CustomRangeSlider from '../customRangeSlider'
+import CustomReactSwitch from '../customReactSwitch'
+import CustomSelect from '../customSelect'
+
+const sth = [{text: 'sth', label: 'sth new'}, {text: 'sth1', label: 'sth1 new'}, {text: 'sth2', label: 'sth2 new'}]
+
 class AdvancedFilter extends React.Component{
+    componentDidMount(){
+        this.props.fetchCategoryHierarchy()
+    }
     render(){
+        let categories1 = [], categories2 = [], categories3 =[]
+        if(this.props.categories){
+            this.props.categories.forEach((category) => {
+                categories1.push({ text: category.name, label: category.value })
+            })
+        }
         return(<div className="advanced-filter__container">
-            something
+            <div className="advanced-filter__content">
+                <div className="advanced-filter__field">
+                    <CustomRangeSlider min={0} max={100} header="بازه قیمت"/>
+                </div>
+                <div className="advanced-filter__field">
+                    <CustomRangeSlider min={0} max={100} header="سال تولید"/>
+                </div>
+                <div className="advanced-filter__field">
+                    <CustomRangeSlider min={0} max={100} header="تعداد موجود"/>
+                </div>
+                <div className="advanced-filter__field">
+                    <CustomReactSwitch label="فقط کالا‌های دسته دوم"/>
+                </div>
+                <div className="advanced-filter__field">
+                    <CustomSelect name='cat1' label='دسته اول' content={categories1} full normal/>
+                </div>
+                <div>
+                    <CustomSelect name='cat2' label='دسته دوم' content={categories2} full normal/>
+                </div>
+                <div>
+                    <CustomSelect name='cat3' label='دسته سوم' content={categories3} full normal/>
+                </div>
+            </div>
         </div>)
     }
 }
 
-export default AdvancedFilter
+const mapStateToProps = state => {
+    return(
+        { categories: state.products.category_hierarchy ? state.products.category_hierarchy.categories : null }
+    )
+}
+
+export default connect(mapStateToProps, { fetchCategoryHierarchy })(AdvancedFilter)

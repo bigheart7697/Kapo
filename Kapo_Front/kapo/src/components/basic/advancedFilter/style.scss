@@ -1,0 +1,16 @@
+@import '../../../scss/base/variables.scss';
+
+.advanced-filter__container{
+    min-height: 100px;
+    width: 300px;
+    padding: 1rem;
+    margin: 3rem 0;
+}
+
+.advanced-filter__content{
+    height: 100%;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}

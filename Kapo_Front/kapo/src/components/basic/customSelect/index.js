@@ -28,9 +28,9 @@ class CustomSelect extends React.Component {
 
   render() {
     return (
-      <div className={`basic-select__container ${this.props.full ? "basic-select__container--full" : null}`}>
-        <div className="basic-select__inner-container">
-          {this.props.label ? <label className="basic-select__label">{this.props.label}</label> : null}
+      <div className={`basic-select__container ${this.props.full ? "basic-select__container--full" : null} ${this.props.normal ? "basic-select__container--normal" : ""}`}>
+        <div className={`basic-select__inner-container ${this.props.normal ? "basic-select__inner-container--normal" : ""}`}>
+          {this.props.label ? <label className={`basic-select__label ${this.props.normal ? "basic-select__label--normal" : ""}`}>{this.props.label}</label> : null}
           <select className="basic-select__input" {...this.props.input} onChangeCapture={this.changed} ref='select'>
             {this.props.noEmpty ? null :<option></option>}
             {this.state.content.map((element, index) => {

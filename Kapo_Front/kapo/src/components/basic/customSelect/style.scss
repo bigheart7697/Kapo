@@ -50,6 +50,18 @@
   text-align: right;
 }
 
+.basic-select__label--normal{
+  text-align: center;
+}
+
+.basic-select__inner-container--normal{
+  text-align: center;
+}
+
+.basic-select__container--normal{
+  padding: 0 1rem;
+}
+
 @media (max-width: 650px) {
   .basic-select__container{
     width: 100%;
