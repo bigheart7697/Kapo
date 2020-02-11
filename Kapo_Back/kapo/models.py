@@ -297,6 +297,7 @@ class Banner(models.Model):
     valid = models.BooleanField(_("valid"), default=False)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     place = models.IntegerField(_("place"), choices=Place.choices, default=Place.FIRST)
+    slogan = models.TextField(_("slogan"), max_length=100)
     days = models.IntegerField(_("days"), validators=[MinValueValidator(1), MaxValueValidator(7)])
     remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
