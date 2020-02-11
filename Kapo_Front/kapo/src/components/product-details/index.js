@@ -124,7 +124,8 @@ class ProductDetails extends React.Component {
             </div>
           </div>
         </div>
-        {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
+        {localStorage.user_email ? 
+        (this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
@@ -137,7 +138,7 @@ class ProductDetails extends React.Component {
             <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
             <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
           </div>
-        }
+         : <></>}
         <Whitespace space="10"/>
       </>
     );

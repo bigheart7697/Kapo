@@ -15,7 +15,8 @@ class User(AbstractUser):
     city = models.CharField(_('city'), max_length=100, default='', blank=True, null=True)
     address = models.CharField(_('address'), max_length=100, default='')
     phone_number = PhoneNumberField(_('phone number'), unique=True)
-    photo = models.ImageField(_('photo'), upload_to=profile_images_dir, null=True, blank=True)
+    # photo = models.ImageField(_('photo'), upload_to=profile_images_dir, null=True, blank=True)
+    photo = models.TextField(_("photo"), default="", null=True, blank=True)
     is_corporate = models.BooleanField(default=False)
     corporate_name = models.CharField(_('corporate name'), max_length=200, null=True, blank=True)
     corporate_number = models.PositiveIntegerField(_('corporate number'), unique=True, null=True, blank=True,

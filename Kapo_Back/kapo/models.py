@@ -198,7 +198,7 @@ class Product(models.Model):
     name = models.CharField(_("name"), max_length=100, default="")
     # image = models.ImageField(_("image"), upload_to=product_images_dir, height_field=None,
     #                           width_field=None, null=True, blank=True)
-    image = models.TextField(_("image"), default="")
+    image = models.TextField(_("image"), default="", null=True, blank=True)
     description = models.TextField(_("description"), default="")
     owner = models.ForeignKey(User, related_name=_('products'), on_delete=models.CASCADE)
     cat1 = models.CharField(_("cat1"), choices=Cat1.choices, max_length=100)
