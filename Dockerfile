@@ -34,6 +34,8 @@ RUN mkdir root && mv *.ico *.js *.json root
 # Collect static files
 RUN mkdir /app/backend/staticfiles
 RUN mkdir /app/backend/media
+RUN mkdir /app/backend/media/products
+RUN mkdir /app/backend/media/users
 
 WORKDIR /app
 

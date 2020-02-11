@@ -187,9 +187,10 @@ class BannerCreateView(generics.CreateAPIView):
             product = Product.objects.get(id=self.kwargs['pk'])
             days = int(self.request.data['days'])
             place = self.request.data['place']
+            slogan = self.request.data['slogan']
             remaining_days = days
             serializer.save(product=product, days=days, remaining_days=remaining_days,
-                            place=place)
+                            place=place, slogan=slogan)
 
         except Product.DoesNotExist:
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
