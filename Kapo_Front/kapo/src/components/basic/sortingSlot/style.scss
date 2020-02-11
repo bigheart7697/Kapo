@@ -1,0 +1,45 @@
+@import '../../../scss/base/variables.scss';
+
+.sorting-slot__container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.sorting-slot__buttons{
+    display: flex;
+    padding: 0.5rem;
+    border: 1px solid $sixth-color;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+}
+
+.sorting-slot__button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-left: 1px dashed $sixth-color;
+    cursor: pointer;
+}
+
+.sorting-slot__label{
+    white-space: nowrap;
+}
+
+.sorting-slot__active{
+    background-color: $gray;
+}
+
+.sorting-slot__button-right{
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.sorting-slot__button-left{
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.sorting-slot__button:first-child{
+    border: none;
+}

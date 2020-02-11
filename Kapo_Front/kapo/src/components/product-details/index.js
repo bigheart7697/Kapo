@@ -39,9 +39,6 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    console.log(localStorage.user_email);
-    console.log(localStorage.jwtToken);
-    
     return (
       <>
         <AdvertisingBanner product={{image: image, name: 'لباس گرم زمستانی', moto: 'با این لباس ها گرم بمانید', price: 120000}}/>

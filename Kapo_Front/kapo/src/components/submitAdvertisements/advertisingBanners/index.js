@@ -12,7 +12,7 @@ const FORM_VALUES = {
     title: "ثبت درخواست بنر تبلیغاتی",
     form_inputs: [
       {
-        title: "count",
+        title: "days",
         label: "تعداد روز",
         inputType: "number",
         error: "لطفا تعداد روز نمایش را وارد کنید"
@@ -27,6 +27,11 @@ const FORM_VALUES = {
           {text: "مکان 3", value: "3"}
         ],
         error: "لطفا مکان بنر خود را مشخص کنید"
+      },
+      {
+        title: "slogan",
+        label: "شعار مورد نظر",
+        error: "لطفا شعار مدنظرتان برای بنر را انتخاب کنید"
       }
     ]
   };

@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { fetchProducts } from '../../actions'
-import Productlist from "../product-list"
 import _ from "lodash";
+
 import './style.scss'
 
+import Productlist from "../product-list"
+import AdvancedFilter from '../basic/advancedFilter'
 
 class AllProducts extends React.Component {
     componentDidMount() {
@@ -16,9 +18,10 @@ class AllProducts extends React.Component {
             return item
         })
         console.log(newArray);
-        return (<>
+        return (<div className="all-products__container">
             <Productlist newArray={newArray}></Productlist>
-        </>)
+            <AdvancedFilter></AdvancedFilter>
+        </div>)
     }
 }
 

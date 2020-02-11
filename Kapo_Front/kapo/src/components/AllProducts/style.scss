@@ -1,0 +1,10 @@
+.all-products__container{
+    display: flex;
+    justify-content: center;
+}
+
+@media(max-width: 500px){
+    .all-products__container{
+        flex-direction: column;
+    }
+}
