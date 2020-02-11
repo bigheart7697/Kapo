@@ -22,13 +22,13 @@ class SubmitAdvertisements extends React.Component {
         return (
             <div>
                 <div className={`submit-advertisements__form-wrapper` + (this.state.active==='1' ? `` : ` submit-advertisements__form-wrapper--hidden`)}>
-                    <SubmitSponseredSearch />
+                    <SubmitSponseredSearch product={this.props.product}/>
                 </div>
                 <div className={`submit-advertisements__form-wrapper` + (this.state.active==='2' ? `` : ` submit-advertisements__form-wrapper--hidden`)}>
-                    <SubmitAdvertisingBanners />
+                    <SubmitAdvertisingBanners product={this.props.product}/>
                 </div>
                 <div className={`submit-advertisements__form-wrapper` + (this.state.active==='3' ? `` : ` submit-advertisements__form-wrapper--hidden`)}>
-                    <SubmitAdvertisingCampaign />
+                    <SubmitAdvertisingCampaign product={this.props.product}/>
                 </div>
             </div>
         );

@@ -15,3 +15,8 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(SponsoredSearch)
 class OrderAdmin(admin.ModelAdmin):
     model = SponsoredSearch
+
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    model = Banner
