@@ -1,0 +1,20 @@
+@import '../../scss/base/variables.scss';
+
+.submit-advertisements__form-wrapper--hidden {
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+}
+
+.submit-advertisements__form-wrapper .form-wrapper__container {
+    width: 60%;
+    margin: 2rem auto;
+
+    .form-wrapper__form {
+        border: none;
+
+        .form__title {
+            font-size: 17px;
+        }
+    }
+}

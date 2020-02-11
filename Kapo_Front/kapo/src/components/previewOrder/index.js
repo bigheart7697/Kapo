@@ -4,6 +4,8 @@ import { fetchOrder } from '../../actions';
 
 import "./style.scss";
 
+import LinkToBank from '../basic/linkToBank';
+
 class PreviewOrder extends React.Component {
     componentDidMount() {
         console.log(this.props);
@@ -35,24 +37,7 @@ class PreviewOrder extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="preview-order__payment">
-                    <div className="preview-order__one-third-container">
-                        <div className="preview-order__title">انتخاب روش پرداخت</div>
-                    </div>
-                    <div className="preview-order__one-third-container">
-                        <div className="preview-order__input">
-                            <input name="bank" type="radio"></input> 
-                            <div className="preview-order__input-label">بانک صدارات</div>
-                        </div>
-                        <div className="preview-order__input">
-                            <input name="bank" type="radio"></input> 
-                            <div className="preview-order__input-label">بانک شتاب</div>
-                        </div>
-                    </div>
-                    <div className="preview-order__one-third-container">
-                        <a href={"/bank/" + this.props.match ? this.props.match.params ? this.props.match.params.id : 0 : 0} className="preview-order__button">انتقال به درگاه بانک</a>
-                    </div>
-                </div>
+                <LinkToBank id={this.props.match ? this.props.match.params ? this.props.match.params.id : 0 : 0} />
             </div>
         );
     }

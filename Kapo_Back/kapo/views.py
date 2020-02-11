@@ -1,16 +1,18 @@
+import operator
+
+from background_task.models import Task
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .tasks import update_order_state
 
 from kapo.serializers import *
 from .filters import *
 from .permissions import *
+from .tasks import update_order_state, update_banner
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -89,6 +91,20 @@ class ProductSearchView(generics.ListAPIView):
     search_fields = ['name', 'description']
     ordering_fields = ['production_year', 'price', 'created']
 
+    def list(self, request, *args, **kwargs):
+        response = super(ProductSearchView, self).list(request, args, kwargs)
+        ordering = request.query_params.get('ordering')
+        if ordering and ordering == 'average_rating':
+            response.data = sorted(response.data, key=operator.itemgetter(ordering.replace('-', ''), ))
+
+            if "-" in ordering:
+                response.data = sorted(response.data,
+                                       key=lambda k: (k[ordering.replace('-', '')],),
+                                       reverse=True)
+            else:
+                response.data = sorted(response.data, key=lambda k: (k[ordering],))
+        return response
+
 
 class CustomerOrderListView(generics.ListAPIView):
     serializer_class = OrderSerializer
@@ -149,7 +165,7 @@ class SponsoredSearchCreateView(generics.CreateAPIView):
 
 
 class SponsoredSearch(generics.ListAPIView):
-    queryset = SponsoredSearch.objects.all().filter(valid=True)
+    queryset = SponsoredSearch.objects.filter(valid=True)
     serializer_class = SponsoredSearchSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['search_phrases']
@@ -162,19 +178,79 @@ class SponsoredSearch(generics.ListAPIView):
         return super(SponsoredSearch, self).get(request, *args, **kwargs)
 
 
-@api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
-def order_complete_view(request, pk):
-    try:
-        order = Order.objects.get(id=pk)
-        if order.state != order.State.AWAITING:
-            raise ValidationError("Operation failed. This order is {}".format(order.state))
-        else:
-            order.state = order.State.COMPLETED
-            order.save()
-            return Response(request.data, status=status.HTTP_200_OK)
-    except Order.DoesNotExist:
-        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+class BannerCreateView(generics.CreateAPIView):
+    serializer_class = BannerSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def perform_create(self, serializer):
+        try:
+            product = Product.objects.get(id=self.kwargs['pk'])
+            days = int(self.request.data['days'])
+            place = self.request.data['place']
+            remaining_days = days
+            serializer.save(product=product, days=days, remaining_days=remaining_days,
+                            place=place)
+
+        except Product.DoesNotExist:
+            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+class BannerDetailView(generics.RetrieveAPIView):
+    serializer_class = BannerSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def get_queryset(self):
+        return Banner.objects.filter(product__owner=self.request.user)
+
+
+class BannerFirstListView(generics.ListAPIView):
+    serializer_class = BannerSerializer
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.FIRST).order_by(
+        'created')[:Banner.MAX_FIRST_NUM]
+
+
+class BannerSecondListView(generics.ListAPIView):
+    serializer_class = BannerSerializer
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.SECOND).order_by(
+        'created')[:Banner.MAX_SECOND_NUM]
+
+
+class BannerThirdListView(generics.ListAPIView):
+    serializer_class = BannerSerializer
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.THIRD).order_by(
+        'created')[:Banner.MAX_THIRD_NUM]
+
+
+class ProductRateView(generics.CreateAPIView):
+    serializer_class = RateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        try:
+            product = Product.objects.get(id=self.kwargs['pk'])
+            user = self.request.user
+            rating = self.request.data['rating']
+            serializer.save(product=product, user=user, rating=rating)
+        except Product.DoesNotExist:
+            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_pending_banners_count(request, place_id):
+    if place_id == 1:
+        place = Banner.Place.FIRST
+        limit = Banner.MAX_FIRST_NUM
+    elif place_id == 2:
+        place = Banner.Place.SECOND
+        limit = Banner.MAX_SECOND_NUM
+    else:
+        place = Banner.Place.THIRD
+        limit = Banner.MAX_THIRD_NUM
+    total = len(Banner.objects.filter(valid=True, place=place))
+    if total > limit:
+        return total - limit
+    return 0
 
 
 @api_view(['POST'])
@@ -190,6 +266,21 @@ def order_fail_view(request, pk):
             product.quantity += order.count
             order.save()
             product.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Order.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsCustomerOfOrderedProduct])
+def order_complete_view(request, pk):
+    try:
+        order = Order.objects.get(id=pk)
+        if order.state != order.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(order.state))
+        else:
+            order.state = order.State.COMPLETED
+            order.save()
             return Response(request.data, status=status.HTTP_200_OK)
     except Order.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
@@ -213,6 +304,66 @@ def order_cancel_view(request, pk):
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def sponsor_complete_view(request, pk):
+    try:
+        sponsored_search = SponsoredSearch.objects.get(id=pk)
+        if sponsored_search.state != sponsored_search.State.AWAITING:
+            raise ValidationError("Operation failed. This object is {}".format(sponsored_search.state))
+        else:
+            sponsored_search.state = sponsored_search.State.COMPLETED
+            sponsored_search.save()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except SponsoredSearch.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def sponsor_fail_view(request, pk):
+    try:
+        sponsored_search = SponsoredSearch.objects.get(id=pk)
+        if sponsored_search.state != sponsored_search.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(sponsored_search.state))
+        else:
+            sponsored_search.delete()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except SponsoredSearch.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def banner_complete_view(request, pk):
+    try:
+        banner = Banner.objects.get(id=pk)
+        if banner.state != banner.State.AWAITING:
+            raise ValidationError("Operation failed. This object is {}".format(banner.state))
+        else:
+            banner.state = banner.State.COMPLETED
+            update_banner(banner.id, repeat=Task.DAILY,
+                          repeat_until=datetime.datetime.now() + datetime.timedelta(days=banner.remaining_days))
+            banner.valid = True
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Banner.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def banner_fail_view(request, pk):
+    try:
+        banner = Banner.objects.get(id=pk)
+        if banner.state != banner.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(banner.state))
+        else:
+            banner.delete()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Banner.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
 def csrf(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
@@ -231,7 +382,8 @@ def cat_hierarchy(request):
         for cat2 in list(Product.category_hierarchy[cat1].keys()):
             tmp_cat2 = {"name": labels2[int(cat2) - 1], "text": labels2[int(cat2) - 1], "value": cat2, "categories": []}
             for cat3 in Product.category_hierarchy[cat1][cat2]:
-                tmp_cat2["categories"].append({"name": labels3[int(cat3) - 1], "text": labels3[int(cat3) - 1], "value": cat3})
+                tmp_cat2["categories"].append(
+                    {"name": labels3[int(cat3) - 1], "text": labels3[int(cat3) - 1], "value": cat3})
             tmp_cat1["categories"].append(tmp_cat2)
         cat_hierarchy["categories"].append(tmp_cat1)
     return JsonResponse(cat_hierarchy)
@@ -253,4 +405,3 @@ def cat3_categories(request, cat1, cat2):
     indices = Product.category_hierarchy[cat1][cat2]
     cats = [(i, labels[int(i) - 1]) for i in indices]
     return JsonResponse({'categories': cats})
-

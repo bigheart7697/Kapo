@@ -11,12 +11,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import datetime
 import os
-from django.utils.translation import ugettext_lazy as _
+
 import dj_database_url
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -29,12 +29,11 @@ DEBUG = int(os.environ.get('DEBUG', default=1))
 
 ALLOWED_HOSTS = [os.environ.get("PRODUCTION_HOST", default='127.0.0.1')]
 
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_ROOT = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
 
 # Application definition
@@ -68,7 +67,6 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 ]
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
@@ -77,12 +75,10 @@ REST_FRAMEWORK = {
     ),
 }
 
-
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:3000'
 ]
 CORS_ALLOW_CREDENTIALS = True
-
 
 ROOT_URLCONF = 'Kapo_Back.urls'
 
@@ -105,7 +101,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Kapo_Back.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -137,7 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -151,12 +145,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
@@ -170,7 +162,7 @@ CSRF_TRUSTED_ORIGINS = ['localhost:3000']
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'Kapo_Back.utils.custom_jwt_response_handler',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=2*60*60),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=2 * 60 * 60),
 }
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')

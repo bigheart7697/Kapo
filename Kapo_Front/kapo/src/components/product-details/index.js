@@ -8,9 +8,13 @@ import "./style.scss";
 import Input from '../basic/customInput'
 import Button from "../basic/customButton";
 import Whitespace from '../basic/whitespace';
-import SubmitSponseredSearch from '../sponseredSearch/submit'
+import SubmitAdvertisements from '../submitAdvertisements';
+import CustomChoices from '../basic/customChoices';
+import AdvertisingBanner from '../advertisingBanner';
 
 import defaultImg from '../../assets/default.jpg'
+
+import image from '../../assets/category4.png'
 
 class ProductDetails extends React.Component {
 
@@ -20,18 +24,25 @@ class ProductDetails extends React.Component {
     owns: false
   }
 
+  constructor(props) {
+    super(props);
+    this.childRef = React.createRef();
+  }
+
   componentDidMount() {
     this.setState({ image: faker.image.image() })
     this.props.fetchProduct(this.props.match.params.id);
   }
 
+  change_active_state = (active) => {
+    this.childRef.current.change_active_state(active);
+  }
+
   render() {
-    // console.log("url(" + this.props.product.image + ")");
     
-    console.log(this.state.count)
-    console.log(this.props.product)
     return (
       <>
+        <AdvertisingBanner product={{image: image, name: 'لباس گرم زمستانی', moto: 'با این لباس ها گرم بمانید', price: 120000}}/>
         <div className="product-details__container">
           <div className="product-details__leftPanel">
 
@@ -110,7 +121,7 @@ class ProductDetails extends React.Component {
             </div>
           </div>
         </div>
-        {this.state.owns ? 
+        {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
@@ -118,7 +129,11 @@ class ProductDetails extends React.Component {
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
           </div>
         :
-          <SubmitSponseredSearch product={this.props.product}/>
+          <div className='product-details__advertisements-container'>
+            <div className='product-details__advertisements-title'>ثبت تبلیغات و خدمات</div>
+            <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
+            <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
+          </div>
         }
         <Whitespace space="10"/>
       </>
