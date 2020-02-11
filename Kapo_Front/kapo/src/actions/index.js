@@ -161,6 +161,7 @@ export const SignIn = (auth) => async dispatch => {
 export const SignOut = () => async dispatch => {
   setAuthToken()
   delete localStorage.jwtToken
+  localStorage.user_email = null
   dispatch({ type: LOG_OUT })
 }
 
