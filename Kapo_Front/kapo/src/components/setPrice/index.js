@@ -42,22 +42,28 @@ class SetPrice extends React.Component {
         ]})
     }
 
+    componentDidUpdate() {
+        if(Array.isArray(this.props.products)) {
+            console.log('props', this.props.products)
+            if(this.state.products != this.props.products) {
+            this.setState({products: this.props.products ? this.props.products : []})
+            }
+        }
+      }
+
     onSubmit = (formValues) => {
         this.props.addProduct(formValues)
     };
 
     render() {
         this.props.setPrice(this.props.category);
-        const newArray = _.map(this.props.products, (item, key) => {
-            return item
-        });
         return (
             <div className='set-price__container'>
                 <div className='set-price__section set-price__section--products'>
                     <div className='set-price__title'>لیست کالاهای مشابه</div>
                     <div className='set-price__product-list-container'>
                         <div className='set-price__product-list'>
-                            {this.state.products ? newArray.map((element, index) => {
+                            {this.state.products ? this.state.products.map((element, index) => {
                                 return <Product product={element} key={-2-index}></Product>
                             }) : <div></div>}
                         </div>
