@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToCart, fetchProduct } from '../../actions';
+import { addToCart, fetchProduct, fetchFirstBanners, fetchSecondBanners, fetchThirdBanners } from '../../actions';
 import faker from 'faker';
 
 import "./style.scss";
@@ -32,6 +32,9 @@ class ProductDetails extends React.Component {
   componentDidMount() {
     this.setState({ image: faker.image.image() })
     this.props.fetchProduct(this.props.match.params.id);
+    this.props.fetchFirstBanners();
+    this.props.fetchSecondBanners();
+    this.props.fetchThirdBanners();
   }
 
   change_active_state = (active) => {
@@ -41,7 +44,8 @@ class ProductDetails extends React.Component {
   render() {
     return (
       <>
-        <AdvertisingBanner product={{image: image, name: 'لباس گرم زمستانی', moto: 'با این لباس ها گرم بمانید', price: 120000}}/>
+        {this.props.second_banners? <AdvertisingBanner product={{link: `https://kapokala.herokuapp.com/product/${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
+        null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">
 
@@ -125,7 +129,7 @@ class ProductDetails extends React.Component {
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
             <Whitespace space="1"/>
-            <Button text="سفارش" onClick={() => this.props.addToCart(this.props.match.params.id, this.state.count)}/>
+            <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.id? this.props.product.id : null, this.state.count)}/>
           </div>
         :
           <div className='product-details__advertisements-container'>
@@ -148,7 +152,9 @@ const mapStatToProps = (state, ownProps) => {
   }else{
     productItem = null
   }
-  return { product: productItem}
+  return { product: productItem, first_banners: state.products.first_banners, 
+    second_banners: state.products.second_banners, third_bannesr: state.products.third_banners}
 }
 
-export default connect(mapStatToProps, { addToCart, fetchProduct })(ProductDetails);
+export default connect(mapStatToProps, { addToCart, fetchProduct, fetchFirstBanners, 
+  fetchSecondBanners, fetchThirdBanners })(ProductDetails);

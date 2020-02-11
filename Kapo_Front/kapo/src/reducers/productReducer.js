@@ -1,4 +1,4 @@
-import { FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_MY_PRODUCTS, FETCH_PRODUCT_CATEGORIES } from "../actions/types";
+import { FETCH_FIRST_BANNER, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_MY_PRODUCTS, FETCH_PRODUCT_CATEGORIES } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_VALUE = {
@@ -44,6 +44,21 @@ const productReducer = (state = INITIAL_VALUE, action) => {
         return {
           ...state,
           products: {..._.mapKeys(action.payload, "id") }
+        };
+      case FETCH_FIRST_BANNER:
+        return {
+          ...state,
+          first_banners: {..._.mapKeys(action.payload, "id")}
+        };
+      case FETCH_SECOND_BANNER:
+        return {
+          ...state,
+          second_banners: {..._.mapKeys(action.payload, "id")}
+        };
+      case FETCH_THIRD_BANNER:
+        return {
+          ...state,
+          third_banners: {..._.mapKeys(action.payload, "id")}
         };
     default:
       return state;

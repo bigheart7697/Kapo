@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchOrder } from '../../actions';
 
 import "./style.scss";
-
+import defaultImg from '../../assets/default.jpg'
 import LinkToBank from '../basic/linkToBank';
 
 class PreviewOrder extends React.Component {
@@ -16,7 +16,7 @@ class PreviewOrder extends React.Component {
             <div className="preview-order__container">
                 <div className="preview-order__product-details">
                     <div className="preview-order__image-container">
-                        <img src={this.props.order ? this.props.order.product ? this.props.order.product.image : '' : ''} className="preview-order__image"
+                        <img src={(this.props.order? (this.props.order.product? (this.props.order.product.image? this.props.order.product.image : defaultImg) : defaultImg) : defaultImg)} className="preview-order__image"
                             alt={this.props.order ? this.props.order.product ? this.props.order.product.name : '' : ''}></img>
                     </div>
                     <div className="preview-order__details">
