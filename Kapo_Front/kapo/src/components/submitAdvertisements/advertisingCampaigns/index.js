@@ -27,6 +27,12 @@ const FORM_VALUES = {
           {text: "مکان 3", value: "3"}
         ],
         error: "لطفا مکان نمایش کمپین خود را مشخص کنید"
+      },
+      {
+        title: "percentage",
+        label: "درصد تخفیف",
+        inputType: "number",
+        error: "لطفا درصد تخفیف را وارد کنید"
       }
     ]
   };
