@@ -6,19 +6,17 @@ import CampaignCard from '../basic/campaignCard'
 
 import image from '../../assets/campaign.png'
 
-import image1 from '../../assets/1.png'
 import image2 from '../../assets/2.png'
 import image3 from '../../assets/3.png'
-import image5 from '../../assets/6.png'
 
 class AdvertisingCampaign extends React.Component {
     state = {campaigns: 
-        [{id: 1, percentage: 50, 
+        [{id: 1, percentage: 50, deadline: new Date("2020-04-01"),
             product: {id: 35, name: 'تست', price: 120000, image: image2, description: 'بهترین کالا', 
                         owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}},
-                        {id: 1, percentage: 50, 
-                            product: {id: 35, name: 'تست', price: 120000, image: image3, description: 'بهترین کالا', 
-                                        owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}}]
+        {id: 1, percentage: 50, deadline: new Date("2020-02-15"),
+            product: {id: 35, name: 'تست', price: 120000, image: image3, description: 'بهترین کالا', 
+                        owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}}]
     }
     
     render() {

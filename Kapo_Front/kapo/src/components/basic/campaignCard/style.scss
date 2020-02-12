@@ -6,11 +6,18 @@
     margin: 3rem 2rem;
     height: 14rem;
     border-radius: 1rem;
-    background: $white;
+    background: $superwhite;
     display: flex;
     direction: rtl;
     padding: 0 1rem;
-    box-shadow: 1rem 1rem 1rem $fourth-color;
+    box-shadow: 1rem 1rem .5rem $fourth-color;
+    color: black;
+    transition: .5s;
+}
+
+.campaign-card__container:hover {
+    text-decoration: none;
+    box-shadow: 2rem 2rem 1rem $fourth-color;
 }
 
 .campaign-card__image-container {
@@ -41,7 +48,7 @@
     padding: 1rem 2rem 0 0;
     color: black;
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
 }
 
 .campaign-card__title:hover {
@@ -77,4 +84,5 @@
     margin-top: .5rem;
     text-align: left;
     display: block;
+    color: black;
 }

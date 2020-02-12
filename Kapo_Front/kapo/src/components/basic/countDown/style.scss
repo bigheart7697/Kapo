@@ -1,0 +1,32 @@
+@import '../../../scss/base/variables.scss';
+
+.count-down__container {
+    display: flex;
+    width: 100%;
+    direction: ltr;
+    margin-left: 1rem;
+}
+
+.count-down__section {
+    background-color: grey;
+    color: $superwhite;
+    border-radius: .5rem;
+    min-width: 2.5rem;
+    margin: .5rem;
+    padding-top: .2rem;
+    text-align: center;
+}
+
+.count-down__dots {
+    color: black;
+    margin: .5rem 0;
+    text-align: center;
+    padding-top: .2rem;
+}
+
+.count-down__finished {
+    color: red;
+    display: block;
+    text-align: left;
+    margin-left: 1rem;
+}
