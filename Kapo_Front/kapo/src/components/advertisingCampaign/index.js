@@ -9,12 +9,16 @@ import image from '../../assets/campaign.png'
 import image1 from '../../assets/1.png'
 import image2 from '../../assets/2.png'
 import image3 from '../../assets/3.png'
-import image4 from '../../assets/4.png'
+import image5 from '../../assets/6.png'
 
 class AdvertisingCampaign extends React.Component {
-    state = {products: 
-        [{'name': 'تست', 'price': 120000, 'image': image1, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
-        {'name': 'تست', 'price': 120000, 'image': image4, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}}]
+    state = {campaigns: 
+        [{id: 1, percentage: 50, 
+            product: {id: 35, name: 'تست', price: 120000, image: image2, description: 'بهترین کالا', 
+                        owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}},
+                        {id: 1, percentage: 50, 
+                            product: {id: 35, name: 'تست', price: 120000, image: image3, description: 'بهترین کالا', 
+                                        owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}}]
     }
     
     render() {
@@ -27,8 +31,8 @@ class AdvertisingCampaign extends React.Component {
                     <img src={image} className='advertising-campaign__image'></img>
                 </div>
                 <div className='advertising-campaign__left-panel'>
-                    {this.state.products ? this.state.products.map((element, index) => 
-                        <CampaignCard product={element} key={index}/>
+                    {this.state.campaigns ? this.state.campaigns.map((element, index) => 
+                        <CampaignCard campaign={element} key={index}/>
                     ) : null}
                 </div>
             </div>
