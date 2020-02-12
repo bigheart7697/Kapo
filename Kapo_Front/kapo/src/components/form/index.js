@@ -33,7 +33,7 @@ class Form extends React.Component {
     return (
       <form
         className="form__container"
-        onSubmit={this.props.handleSubmit(this.props.onSubmit)}
+        onSubmit={this.props.submitText ? this.props.handleSubmit(this.props.onSubmit) : this.props.handleSubmit(() => console.log("not allowed to submit for readonly forms"))}
       >
         {this.props.title ? (
           <div className="form__title">{this.props.title}</div>

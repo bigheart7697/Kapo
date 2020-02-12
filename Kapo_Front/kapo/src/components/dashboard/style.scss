@@ -14,3 +14,11 @@
     justify-content: center;
     align-items: center;
 }
+
+@media(max-width: 650px){
+    .dashboard__container{
+        margin-top: 3rem;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
