@@ -7,17 +7,17 @@ import AdvertisementTable from '../basic/advertisementTable'
 
 const ADVERTISEMENT_LIST = [
     {id: 1, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05'},
+        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05 18:52'},
     {id: 2, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05'},
+        count: 12, remaining_count: 5, search_phrases: 'لباس زمستانی پالتو', created: '2020-02-05 18:52'},
     {id: 3, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05'},
+        count: 11, remaining_count: 2, search_phrases: 'مشکی لباس پالتو', created: '2020-02-05 18:52'},
     {id: 4, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05'},
+        count: 5, remaining_count: 1, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05 18:52'},
     {id: 5, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05'},
+        count: 8, remaining_count: 4, search_phrases: 'مشکی پالتو', created: '2020-02-05 18:52'},
     {id: 6, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05'}
+        count: 10, remaining_count: 8, search_phrases: ' زمستانی پالتو', created: '2020-02-05 18:52'}
 ]
 
 class AdvertisementList extends React.Component {
@@ -55,7 +55,7 @@ class AdvertisementList extends React.Component {
                     <AdvertisementTable header={this.get_header()} advertisements={ADVERTISEMENT_LIST} type={this.props.type} setMethod={click => this.change_active = click} callMethod={this.change_advertisements}/>
                 </div>
                 <div className='advertisement-list__section'>
-                    <AdvertisementDetails advertisement={ADVERTISEMENT_LIST[0]} setMethod={click => this.change_advertisements = click} callMethod={this.change_active}/>
+                    <AdvertisementDetails advertisement={ADVERTISEMENT_LIST[0]} type={this.props.type} setMethod={click => this.change_advertisements = click} callMethod={this.change_active}/>
                 </div>
             </div>
         );

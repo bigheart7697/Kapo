@@ -16,7 +16,7 @@
     min-height: 20rem;
     border-radius: 1rem;
     background-color: $white;
-    padding: 1rem;
+    padding: 2rem 1rem;
 }
 
 .advertisement-list__title {
@@ -26,41 +26,3 @@
     text-align: center;
 }
 
-.advertisement-list__table {
-    width: 95%;
-    margin: auto;
-    border: 1px solid black;
-    border-radius: 1rem;
-    overflow: hidden;
-    margin-top: 2rem;
-}
-
-.advertisement-list__row {
-    width: 100%;
-    display: flex;
-    background-color: $superwhite;
-    height: 4rem;
-    color: black;
-    transition: .2s ease all;
-    cursor: pointer;
-}
-
-.advertisement-list__row:hover {
-    background-color: $white;
-}
-
-.advertisement-list__header {
-    background-color: $second-color;
-    color: $white;
-    cursor: initial;
-}
-
-.advertisement-list__header:hover {
-    background-color: $second-color;
-}
-
-.advertisement-list__table-cell {
-    width: 25%;
-    text-align: center;
-    padding: .7rem 0;
-}
