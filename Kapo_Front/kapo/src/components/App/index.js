@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Router} from 'react-router-dom'
 import { connect } from 'react-redux'
 import history from '../../history'
-import { setIsLoggedInStatus } from '../../actions'
+import { setIsLoggedInStatus, getCurrentUser } from '../../actions'
 
 import '../../style.scss'
 import './index.scss'
@@ -32,6 +32,7 @@ class App extends React.Component{
     componentDidMount(){
         if(localStorage.jwtToken){
             this.props.setIsLoggedInStatus()
+            this.props.getCurrentUser()
         }
     }
     render(){
@@ -72,4 +73,4 @@ const mapStateToProps = (state) => {
     return { isLoggedIn : state.user.isLoggedIn }
 }
 
-export default connect(mapStateToProps, { setIsLoggedInStatus })(App)
+export default connect(mapStateToProps, { setIsLoggedInStatus, getCurrentUser })(App)

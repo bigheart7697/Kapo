@@ -12,15 +12,6 @@ const FORM_VALUES = {
     form_inputs: [
       //corporate_name, corporate_number
       {
-        title: "email",
-        label: "ایمیل",
-        error: "لطفا نام کاربری خود را وارد کنید"
-      }, {
-        title: "password",
-        inputType: "password",
-        label: "رمز عبور",
-        error: "لطفا رمز عبور خود را وارد کنید"
-      }, {
         title: "phone_number",
         label: "شماره تلفن",
         error: "لطفا شماره تلفن خود را وارد کنید"
@@ -34,14 +25,6 @@ const FORM_VALUES = {
       }, {
         title: "Address",
         label: "آدرس"
-      }, {
-        title: "is_corporate",
-        label: "آیا فروشنده هستید",
-        type: "select",
-        content: [
-          { text: "بله", value: "True" },
-          { text: "خیر", value: "False" }
-        ]
       }, {
         title: "corporate_name",
         label: "اسم شرکت"
@@ -66,6 +49,10 @@ class EditProfile extends React.Component{
         return(
             <div className="edit-profile__container">
                 <ProfileImage />
+                <div className="edit-profile__email">
+                {}
+                   : ایمیل
+                </div>
                 <FormWrapper dashboard>
                     <Form
                         formValues={FORM_VALUES.form_inputs}
