@@ -1,0 +1,10 @@
+@import '../../../scss/base/variables.scss';
+
+.campaign-card__container {
+    flex-grow: 1;
+    max-width: 50%;
+    margin: 3rem 2rem;
+    height: 14rem;
+    border-radius: 1rem;
+    background: $superwhite;
+}
