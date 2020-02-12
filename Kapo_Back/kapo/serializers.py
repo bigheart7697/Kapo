@@ -24,7 +24,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'state', 'customer', 'product', 'count', 'created']
+        fields = ['id', 'state', 'customer', 'product', 'count', 'created', 'delivery_weekday', 'delivery_hours']
 
 
 class SponsoredSearchSerializer(serializers.ModelSerializer):

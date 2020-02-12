@@ -242,12 +242,29 @@ class Order(models.Model):
         FAILED = 3
         CANCELED = 4
 
+    class WeekDay(models.IntegerChoices):
+        SATURDAY = 1
+        SUNDAY = 2
+        MONDAY = 3
+        TUESDAY = 4
+        WEDNESDAY = 5
+        THURSDAY = 6
+        FRIDAY = 7
+
+    class TimeInterval(models.IntegerChoices):
+        NINE_TWELVE = 1
+        TWELVE_FIFTEEN = 2
+        FIFTEEN_EIGHTEEN = 3
+
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("orders"), on_delete=models.CASCADE)
     customer = models.ForeignKey(User, related_name=_("orders"), on_delete=models.CASCADE)
     count = models.IntegerField(_('quantity'), default=1, validators=[MinValueValidator(1)])
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
+    delivery_weekday = models.IntegerField(_("delivery_weekday"), choices=WeekDay.choices, default=WeekDay.SATURDAY)
+    delivery_hours = models.IntegerField(_("delivery_hours"), choices=TimeInterval.choices,
+                                         default=TimeInterval.NINE_TWELVE)
 
     class Meta:
         ordering = ['created']
