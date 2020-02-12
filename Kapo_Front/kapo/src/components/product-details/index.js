@@ -44,7 +44,7 @@ class ProductDetails extends React.Component {
   render() {
     return (
       <>
-        {this.props.second_banners? <AdvertisingBanner product={{link: `https://kapokala.herokuapp.com/product/${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
+        {this.props.second_banners? <AdvertisingBanner product={{link: `${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
         null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">

@@ -150,6 +150,7 @@ export const addToCart = (id, count) => async dispatch => {
   try {
     const response = await server.post(`https://kapokala.herokuapp.com/kapo/products/${id}/order/`, payload);
     console.log(response);
+    history.push(`/order/preview/${response.data.id}`)
     alert("سفارش شما ثبت شد");
   } catch (e) {
     alert("خطایی رخ داد");
