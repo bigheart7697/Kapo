@@ -1,0 +1,27 @@
+.profile-image___container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.profile-image__image{
+    border: 1px solid black;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.profile-image__edit-image{
+    background-image: url('../../../assets/pen.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+    height: 30px;
+    width: 45px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin: 1rem;
+    cursor: pointer;
+}
