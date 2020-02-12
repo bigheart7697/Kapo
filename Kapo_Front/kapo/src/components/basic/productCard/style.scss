@@ -15,7 +15,12 @@ $darkgold: rgb(190, 162, 0);
     background-blend-mode: darken;
     background-position-x: center;
     background-size: cover;
-    box-shadow: .5rem .5rem 1rem grey;
+    box-shadow: .5rem .5rem .5rem grey;
+    transition: .5s;
+}
+
+.product-card__container:hover {
+    box-shadow: 1rem 1rem 1rem grey;
 }
 
 .product-card__container--gold {

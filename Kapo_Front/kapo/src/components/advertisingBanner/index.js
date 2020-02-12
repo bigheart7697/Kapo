@@ -19,7 +19,7 @@ class AdvertisingBanner extends React.Component {
                     </div>
                     <div className='advertising-banner__line'>
                         <div className='advertising-banner__moto'>{this.props.product ? this.props.product.moto : '-'}</div>
-                        <div className='advertising-banner__view'><Link to=''>مشاهده</Link></div>
+                        <div className='advertising-banner__view'><Link to={this.props.product ? this.props.product.link : ''}>مشاهده</Link></div>
                     </div>
                 </div>
             </div>

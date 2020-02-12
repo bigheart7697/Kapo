@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
+import { FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("https://kapokala.herokuapp.com/kapo/");
@@ -90,7 +90,7 @@ export const setPrice = (category = null) => async dispatch => {
 export const fetchProduct = id => async dispatch => {
   console.log("id")
   console.log(id)
-  const response = await server.get(`https://kapokala.herokuapp.com/kapo/products/${id}`)
+  const response = await server.get(`https://kapokala.herokuapp.com/kapo/products/${id}/`)
   console.log(response)
   dispatch({ type: FETCH_PRODUCT, payload: response.data })
 }
@@ -129,12 +129,28 @@ export const categoryProducts = (category1 = null, category2 = null, category3 =
   dispatch({ type: SEARCH_ITEM, payload: response.data });
 };
 
+export const fetchFirstBanners = () => async dispatch => {
+  const response = await server.get(`https://kapokala.herokuapp.com/kapo/first-banners/`)
+  dispatch({ type: FETCH_FIRST_BANNER, payload: response.data });
+};
+
+export const fetchSecondBanners = () => async dispatch => {
+  const response = await server.get(`https://kapokala.herokuapp.com/kapo/second-banners/`)
+  dispatch({ type: FETCH_SECOND_BANNER, payload: response.data });
+};
+
+export const fetchThirdBanners = () => async dispatch => {
+  const response = await server.get(`https://kapokala.herokuapp.com/kapo/third-banners/`)
+  dispatch({ type: FETCH_THIRD_BANNER, payload: response.data });
+};
+
 export const addToCart = (id, count) => async dispatch => {
   let payload = { count: parseInt(count) }
   console.log(payload)
   try {
     const response = await server.post(`https://kapokala.herokuapp.com/kapo/products/${id}/order/`, payload);
     console.log(response);
+    history.push(`/order/preview/${response.data.id}`)
     alert("سفارش شما ثبت شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -180,7 +196,7 @@ export const SignUp = (formValues) => async dispatch => {
 
 export const ChangeProductAction = (formValues, id) => async dispatch => {
   try {
-    const response = await server.post(`https://kapokala.herokuapp.com/kapo/products/${id}/`, formValues)
+    const response = await server.put(`https://kapokala.herokuapp.com/kapo/products/${id}/`, formValues)
     alert("ویرایش کالا با موفقیت انجام شد")
   }
   catch{

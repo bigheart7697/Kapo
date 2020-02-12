@@ -49,6 +49,7 @@ class Form extends React.Component {
                 content={element.content}
                 full={true}
                 key={index}
+                dashboard = {this.props.dashboard ? true : false}
               />
             );
           })}

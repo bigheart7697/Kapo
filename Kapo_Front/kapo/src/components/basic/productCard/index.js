@@ -7,12 +7,7 @@ import StarScore from '../../basic/starScore'
 
 class productCard extends React.Component {
     state={mouseOver: false, element: this.props.product}
-    render() {
-        console.log(this.state.element.name);
-        console.log(`url(${defaultImg})`);
-        console.log(`url(${this.state.element.image})`);
-        
-        
+    render() { 
         return (<div className={`product-card__container` + (this.props.is_sponsered ? ` product-card__container--gold` : ``)} onClick={this.props.onClick} onMouseEnter={() => this.setState({ mouseOver: true})} onMouseLeave={() => this.setState({ mouseOver: false })} style={{ backgroundImage: this.props.product.image? `url(${this.props.product.image})` : `url(${defaultImg})` }}>
             <div className={`product-card__content` + (this.props.is_sponsered ? ` product-card__content--gold` : ``)}>
                 <div className={`product-card__name` + (!this.state.mouseOver ? `` : ` product-card__name--hover`) + (this.props.is_sponsered ? ` product-card__name--gold` : ``)}>{this.props.product.name}</div>

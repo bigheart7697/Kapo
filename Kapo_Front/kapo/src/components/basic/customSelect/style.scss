@@ -7,7 +7,6 @@
   justify-content: center;
   align-items: center;
   width: 50%;
-  margin: auto
 }
 
 .basic-select__container--full{
@@ -17,6 +16,10 @@
 .basic-select__inner-container {
   width: 100%;
   text-align: right;
+}
+
+.basic-select__container--dashboard {
+  width: 35%;
 }
 
 .basic-select__input {

@@ -38,6 +38,8 @@
 .advertising-banner__title {
     font-size: 30px;
     font-weight: 600;
+    display: block;
+    text-align: left;
 }
 
 .advertising-banner__line {
@@ -51,6 +53,7 @@
 
 .advertising-banner__view {
     float: left;
+    margin-right: .5rem;
 }
 
 .advertising-banner__view a {
