@@ -8,6 +8,8 @@ const describe = (success) => {
             return 'پرداخت با موفقیت انجام شد!';
         case false:
             return 'عملیات پرداخت ناتمام ماند';
+        default:
+            return 'عملیات پرداخت ناتمام ماند';
     }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultImg from '../../../assets/default.jpg'
+
 import './style.scss';
 
 import OrderFactor from '../factor'
