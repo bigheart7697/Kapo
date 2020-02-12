@@ -1,0 +1,39 @@
+@import '../../scss/base/variables.scss';
+
+.advertising-campaign__container {
+    width: 100%;
+    height: 20rem;
+    background-color: $fifth-color;
+    display: flex;
+    direction: rtl;
+}
+
+.advertising-campaign__right-panel {
+    width: 30%;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.advertising-campaign__title {
+    color: $superwhite;
+    font-size: 30px;
+    text-shadow: .5rem .5rem 1rem $white;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.advertising-campaign__image {
+    width: auto;
+    height: auto;
+    margin: auto;
+    max-height: 70%;
+    max-width: 100%;
+    filter: grayscale(100%);
+}
+
+.advertising-campaign__left-panel {
+    width: 70%;
+    display: flex;
+}
+

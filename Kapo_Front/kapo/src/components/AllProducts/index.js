@@ -7,6 +7,7 @@ import './style.scss'
 
 import Productlist from "../product-list"
 import AdvancedFilter from '../basic/advancedFilter'
+import AdvertisingCampaign from '../advertisingCampaign'
 
 class AllProducts extends React.Component {
     componentDidMount() {
@@ -18,10 +19,13 @@ class AllProducts extends React.Component {
             return item
         })
         console.log(newArray);
-        return (<div className="all-products__container">
-            <Productlist newArray={newArray}></Productlist>
-            <AdvancedFilter></AdvancedFilter>
-        </div>)
+        return (<>
+            <AdvertisingCampaign />
+            <div className="all-products__container">
+                <Productlist newArray={newArray}></Productlist>
+                <AdvancedFilter></AdvancedFilter>
+            </div>
+        </>)
     }
 }
 

@@ -26,6 +26,7 @@ import ChangeProduct from '../changeProduct'
 import CategoryProducts from "../categoryProducts"
 import PayFactor from '../payFactor'
 import Dashboard from '../dashboard'
+import PaymentResult from '../basic/paymentResult'
 
 class App extends React.Component{
     componentDidMount(){
@@ -59,6 +60,7 @@ class App extends React.Component{
                         <Route path="/ProductList/:cat1/:cat2/:cat3" exact component={CategoryProducts}/>
                         <Route path="/pay/factor" exact component={PayFactor}/>
                         <Route path="/dashboard" exact component={Dashboard} />
+                        <Route path="/payment/result" exact component={PaymentResult}/>
                     </div>
                 </Router>
             </div>
