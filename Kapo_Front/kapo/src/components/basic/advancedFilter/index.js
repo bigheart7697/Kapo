@@ -8,6 +8,7 @@ import './style.scss'
 import CustomRangeSlider from '../customRangeSlider'
 import CustomReactSwitch from '../customReactSwitch'
 import CustomSelect from '../customSelect'
+import CustomButton from '../customButton'
 import AdvancedSorting from '../advancedSorting'
 
 class AdvancedFilter extends React.Component{
@@ -60,6 +61,9 @@ class AdvancedFilter extends React.Component{
                 <div>
                     <CustomSelect name='cat3' label='دسته سوم' content={categories3} onChange={(e) => {e.persist(); this.setState({ cat3: e.target.value })}} full normal/>
                 </div>
+                <div className="advanced-filter__button">
+                    <CustomButton text="اعمال فیلتر"></CustomButton>
+                </div>    
                 <div className="advanced-filter__header">مرتب‌سازی</div>
                 <AdvancedSorting syncState={(sort, direction) => {if(this.state.activeSort != sort || this.state.direction != direction){ this.setState({ activeSort: sort, direction: direction }) }}}/>
             </div>
