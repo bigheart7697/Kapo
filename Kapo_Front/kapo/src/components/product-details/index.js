@@ -45,7 +45,7 @@ class ProductDetails extends React.Component {
   render() {
     return (
       <>
-        {this.props.second_banners? <AdvertisingBanner product={{link: `${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
+        {this.props.second_banners[1]? <AdvertisingBanner product={{link: `${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
         null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">
@@ -131,8 +131,8 @@ class ProductDetails extends React.Component {
             }
           </div>
         </div>
-        {localStorage.user_email ? 
-        (this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
+        {(localStorage.user_email != null) ? 
+        ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
@@ -144,7 +144,7 @@ class ProductDetails extends React.Component {
             <div className='product-details__advertisements-title'>ثبت تبلیغات و خدمات</div>
             <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
             <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
-          </div>
+          </div>)
          : <></>}
         <Whitespace space="10"/>
       </>
@@ -160,8 +160,8 @@ const mapStatToProps = (state, ownProps) => {
   }else{
     productItem = null
   }
-  return { product: productItem, first_banners: state.products.first_banners, 
-    second_banners: state.products.second_banners, third_bannesr: state.products.third_banners}
+  return { product: productItem, first_banners: state.advertisements.first_banners, 
+    second_banners: state.advertisements.second_banners, third_bannesr: state.advertisements.third_banners}
 }
 
 export default connect(mapStatToProps, { addToCart, fetchProduct, fetchFirstBanners, 
