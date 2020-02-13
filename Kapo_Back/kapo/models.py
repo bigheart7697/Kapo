@@ -22,12 +22,19 @@ def current_year():
     return datetime.date.today().year
 
 
-class Receipt(models.Model):
+class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     amount = models.IntegerField(_("amount"))
-    created = models.DateTimeField(_("registration date"), auto_now_add=True)
+    created = models.DateTimeField(_("created"), auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+        verbose_name = _('Receipt')
+        verbose_name_plural = _('Receipts')
 
 
 class Product(models.Model):
@@ -276,7 +283,7 @@ class Order(models.Model):
     delivery_weekday = models.IntegerField(_("delivery_weekday"), choices=WeekDay.choices, default=WeekDay.SATURDAY)
     delivery_hours = models.IntegerField(_("delivery_hours"), choices=TimeInterval.choices,
                                          default=TimeInterval.NINE_TWELVE)
-    receipt = GenericRelation(Receipt)
+    receipt = GenericRelation(Transaction)
 
     class Meta:
         ordering = ['created']
@@ -297,7 +304,7 @@ class SponsoredSearch(models.Model):
     search_phrases = models.CharField(_('search phrases'), max_length=20)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
-    receipt = GenericRelation(Receipt)
+    receipt = GenericRelation(Transaction)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -331,7 +338,7 @@ class Banner(models.Model):
     slogan = models.TextField(_("slogan"), max_length=100)
     days = models.IntegerField(_("days"), validators=[MinValueValidator(1), MaxValueValidator(7)])
     remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
-    receipt = GenericRelation(Receipt)
+    receipt = GenericRelation(Transaction)
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
     def save(self, force_insert=False, force_update=False, using=None,

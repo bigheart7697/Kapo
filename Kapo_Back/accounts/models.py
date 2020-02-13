@@ -21,12 +21,10 @@ class User(AbstractUser):
     corporate_number = models.PositiveIntegerField(_('corporate number'), unique=True, null=True, blank=True,
                                                    validators=[MaxValueValidator(999999999999),
                                                                MinValueValidator(100000000000)])
+    balance = models.DecimalField(_("balance"), default=0.0, max_digits=20, decimal_places=2)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'phone_number']
 
     def __str__(self):
         return "{}".format(self.email)
-
-    balance = models.DecimalField(_("balance"), default=0.0, max_digits=20, decimal_places=2)
-

@@ -19,7 +19,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ReceiptSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Receipt
+        model = Transaction
         fields = ['id', 'amount']
 
 
