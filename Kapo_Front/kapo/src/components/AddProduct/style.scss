@@ -1,0 +1,16 @@
+@import '../../scss/base/variables.scss';
+
+.add-product__container {
+    width: 100%;
+    display: flex;
+    direction: rtl;
+}
+
+.add-product__section {
+    width: 50%;
+    padding: 5rem;
+}
+
+.add-product__section .form-wrapper__container {
+    width: 70%;
+}
