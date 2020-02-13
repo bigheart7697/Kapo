@@ -41,9 +41,9 @@ export const fetchOrder = id => async dispatch => {
 export const fetchProductOrders = id => async dispatch => {
   console.log("id")
   console.log(id)
-  const response = await server.get(`/kapo/products/${id}/orders`);
+  const response = await server.get(`/kapo/products/${id}/orders/`);
   console.log(response)
-  dispatch({type: FETCH_PRODUCT_ORDERS, payload: response.data})
+  dispatch({type: FETCH_ORDERS, payload: response.data})
 }
 
 export const completeOrder = id => async dispatch => {
@@ -87,7 +87,7 @@ export const failBanner = id => async dispatch => {
 }
 
 export const bannerCount = place_id => async dispatch => {
-  const response = await server.get(`/kapo/banner-count/${place_id}`);
+  const response = await server.get(`/kapo/banner-count/${place_id}/`);
   dispatch({type: BANNER_COUNT, payload: {count: response.data, place: place_id}})
 }
 
@@ -175,7 +175,7 @@ export const addToCart = (id, count) => async dispatch => {
   try {
     const response = await server.post(`/kapo/products/${id}/order/`, payload);
     console.log(response);
-    history.push(`/order/preview/${response.data.id}`)
+    history.push(`/order/preview/${response.data.id}/`)
     alert("سفارش شما ثبت شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -226,6 +226,18 @@ export const ChangeProductAction = (formValues, id) => async dispatch => {
   }
   catch{
     alert("error")
+  }
+}
+
+export const deleteProduct = (id) => async dispatch => {
+  if (id != null){
+    try {
+      const response = await server.delete(`/kapo/products/${id}/`);
+      alert("کالا با موفقیت حذف شد.");
+      history.push(`/`);
+    } catch {
+      alert("error")
+    }
   }
 }
 
