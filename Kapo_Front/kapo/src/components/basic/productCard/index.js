@@ -8,15 +8,15 @@ import StarScore from '../../basic/starScore'
 class productCard extends React.Component {
     state={mouseOver: false, element: this.props.product}
     render() { 
-        return (<div className={`product-card__container` + (this.props.is_sponsered ? ` product-card__container--gold` : ``)} onClick={this.props.onClick} onMouseEnter={() => this.setState({ mouseOver: true})} onMouseLeave={() => this.setState({ mouseOver: false })} style={{ backgroundImage: this.props.product.image? `url(${this.props.product.image})` : `url(${defaultImg})` }}>
+        return (<div className={`product-card__container` + (this.props.is_sponsered ? ` product-card__container--gold` : ``)} onClick={this.props.onClick} onMouseEnter={() => this.setState({ mouseOver: true})} onMouseLeave={() => this.setState({ mouseOver: false })} style={{ backgroundImage: this.props.product ? this.props.product.image? `url(${this.props.product.image})` : `url(${defaultImg})` : `url(${defaultImg})` }}>
             <div className={`product-card__content` + (this.props.is_sponsered ? ` product-card__content--gold` : ``)}>
-                <div className={`product-card__name` + (!this.state.mouseOver ? `` : ` product-card__name--hover`) + (this.props.is_sponsered ? ` product-card__name--gold` : ``)}>{this.props.product.name}</div>
+                <div className={`product-card__name` + (!this.state.mouseOver ? `` : ` product-card__name--hover`) + (this.props.is_sponsered ? ` product-card__name--gold` : ``)}>{this.props.product ? this.props.product.name : '-'}</div>
                 {!this.state.mouseOver 
                 ? 
                 <>
                     <div className="product-card__description">
                         <div className="product-card__description-text">
-                            {this.props.product.description}
+                            {this.props.product ? this.props.product.description : '-'}
                         </div>
                         <StarScore score={this.props.product ? this.props.product.score ? this.props.product.score : 1 : 1}/>
                     </div>
@@ -26,7 +26,7 @@ class productCard extends React.Component {
                 </div>)}
                 <div className="product-card__image-container">
                     <div className={`product-card__image-before` + (this.props.is_sponsered ? ` product-card__image-before--gold` : ``)} />
-                    <div className="product-card__image" style={{ backgroundImage: this.props.product.image? `url(${this.props.product.image})` : `url(${defaultImg})` }}></div>
+                    <div className="product-card__image" style={{ backgroundImage: this.props.product ? this.props.product.image ? `url(${this.props.product.image})` : `url(${defaultImg})` : `url(${defaultImg})` }}></div>
                 </div>
             </div>
         </div>)

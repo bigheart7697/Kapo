@@ -31,7 +31,7 @@ class SetPrice extends React.Component {
     componentDidUpdate() {
         if(Array.isArray(this.props.products)) {
             console.log('props', this.props.products)
-            if(this.state.products != this.props.products) {
+            if(this.state.products !== this.props.products) {
             this.setState({products: this.props.products ? this.props.products : []})
             }
         }

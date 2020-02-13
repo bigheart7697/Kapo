@@ -14,7 +14,6 @@ import AdvertisingBanner from '../advertisingBanner';
 
 import defaultImg from '../../assets/default.jpg'
 
-import image from '../../assets/category4.png'
 import { Link } from "react-router-dom";
 
 class ProductDetails extends React.Component {
@@ -123,16 +122,17 @@ class ProductDetails extends React.Component {
                 }}
               ></div>
             </div>
-            {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? null :
+            {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? null :
               <div className='product-details__buttons-container'>
-                  <Link to=''>ویرایش</Link>
-                  <Link to=''>لیست سفارش ها</Link>
+                <Link to=''>حذف</Link>
+                <Link to=''>ویرایش</Link>
+                <Link to=''>لیست سفارش ها</Link>
               </div>
             }
           </div>
         </div>
         {localStorage.user_email ? 
-        (this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
+        (this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>

@@ -1,0 +1,28 @@
+@import '../../scss/base/variables.scss';
+
+.advertisement-list__container {
+    width: 100%;
+    padding: 5rem 2rem;
+    display: flex;
+    direction: rtl;
+    min-height: 20rem;
+}
+
+.advertisement-list__section {
+    width: 48%;
+    border: 3px solid $borders;
+    margin: auto;
+    height: 100%; 
+    min-height: 20rem;
+    border-radius: 1rem;
+    background-color: $white;
+    padding: 2rem 1rem;
+}
+
+.advertisement-list__title {
+    font-size: 20px;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+

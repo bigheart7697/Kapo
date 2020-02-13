@@ -1,10 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import faker from 'faker'
 
 import './style.scss'
-
-import history from "../../history"
 
 class Product extends React.Component {
   state = { active: false, zIndex: -1, top: "30px" }
