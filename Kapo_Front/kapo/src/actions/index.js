@@ -234,7 +234,7 @@ export const createAdvertisingCampaigns = () => {};
   
 export const getCurrentUser = () => async dispatch => {
   try{
-    const response = await heroku.get('account/current-user/')
+    const response = await heroku.get('accounts/current-user/')
     console.log(response.data)
   }catch{
 

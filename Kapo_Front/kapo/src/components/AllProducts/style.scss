@@ -1,9 +1,10 @@
 .all-products__container{
     display: flex;
     justify-content: center;
+    padding: 0 1rem;
 }
 
-@media(max-width: 500px){
+@media(max-width: 650px){
     .all-products__container{
         flex-direction: column;
     }
