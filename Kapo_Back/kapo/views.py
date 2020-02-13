@@ -92,7 +92,9 @@ class ProductSearchView(generics.ListAPIView):
     ordering_fields = ['production_year', 'price', 'created']
 
     def list(self, request, *args, **kwargs):
+        sponsored_search_list = [obj.product.id for obj in SponsoredSearch.objects.filter(valid=True)]
         response = super(ProductSearchView, self).list(request, args, kwargs)
+        response.data = [obj for obj in response.data if obj['id'] not in sponsored_search_list]
         ordering = request.query_params.get('ordering')
         if ordering and ordering == 'average_rating':
             response.data = sorted(response.data, key=operator.itemgetter(ordering.replace('-', ''), ))
