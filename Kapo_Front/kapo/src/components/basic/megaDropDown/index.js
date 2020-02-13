@@ -51,9 +51,6 @@ class MegaDropDown extends React.Component {
                         ref='itemscolumn2' categories={this.state.categories ? this.state.categories[0] ? this.state.categories[0].categories : [] : []}/>
                     <ItemsColumn onMouseOver={this.inside} onMouseLeave={this.outside} id='3' func={this.changeSubCategories} urlPrefix={this.state.prefix3 ? this.state.prefix3 : '/'}
                         ref='itemscolumn3' categories={this.state.categories ? this.state.categories[0] ? this.state.categories[0].categories : [] : []}/>
-                    <div className='mega-drop-down__column mega-drop-down__column--padding'>
-                        <img src={this.state.image} alt={this.state.name} className='mega-drop-down__image'></img>
-                    </div>
                 </div>
             </div>
         );

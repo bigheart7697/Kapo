@@ -6,6 +6,7 @@
     background-color: $fifth-color;
     display: flex;
     direction: rtl;
+    transition: .5s ease;
 }
 
 .advertising-campaign__right-panel {
@@ -35,5 +36,18 @@
 .advertising-campaign__left-panel {
     width: 70%;
     display: flex;
+}
+
+@media (max-width: 767px) {
+    .advertising-campaign__container {
+        height: 34rem;
+    }
+    .advertising-campaign__right-panel {
+        width: 50%;
+    }
+    .advertising-campaign__left-panel {
+        flex-direction: column;
+        width: 50%;
+    }
 }
 
