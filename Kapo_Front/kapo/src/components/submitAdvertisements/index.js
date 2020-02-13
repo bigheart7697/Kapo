@@ -11,7 +11,7 @@ class SubmitAdvertisements extends React.Component {
 
     componentDidMount() {
         this.props.setMethod(this.change_active_state);
-     }
+    }
 
     change_active_state = (active) => {
         this.setState({active})

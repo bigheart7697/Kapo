@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToCart, fetchProduct, fetchFirstBanners, fetchSecondBanners, fetchThirdBanners } from '../../actions';
+import { deleteProduct, addToCart, fetchProduct, fetchFirstBanners, fetchSecondBanners, fetchThirdBanners } from '../../actions';
 import faker from 'faker';
 
 import "./style.scss";
 
-import Input from '../basic/customInput'
+import Input from '../basic/customInput';
 import Button from "../basic/customButton";
+import Select from '../basic/customSelect';
 import Whitespace from '../basic/whitespace';
 import SubmitAdvertisements from '../submitAdvertisements';
 import CustomChoices from '../basic/customChoices';
@@ -14,7 +15,6 @@ import AdvertisingBanner from '../advertisingBanner';
 
 import defaultImg from '../../assets/default.jpg'
 
-import image from '../../assets/category4.png'
 import { Link } from "react-router-dom";
 
 class ProductDetails extends React.Component {
@@ -38,6 +38,97 @@ class ProductDetails extends React.Component {
     this.props.fetchThirdBanners();
   }
 
+  get_starting_day = () => {
+    let d = new Date(Date.now());
+    let start_date = d.getDay() + 1;
+    return start_date;
+  }
+
+  get_day = (day) => {
+    switch(day) {
+      case '1': 
+        return [
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'}
+              ];
+      case '2': 
+        return [
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'}
+        ];
+      case '3': 
+        return [
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'}
+        ];
+      case '4': 
+        return [
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'}
+        ];
+      case '5': 
+        return [
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'}
+        ];
+      case '6': 
+        return [
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'}
+        ];
+      case '7': 
+        return [
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'}
+        ];
+      default: 
+        return [
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'}
+        ];
+    }
+  }
+
   change_active_state = (active) => {
     this.childRef.current.change_active_state(active);
   }
@@ -45,7 +136,7 @@ class ProductDetails extends React.Component {
   render() {
     return (
       <>
-        {this.props.second_banners? <AdvertisingBanner product={{link: `${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
+        {this.props.second_banners[1]? <AdvertisingBanner product={{link: `${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
         null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">
@@ -123,19 +214,24 @@ class ProductDetails extends React.Component {
                 }}
               ></div>
             </div>
-            {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? null :
+            {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? null :
               <div className='product-details__buttons-container'>
-                  <Link to=''>ویرایش</Link>
-                  <Link to=''>لیست سفارش ها</Link>
+                <Link onClick={()=>this.props.deleteProduct(this.props.product? this.props.product.id? this.props.product.id : null : null)}>حذف</Link>
+                <Link to={this.props.product? this.props.product.id? `/changeProduct/${this.props.product.id}` : "" : "" }>ویرایش</Link>
+                <Link to={this.props.product? this.props.product.id? `/ProductOrders/${this.props.product.id}` : "" : "" }>لیست سفارش ها</Link>
               </div>
             }
           </div>
         </div>
-        {localStorage.user_email ? 
-        (this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
+        {(localStorage.user_email != null) ? 
+        ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
+            <Whitespace space="1"/>
+            <Select input={{name: 'receiving_day'}} label='روز دریافت کالا' content={this.get_day(this.get_starting_day() + 1)} />
+            <Whitespace space="1"/>
+            <Select input={{name: 'receiving_hour'}} label='ساعت دریافت کالا' content={[{text: '9-12', value: '1'}, {text: '12-15', value: '2'}, {text: '15-18', value: '3'}]} />
             <Whitespace space="1"/>
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.id? this.props.product.id : null, this.state.count)}/>
           </div>
@@ -144,7 +240,7 @@ class ProductDetails extends React.Component {
             <div className='product-details__advertisements-title'>ثبت تبلیغات و خدمات</div>
             <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
             <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
-          </div>
+          </div>)
          : <></>}
         <Whitespace space="10"/>
       </>
@@ -160,9 +256,9 @@ const mapStatToProps = (state, ownProps) => {
   }else{
     productItem = null
   }
-  return { product: productItem, first_banners: state.products.first_banners, 
-    second_banners: state.products.second_banners, third_bannesr: state.products.third_banners}
+  return { product: productItem, first_banners: state.advertisements.first_banners, 
+    second_banners: state.advertisements.second_banners, third_bannesr: state.advertisements.third_banners}
 }
 
-export default connect(mapStatToProps, { addToCart, fetchProduct, fetchFirstBanners, 
+export default connect(mapStatToProps, { deleteProduct, addToCart, fetchProduct, fetchFirstBanners, 
   fetchSecondBanners, fetchThirdBanners })(ProductDetails);

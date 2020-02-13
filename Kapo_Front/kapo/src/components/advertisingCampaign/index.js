@@ -26,7 +26,7 @@ class AdvertisingCampaign extends React.Component {
                     <div className='advertising-campaign__title'>
                         کمپین‌های تبلیغاتی
                     </div>
-                    <img src={image} className='advertising-campaign__image'></img>
+                    <img src={image} alt='محصولات' className='advertising-campaign__image'></img>
                 </div>
                 <div className='advertising-campaign__left-panel'>
                     {this.state.campaigns ? this.state.campaigns.map((element, index) => 
