@@ -240,3 +240,5 @@ export const getCurrentUser = () => async dispatch => {
 
   }
 }
+
+export const chargeAccount = () => {};
