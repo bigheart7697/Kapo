@@ -55,7 +55,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.available = False
-        instance.save()
+        instance.save(delete=True)
         return instance
 
 
