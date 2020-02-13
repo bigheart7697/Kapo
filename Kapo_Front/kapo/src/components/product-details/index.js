@@ -216,7 +216,7 @@ class ProductDetails extends React.Component {
             </div>
             {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? null :
               <div className='product-details__buttons-container'>
-                <Link onClick={()=>this.props.deleteProduct(this.props.product? this.props.product.id? this.props.product.id : null : null)}>حذف</Link>
+                <div onClick={()=>this.props.deleteProduct(this.props.product? this.props.product.id? this.props.product.id : null : null)}>حذف</div>
                 <Link to={this.props.product? this.props.product.id? `/changeProduct/${this.props.product.id}` : "" : "" }>ویرایش</Link>
                 <Link to={this.props.product? this.props.product.id? `/ProductOrders/${this.props.product.id}` : "" : "" }>لیست سفارش ها</Link>
               </div>

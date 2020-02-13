@@ -82,7 +82,7 @@
     padding: 2rem 5rem;
 }
 
-.product-details__buttons-container a{
+.product-details__buttons-container a, .product-details__buttons-container div{
     padding: 1rem;
     margin: 2rem auto;
     width: 25%;
@@ -92,9 +92,10 @@
     color: $white;
     transition: .5s ease;
     border: 2px solid $second-color;
+    cursor: pointer;
 }
 
-.product-details__buttons-container a:hover{
+.product-details__buttons-container a:hover, .product-details__buttons-container div:hover{
     background-color: $white;
     color: $second-color;
     text-decoration: none;
