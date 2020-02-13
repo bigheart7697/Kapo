@@ -13,7 +13,8 @@ class Productlist extends React.Component {
     render() {
         return (<>
             <div className="product-list__container">
-                {this.props.newArray.map((element, index) => <ProductCard key={index} onClick={() => history.push(`/product/${element.id}`)} product={element} is_sponsered={element.is_sponsered}></ProductCard>)}
+                {this.props.sponsered_products ? this.props.sponsered_products.map((element, index) => <ProductCard key={-1 - index} onClick={() => history.push(`/product/${element.id}`)} product={element} is_sponsered={true}></ProductCard>) : null}
+                {this.props.newArray.map((element, index) => <ProductCard key={index} onClick={() => history.push(`/product/${element.id}`)} product={element} is_sponsered={false}></ProductCard>)}
             </div>
         </>)
     }
