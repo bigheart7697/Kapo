@@ -37,7 +37,7 @@ class ProductCreateView(generics.CreateAPIView):
 
 class ProductListView(generics.ListAPIView):
     serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(deleted=False)
 
 
 class OwnerProductListView(generics.ListCreateAPIView):
@@ -45,7 +45,7 @@ class OwnerProductListView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        return Product.objects.filter(owner=self.request.user)
+        return Product.objects.filter(owner=self.request.user, deleted=False)
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -54,8 +54,8 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
 
     def perform_destroy(self, instance):
-        instance.available = False
-        instance.save(delete=True)
+        instance.deleted = True
+        instance.save()
         return instance
 
 
@@ -84,7 +84,7 @@ class OrderCreateView(generics.CreateAPIView):
 
 
 class ProductSearchView(generics.ListAPIView):
-    queryset = Product.objects.all().filter(available=True)
+    queryset = Product.objects.all().filter(available=True, deleted=False)
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filter_class = ProductFilter

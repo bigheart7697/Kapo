@@ -222,6 +222,7 @@ class Product(models.Model):
     second_hand = models.BooleanField(_("second hand"), default=False)
     available = models.BooleanField(_("available"), default=False)
     visit_count = models.IntegerField(_("visit count"), default=0)
+    deleted = models.BooleanField(_("deleted"), default=False)
 
     class Meta:
         ordering = ['created']
@@ -229,8 +230,8 @@ class Product(models.Model):
         verbose_name_plural = _('Products')
 
     def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None, delete=False):
-        if self.quantity > 0 and not delete:
+             update_fields=None):
+        if self.quantity > 0:
             self.available = True
         else:
             self.available = False
