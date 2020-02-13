@@ -1,6 +1,8 @@
 import datetime
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -18,6 +20,22 @@ def year_choices():
 
 def current_year():
     return datetime.date.today().year
+
+
+class Transaction(models.Model):
+    id = models.AutoField(primary_key=True)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='debt')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='credit')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    total_amount = models.IntegerField(_("total_amount"))
+    amount = models.IntegerField(_("amount"))
+    created = models.DateTimeField(_("created"), auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+        verbose_name = _('Receipt')
+        verbose_name_plural = _('Receipts')
 
 
 class Product(models.Model):
@@ -212,6 +230,7 @@ class Product(models.Model):
     second_hand = models.BooleanField(_("second hand"), default=False)
     available = models.BooleanField(_("available"), default=False)
     visit_count = models.IntegerField(_("visit count"), default=0)
+    deleted = models.BooleanField(_("deleted"), default=False)
 
     class Meta:
         ordering = ['created']
@@ -265,6 +284,7 @@ class Order(models.Model):
     delivery_weekday = models.IntegerField(_("delivery_weekday"), choices=WeekDay.choices, default=WeekDay.SATURDAY)
     delivery_hours = models.IntegerField(_("delivery_hours"), choices=TimeInterval.choices,
                                          default=TimeInterval.NINE_TWELVE)
+    receipt = GenericRelation(Transaction)
 
     class Meta:
         ordering = ['created']
@@ -285,6 +305,7 @@ class SponsoredSearch(models.Model):
     search_phrases = models.CharField(_('search phrases'), max_length=20)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
+    receipt = GenericRelation(Transaction)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -318,6 +339,7 @@ class Banner(models.Model):
     slogan = models.TextField(_("slogan"), max_length=100)
     days = models.IntegerField(_("days"), validators=[MinValueValidator(1), MaxValueValidator(7)])
     remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
+    receipt = GenericRelation(Transaction)
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
     def save(self, force_insert=False, force_update=False, using=None,

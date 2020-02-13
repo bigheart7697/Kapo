@@ -37,12 +37,6 @@ const FORM_VALUES = {
       error: "لطفا سال تولید کالای خود را وارد نمایید"
     },
     {
-      title: "price",
-      label: "قیمت",
-      inputType: "number",
-      error: "لطفا قیمت کالای موجود را وارد کنید"
-    },
-    {
       title: "second_hand",
       label: "آیا کالا دست دوم است؟",
       type: "select",
@@ -98,23 +92,27 @@ class AddProduct extends React.Component {
       return item
   })
     return (
-      <>
-        <FormWrapper>
-          <Form
-            formValues={FORM_VALUES.form_inputs}
-            onSubmit={this.onSubmit}
-            submitText={FORM_VALUES.submitText}
-            title={FORM_VALUES.title}
-            categories1={this.props.category_hierarchy? this.props.category_hierarchy.categories : this.state.categories1}
-            categories2={this.state.categories2}
-            categories3={this.state.categories3}
-            onChangeCategory1={this.onChangeCategory1}
-            onChangeCategory2={this.onChangeCategory2}
-            onChangeCategory3={this.onChangeCategory3}
-          ></Form>
-        </FormWrapper>
-        <SetPrice products={newArray}/>
-      </>
+      <div className='add-product__container'>
+        <div className='add-product__section'>
+          <FormWrapper>
+            <Form
+              formValues={FORM_VALUES.form_inputs}
+              onSubmit={this.onSubmit}
+              submitText={FORM_VALUES.submitText}
+              title={FORM_VALUES.title}
+              categories1={this.props.category_hierarchy? this.props.category_hierarchy.categories : this.state.categories1}
+              categories2={this.state.categories2}
+              categories3={this.state.categories3}
+              onChangeCategory1={this.onChangeCategory1}
+              onChangeCategory2={this.onChangeCategory2}
+              onChangeCategory3={this.onChangeCategory3}
+            ></Form>
+          </FormWrapper>
+        </div>
+        <div className='add-product__section'>
+          <SetPrice products={newArray}/>
+        </div>
+      </div>
     );
   }
 }

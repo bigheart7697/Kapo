@@ -37,7 +37,7 @@ class ProductCreateView(generics.CreateAPIView):
 
 class ProductListView(generics.ListAPIView):
     serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(deleted=False)
 
 
 class OwnerProductListView(generics.ListCreateAPIView):
@@ -45,7 +45,7 @@ class OwnerProductListView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        return Product.objects.filter(owner=self.request.user)
+        return Product.objects.filter(owner=self.request.user, deleted=False)
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -54,7 +54,7 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
 
     def perform_destroy(self, instance):
-        instance.available = False
+        instance.deleted = True
         instance.save()
         return instance
 
@@ -84,7 +84,7 @@ class OrderCreateView(generics.CreateAPIView):
 
 
 class ProductSearchView(generics.ListAPIView):
-    queryset = Product.objects.all().filter(available=True)
+    queryset = Product.objects.all().filter(available=True, deleted=False)
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filter_class = ProductFilter
@@ -92,7 +92,9 @@ class ProductSearchView(generics.ListAPIView):
     ordering_fields = ['production_year', 'price', 'created']
 
     def list(self, request, *args, **kwargs):
+        sponsored_search_list = [obj.product.id for obj in SponsoredSearch.objects.filter(valid=True)]
         response = super(ProductSearchView, self).list(request, args, kwargs)
+        response.data = [obj for obj in response.data if obj['id'] not in sponsored_search_list]
         ordering = request.query_params.get('ordering')
         if ordering and ordering == 'average_rating':
             response.data = sorted(response.data, key=operator.itemgetter(ordering.replace('-', ''), ))

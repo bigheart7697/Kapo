@@ -43,7 +43,8 @@
 
 .set-price__product-list-container {
     margin: auto;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    height: 100rem;
     direction: rtl;
     padding: 3rem 0;
     background-color: $white;
@@ -51,6 +52,7 @@
 
 .set-price__product-list {
     display: flex;
+    flex-direction: column;
     width: auto;
     background-color: $white;
 }

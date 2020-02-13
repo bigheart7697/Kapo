@@ -17,6 +17,15 @@ class ProductSerializer(serializers.ModelSerializer):
                   'quantity', 'owner', 'production_year', 'available']
 
 
+class TransactionSerializer(serializers.ModelSerializer):
+    sender = UserSerializer(read_only=True)
+    receiver = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Transaction
+        fields = ['id', 'total_amount', 'amount', 'created']
+
+
 class OrderSerializer(serializers.ModelSerializer):
     customer = UserSerializer(read_only=True, many=False)
     product = ProductSerializer(read_only=True, many=False)
