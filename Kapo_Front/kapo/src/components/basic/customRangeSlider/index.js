@@ -10,6 +10,7 @@ class CustomRangeSlider extends React.Component {
         this.setState({ range: range })
     }
     render(){
+        this.props.syncState(this.state.range)
         return(<div className="custom-range-slider__container">
             <div className="custom-range-slider__header">{this.props.header}</div>
             <div className="custom-range-slider__slider">

@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Router} from 'react-router-dom'
 import { connect } from 'react-redux'
 import history from '../../history'
-import { setIsLoggedInStatus } from '../../actions'
+import { setIsLoggedInStatus, getCurrentUser } from '../../actions'
 
 import '../../style.scss'
 import './index.scss'
@@ -27,11 +27,13 @@ import CategoryProducts from "../categoryProducts"
 import PayFactor from '../payFactor'
 import Dashboard from '../dashboard'
 import PaymentResult from '../basic/paymentResult'
+import AdvertisementList from '../advertisementList'
 
 class App extends React.Component{
     componentDidMount(){
         if(localStorage.jwtToken){
             this.props.setIsLoggedInStatus()
+            this.props.getCurrentUser()
         }
     }
     render(){
@@ -61,6 +63,7 @@ class App extends React.Component{
                         <Route path="/pay/factor" exact component={PayFactor}/>
                         <Route path="/dashboard" exact component={Dashboard} />
                         <Route path="/payment/result" exact component={PaymentResult}/>
+                        <Route path="/advertisement/list" exact component={AdvertisementList}/>
                     </div>
                 </Router>
             </div>
@@ -72,4 +75,4 @@ const mapStateToProps = (state) => {
     return { isLoggedIn : state.user.isLoggedIn }
 }
 
-export default connect(mapStateToProps, { setIsLoggedInStatus })(App)
+export default connect(mapStateToProps, { setIsLoggedInStatus, getCurrentUser })(App)

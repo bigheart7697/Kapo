@@ -1,4 +1,5 @@
 import server from "../apis/server";
+import heroku from '../apis/heroku';
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
@@ -255,3 +256,13 @@ export const createAdvertisingBanners = (formValues, id) => async dispatch => {
 };
 export const createAdvertisingCampaigns = () => {};
   
+export const getCurrentUser = () => async dispatch => {
+  try{
+    const response = await heroku.get('accounts/current-user/')
+    console.log(response.data)
+  }catch{
+
+  }
+}
+
+export const chargeAccount = () => {};

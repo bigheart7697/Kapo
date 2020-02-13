@@ -5,8 +5,9 @@ import faker from 'faker';
 
 import "./style.scss";
 
-import Input from '../basic/customInput'
+import Input from '../basic/customInput';
 import Button from "../basic/customButton";
+import Select from '../basic/customSelect';
 import Whitespace from '../basic/whitespace';
 import SubmitAdvertisements from '../submitAdvertisements';
 import CustomChoices from '../basic/customChoices';
@@ -14,7 +15,6 @@ import AdvertisingBanner from '../advertisingBanner';
 
 import defaultImg from '../../assets/default.jpg'
 
-import image from '../../assets/category4.png'
 import { Link } from "react-router-dom";
 
 class ProductDetails extends React.Component {
@@ -36,6 +36,97 @@ class ProductDetails extends React.Component {
     this.props.fetchFirstBanners();
     this.props.fetchSecondBanners();
     this.props.fetchThirdBanners();
+  }
+
+  get_starting_day = () => {
+    let d = new Date(Date.now());
+    let start_date = d.getDay() + 1;
+    return start_date;
+  }
+
+  get_day = (day) => {
+    switch(day) {
+      case '1': 
+        return [
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'}
+              ];
+      case '2': 
+        return [
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'}
+        ];
+      case '3': 
+        return [
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'}
+        ];
+      case '4': 
+        return [
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'}
+        ];
+      case '5': 
+        return [
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'}
+        ];
+      case '6': 
+        return [
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'}
+        ];
+      case '7': 
+        return [
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'},
+          {text: 'شنبه', value: '1'}
+        ];
+      default: 
+        return [
+          {text: 'شنبه', value: '1'},
+          {text: 'یکشنبه', value: '2'},
+          {text: 'دوشنبه', value: '3'},
+          {text: 'سه‌شنبه', value: '4'},
+          {text: 'چهارشنبه', value: '5'},
+          {text: 'پنجشنبه', value: '6'},
+          {text: 'جمعه', value: '7'}
+        ];
+    }
   }
 
   change_active_state = (active) => {
@@ -123,10 +214,11 @@ class ProductDetails extends React.Component {
                 }}
               ></div>
             </div>
-            {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? null :
+            {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? null :
               <div className='product-details__buttons-container'>
-                  <Link to=''>ویرایش</Link>
-                  <Link to=''>لیست سفارش ها</Link>
+                <Link to=''>حذف</Link>
+                <Link to=''>ویرایش</Link>
+                <Link to=''>لیست سفارش ها</Link>
               </div>
             }
           </div>
@@ -136,6 +228,10 @@ class ProductDetails extends React.Component {
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
+            <Whitespace space="1"/>
+            <Select input={{name: 'receiving_day'}} label='روز دریافت کالا' content={this.get_day(this.get_starting_day() + 1)} />
+            <Whitespace space="1"/>
+            <Select input={{name: 'receiving_hour'}} label='ساعت دریافت کالا' content={[{text: '9-12', value: '1'}, {text: '12-15', value: '2'}, {text: '15-18', value: '3'}]} />
             <Whitespace space="1"/>
             <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.id? this.props.product.id : null, this.state.count)}/>
           </div>

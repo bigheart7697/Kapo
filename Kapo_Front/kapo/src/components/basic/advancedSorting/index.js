@@ -7,6 +7,7 @@ import SortingSlot from '../sortingSlot'
 class AdvancedSorting extends React.Component{
     state={active: 0, direction: 0}
     render(){
+        this.props.syncState(this.state.active, this.state.direction)
         return(
         <div className="advanced-sorting__container">
             <SortingSlot label="قیمت" active={this.state.active == 0 ? this.state.direction : null} active0={() => this.setState({active: 0, direction: 0})} active1={() => this.setState({active: 0, direction: 1})}/>

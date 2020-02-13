@@ -3,6 +3,7 @@ import React from 'react'
 import './style.scss'
 
 import DashboardBar from '../basic/dashboardBar'
+import EditProfile from '../editProfile'
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -29,7 +30,7 @@ class Dashboard extends React.Component{
     renderContent = () => {
         switch(this.state.activeTab){
             case 0:
-                return(<div>Edit Profile</div>)
+                return(<EditProfile/>)
             case 1:
                 return(<div>My Orders</div>)
             case 2:

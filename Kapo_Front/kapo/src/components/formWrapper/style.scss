@@ -1,7 +1,7 @@
 @import "../../scss/base/variables.scss";
 
 .form-wrapper__container{
-    margin: 8rem auto;
+    margin: 4rem auto;
     width: 30%;
     display: flex;
     align-items: center;
@@ -9,6 +9,10 @@
     background: $white;
     overflow: hidden;
     border-radius: 1rem;
+}
+
+.form-wrapper__container--dashboard{
+    width: 100%;
 }
 
 .form-wrapper__form{

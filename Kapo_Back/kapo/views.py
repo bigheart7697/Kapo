@@ -164,7 +164,7 @@ class SponsoredSearchCreateView(generics.CreateAPIView):
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
 
 
-class SponsoredSearch(generics.ListAPIView):
+class SponsoredSearchView(generics.ListAPIView):
     queryset = SponsoredSearch.objects.filter(valid=True)
     serializer_class = SponsoredSearchSerializer
     filter_backends = [filters.SearchFilter]
@@ -175,7 +175,7 @@ class SponsoredSearch(generics.ListAPIView):
         for sponsored_search in self.get_queryset():
             sponsored_search.remaining_count -= 1
             sponsored_search.save()
-        return super(SponsoredSearch, self).get(request, *args, **kwargs)
+        return super(SponsoredSearchView, self).get(request, *args, **kwargs)
 
 
 class BannerCreateView(generics.CreateAPIView):
@@ -234,6 +234,22 @@ class ProductRateView(generics.CreateAPIView):
             serializer.save(product=product, user=user, rating=rating)
         except Product.DoesNotExist:
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+class OwnerBannerListView(generics.ListAPIView):
+    serializer_class = BannerSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def get_queryset(self):
+        return Banner.objects.filter(product__owner=self.request.user)
+
+
+class OwnerSponsorSearchListView(generics.ListAPIView):
+    serializer_class = SponsoredSearchSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def get_queryset(self):
+        return SponsoredSearch.objects.filter(product__owner=self.request.user)
 
 
 @api_view(['GET'])
@@ -309,14 +325,14 @@ def order_cancel_view(request, pk):
 @permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
 def sponsor_complete_view(request, pk):
     try:
-        sponsored_search = SponsoredSearch.objects.get(id=pk)
+        sponsored_search = SponsoredSearchView.objects.get(id=pk)
         if sponsored_search.state != sponsored_search.State.AWAITING:
             raise ValidationError("Operation failed. This object is {}".format(sponsored_search.state))
         else:
             sponsored_search.state = sponsored_search.State.COMPLETED
             sponsored_search.save()
             return Response(request.data, status=status.HTTP_200_OK)
-    except SponsoredSearch.DoesNotExist:
+    except SponsoredSearchView.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
@@ -324,13 +340,13 @@ def sponsor_complete_view(request, pk):
 @permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
 def sponsor_fail_view(request, pk):
     try:
-        sponsored_search = SponsoredSearch.objects.get(id=pk)
+        sponsored_search = SponsoredSearchView.objects.get(id=pk)
         if sponsored_search.state != sponsored_search.State.AWAITING:
             raise ValidationError("Operation failed. This order is {}".format(sponsored_search.state))
         else:
             sponsored_search.delete()
             return Response(request.data, status=status.HTTP_200_OK)
-    except SponsoredSearch.DoesNotExist:
+    except SponsoredSearchView.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 

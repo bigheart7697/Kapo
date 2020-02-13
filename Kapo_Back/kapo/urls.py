@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^products/(?P<pk>\d+)/sponsor/$', views.SponsoredSearchCreateView.as_view(), name='banner'),
     url(r'^products/(?P<pk>\d+)/banner/$', views.BannerCreateView.as_view(), name='sponsor'),
     url(r'^search/$', views.ProductSearchView.as_view(), name='search'),
-    url(r'^sponsored-search/$', views.SponsoredSearch.as_view(), name='sponsored_search'),
+    url(r'^sponsored-search/$', views.SponsoredSearchView.as_view(), name='sponsored_search'),
     url(r'^orders/$', views.CustomerOrderListView.as_view(), name='customer-orders'),
     url(r'^products/(?P<pk>\d+)/orders/$', views.ProductOrderListView.as_view(), name='owner-product-orders'),
     url(r'^orders/(?P<pk>\d+)/$', views.CustomerOrderDetailView.as_view(), name='customer-order-detail'),
@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^first-banners/$', views.BannerFirstListView.as_view(), name='first-banners'),
     url(r'^second-banners/$', views.BannerSecondListView.as_view(), name='second-banners'),
     url(r'^third-banners/$', views.BannerThirdListView.as_view(), name='third-banners'),
+    url(r'^my-banners/$', views.OwnerBannerListView.as_view(), name='my-banners'),
     url(r'^banner-count/(?P<banner_id>\d+)/$', views.get_pending_banners_count, name='pending-banners'),
     url(r'^banners/(?P<pk>\d+)/$', views.BannerDetailView.as_view(), name='banner-detail'),
     url(r'^banners/(?P<pk>\d+)/complete/$', views.banner_complete_view, name='banner-complete'),
@@ -49,6 +50,7 @@ urlpatterns = [
 
     url(r'^sponsors/(?P<pk>\d+)/complete/$', views.sponsor_complete_view, name='sponsor-complete'),
     url(r'^sponsors/(?P<pk>\d+)/fail/$', views.sponsor_fail_view, name='sponsor-fail'),
+    url(r'^my-sponsors/$', views.OwnerSponsorSearchListView.as_view(), name='my-sponsors'),
 
     path('csrf/', views.csrf),
     path('ping/', views.ping),
