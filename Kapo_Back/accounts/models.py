@@ -22,6 +22,7 @@ class User(AbstractUser):
                                                    validators=[MaxValueValidator(999999999999),
                                                                MinValueValidator(100000000000)])
     balance = models.DecimalField(_("balance"), default=0.0, max_digits=20, decimal_places=2)
+    percentage = models.DecimalField(_("balance"), default=0.1, max_digits=2, decimal_places=2)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'phone_number']
