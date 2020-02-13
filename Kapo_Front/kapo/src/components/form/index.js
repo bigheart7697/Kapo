@@ -81,6 +81,7 @@ class Form extends React.Component {
               content={this.props.categories3}
               full={true}
               id='3'
+              onChange={this.props.onChangeCategory3}
             />
           </div>
         ) : null}

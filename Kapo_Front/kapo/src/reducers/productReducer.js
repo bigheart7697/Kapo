@@ -22,7 +22,7 @@ const productReducer = (state = INITIAL_VALUE, action) => {
     case SEARCH_ITEM:
       return {
         ...state,
-        products: { ..._.mapKeys(action.payload, "id") }
+        sponsored_products: { ..._.mapKeys(action.payload, "id") }
       };
     // case DELETE_PRODUCT:
     //   return { ...state, products: _.omit(state.products, action.payload) };
