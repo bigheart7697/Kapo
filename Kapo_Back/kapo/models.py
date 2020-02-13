@@ -24,8 +24,8 @@ def current_year():
 
 class Transaction(models.Model):
     id = models.AutoField(primary_key=True)
-    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='debt')
-    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='credit')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='debt')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='credit')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     total_amount = models.IntegerField(_("total_amount"))
