@@ -20,7 +20,7 @@ from django.views.generic import TemplateView
 from rest_framework_jwt.views import obtain_jwt_token
 
 from . import settings
-from .settings import DEBUG
+from .settings import PRODUCTION
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
@@ -31,5 +31,5 @@ urlpatterns = [
                   path('kapo/', include('kapo.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# if not DEBUG:
-urlpatterns.append(re_path(".*", TemplateView.as_view(template_name="index.html")))
+if PRODUCTION:
+    urlpatterns.append(re_path(".*", TemplateView.as_view(template_name="index.html")))
