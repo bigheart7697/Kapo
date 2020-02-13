@@ -33,6 +33,7 @@ RUN mkdir root && mv *.ico *.js *.json root
 
 # Collect static files
 RUN mkdir /app/backend/staticfiles
+RUN mkdir /app/backend/static
 RUN mkdir /app/backend/media
 RUN mkdir /app/backend/media/products
 RUN mkdir /app/backend/media/users
@@ -41,7 +42,7 @@ WORKDIR /app
 
 # SECRET_KEY is only included here to avoid raising an error when generating static files.
 # Be sure to add a real SECRET_KEY config variable in Heroku.
-RUN DEBUG=0\
+RUN PRODUCTION=1\
   SECRET_KEY=somethingsupersecret \
   python3 backend/manage.py collectstatic --noinput
 

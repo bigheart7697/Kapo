@@ -109,7 +109,7 @@ export const setPrice = (category = null) => async dispatch => {
   } else {
     response = await server.get(`/kapo/`);
   }
-  dispatch({ type: SEARCH_ITEM, payload: response.data });
+  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
 }
 
 export const fetchProduct = id => async dispatch => {
@@ -127,6 +127,18 @@ export const searchProducts = (search, category = null) => async dispatch => {
     response = await server.get(`/kapo/search/?search=${search}`);
   } else {
     response = await server.get(`/kapo/`)
+  }
+  console.log('response')
+  console.log(response)
+  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
+};
+
+export const sponsoredSearchProducts = (search) => async dispatch => {
+  let response
+  if (search !== "") {
+    response = await server.get(`/kapo/sponsored-search/?search=${search}`);
+  } else {
+    response  = {data: {}}
   }
   console.log('response')
   console.log(response)

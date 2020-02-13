@@ -17,10 +17,13 @@ class ProductSerializer(serializers.ModelSerializer):
                   'quantity', 'owner', 'production_year', 'available']
 
 
-class ReceiptSerializer(serializers.ModelSerializer):
+class TransactionSerializer(serializers.ModelSerializer):
+    sender = UserSerializer(read_only=True)
+    receiver = UserSerializer(read_only=True)
+
     class Meta:
-        model = Receipt
-        fields = ['id', 'amount']
+        model = Transaction
+        fields = ['id', 'total_amount', 'amount', 'created']
 
 
 class OrderSerializer(serializers.ModelSerializer):

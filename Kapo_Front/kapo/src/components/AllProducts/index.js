@@ -18,11 +18,14 @@ class AllProducts extends React.Component {
         const newArray = _.map(this.props.products, (item, key) => {
             return item
         })
+        const newArray2 = _.map(this.props.sponsored_products, (item, key) => {
+            return item.product
+        })
         console.log(newArray);
         return (<>
             <AdvertisingCampaign />
             <div className="all-products__container">
-                <Productlist newArray={newArray}></Productlist>
+                <Productlist newArray={newArray} sponsered_products={newArray2}></Productlist>
                 <AdvancedFilter></AdvancedFilter>
             </div>
         </>)
@@ -32,7 +35,7 @@ class AllProducts extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    return { products: state.products.products}
+    return { products: state.products.products, sponsored_products: state.products.sponsored_products }
 }
 
 export default connect(mapStateToProps, { fetchProducts })(AllProducts)

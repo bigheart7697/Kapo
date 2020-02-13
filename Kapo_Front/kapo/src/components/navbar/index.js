@@ -8,7 +8,7 @@ import NavDropDown from '../basic/navDropDown';
 import history from '../../history';
 import SearchBar from '../basic/searchBar';
 import MegaDropDown from "../basic/megaDropDown";
-import { searchProducts, SignOut, fetchCategoryHierarchy } from "../../actions";
+import { sponsoredSearchProducts, searchProducts, SignOut, fetchCategoryHierarchy } from "../../actions";
 
 const navItems = [
   {
@@ -46,6 +46,7 @@ class Navbar extends React.Component {
         this.setState({query})
     }
     this.props.searchProducts(query, category);
+    this.props.sponsoredSearchProducts(query);
 };
 
   componentDidMount() {
@@ -127,4 +128,4 @@ const mapStateToProps = (state) => {
   return {category_hierarchy: state.products.category_hierarchy }
 }
 
-export default connect(mapStateToProps, {fetchCategoryHierarchy, searchProducts, SignOut})(Navbar)
+export default connect(mapStateToProps, {fetchCategoryHierarchy, searchProducts, sponsoredSearchProducts, SignOut})(Navbar)

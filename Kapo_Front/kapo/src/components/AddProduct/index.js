@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { addProduct, fetchCategoryHierarchy } from '../../actions'
+import { setPrice, addProduct, fetchCategoryHierarchy } from '../../actions'
+import _ from "lodash";
 
 import "./style.scss";
 
@@ -50,12 +51,6 @@ const FORM_VALUES = {
       label: "تصویر کالا",
       type: "file",
       error: "لطفا تصویر کالا را بارگذاری کنید"
-    },
-    {
-      title: "price",
-      label: "قیمت",
-      inputType: "number",
-      error: "لطفا قیمت کالای موجود را وارد کنید"
     }
   ]
 };
@@ -63,7 +58,7 @@ const FORM_VALUES = {
 class AddProduct extends React.Component {
   constructor(props) {
     super(props) 
-    this.state = {categories1: [], categories2: [], categories3: []}
+    this.state = {categories1: [], categories2: [], categories3: [], cat3: null}
   }
 
   componentDidMount() {
@@ -85,7 +80,17 @@ class AddProduct extends React.Component {
     this.setState({categories3: obj.categories})
   }
 
+  onChangeCategory3 = (event) => {
+    this.setState({cat3: event.target.value});
+    this.props.setPrice(event.target.value);
+    console.log(event.target.value);
+    
+  }
+
   render() {
+    const newArray = _.map(this.props.products, (item, key) => {
+      return item
+  })
     return (
       <div className='add-product__container'>
         <div className='add-product__section'>
@@ -100,11 +105,12 @@ class AddProduct extends React.Component {
               categories3={this.state.categories3}
               onChangeCategory1={this.onChangeCategory1}
               onChangeCategory2={this.onChangeCategory2}
+              onChangeCategory3={this.onChangeCategory3}
             ></Form>
           </FormWrapper>
         </div>
         <div className='add-product__section'>
-          <SetPrice />
+          <SetPrice products={newArray}/>
         </div>
       </div>
     );
@@ -112,7 +118,7 @@ class AddProduct extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {category_hierarchy: state.products.category_hierarchy }
+  return {category_hierarchy: state.products.category_hierarchy, products: state.products.products }
 }
 
-export default connect(mapStateToProps, {fetchCategoryHierarchy, addProduct })(AddProduct);
+export default connect(mapStateToProps, {setPrice, fetchCategoryHierarchy, addProduct })(AddProduct);
