@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Router} from 'react-router-dom'
+import { Redirect, Route, Router} from 'react-router-dom'
 import { connect } from 'react-redux'
 import history from '../../history'
 import { setIsLoggedInStatus, getCurrentUser } from '../../actions'
@@ -29,7 +29,6 @@ import Dashboard from '../dashboard'
 import PaymentResult from '../basic/paymentResult'
 import AdvertisementList from '../advertisementList'
 import AdminPanel from '../adminPanel'
-import setAuthToken from '../basic/setAuthToken'
 
 class App extends React.Component{
     componentDidMount(){
@@ -67,6 +66,7 @@ class App extends React.Component{
                         <Route path="/dashboard_admin" exact component={AdminPanel} />
                         <Route path="/payment/result" exact component={PaymentResult}/>
                         <Route path="/advertisement/list" exact component={AdvertisementList}/>
+                        <Redirect to="/404"/>
                     </div>
                 </Router>
             </div>
