@@ -12,13 +12,6 @@
     direction: rtl;
 }
 
-.order-details__container--hidden {
-    height: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition-delay: .5s;
-}
-
 .order-details__container-text {
     color: black;
     transition: .3s;
@@ -129,4 +122,17 @@
         height: 25rem;
         text-align: center;
     }
+}
+
+@media (max-width: 767px) {
+    .order-details__container {
+        height: 80rem;
+    }
+}
+
+.order-details__container--hidden {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: .5s;
 }

@@ -74,3 +74,33 @@
 .preview-order__price-section {
     height: 50%;
 }
+
+@media (max-width: 1000px) {
+    .preview-order__product-details {
+        width: 95%;
+    }
+    .preview-order__image-container {
+        width: 40%;
+    }
+    .preview-order__details {
+        width: 35%;
+    }
+    .preview-order__price {
+        width: 25%;
+    }
+}
+
+@media (max-width: 767px) {
+    .preview-order__product-details {
+        width: 95%;
+    }
+    .preview-order__image-container {
+        padding: 1rem;
+    }
+    .preview-order__details {
+        margin: 1rem;
+    }
+    .preview-order__price {
+        padding: 1rem;
+    }
+}

@@ -20,6 +20,8 @@ import { Link } from "react-router-dom";
 class ProductDetails extends React.Component {
 
   state = {
+    delivery_weekday: 1,
+    delivery_hours:1,
     count: 0,
     image: "",
     owns: false
@@ -216,7 +218,7 @@ class ProductDetails extends React.Component {
             </div>
             {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? null :
               <div className='product-details__buttons-container'>
-                <Link onClick={()=>this.props.deleteProduct(this.props.product? this.props.product.id? this.props.product.id : null : null)}>حذف</Link>
+                <div onClick={()=>this.props.deleteProduct(this.props.product? this.props.product.id? this.props.product.id : null : null)}>حذف</div>
                 <Link to={this.props.product? this.props.product.id? `/changeProduct/${this.props.product.id}` : "" : "" }>ویرایش</Link>
                 <Link to={this.props.product? this.props.product.id? `/ProductOrders/${this.props.product.id}` : "" : "" }>لیست سفارش ها</Link>
               </div>
@@ -229,11 +231,11 @@ class ProductDetails extends React.Component {
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
             <Whitespace space="1"/>
-            <Select input={{name: 'receiving_day'}} label='روز دریافت کالا' content={this.get_day(this.get_starting_day() + 1)} />
+            <Select input={{name: 'receiving_day', onChange: (e) => this.setState({ delivery_weekday: e.target.value })}} label='روز دریافت کالا' content={this.get_day(this.get_starting_day() + 1)} />
             <Whitespace space="1"/>
-            <Select input={{name: 'receiving_hour'}} label='ساعت دریافت کالا' content={[{text: '9-12', value: '1'}, {text: '12-15', value: '2'}, {text: '15-18', value: '3'}]} />
+            <Select input={{name: 'receiving_hour', onChange: (e) => this.setState({ delivery_hours: e.target.value })}} label='ساعت دریافت کالا' content={[{text: '9-12', value: '1'}, {text: '12-15', value: '2'}, {text: '15-18', value: '3'}]} />
             <Whitespace space="1"/>
-            <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.id? this.props.product.id : null, this.state.count)}/>
+            <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.id? this.props.product.id : null, {count: this.state.count, delivery_weekday: this.state.delivery_weekday, delivery_hours: this.state.delivery_hours})}/>
           </div>
         :
           <div className='product-details__advertisements-container'>

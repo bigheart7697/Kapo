@@ -49,6 +49,14 @@
     background-color: $white;
     border-radius: 1rem;
     padding: 3rem;
+
+    .custom-input__container {
+        width: 80%;
+    }
+    
+    .basic-select__container {
+        width: 80%;
+    }
 }
 
 .product-details__order-title {
@@ -82,21 +90,82 @@
     padding: 2rem 5rem;
 }
 
-.product-details__buttons-container a{
-    padding: 1rem;
+.product-details__buttons-container a, .product-details__buttons-container div{
+    padding: 1rem 2rem;
     margin: 2rem auto;
-    width: 25%;
+    width: auto;
     text-align: center;
     background-color: $second-color;
     border-radius: 1rem;
     color: $white;
     transition: .5s ease;
     border: 2px solid $second-color;
+    cursor: pointer;
+    box-shadow: .2rem .5rem .5rem grey;
 }
 
-.product-details__buttons-container a:hover{
+.product-details__buttons-container a:hover, .product-details__buttons-container div:hover{
     background-color: $white;
     color: $second-color;
     text-decoration: none;
     border: 2px solid $borders;
+    box-shadow: .4rem 1rem 1rem grey;
+}
+
+@media (max-width: 1000px) {
+    .product-details__container{
+        padding: 0;
+        .product-details__leftPanel {
+            padding: 30px 1%;
+        }
+        .product-details__rightPanel {
+            padding: 60px 1%;
+            .product-details__imageContainer {
+                width: 90%;
+            }
+        }
+    }
+    .product-details__button-container { 
+        width: 60%;
+    }
+
+    .product-details__buttons-container a, .product-details__buttons-container div{
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .product-details__container{
+        flex-direction: column;
+
+        .product-details__leftPanel {
+            width: 80%;
+            margin: auto;
+            padding: 30px 1%;
+        }
+        .product-details__rightPanel {
+            width: 80%;
+            margin: auto;
+            padding: 60px 1%;
+            .product-details__imageContainer {
+                width: 90%;
+            }
+        }
+    }   
+
+    .ui.table:not(.unstackable) tbody, .ui.table:not(.unstackable) tr, .ui.table:not(.unstackable) tr > td, .ui.table:not(.unstackable) tr > th {
+        display: revert !important;
+        width: 50% !important;
+    }
+    .product-details__buttons-container a, .product-details__buttons-container div{
+        padding: 1rem 1.5rem;
+    }
+    .product-details__buttons-container {
+        padding: 2rem;
+    }
+
+    .product-details__advertisements-container {
+        width: 80%;
+        padding: 4rem 2rem;
+    }
 }

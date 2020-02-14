@@ -46,3 +46,18 @@
     display: inline;
     padding: 0 1rem;
 }
+
+@media (max-width: 1000px) {
+
+}
+
+@media (max-width: 767px) {
+    .person-details__person-title {
+        padding: .8rem;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+    .person-details__row {
+        flex-direction: column;
+    }
+}

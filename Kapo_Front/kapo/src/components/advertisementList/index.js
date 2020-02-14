@@ -6,17 +6,17 @@ import AdvertisementDetails from '../basic/advertisementDetails'
 import AdvertisementTable from '../basic/advertisementTable'
 
 const ADVERTISEMENT_LIST = [
-    {id: 1, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
+    {id: 1, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
         count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05 18:52'},
-    {id: 2, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
+    {id: 2, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
         count: 12, remaining_count: 5, search_phrases: 'لباس زمستانی پالتو', created: '2020-02-05 18:52'},
-    {id: 3, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
+    {id: 3, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
         count: 11, remaining_count: 2, search_phrases: 'مشکی لباس پالتو', created: '2020-02-05 18:52'},
-    {id: 4, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
+    {id: 4, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
         count: 5, remaining_count: 1, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05 18:52'},
-    {id: 5, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
+    {id: 5, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
         count: 8, remaining_count: 4, search_phrases: 'مشکی پالتو', created: '2020-02-05 18:52'},
-    {id: 6, product: {name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
+    {id: 6, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
         count: 10, remaining_count: 8, search_phrases: ' زمستانی پالتو', created: '2020-02-05 18:52'}
 ]
 
