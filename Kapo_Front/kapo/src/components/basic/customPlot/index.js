@@ -6,16 +6,11 @@ import './style.scss'
 const CustomPlot = (props) => {
     return (
         <Chart
-            width={'500px'}
-            height={'300px'}
-            chartType="Bar"
+            width={'100%'}
+            height={'40rem'}
+            chartType={props.type ? props.type : "ScatterChart"}
             loader={<div>در حال محاسبه اطلاعات</div>}
             data={props.data}
-            options={{
-                chart: {
-                    title: 'تعداد کاربران ثبت نام کرده طی روزهای مختلف'
-                },
-            }}
         />
     )
 }

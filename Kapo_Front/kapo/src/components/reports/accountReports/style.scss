@@ -1,6 +1,29 @@
 @import '../../../scss/base/variables.scss';
 
 .account-reports__container {
-    width: 300px;
-    height: 400px;
+    width: 100%;
+}
+
+.account-reports__section {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    padding: 3rem 2rem;
+    height: 30rem;
+    background-color: $superwhite;
+    border: 2px solid grey;
+    border-radius: 1rem;
+    margin: 1rem auto;
+}
+
+.account-reports__section--big {
+    width: 70%;
+    height: 50rem;
+}
+
+.account-reports__title {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
 }

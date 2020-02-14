@@ -14,9 +14,6 @@ const CustomPieChart = (props) => {
                 width={"100%"}
                 height={"100%"}
                 legend_toggle
-                options={{
-                    title: 'تعداد فروشندگان و خریداران سامانه'
-                }}
             />
         </div>
     )
