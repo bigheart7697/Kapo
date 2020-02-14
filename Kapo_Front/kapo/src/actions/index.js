@@ -181,11 +181,11 @@ export const fetchThirdBanners = () => async dispatch => {
   dispatch({ type: FETCH_THIRD_BANNER, payload: response.data });
 };
 
-export const addToCart = (id, count) => async dispatch => {
-  let payload = { count: parseInt(count) }
-  console.log(payload)
+export const addToCart = (id, formValues) => async dispatch => {
+  // let payload = { count: parseInt(count) }
+  // console.log(payload)
   try {
-    const response = await server.post(`/kapo/products/${id}/order/`, payload);
+    const response = await server.post(`/kapo/products/${id}/order/`, formValues);
     console.log(response);
     history.push(`/order/preview/${response.data.id}/`)
     alert("سفارش شما ثبت شد");
