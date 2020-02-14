@@ -7,6 +7,9 @@ import CustomButton from '../../basic/customButton'
 
 class ProductScoreSubmit extends React.Component {
     state = { rating: 0 }
+    onClickHandler = () => {
+        this.props.onRateHandler(this.state.rating)
+    }
     changeRating = newRating => {
         this.setState({
             rating: newRating
@@ -29,7 +32,7 @@ class ProductScoreSubmit extends React.Component {
                         name='rating'
                     />
                 </div>
-                <CustomButton text="ثبت امتیاز" noWidth/>
+                <CustomButton text="ثبت امتیاز" onClick={this.onClickHandler} noWidth/>
             </div>
         )
     }

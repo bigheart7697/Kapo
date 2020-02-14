@@ -306,3 +306,12 @@ export const getAllUsers = () => async dispatch => {
   
   dispatch({ type: FETCH_USERS, payload: response.data });
 }
+
+export const rateProduct = (rate, id) => async () => {
+  try{
+    const response = await server.post(`product/${id}/rate/`, {rating: rate})
+    alert('success')
+  }catch{
+    alert('error')
+  }
+}
