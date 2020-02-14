@@ -2,11 +2,18 @@ import React from 'react';
 
 import './style.scss';
 
+const JDate = require('jalali-date');
+
 class OrderCard extends React.Component {
     state = {active: false}
 
     onButtonClick = () => {
         this.setState({active: this.state.active ? false : true})
+    }
+
+    get_date = () => {
+        let date = new JDate(new Date(this.props.order ? this.props.order.created : '0'))
+        return date.format('dddd DD MMMM YYYY')
     }
 
     render() {
@@ -16,7 +23,7 @@ class OrderCard extends React.Component {
                     {this.props.details === '-' ? 'نام کالا' : this.props.order ? this.props.order.product ? this.props.order.product.name : '-' : '-'}
                 </div>
                 <div className={this.state.active ? "order-card__section" : "order-card__section"}>
-                    {this.props.details === '-' ? 'تاریخ' : this.props.order ? this.props.order.created : '-'}
+                    {this.props.details === '-' ? 'تاریخ' : this.get_date()}
                 </div>
                 <div className={this.state.active ? "order-card__section" : "order-card__section"}>
                     <div className={this.props.details === '-' ? '' : this.props.order ? this.props.order.state ? this.props.order.state === "Awaiting" ? 'order-card__state--awaiting' : this.props.order.state === "Completed" ? 'order-card__state--completed' : 'order-card__state--failed' : '' : ''}>

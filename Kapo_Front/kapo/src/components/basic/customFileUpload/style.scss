@@ -20,6 +20,7 @@
   transition: 0.4s;
   box-sizing: border-box;
   padding: 1rem;
+  display: none !important;
 }
 
 .custom-file-upload__error {
@@ -34,6 +35,25 @@
   display: inline-block;
   color: $black;
   text-align: right;
+}
+
+.custom-file-upload__add{
+  height: 75px;
+  width: 75px;
+  border: 3px dashed $second-color;
+  color: $second-color;
+  font-weight: bold;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-file-upload__image-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 650px) {

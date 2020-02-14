@@ -27,3 +27,13 @@
     transition: 1s ease all;
     border-color: $hover-color;
 }
+
+@media (max-width: 1000px) {
+    .custom-choices__choices-container {
+        flex-direction: column;
+    }
+
+    .custom-choices__choice {
+        width: 100%;
+    }
+}

@@ -4,6 +4,26 @@ from accounts.serializers import UserSerializer
 from django.db.models import Avg
 
 
+class TransactionObjectRelatedField(serializers.RelatedField):
+    """
+    A custom field to use for the `transaction_object` generic relationship.
+    """
+
+    def to_representation(self, value):
+        """
+        Serialize bookmark instances using a bookmark serializer,
+        and note instances using a note serializer.
+        """
+        if isinstance(value, SponsoredSearch):
+            serializer = SponsoredSearchSerializer(value)
+        elif isinstance(value, Banner):
+            serializer = BannerSerializer(value)
+        else:
+            raise Exception('Unexpected type of transaction object')
+
+        return serializer.data
+
+
 class ProductSerializer(serializers.ModelSerializer):
     owner = UserSerializer(read_only=True)
     first_category = serializers.CharField(source='get_cat1_display', read_only=True)
@@ -19,11 +39,11 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class TransactionSerializer(serializers.ModelSerializer):
     sender = UserSerializer(read_only=True)
-    receiver = UserSerializer(read_only=True)
+    transaction_object = TransactionObjectRelatedField(read_only=True)
 
     class Meta:
         model = Transaction
-        fields = ['id', 'total_amount', 'amount', 'created']
+        fields = ['id', 'created', 'sender', 'transaction_object', 'type', 'amount']
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -41,10 +61,12 @@ class SponsoredSearchSerializer(serializers.ModelSerializer):
     remaining_count = serializers.IntegerField(read_only=True)
     state = serializers.CharField(source='get_state_display', read_only=True)
     valid = serializers.BooleanField(read_only=True)
+    transaction = serializers.IntegerField(source='get_transaction.id', read_only=True)
 
     class Meta:
         model = SponsoredSearch
-        fields = ['id', 'product', 'count', 'remaining_count', 'search_phrases', 'state', 'created', 'valid']
+        fields = ['id', 'product', 'count', 'remaining_count', 'search_phrases', 'state',
+                  'transaction', 'created', 'valid']
 
 
 class BannerSerializer(serializers.ModelSerializer):

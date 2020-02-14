@@ -17,7 +17,6 @@ class AdvancedFilter extends React.Component{
         this.props.fetchCategoryHierarchy()
     }
     render(){
-        console.log(this.state)
         let categories1 = [], categories2 = [], categories3 =[]
         if(this.props.categories){
             this.props.categories.forEach((category) => {
