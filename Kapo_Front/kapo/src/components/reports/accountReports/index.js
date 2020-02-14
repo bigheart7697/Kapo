@@ -1,7 +1,8 @@
 import React from 'react'
-import Chart from "react-google-charts";
 
 import './style.scss'
+
+import CustomPieChart from '../../basic/customPieChart'
 
 const data = 
     [
@@ -22,21 +23,16 @@ const axes = [
 
 class AccountReports extends React.Component {
     
+    get_percentages = () => {
+        let corporates = this.props.accounts ? this.props.accounts.filter(element => element.is_corporate) : [];
+        let users = this.props.accounts ? this.props.accounts.filter(element => !element.is_corporate) : [];
+        return ([['گروه', 'تعداد'], ['فروشندگان', corporates.length], ['خریداران', users.length]])
+    }
+
     render() {
         return (
             <div className='account-reports__container'>
-            <Chart
-                chartType="PieChart"
-                data={[["Age", "Weight"], ["a", 12], ["b", 5.5], ["c", 1], ["d", 8]]}
-                graph_id="PieChart"
-                width={"100%"}
-                height={"400px"}
-                legend_toggle
-                options={{
-                    title: 'My Daily Activities',
-                    is3D: true,
-                }}
-            />
+                <CustomPieChart data={this.get_percentages()} />
             </div>
         )
     }

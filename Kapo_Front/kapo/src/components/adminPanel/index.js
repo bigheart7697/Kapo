@@ -22,6 +22,33 @@ const DASHBOARD_ITEMS = [
     }
 ]
 
+const ACCOUNTS = [
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-13'},
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-13'},
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-12'},
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-12'},
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-12'},
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-11'},
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-10'},
+    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-10'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-10'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-09'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-09'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-07'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-07'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-07'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-06'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-03'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-02'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-02'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-01'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-30'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
+    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'}
+]
+
 class AdminPanel extends React.Component{
     state={ activeTab: 0 }
     changeActiveTab = (tab) => {
@@ -30,7 +57,7 @@ class AdminPanel extends React.Component{
     renderContent = () => {
         switch(this.state.activeTab){
             case 0:
-                return(<AccountReports/>)
+                return(<AccountReports accounts={ACCOUNTS}/>)
             case 1:
                 return(<div>My Orders</div>)
             case 2:

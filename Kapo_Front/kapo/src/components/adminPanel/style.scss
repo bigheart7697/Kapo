@@ -1,0 +1,12 @@
+@import '../../scss/base/variables.scss';
+
+.dashboard__content{
+    flex-grow: 1;
+    border: 1px solid $sixth-color;
+    margin: 10px;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $superwhite;
+}
