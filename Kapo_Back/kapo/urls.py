@@ -52,6 +52,8 @@ urlpatterns = [
     url(r'^sponsors/(?P<pk>\d+)/fail/$', views.sponsor_fail_view, name='sponsor-fail'),
     url(r'^my-sponsors/$', views.OwnerSponsorSearchListView.as_view(), name='my-sponsors'),
 
+    url(r'^transaction/(?P<pk>\d+)/$', views.TransactionDetailView.as_view(), name='transaction-detail'),
+
     path('csrf/', views.csrf),
     path('ping/', views.ping),
     url(r'^cat-hierarchy/$', views.cat_hierarchy, name='cat-hierarchy'),
