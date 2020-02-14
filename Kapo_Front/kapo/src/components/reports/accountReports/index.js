@@ -3,23 +3,9 @@ import React from 'react'
 import './style.scss'
 
 import CustomPieChart from '../../basic/customPieChart'
+import CustomPlot from '../../basic/customPlot'
 
-const data = 
-    [
-        {
-        label: 'Series 1',
-        data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]]
-        },
-        {
-        label: 'Series 2',
-        data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]]
-        }
-    ]
-
-const axes = [
-        { primary: true, type: 'linear', position: 'bottom' },
-        { type: 'log', position: 'left' }
-    ]
+const JDate = require('jalali-date');
 
 class AccountReports extends React.Component {
     
@@ -29,10 +15,22 @@ class AccountReports extends React.Component {
         return ([['گروه', 'تعداد'], ['فروشندگان', corporates.length], ['خریداران', users.length]])
     }
 
+    get_trend = () => {
+        let data = [['تاریخ', 'تعداد'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0']];
+        let d = Date.now();
+        for (let i = 0; i < 14; i ++) {
+            let users = this.props.accounts ? this.props.accounts.filter(element => Math.ceil(Math.abs(d - new Date(element.date_joined)) / (1000 * 60 * 60 * 24))===i+1) : [];
+            let date = new JDate(new Date(d - i * (1000 * 60 * 60 * 24)))
+            data[i+1] = [date.format('YYYY/MM/DD'), users.length]
+        }
+        return data;
+    }
+
     render() {
         return (
             <div className='account-reports__container'>
                 <CustomPieChart data={this.get_percentages()} />
+                <CustomPlot data={this.get_trend()} />
             </div>
         )
     }
