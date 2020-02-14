@@ -8,6 +8,7 @@ import { fetchProducts, getAllUsers, getAllTransactions } from '../../actions'
 import ProductReports from '../reports/productReports'
 import TransactionReports from '../reports/transactionReports'
 import { connect } from 'react-redux'
+import AdvertisementList from '../advertisementList'
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -24,48 +25,22 @@ const DASHBOARD_ITEMS = [
     },{
         text: "گزارش‌های آماری معاملات",
         image: addressImage
+    },{
+        text: "لیست تمام بنرهای تبلغیاتی",
+        image: addressImage
+    },{
+        text: "لیست تمام کمپین‌های تبلیغاتی",
+        image: addressImage
+    },{
+        text: "لیست تمام جست‌وجوهای پیشرفته",
+        image: addressImage
     }
 ]
 
 const ACCOUNTS = [
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-13'},
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-13'},
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-12'},
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-12'},
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-12'},
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-11'},
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-10'},
-    {id: 1, is_corporate: true, username: 'ali1', date_joined: '2020-02-10'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-10'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-09'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-09'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-07'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-07'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-07'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-06'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-03'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-02'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-02'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-01'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-30'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2019-07-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2019-07-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2019-05-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-02'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-02'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-02-01'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-30'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2020-01-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2019-07-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2019-07-29'},
-    {id: 1, is_corporate: false, username: 'ali1', date_joined: '2019-05-29'},
+    {id: 1, is_corporate: true, username: 'ali1', corporate_name: 'ali1', date_joined: '2020-02-13'},
+    {id: 2, is_corporate: true, username: 'ali2', corporate_name: 'ali2', date_joined: '2020-02-13'},
+    {id: 3, is_corporate: true, username: 'ali3', corporate_name: 'ali3', date_joined: '2020-02-12'}
 ]
 
 const PRODUCTS = [
@@ -105,40 +80,40 @@ const PRODUCTS = [
 ]
 
 const TRANSACTION_TYPES = [
-    'SPONSOR', 'BANNER', 'CAMPAIGN', 'ORDER', 'INCREASE_BALANCE', 'LIQUIDATE'
+    1, 2, 3, 4, 5, 6
 ]
 
 const TRANSACTIONS = [
-    {id: 1, type: 'SPONSOR', amount: 12000, created: '2020-02-14'},
-    {id: 1, type: 'SPONSOR', amount: 22000, created: '2020-02-12'},
-    {id: 1, type: 'SPONSOR', amount: 32000, created: '2020-02-10'},
-    {id: 1, type: 'SPONSOR', amount: 42000, created: '2020-02-06'},
-    {id: 1, type: 'SPONSOR', amount: 52000, created: '2020-02-02'},
-    {id: 1, type: 'BANNER', amount: 12000, created: '2020-02-14'},
-    {id: 1, type: 'BANNER', amount: 10000, created: '2020-02-13'},
-    {id: 1, type: 'BANNER', amount: 2000, created: '2020-02-12'},
-    {id: 1, type: 'BANNER', amount: 11000, created: '2020-02-03'},
-    {id: 1, type: 'BANNER', amount: 1000, created: '2020-01-19'},
-    {id: 1, type: 'BANNER', amount: 2000, created: '2020-01-16'},
-    {id: 1, type: 'BANNER', amount: 200000, created: '2020-01-14'},
-    {id: 1, type: 'BANNER', amount: 2000, created: '2019-09-13'},
-    {id: 1, type: 'CAMPAIGN', amount: 120000, created: '2020-02-05'},
-    {id: 1, type: 'CAMPAIGN', amount: 120000, created: '2020-01-01'},
-    {id: 1, type: 'ORDER', amount: 12000, created: '2020-02-14'},
-    {id: 1, type: 'ORDER', amount: 1000, created: '2020-02-05'},
-    {id: 1, type: 'ORDER', amount: 100000, created: '2020-02-04'},
-    {id: 1, type: 'ORDER', amount: 42000, created: '2020-01-01'},
-    {id: 1, type: 'INCREASE_BALANCE', amount: 1000, created: '2020-02-14'},
-    {id: 1, type: 'INCREASE_BALANCE', amount: 1000, created: '2020-02-13'},
-    {id: 1, type: 'INCREASE_BALANCE', amount: 10000, created: '2020-02-12'},
-    {id: 1, type: 'INCREASE_BALANCE', amount: 1000, created: '2020-02-11'},
-    {id: 1, type: 'INCREASE_BALANCE', amount: 10000, created: '2020-02-10'},
-    {id: 1, type: 'INCREASE_BALANCE', amount: 14000, created: '2020-02-08'},
-    {id: 1, type: 'LIQUIDATE', amount: 100, created: '2020-02-14'},
-    {id: 1, type: 'LIQUIDATE', amount: 100, created: '2020-02-12'},
-    {id: 1, type: 'LIQUIDATE', amount: 100, created: '2020-02-11'},
-    {id: 1, type: 'LIQUIDATE', amount: 100, created: '2020-02-05'},
-    {id: 1, type: 'LIQUIDATE', amount: 100, created: '2020-02-01'},
+    {id: 1, type: 1, amount: 12000, created: '2020-02-14', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 1, amount: 22000, created: '2020-02-12', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 1, amount: 32000, created: '2020-02-10', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 1, amount: 42000, created: '2020-02-06', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 1, amount: 52000, created: '2020-02-02', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 12000, created: '2020-02-14', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 10000, created: '2020-02-13', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 2000, created: '2020-02-12', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 11000, created: '2020-02-03', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 1000, created: '2020-01-19', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 2000, created: '2020-01-16', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 200000, created: '2020-01-14', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 2, amount: 2000, created: '2019-09-13', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 3, amount: 120000, created: '2020-02-05', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 3, amount: 120000, created: '2020-01-01', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 4, amount: 12000, created: '2020-02-14', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 4, amount: 1000, created: '2020-02-05', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 4, amount: 100000, created: '2020-02-04', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 4, amount: 42000, created: '2020-01-01', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 5, amount: 1000, created: '2020-02-14', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 5, amount: 1000, created: '2020-02-13', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 5, amount: 10000, created: '2020-02-12', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 5, amount: 1000, created: '2020-02-11', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 5, amount: 10000, created: '2020-02-10', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 5, amount: 14000, created: '2020-02-08', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 6, amount: 100, created: '2020-02-14', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 6, amount: 100, created: '2020-02-12', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 6, amount: 100, created: '2020-02-11', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 6, amount: 100, created: '2020-02-05', sender: {id: 1}, receiver: {id: 2}},
+    {id: 1, type: 6, amount: 100, created: '2020-02-01', sender: {id: 1}, receiver: {id: 2}},
 ]
 
 class AdminPanel extends React.Component{
@@ -154,27 +129,34 @@ class AdminPanel extends React.Component{
         this.setState({ activeTab: tab })
     }
     renderContent = () => {
+        const accountsList = _.map(this.props.accounts, (item) => {
+            return item
+        })
+        const productsList = _.map(this.props.products, (item) => {
+            return item
+        })
+        const transactionssList = _.map(this.props.transactions, (item) => {
+            return item
+        })
+        console.log('here', transactionssList)
         switch(this.state.activeTab){
             case 0:
-                return(<AccountReports accounts={ACCOUNTS}/>)
+                return(<AccountReports accounts={accountsList}/>)
             case 1:
-                return(<ProductReports products={PRODUCTS}/>)
+                return(<ProductReports products={productsList}/>)
             case 2:
-                return(<TransactionReports transactions={TRANSACTIONS} />)
+                return(<TransactionReports transactions={TRANSACTIONS} accounts={ACCOUNTS} />)
+            case 3:
+                return(<AdvertisementList />)
+            case 4:
+                return(<AdvertisementList />)
+            case 5:
+                return(<AdvertisementList />)
             default:
                 return(<div>Default</div>)
         }
     }
     render(){
-        const accountsList = _.map(this.props.accounts, (item, key) => {
-            return item
-        })
-        const productsList = _.map(this.props.products, (item, key) => {
-            return item
-        })
-        const transactionssList = _.map(this.props.transactions, (item, key) => {
-            return item
-        })
         return(
             <div className="dashboard__container">
                 <DashboardBar activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab} content={DASHBOARD_ITEMS}/>

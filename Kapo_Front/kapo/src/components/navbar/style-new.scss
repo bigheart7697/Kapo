@@ -64,16 +64,17 @@ $transition-time: 0.4s;
 }
 
 .navbar__searchbar {
-    width: 40%;
+    width: 35%;
     display: table;
 }
 
 .navbar__auth {
-    width: 10%;
+    width: 15%;
 }
 
 .navbar__new-product {
-    margin-left: 2%;
+    margin-left: 20%;
+    float: left;
 }
 
 .nav-bar__button {

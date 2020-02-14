@@ -5,6 +5,7 @@ import '../accountReports/style.scss'
 
 import CustomPieChart from '../../basic/customPieChart'
 import CustomPlot from '../../basic/customPlot'
+import CustomSelect from '../../basic/customSelect'
 
 const JDate = require('jalali-date');
 
@@ -12,23 +13,23 @@ const TRANSACTION_TYPES = [
     'SPONSOR', 'BANNER', 'CAMPAIGN', 'ORDER', 'INCREASE_BALANCE', 'LIQUIDATE'
 ]
 
-const CATEGORIES = [
-    'ELECTRONICS', 'PERSONAL', 'BUSINESSES', 'VEHICLE', 'HOME', 'LEISURE'
-]
-
 class TransactionReports extends React.Component {
-    
+    state = {corporate: ''}
+    get_corporates = () => {
+        let corporates = this.props.accounts ? this.props.accounts.filter(element => element.is_corporate).map(element => { return {text: element.corporate_name, value: element.id}}) : [];
+        return corporates
+    }
+
     get_percentages = () => {
         let data = [['نوع معامله', 'مجموع مقدار'], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']]
         for(let i = 0; i < 6; i ++) {
-            let filtered = this.props.transactions ? this.props.transactions.filter(element => element.type === TRANSACTION_TYPES[i]) : [];
+            let filtered = this.props.transactions ? this.props.transactions.filter(element => this.state.corporate ? (element.type === i && ((element.sender ? element.sender.id ? element.sender.id.toString() : '-1' ? element.sender.id ? element.sender.id.toString() : '-1'.toString() : '-1' : '-1')===this.state.corporate || (element.receiver ? element.sender.id ? element.receiver.id.toString() : '-1' ? element.sender.id ? element.receiver.id.toString() : '-1'.toString() : '-1' : '-1')===this.state.corporate)) : element.type === i) : [];
             let sum = 0;
             for (let j = 0; j < filtered.length; j ++) {
                 sum = sum + filtered[j].amount;
             }
             data[i+1] = [TRANSACTION_TYPES[i], sum]
         }
-        console.log(data)
         return data
     }
 
@@ -36,7 +37,7 @@ class TransactionReports extends React.Component {
         let data = [['تاریخ', 'تعداد'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0'], ['0', '0']];
         let d = Date.now();
         for (let i = 0; i < 14; i ++) {
-            let filtered = this.props.transactions ? this.props.transactions.filter(element => Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24))>=i+1) : [];
+            let filtered = this.props.transactions ? this.props.transactions.filter(element => (Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24))>=i+1) && (this.state.corporate ? ((element.sender ? element.sender.id ? element.sender.id.toString() : '-1' : '-1')===this.state.corporate || (element.receiver ? element.sender.id ? element.receiver.id.toString() : '-1' : '-1')===this.state.corporate) : true)) : [];
             let sum = 0;
             for (let j = 0; j < filtered.length; j ++) {
                 sum = sum + filtered[j].amount;
@@ -67,7 +68,7 @@ class TransactionReports extends React.Component {
         for (let i = 0; i < 14; i ++) {
             let transactions = ['0', '0', '0', '0', '0', '0']
             for (let j = 0; j < 6; j ++) {
-                let filtered = this.props.transactions ? this.props.transactions.filter(element => element.type===TRANSACTION_TYPES[j] && Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24))>=i+1) : [];
+                let filtered = this.props.transactions ? this.props.transactions.filter(element => element.type===j && Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24))>=i+1 && (this.state.corporate ? ((element.sender ? element.sender.id ? element.sender.id.toString() : '-1' : '-1')===this.state.corporate || (element.receiver ? element.sender.id ? element.receiver.id.toString() : '-1' : '-1')===this.state.corporate) : true)) : [];
                 let sum = 0;
                 for (let j = 0; j < filtered.length; j ++) {
                     sum = sum + filtered[j].amount;
@@ -86,6 +87,8 @@ class TransactionReports extends React.Component {
         let jd = new JDate(new Date(d));
         for (let i = 0; i < 12; i ++) {
             let filtered = this.props.transactions ? this.props.transactions.filter(element => {
+                if (!(this.state.corporate ? ((element.sender ? element.sender.id ? element.sender.id.toString() : '-1' : '-1')===this.state.corporate || (element.receiver ? element.sender.id ? element.receiver.id.toString() : '-1' : '-1')===this.state.corporate) : true))
+                    return false
                 if (Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24 * 365))>=2)
                         return false
                 let date = new JDate(new Date(element.created)); 
@@ -104,7 +107,7 @@ class TransactionReports extends React.Component {
         return data;
     }
     get_trend_months_categories = () => {
-        let data = [['تاریخ', 'ELECTRONICS', 'PERSONAL', 'BUSINESSES', 'VEHICLE', 'HOME', 'LEISURE'], 
+        let data = [['تاریخ', 'SPONSOR', 'BANNER', 'CAMPAIGN', 'ORDER', 'INCREASE_BALANCE', 'LIQUIDATE'], 
                     ['0', '0', '0', '0', '0', '0', '0'], 
                     ['0', '0', '0', '0', '0', '0', '0'], 
                     ['0', '0', '0', '0', '0', '0', '0'], 
@@ -125,7 +128,9 @@ class TransactionReports extends React.Component {
             let transactions = ['0', '0', '0', '0', '0', '0']
             for (let j = 0; j < 6; j ++) {
                 let filtered = this.props.transactions ? this.props.transactions.filter(element => {
-                    if (element.type !== TRANSACTION_TYPES[j])
+                    if (!(this.state.corporate ? ((element.sender ? element.sender.id ? element.sender.id.toString() : '-1' : '-1')===this.state.corporate || (element.receiver ? element.sender.id ? element.receiver.id.toString() : '-1' : '-1')===this.state.corporate) : true))
+                        return false
+                    if (element.type !== j)
                         return false
                     if (Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24 * 365))>=2)
                         return false
@@ -148,8 +153,12 @@ class TransactionReports extends React.Component {
     }
 
     render() {
+        console.log(this.state.corporate)
         return (
             <div className='account-reports__container'>
+                <div className='transaction-reports__select'>
+                    <CustomSelect name='corporate' content={this.get_corporates()} label='فروشگاه' onChange={(e) => {e.persist(); this.setState({ corporate: e.target.value })}} input={{value: this.state.corporate}}/>
+                </div>
                 <div className='account-reports__section'>
                     <div className='account-reports__title'>نسبت مقدار پول جابه‌جا شده در دسته‌های مختلف</div>
                     <CustomPieChart data={this.get_percentages()} />

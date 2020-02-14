@@ -9,7 +9,7 @@ import CustomPlot from '../../basic/customPlot'
 const JDate = require('jalali-date');
 
 const CATEGORIES = [
-    'ELECTRONICS', 'PERSONAL', 'BUSINESSES', 'VEHICLE', 'HOME', 'LEISURE'
+    'electronics', 'personal', 'businesses', 'vehicle', 'home-appliance', 'leisure-and-hobbies'
 ]
 
 class ProductReports extends React.Component {
@@ -17,7 +17,7 @@ class ProductReports extends React.Component {
     get_percentages = () => {
         let data = [['دسته کالا', 'تعداد'], ['', ''], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']]
         for(let i = 0; i < 6; i ++) {
-            let filtered = this.props.products ? this.props.products.filter(element => element.first_category === CATEGORIES[i]) : [];
+            let filtered = this.props.products ? this.props.products.filter(element => element.first_category.toLowerCase() === CATEGORIES[i].toLowerCase()) : [];
             data[i+1] = [CATEGORIES[i], filtered.length]
         }
         return data
@@ -54,7 +54,7 @@ class ProductReports extends React.Component {
         for (let i = 0; i < 14; i ++) {
             let products = ['0', '0', '0', '0', '0', '0']
             for (let j = 0; j < 6; j ++) {
-                products[j] = this.props.products ? this.props.products.filter(element => element.first_category===CATEGORIES[j] && Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24))>=i+1) : [];
+                products[j] = this.props.products ? this.props.products.filter(element => element.first_category.toLowerCase()===CATEGORIES[j].toLowerCase() && Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24))>=i+1) : [];
             }
             let date = new JDate(new Date(d - i * (1000 * 60 * 60 * 24)))
             data[14 - i] = [date.format('MM/DD'), products[0].length, products[1].length, products[2].length, products[3].length, products[4].length, products[5].length]
@@ -103,7 +103,7 @@ class ProductReports extends React.Component {
             let products = ['0', '0', '0', '0', '0', '0']
             for (let j = 0; j < 6; j ++) {
                 let p = this.props.products ? this.props.products.filter(element => {
-                    if (element.first_category !== CATEGORIES[j])
+                    if (element.first_category.toLowerCase() !== CATEGORIES[j].toLowerCase())
                         return false
                     if (Math.ceil(Math.abs(d - new Date(element.created)) / (1000 * 60 * 60 * 24 * 365))>=2)
                         return false

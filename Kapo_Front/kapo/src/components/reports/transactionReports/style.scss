@@ -1,1 +1,10 @@
 @import '../../../scss/base/variables.scss';
+
+.transaction-reports__select {
+    width: 60%;
+    margin: auto;
+    .basic-select__container {
+        margin: auto;
+        padding: 2rem;
+    }
+}
