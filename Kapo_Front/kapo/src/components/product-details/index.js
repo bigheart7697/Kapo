@@ -12,6 +12,7 @@ import Whitespace from '../basic/whitespace';
 import SubmitAdvertisements from '../submitAdvertisements';
 import CustomChoices from '../basic/customChoices';
 import AdvertisingBanner from '../advertisingBanner';
+import ProductScoreSubmit from '../basic/productScoreSubmit'
 
 import defaultImg from '../../assets/default.jpg'
 
@@ -225,6 +226,7 @@ class ProductDetails extends React.Component {
             }
           </div>
         </div>
+        <ProductScoreSubmit/>
         {(localStorage.user_email != null) ? 
         ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">

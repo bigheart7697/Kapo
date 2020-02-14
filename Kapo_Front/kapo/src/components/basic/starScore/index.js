@@ -16,7 +16,7 @@ class StarScore extends React.Component {
         <div className="star-rating__container">
           <StarRatings
             rating={this.state.rating}
-            starRatedColor="yellow"
+            starRatedColor="#950740"
             // changeRating={this.changeRating}
             numberOfStars={5}
             starDimension="17px"

@@ -1,0 +1,19 @@
+@import "../../../scss/base/variables.scss";
+
+.product-score-submit__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-top: 1px solid $gray;
+    border-bottom: 1px solid $gray;
+    padding: 2rem 0
+}
+
+.product-score-submit__score{
+    padding: 2rem 0;
+}
+
+.product-score-submit__header{
+    font-weight: bold;
+}
