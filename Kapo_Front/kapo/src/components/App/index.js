@@ -50,7 +50,7 @@ class App extends React.Component{
                         <Route path="/Auth/SignUp" exact component={SignUp}/>
                         <Route path="/MyProductList" exact component={MyProductList} />
                         <Route path="/order/preview/:id" exact component={PreviewOrder}/>
-                        <Route path="/bank/:id" exact component={Bank}/>
+                        <Route path="/order/bank/:id" exact component={Bank}/>
                         <Route path="/order/list" exact component={MyOrders}/>
                         <Route path="/order/factor/:id" exact component={OrderFactor}/>
                         <Route path="/AddProduct/SetPrice/:id" exact component={SetPrice}/>
