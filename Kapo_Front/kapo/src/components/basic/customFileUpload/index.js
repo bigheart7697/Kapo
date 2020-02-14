@@ -6,6 +6,8 @@ export default class CustomFileUpload  extends React.Component{
   constructor(props) {
     super(props)
     this.onChange = this.onChange.bind(this)
+
+    this.ref = React.createRef();
   }
 
   onChange(event) {
@@ -23,12 +25,16 @@ export default class CustomFileUpload  extends React.Component{
       <div className="custom-file-upload__container">
         <div className="custom-file-upload__inner-container">
           <label className="custom-file-upload__label">{this.props.label}</label>
-          <input
-            className="custom-file-upload__input"
-            type='file'
-            accept='.jpg, .png, .jpeg'
-            onChange={this.onChange}
-          />
+          <div className="custom-file-upload__image-container">
+            <div className="custom-file-upload__add" onClick={() => this.ref.current.click()}>عکس</div>
+            <input
+              className="custom-file-upload__input"
+              type='file'
+              accept='.jpg, .png, .jpeg'
+              onChange={this.onChange}
+              ref = {this.ref}
+            />
+          </div>
         </div>
       </div>
     )
