@@ -288,7 +288,6 @@ export const getCurrentUser = () => async dispatch => {
   }
 }
 
-<<<<<<< HEAD
 export const editProfile = (data, id) => async dispatch => {
   try{
     const respsonse = await server.patch(`accounts/${id}/`, data)
@@ -300,8 +299,6 @@ export const editProfile = (data, id) => async dispatch => {
 }
 
 export const chargeAccount = () => {};
-=======
-export const chargeAccount = () => {};
 
 export const getAllUsers = () => async dispatch => {
   const response = await server.get("/admin_statistics/user_statistics/");
@@ -309,4 +306,3 @@ export const getAllUsers = () => async dispatch => {
   
   dispatch({ type: FETCH_USERS, payload: response.data });
 }
->>>>>>> adc9893aafd5c44f3fd55e7df9e5c3332d224afc
