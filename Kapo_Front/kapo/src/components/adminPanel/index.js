@@ -4,6 +4,8 @@ import './style.scss'
 
 import DashboardBar from '../basic/dashboardBar'
 import AccountReports from '../reports/accountReports'
+import { fetchProducts, getAllUsers } from '../../actions'
+import { connect } from 'react-redux'
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -24,6 +26,12 @@ const DASHBOARD_ITEMS = [
 
 class AdminPanel extends React.Component{
     state={ activeTab: 0 }
+
+    componentDidMount() {
+        this.props.fetchProducts();
+        this.props.getAllUsers();
+    }
+
     changeActiveTab = (tab) => {
         this.setState({ activeTab: tab })
     }
@@ -51,4 +59,8 @@ class AdminPanel extends React.Component{
     }
 }
 
-export default AdminPanel;
+const mapStateToProps = (state) => {
+    return { accounts: state.user.all_accounts, products: state.products.products }
+}
+
+export default connect(mapStateToProps, { fetchProducts, getAllUsers })(AdminPanel);

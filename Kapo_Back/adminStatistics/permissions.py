@@ -3,8 +3,7 @@ from django.core.exceptions import PermissionDenied
 
 
 class IsStaff(permissions.BasePermission):
-    @staticmethod
-    def is_staff(request, view, obj):
+    def has_object_permission(self, request, view, obj):
         if not request.user.is_staff:
             raise PermissionDenied()
         return True
