@@ -12,7 +12,7 @@ const CustomPieChart = (props) => {
                 loader={<div>در حال محاسبه اطلاعات</div>}
                 graph_id="PieChart"
                 width={"100%"}
-                height={"100%"}
+                height={"30rem"}
                 legend_toggle
             />
         </div>

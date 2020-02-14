@@ -32,6 +32,8 @@ class AccountReports extends React.Component {
         let jd = new JDate(new Date(d));
         for (let i = 0; i < 12; i ++) {
             let users = this.props.accounts ? this.props.accounts.filter(element => {
+                if (Math.ceil(Math.abs(d - new Date(element.date_joined)) / (1000 * 60 * 60 * 24 * 365))>=2)
+                    return false
                 let date = new JDate(new Date(element.date_joined)); 
                 if (date.getMonth() === (jd.getMonth() - i) % 12)
                     return true
@@ -39,7 +41,6 @@ class AccountReports extends React.Component {
                     return false
             }) : [];
             let date1 = new JDate(new Date(d - i * (1000 * 60 * 60 * 24 * 31)))
-            console.log(i, date1.format('dd DD MMMM YYYY'), jd.getMonth())
             data[12 - i] = [date1.format('MMMM YY'), users.length]
         }
         return data;
