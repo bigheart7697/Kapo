@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import "./style-new.scss";
 
 import NavItem from "../basic/navItem";
@@ -34,8 +35,23 @@ const navItems = [
 ];
 
 class Navbar extends React.Component {
-  state = { active: 0, dropActive: false, categories: []};
-  
+
+  constructor(props) {
+    super(props);
+
+    let path = null
+
+    if(history){
+      if(history.location){
+        if(history.location.pathname){
+          path = history.location.pathname
+        }
+      }
+    }
+
+    this.state = { active: this.setCorrectState(path), dropActive: false, categories: []};
+  }
+
   navItemOnClick = (index, link) => {
     this.setState({ active : index })
     history.push(link)
@@ -48,6 +64,21 @@ class Navbar extends React.Component {
     this.props.searchProducts(query, category);
     this.props.sponsoredSearchProducts(query);
 };
+
+setCorrectState = (path) => {
+  switch(path){
+    case '/':
+      return 0;
+    case '/ProductList':
+      return 1;
+    case '/AddProduct':
+      return 2;
+    case '/dashboard':
+      return 3;
+    default:
+      return null;
+  }
+}
 
   componentDidMount() {
     this.props.fetchCategoryHierarchy();
@@ -66,9 +97,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    console.log(this.props.category_hierarchy);
-    console.log(this.state.categories);
-    // this.setState(this.props.category_hierarchy)
+    console.log(this.props.category_hier);
     return (
       <div className="navbar__component--padding-top">
         <div className="navbar__flex">

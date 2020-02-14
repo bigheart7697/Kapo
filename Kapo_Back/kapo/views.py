@@ -254,6 +254,12 @@ class OwnerSponsorSearchListView(generics.ListAPIView):
         return SponsoredSearch.objects.filter(product__owner=self.request.user)
 
 
+class TransactionDetailView(generics.RetrieveAPIView):
+    serializer_class = TransactionSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfTransaction]
+    queryset = Transaction.objects.all()
+
+
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def get_pending_banners_count(request, place_id):

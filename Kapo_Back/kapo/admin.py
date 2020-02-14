@@ -20,3 +20,8 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
     model = Banner
+
+
+@admin.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+    model = Transaction

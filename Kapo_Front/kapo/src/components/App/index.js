@@ -29,6 +29,7 @@ import Dashboard from '../dashboard'
 import PaymentResult from '../basic/paymentResult'
 import AdvertisementList from '../advertisementList'
 import AdminPanel from '../adminPanel'
+import setAuthToken from '../basic/setAuthToken'
 
 class App extends React.Component{
     componentDidMount(){
