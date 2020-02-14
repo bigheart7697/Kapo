@@ -276,7 +276,7 @@ class Product(models.Model):
         return ratings
 
 
-class Order(models.Model):
+class Order(TransactionMixin, models.Model):
     class State(models.IntegerChoices):
         AWAITING = 1
         COMPLETED = 2
@@ -404,6 +404,44 @@ class Rate(models.Model):
 class Liquidate(TransactionMixin, models.Model):
     owner = models.ForeignKey(User, related_name='liquidate', on_delete=models.CASCADE)
     amount = models.IntegerField(_("amount"))
+    created = models.DateTimeField(_("registration date"), auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = _('Liquidate')
+        verbose_name_plural = _('Liquidates')
+
+
+class Campaign(TransactionMixin, models.Model):
+
+    FEE = 100000
+
+    class State(models.IntegerChoices):
+        AWAITING = 1
+        COMPLETED = 2
+
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, related_name=_("campaigns"), on_delete=models.CASCADE)
+    valid = models.BooleanField(_("valid"), default=False)
+    state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
+    days = models.IntegerField(_("days"), validators=[MinValueValidator(3), MaxValueValidator(7)])
+    discount = models.IntegerField(_("discount"), default=10, validators=[MinValueValidator(0), MaxValueValidator(99)])
+    remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
+    created = models.DateTimeField(_("registration date"), auto_now_add=True)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.remaining_days > 0 and self.state == self.State.COMPLETED:
+            self.valid = True
+        else:
+            self.valid = False
+        super(Campaign, self).save(force_insert=force_insert, force_update=force_update, using=None, update_fields=None)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = _('Campaign')
+        verbose_name_plural = _('Campaigns')
+
 
 
 @receiver(post_save, sender=SponsoredSearch)
@@ -422,9 +460,18 @@ def create_transaction(sender, instance, created, **kwargs):
                                    amount=instance.days*instance.FEE, type=transaction_type)
 
 
+@receiver(post_save, sender=Campaign)
+def create_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.CAMPAIGN
+        Transaction.objects.create(sender=instance.product.owner, transaction_object=instance,
+                                   amount=instance.days*instance.FEE, type=transaction_type)
+
+
 @receiver(post_save, sender=Liquidate)
 def create_transaction(sender, instance, created, **kwargs):
     if created:
         transaction_type = Transaction.Type.LIQUIDATE
         Transaction.objects.create(sender=instance.owner, transaction_object=instance,
                                    amount=instance.amount, type=transaction_type)
+

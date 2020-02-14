@@ -48,6 +48,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .custom-file-upload__image-container{

@@ -7,3 +7,8 @@ class IsStaff(permissions.BasePermission):
         if not request.user.is_staff:
             raise PermissionDenied()
         return True
+
+    def has_object_permission(self, request, view, obj):
+        if not request.user.is_staff:
+            raise PermissionDenied()
+        return True

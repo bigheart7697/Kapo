@@ -47,9 +47,8 @@ $transition-time: 0.4s;
     top: -$tail-top-relative;
     border: 3px solid $second-color;
     transition: $transition-time;
-    background-image: url('../../assets/user.png');
-    background-repeat: none;
-    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .navbar__tail{
