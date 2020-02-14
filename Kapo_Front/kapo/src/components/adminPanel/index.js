@@ -4,13 +4,14 @@ import './style.scss'
 
 import DashboardBar from '../basic/dashboardBar'
 import AccountReports from '../reports/accountReports'
+import { fetchProducts, getAllUsers, getAllTransactions } from '../../actions'
 import ProductReports from '../reports/productReports'
-import { fetchProducts, getAllUsers } from '../../actions'
 import { connect } from 'react-redux'
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
 import addressImage from '../../assets/address.svg'
+import _ from "lodash";
 
 const DASHBOARD_ITEMS = [
     {
@@ -108,6 +109,7 @@ class AdminPanel extends React.Component{
     componentDidMount() {
         this.props.fetchProducts();
         this.props.getAllUsers();
+        this.props.getAllTransactions();
     }
 
     changeActiveTab = (tab) => {
@@ -126,6 +128,15 @@ class AdminPanel extends React.Component{
         }
     }
     render(){
+        const accountsList = _.map(this.props.accounts, (item, key) => {
+            return item
+        })
+        const productsList = _.map(this.props.products, (item, key) => {
+            return item
+        })
+        const transactionssList = _.map(this.props.transactions, (item, key) => {
+            return item
+        })
         return(
             <div className="dashboard__container">
                 <DashboardBar activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab} content={DASHBOARD_ITEMS}/>
@@ -138,7 +149,7 @@ class AdminPanel extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return { accounts: state.user.all_accounts, products: state.products.products }
+    return { accounts: state.user.all_accounts, products: state.products.products, transactions: state.advertisements.transactions }
 }
 
-export default connect(mapStateToProps, { fetchProducts, getAllUsers })(AdminPanel);
+export default connect(mapStateToProps, { fetchProducts, getAllUsers, getAllTransactions })(AdminPanel);
