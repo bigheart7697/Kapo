@@ -5,11 +5,12 @@ from accounts.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    balance = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = User
         fields = ('id', 'email', 'country', 'city', 'address', 'phone_number', 'photo',
-                  'is_corporate', 'first_name', 'last_name', 'corporate_name',
+                  'is_corporate', 'first_name', 'last_name', 'corporate_name', 'balance',
                   'corporate_number')
 
 

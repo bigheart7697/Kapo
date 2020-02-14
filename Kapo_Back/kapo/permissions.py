@@ -36,3 +36,10 @@ class IsOwnerOfProduct(permissions.BasePermission):
         if obj.product.owner != request.user:
             raise PermissionDenied()
         return True
+
+
+class IsOwnerOfTransaction(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if obj.transaction_object.product.owner != request.user:
+            raise PermissionDenied()
+        return True

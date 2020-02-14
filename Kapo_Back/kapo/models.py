@@ -1,10 +1,12 @@
 import datetime
 
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 
 from django.db.models import Avg
@@ -23,19 +25,37 @@ def current_year():
 
 
 class Transaction(models.Model):
+
+    class Type(models.IntegerChoices):
+        SPONSOR = 1
+        BANNER = 2
+        CAMPAIGN = 3
+
     id = models.AutoField(primary_key=True)
+    type = models.IntegerField(_("type"), choices=Type.choices)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='debt')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='credit')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    total_amount = models.IntegerField(_("total_amount"))
+    transaction_object = GenericForeignKey('content_type', 'object_id')
     amount = models.IntegerField(_("amount"))
     created = models.DateTimeField(_("created"), auto_now_add=True)
 
     class Meta:
-        ordering = ['created']
-        verbose_name = _('Receipt')
-        verbose_name_plural = _('Receipts')
+        ordering = ['-created']
+        verbose_name = _('Transaction')
+        verbose_name_plural = _('Transactions')
+        unique_together = ('content_type', 'object_id')
+
+
+class TransactionMixin(object):
+    @property
+    def get_transaction(self):
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        try:
+            transaction = Transaction.objects.get(content_type__pk=content_type.id, object_id=self.id)
+        except:
+            return None
+        return transaction
 
 
 class Product(models.Model):
@@ -214,8 +234,6 @@ class Product(models.Model):
     id = models.AutoField(primary_key=True)
     created = models.DateTimeField(_("creation date"), auto_now_add=True)
     name = models.CharField(_("name"), max_length=100, default="")
-    # image = models.ImageField(_("image"), upload_to=product_images_dir, height_field=None,
-    #                           width_field=None, null=True, blank=True)
     image = models.TextField(_("image"), default="", null=True, blank=True)
     description = models.TextField(_("description"), default="")
     owner = models.ForeignKey(User, related_name=_('products'), on_delete=models.CASCADE)
@@ -233,7 +251,7 @@ class Product(models.Model):
     deleted = models.BooleanField(_("deleted"), default=False)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
         verbose_name = _('Product')
         verbose_name_plural = _('Products')
 
@@ -284,15 +302,16 @@ class Order(models.Model):
     delivery_weekday = models.IntegerField(_("delivery_weekday"), choices=WeekDay.choices, default=WeekDay.SATURDAY)
     delivery_hours = models.IntegerField(_("delivery_hours"), choices=TimeInterval.choices,
                                          default=TimeInterval.NINE_TWELVE)
-    receipt = GenericRelation(Transaction)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
         verbose_name = _('Order')
         verbose_name_plural = _('Orders')
 
 
-class SponsoredSearch(models.Model):
+class SponsoredSearch(TransactionMixin, models.Model):
+    FEE = 1000
+
     class State(models.IntegerChoices):
         AWAITING = 1
         COMPLETED = 2
@@ -305,7 +324,6 @@ class SponsoredSearch(models.Model):
     search_phrases = models.CharField(_('search phrases'), max_length=20)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
-    receipt = GenericRelation(Transaction)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -316,8 +334,14 @@ class SponsoredSearch(models.Model):
         super(SponsoredSearch, self).save(force_insert=force_insert, force_update=force_update, using=None,
                                           update_fields=None)
 
+    class Meta:
+        ordering = ['-created']
+        verbose_name = _('Sponsored Search')
+        verbose_name_plural = _('Sponsored Searches')
+
 
 class Banner(models.Model):
+    FEE = 1000000
     MAX_FIRST_NUM = 6
     MAX_SECOND_NUM = 6
     MAX_THIRD_NUM = 6
@@ -350,6 +374,11 @@ class Banner(models.Model):
             self.valid = False
         super(Banner, self).save(force_insert=force_insert, force_update=force_update, using=None, update_fields=None)
 
+    class Meta:
+        ordering = ['-created']
+        verbose_name = _('Banners')
+        verbose_name_plural = _('Banners')
+
 
 class Rate(models.Model):
     RATING_RANGE = (
@@ -362,7 +391,23 @@ class Rate(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
-    rating = models.IntegerField(choices=RATING_RANGE,)
+    rating = models.IntegerField(choices=RATING_RANGE, )
 
     class Meta:
         unique_together = [["user", "product"]]
+
+
+@receiver(post_save, sender=SponsoredSearch)
+def create_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.SPONSOR
+        Transaction.objects.create(sender=instance.product.owner, transaction_object=instance,
+                                   amount=instance.count*instance.FEE, type=transaction_type)
+
+
+@receiver(post_save, sender=Banner)
+def create_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.BANNER
+        Transaction.objects.create(sender=instance.product.owner, transaction_object=instance,
+                                   amount=instance.days*instance.FEE, type=transaction_type)
