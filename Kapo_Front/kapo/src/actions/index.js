@@ -1,5 +1,4 @@
 import server from "../apis/server";
-import heroku from '../apis/heroku';
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
@@ -282,10 +281,20 @@ export const createAdvertisingCampaigns = () => {};
   
 export const getCurrentUser = () => async dispatch => {
   try{
-    const response = await heroku.get('accounts/current-user/')
+    const response = await server.get('accounts/current-user/')
     dispatch({ type: FETCH_USER_INFO, payload: response.data })
   }catch{
 
+  }
+}
+
+export const editProfile = (data, id) => async dispatch => {
+  try{
+    const respsonse = await server.patch(`accounts/${id}/`, data)
+    alert('success')
+    console.log(respsonse.data)
+  }catch{
+    alert('error')
   }
 }
 
@@ -296,6 +305,14 @@ export const getAllUsers = () => async dispatch => {
   dispatch({ type: FETCH_USERS, payload: response.data });
 }
 
+export const rateProduct = (rate, id) => async () => {
+  try{
+    const response = await server.post(`product/${id}/rate/`, {rating: rate})
+    alert('success')
+  }catch{
+    alert('error')
+  }
+}
 export const getAllTransactions = () => async dispatch => {
   const response = await server.get("/admin_statistics/transaction_statistics/");
   dispatch({ type: FETCH_TRANSACTIONS, payload: response.data });

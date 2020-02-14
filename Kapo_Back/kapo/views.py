@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from kapo.serializers import *
 from .filters import *
 from .permissions import *
-from .tasks import update_order_state, update_banner
+from .tasks import *
 
 
 class ProductCreateView(generics.CreateAPIView):
@@ -180,6 +180,36 @@ class SponsoredSearchView(generics.ListAPIView):
         return super(SponsoredSearchView, self).get(request, *args, **kwargs)
 
 
+class CampaignCreateView(generics.CreateAPIView):
+    serializer_class = CampaignSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+
+    def perform_create(self, serializer):
+        try:
+            product = Product.objects.get(id=self.kwargs['pk'])
+            campaigns = Campaign.objects.filter(product=product, remaining_days__gt=0)
+            if len(campaigns) > 0:
+                raise ValidationError('There is an existing campaign on this product')
+            else:
+                days = int(self.request.data['days'])
+                discount = int(self.request.data['discount'])
+                remaining_days = days
+                serializer.save(product=product, days=days, remaining_days=remaining_days, discount=discount)
+
+        except Product.DoesNotExist:
+            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+class CampaignListView(generics.ListAPIView):
+    serializer_class = CampaignSerializer
+    queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED)
+
+
+class CampaignDetailView(generics.RetrieveAPIView):
+    serializer_class = CampaignSerializer
+    queryset = Campaign.objects.all()
+
+
 class BannerCreateView(generics.CreateAPIView):
     serializer_class = BannerSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
@@ -187,6 +217,9 @@ class BannerCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         try:
             product = Product.objects.get(id=self.kwargs['pk'])
+            banners = Banner.objects.filter(product=product, remaining_days__gt=0)
+            if len(banners) > 0:
+                raise ValidationError('There is an existing banner on this product')
             days = int(self.request.data['days'])
             place = self.request.data['place']
             slogan = self.request.data['slogan']
@@ -198,12 +231,21 @@ class BannerCreateView(generics.CreateAPIView):
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
 
 
+class ProductCampaignListView(generics.ListAPIView):
+    serializer_class = CampaignSerializer
+
+    def get_queryset(self):
+        try:
+            product = Product.objects.get(id=self.kwargs['pk'])
+            return Campaign.objects.filter(product=product)
+        except Product.DoesNotExist:
+            return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
+
+
 class BannerDetailView(generics.RetrieveAPIView):
     serializer_class = BannerSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
-
-    def get_queryset(self):
-        return Banner.objects.filter(product__owner=self.request.user)
+    queryset = Banner.objects.all()
 
 
 class BannerFirstListView(generics.ListAPIView):
@@ -368,7 +410,7 @@ def sponsor_fail_view(request, pk):
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
 def banner_complete_view(request, pk):
     try:
@@ -394,6 +436,37 @@ def banner_fail_view(request, pk):
             raise ValidationError("Operation failed. This order is {}".format(banner.state))
         else:
             banner.delete()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Banner.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def campaign_complete_view(request, pk):
+    try:
+        campaign = Campaign.objects.get(id=pk)
+        if campaign.state != campaign.State.AWAITING:
+            raise ValidationError("Operation failed. This object is {}".format(campaign.state))
+        else:
+            campaign.state = campaign.State.COMPLETED
+            update_campaign(campaign.id, repeat=Task.DAILY,
+                            repeat_until=datetime.datetime.now() + datetime.timedelta(days=campaign.remaining_days))
+            campaign.valid = True
+            return Response(request.data, status=status.HTTP_200_OK)
+    except Banner.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
+def campaign_fail_view(request, pk):
+    try:
+        campaign = Campaign.objects.get(id=pk)
+        if campaign.state != campaign.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(campaign.state))
+        else:
+            campaign.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)

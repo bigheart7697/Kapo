@@ -47,9 +47,8 @@ $transition-time: 0.4s;
     top: -$tail-top-relative;
     border: 3px solid $second-color;
     transition: $transition-time;
-    background-image: url('../../assets/user.png');
-    background-repeat: none;
-    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .navbar__tail{
@@ -65,16 +64,17 @@ $transition-time: 0.4s;
 }
 
 .navbar__searchbar {
-    width: 40%;
+    width: 35%;
     display: table;
 }
 
 .navbar__auth {
-    width: 10%;
+    width: 15%;
 }
 
 .navbar__new-product {
-    margin-left: 2%;
+    margin-left: 20%;
+    float: left;
 }
 
 .nav-bar__button {
