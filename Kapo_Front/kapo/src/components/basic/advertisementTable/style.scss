@@ -1,0 +1,45 @@
+@import '../../../scss/base/variables.scss';
+
+.advertisement-table__table {
+    width: 95%;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.advertisement-table__row {
+    width: 100%;
+    display: flex;
+    background-color: $superwhite;
+    min-height: 4rem;
+    color: black;
+    transition: .2s ease all;
+    cursor: pointer;
+}
+
+.advertisement-table__row:hover {
+    opacity: .5;
+}
+
+.advertisement-table__header {
+    background-color: $second-color;
+    color: $white;
+    cursor: initial;
+}
+
+.advertisement-table__header:hover {
+    background-color: $second-color;
+}
+
+.advertisement-table__table-cell {
+    width: 25%;
+    text-align: center;
+    padding: .7rem 0;
+}
+
+.advertisement-table__row--active {
+    background-color: $hover-color;
+    color: $white;
+}

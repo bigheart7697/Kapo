@@ -15,13 +15,14 @@ class User(AbstractUser):
     city = models.CharField(_('city'), max_length=100, default='', blank=True, null=True)
     address = models.CharField(_('address'), max_length=100, default='')
     phone_number = PhoneNumberField(_('phone number'), unique=True)
-    # photo = models.ImageField(_('photo'), upload_to=profile_images_dir, null=True, blank=True)
     photo = models.TextField(_("photo"), default="", null=True, blank=True)
     is_corporate = models.BooleanField(default=False)
     corporate_name = models.CharField(_('corporate name'), max_length=200, null=True, blank=True)
     corporate_number = models.PositiveIntegerField(_('corporate number'), unique=True, null=True, blank=True,
                                                    validators=[MaxValueValidator(999999999999),
                                                                MinValueValidator(100000000000)])
+    balance = models.DecimalField(_("balance"), default=0.0, max_digits=20, decimal_places=2)
+    percentage = models.DecimalField(_("balance"), default=0.1, max_digits=2, decimal_places=2)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'phone_number']

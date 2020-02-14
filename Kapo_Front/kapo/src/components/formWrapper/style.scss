@@ -27,3 +27,15 @@
     justify-content: center;
     flex-direction: column;
 }
+
+@media (max-width: 1000px) {
+    .form-wrapper__container{
+        width: 50%;
+    }
+}
+
+@media (max-width: 767px) {
+    .form-wrapper__container{
+        width: 80%;
+    }
+}

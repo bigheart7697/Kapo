@@ -26,6 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='cky)4vk1(2sfkatfazii^s8e!4o%1
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=1))
+PRODUCTION = int(os.environ.get('PRODUCTION', default=0))
 
 ALLOWED_HOSTS = [os.environ.get("PRODUCTION_HOST", default='127.0.0.1')]
 
@@ -167,7 +168,7 @@ JWT_AUTH = {
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-if not DEBUG:
+if PRODUCTION:
     INSTALLED_APPS.insert(0, 'whitenoise.runserver_nostatic')
 
     # Must insert after SecurityMiddleware, which is first in settings/common.py

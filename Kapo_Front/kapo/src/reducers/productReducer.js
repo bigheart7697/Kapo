@@ -1,5 +1,6 @@
 import { FETCH_FIRST_BANNER, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_MY_PRODUCTS, FETCH_PRODUCT_CATEGORIES } from "../actions/types";
 import _ from "lodash";
+import {catDict} from "../components/basic/categoryDict"
 
 const INITIAL_VALUE = {
   products: {},
@@ -16,21 +17,17 @@ const productReducer = (state = INITIAL_VALUE, action) => {
       case FETCH_CATEGORY_HIERARCHY:
         return{
           ...state,
-          // category_hierarchy:  _.map(action.payload, (item, key) => {
-            // return item
-        // })
-          category_hierarchy: action.payload
+          category_hierarchy: catDict(action.payload)
         }
     case SEARCH_ITEM:
       return {
         ...state,
-        products: { ..._.mapKeys(action.payload, "id") }
+        sponsored_products: { ..._.mapKeys(action.payload, "id") }
       };
     // case DELETE_PRODUCT:
     //   return { ...state, products: _.omit(state.products, action.payload) };
     case ADD_PRODUCT:
     case FETCH_PRODUCT:
-      // case EDIT_PRODUCT:
       return {
         ...state,
         products: { ...state.products, [action.payload.id]: action.payload }
@@ -44,21 +41,6 @@ const productReducer = (state = INITIAL_VALUE, action) => {
         return {
           ...state,
           products: {..._.mapKeys(action.payload, "id") }
-        };
-      case FETCH_FIRST_BANNER:
-        return {
-          ...state,
-          first_banners: {..._.mapKeys(action.payload, "id")}
-        };
-      case FETCH_SECOND_BANNER:
-        return {
-          ...state,
-          second_banners: {..._.mapKeys(action.payload, "id")}
-        };
-      case FETCH_THIRD_BANNER:
-        return {
-          ...state,
-          third_banners: {..._.mapKeys(action.payload, "id")}
         };
     default:
       return state;

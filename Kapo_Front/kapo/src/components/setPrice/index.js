@@ -16,7 +16,6 @@ class SetPrice extends React.Component {
     state = {products: []}
 
     componentDidMount() {
-        this.props.fetchProducts()
         this.setState({products: [
             {'name': 'تست', 'price': 120000, 'image': image1, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
             {'name': 'تست', 'price': 120000, 'image': image2, 'description': 'بهترین کالا', 'owner': {'name': 'علی', 'address': 'نیاوران', 'country': 'ایران', 'city': 'تهران'}},
@@ -31,25 +30,25 @@ class SetPrice extends React.Component {
     componentDidUpdate() {
         if(Array.isArray(this.props.products)) {
             console.log('props', this.props.products)
-            if(this.state.products != this.props.products) {
+            if(this.state.products !== this.props.products) {
             this.setState({products: this.props.products ? this.props.products : []})
             }
         }
       }
 
     onSubmit = (formValues) => {
-        this.props.addProduct(formValues)
+        // this.props.addProduct(formValues)
     };
 
     render() {
-        this.props.setPrice(this.props.category);
+        // this.props.setPrice(this.props.category);
         return (
             <div className='set-price__container'>
                 <div className='set-price__section set-price__section--products'>
                     <div className='set-price__title'>لیست کالاهای مشابه</div>
                     <div className='set-price__product-list-container'>
                         <div className='set-price__product-list'>
-                            {this.state.products ? this.state.products.map((element, index) => {
+                            {this.props.products ? this.props.products.map((element, index) => {
                                 return <Product product={element} key={-2-index}></Product>
                             }) : <div></div>}
                         </div>
@@ -60,17 +59,17 @@ class SetPrice extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    let productItem = null
-    if(ownProps.match)
-    {
-      productItem = state.products.products[ownProps.match.params.id]
-      delete state.products.products[ownProps.match.params.id];
-    //   state.products.products[ownProps.match.params.id] = undefined
-    }else{
-      productItem = null
-    }
-    return { products: state.products.products, category: productItem? productItem.cat3 : null}
-}
+// const mapStateToProps = (state, ownProps) => {
+//     let productItem = null
+//     if(ownProps.match)
+//     {
+//       productItem = state.products.products[ownProps.match.params.id]
+//       delete state.products.products[ownProps.match.params.id];
+//     //   state.products.products[ownProps.match.params.id] = undefined
+//     }else{
+//       productItem = null
+//     }
+//     return { products: state.products.products, category: productItem? productItem.cat3 : null}
+// }
 
-export default connect(mapStateToProps, { fetchProducts, setPrice })(SetPrice)
+export default connect(null, { setPrice })(SetPrice)

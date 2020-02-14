@@ -1,0 +1,45 @@
+@import '../../../scss/base/variables.scss';
+
+.advertisement-details__container {
+    width: 100%;
+    display: flex;
+    direction: rtl;
+}
+
+.advertisement-details__content {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 3rem 0.5rem 3rem 0;
+    border-radius: 1rem;
+    border: 1px solid grey;
+    overflow: hidden;
+    background-color: $superwhite;
+}
+
+.advertisement-details__line {
+    display: flex;
+    flex-direction: row;
+}
+
+.advertisement-details__key {
+    width: 40%;
+    text-align: center;
+    padding: 2.3rem 0;
+}
+
+.advertisement-details__value {
+    width: 60%;
+    font-weight: 600;
+    text-align: center;
+    padding: 2rem;
+}
+
+@media (max-width: 767px) {
+    .advertisement-details__container {
+        flex-direction: column;
+    }
+    .advertisement-details__content {
+        width: 100%;
+    }
+}

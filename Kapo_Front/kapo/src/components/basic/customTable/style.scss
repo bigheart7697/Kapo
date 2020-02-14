@@ -19,8 +19,8 @@
 .custom-table__td {
     text-align: center;
     flex-grow: 1;
-    width: 20%;
-    padding: 2rem;
+    min-width: 16.67%;
+    padding: 2rem 0;
     border: 1px solid $borders;
 }
 

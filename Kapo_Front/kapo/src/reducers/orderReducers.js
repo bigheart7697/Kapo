@@ -14,14 +14,16 @@ const orderReducer = (state = INITIAL_VALUE, action) => {
         orders: { ...state.orders, [action.payload.id]: action.payload }
       };
     case FETCH_ORDERS:
+      console.log(action.payload);
+      
       return {
         ...state,
-        orders: { ...state.orders, ..._.mapKeys(action.payload, "id") }
+        orders: {  ..._.mapKeys(action.payload, "id") }
       };
     case FETCH_PRODUCT_ORDERS:
       return {
         ...state,
-        orders: { ...state.orders, ..._.mapKeys(action.payload, "id")}
+        orders: {  ..._.mapKeys(action.payload, "id")}
       };
     // case DELETE_PRODUCT:
     //   return { ...state, products: _.omit(state.products, action.payload) };

@@ -1,0 +1,36 @@
+@import '../../scss/base/variables.scss';
+
+.add-product__container {
+    width: 100%;
+    display: flex;
+    direction: rtl;
+}
+
+.add-product__section {
+    width: 50%;
+    padding: 5rem;
+}
+
+.add-product__section .form-wrapper__container {
+    width: 70%;
+}
+
+@media (max-width: 1000px) {
+    .add-product__section .form-wrapper__container {
+        width: 100%;
+    }
+    .add-product__section {
+        padding: 5rem 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .add-product__container {
+        flex-direction: column;
+    }
+
+    .add-product__section {
+        width: 80%;
+        margin: auto;
+    }
+}
