@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO } from "./types";
+import { FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/kapo/");
@@ -288,6 +288,7 @@ export const getCurrentUser = () => async dispatch => {
   }
 }
 
+<<<<<<< HEAD
 export const editProfile = (data, id) => async dispatch => {
   try{
     const respsonse = await server.patch(`accounts/${id}/`, data)
@@ -299,3 +300,13 @@ export const editProfile = (data, id) => async dispatch => {
 }
 
 export const chargeAccount = () => {};
+=======
+export const chargeAccount = () => {};
+
+export const getAllUsers = () => async dispatch => {
+  const response = await server.get("/admin_statistics/user_statistics/");
+  console.log(response.data);
+  
+  dispatch({ type: FETCH_USERS, payload: response.data });
+}
+>>>>>>> adc9893aafd5c44f3fd55e7df9e5c3332d224afc

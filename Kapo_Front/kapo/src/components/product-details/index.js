@@ -5,6 +5,7 @@ import faker from 'faker';
 
 import "./style.scss";
 
+import {translate} from '../basic/categoryDict';
 import Input from '../basic/customInput';
 import Button from "../basic/customButton";
 import Select from '../basic/customSelect';
@@ -165,7 +166,7 @@ class ProductDetails extends React.Component {
                   <td className="product-details__column">نوع کالا</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.first_category + '>' + this.props.product.second_category + '>' + this.props.product.third_category : '-'}</td>
+                  <td>{this.props.product ? translate(this.props.product.first_category) + '>' + translate(this.props.product.second_category) + '>' + translate(this.props.product.third_category) : '-'}</td>
                   <td>دسته کالا</td>
                 </tr>
                 <tr>

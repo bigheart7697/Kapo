@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'kapo',
+    'adminStatistics',
     'rest_framework',
     'django_filters',
     'background_task',
