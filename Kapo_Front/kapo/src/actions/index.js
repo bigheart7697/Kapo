@@ -3,7 +3,7 @@ import heroku from '../apis/heroku';
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT } from "./types";
+import { BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO } from "./types";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/kapo/");
@@ -283,7 +283,7 @@ export const createAdvertisingCampaigns = () => {};
 export const getCurrentUser = () => async dispatch => {
   try{
     const response = await heroku.get('accounts/current-user/')
-    console.log(response.data)
+    dispatch({ type: FETCH_USER_INFO, payload: response.data })
   }catch{
 
   }
