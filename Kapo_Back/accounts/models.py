@@ -9,6 +9,8 @@ profile_images_dir = 'users/'
 
 
 class User(AbstractUser):
+    MIN_BALANCE = 10000
+
     username = models.CharField(blank=True, null=True, max_length=100)
     email = models.EmailField(_('email'), unique=True)
     country = models.CharField(_('country'), max_length=100, default='')
@@ -21,8 +23,9 @@ class User(AbstractUser):
     corporate_number = models.PositiveIntegerField(_('corporate number'), unique=True, null=True, blank=True,
                                                    validators=[MaxValueValidator(999999999999),
                                                                MinValueValidator(100000000000)])
-    balance = models.DecimalField(_("balance"), default=0.0, max_digits=20, decimal_places=2)
-    percentage = models.DecimalField(_("balance"), default=0.1, max_digits=2, decimal_places=2)
+    balance = models.IntegerField(_("balance"), default=0.0,
+                                  validators=[MinValueValidator(0)])
+    percentage = models.DecimalField(_("balance"), default=0.02, max_digits=2, decimal_places=2)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'phone_number']
