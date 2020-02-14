@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Route, Router} from 'react-router-dom'
+import { Switch, Route, Router} from 'react-router-dom'
 import { connect } from 'react-redux'
 import history from '../../history'
 import { setIsLoggedInStatus, getCurrentUser } from '../../actions'
@@ -41,7 +41,6 @@ class App extends React.Component{
         return (
             <div className="app-container">
                 <Router history={history}>
-                    <div>
                         <Navbar loggedIn={this.props.isLoggedIn ? true : false}></Navbar>
                         <Route path="/" exact component={MainPage}/>
                         <Route path="/ProductList" exact component={AllProducts} />
@@ -66,8 +65,6 @@ class App extends React.Component{
                         <Route path="/dashboard_admin" exact component={AdminPanel} />
                         <Route path="/payment/result" exact component={PaymentResult}/>
                         <Route path="/advertisement/list" exact component={AdvertisementList}/>
-                        <Redirect to="/404"/>
-                    </div>
                 </Router>
             </div>
         )
