@@ -3,7 +3,8 @@ import heroku from '../apis/heroku';
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO } from "./types";
+import { FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO } from "./types";
+import bank from "../apis/bank";
 
 export const fetchProducts = () => async dispatch => {
   const response = await server.get("/kapo/");
@@ -48,9 +49,7 @@ export const fetchProductOrders = id => async dispatch => {
 
 export const completeOrder = id => async dispatch => {
   try {
-    console.log("$id")
-	const response = await server.post(`/kapo/orders/${id}/complete/`);
-	console.log(response)
+	  const response = await server.post(`/kapo/orders/${id}/complete/`);
     alert("سفارش پرداخت شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -262,6 +261,7 @@ export const setIsLoggedInStatus = () => {
 export const createSponsoredSearch = (formValues, id) => async dispatch => {
   try {
     const response = await server.post(`/kapo/products/${id}/sponsor/`, formValues)
+    history.push(`/pay/factor/${response.data.transaction}`);
     alert("درخواست اسپانسر کالا با موفقیت انجام شد")
   }
   catch {
@@ -293,14 +293,15 @@ export const chargeAccount = () => {};
 
 export const getAllUsers = () => async dispatch => {
   const response = await server.get("/admin_statistics/user_statistics/");
-  console.log(response.data);
-  
   dispatch({ type: FETCH_USERS, payload: response.data });
 }
 
 export const getAllTransactions = () => async dispatch => {
   const response = await server.get("/admin_statistics/transaction_statistics/");
-  console.log(response.data);
-  
   dispatch({ type: FETCH_TRANSACTIONS, payload: response.data });
+}
+
+export const fetch_factor = (id) => async dispatch => {
+  const response = await server.get(`kapo/transaction/${id}/`);
+  dispatch({type: FETCH_FACTOR, payload:response.data})
 }

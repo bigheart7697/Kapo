@@ -34,7 +34,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'name', 'first_category', 'second_category', 'third_category', 'cat1', 'cat2', 'cat3',
                   'description', 'image', 'price', 'second_hand', 'average_rating',
-                  'quantity', 'owner', 'production_year', 'available']
+                  'quantity', 'owner', 'production_year', 'available', 'created']
 
 
 class TransactionSerializer(serializers.ModelSerializer):

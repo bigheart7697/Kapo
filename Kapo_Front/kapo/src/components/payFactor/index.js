@@ -5,12 +5,14 @@ import './style.scss';
 import PersonDetails from '../basic/personDetails'
 import CustomTable from '../basic/customTable'
 import LinkToBank from '../basic/linkToBank'
+import {fetch_factor} from "../../actions"
+import { connect } from "react-redux";
 
-const factor = {
-    type: 'بنر تبلیغاتی',
-    product: {name: 'لباس بچه'},
-    days_number: 4
-}
+// const factor = {
+//     type: 'بنر تبلیغاتی',
+//     product: {name: 'لباس بچه'},
+//     days_number: 4
+// }
 
 const kapo = {
     is_corporate: true,
@@ -24,6 +26,10 @@ const kapo = {
 }
 
 class PayFactor extends React.Component {
+    componentDidMount() {
+        this.props.fetch_factor(this.props.match.params.id);
+    }
+
     get_price = (type) => {
         switch(type) {
             case 'کمپین تبلیغاتی':
@@ -43,7 +49,7 @@ class PayFactor extends React.Component {
                 return 'تعداد روز';
             case 'جست‌وجوی اسپانسر شده':
                 return 'تعداد بازدید';
-            case 'بنر تبلیغاتی':
+            case '':
                 return 'تعداد روز';
             default:
                 return 'تعداد';
@@ -51,6 +57,35 @@ class PayFactor extends React.Component {
     }
 
     render() {
+        let factor = {
+                type: 'بنر تبلیغاتی',
+                product: {name: 'لباس بچه'},
+                days_number: 4
+            }
+        this.props.factorObject? console.log(this.props.factorObject) : console.log("ez");
+        if (this.props.factorObject) {
+            console.log(this.props.factorObject.type)}
+            
+        if (this.props.factorObject && this.props.factorObject.type == 1){
+            factor = {
+                type: 'جست‌وجوی اسپانسر شده',
+                product: {name: this.props.factorObject.transaction_object.product.name},
+                days_number: this.props.factorObject.transaction_object.count
+            }}
+        if (this.props.factorObject && this.props.factorObject.type == 2){
+            factor = {
+            type: 'بنر تبلیغاتی',
+            product: {name: this.props.factorObject.transaction_object.product.name},
+            days_number: this.props.factorObject.transaction_object.days
+            }}
+        if (this.props.factorObject && this.props.factorObject.type == 3){
+            factor = {
+                type: 'کمپین تبلیغاتی',
+                product: {name: this.props.factorObject.transaction_object.product.name},
+                days_number: this.props.factorObject.transaction_object.days
+                }}
+
+
         return (
             <div className='pay-factor__container'>
                 <div className='pay-factor__inner-container'>
@@ -74,4 +109,17 @@ class PayFactor extends React.Component {
     }
 }
 
-export default PayFactor;
+
+const mapStatToProps = (state, ownProps) => {
+    let factorItem = null
+    if(ownProps.match)
+    {
+      factorItem = state.advertisements.transactions[ownProps.match.params.id]
+    }else{
+      factorItem = null
+    }
+    return { factorObject: factorItem }
+  }
+  
+  export default connect(mapStatToProps, { fetch_factor })(PayFactor);
+  
