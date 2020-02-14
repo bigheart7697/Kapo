@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import "./style-new.scss";
+import defaultImage from '../../assets/user.png'
 
 import NavItem from "../basic/navItem";
 import NavDropDown from '../basic/navDropDown';
@@ -126,7 +127,7 @@ setCorrectState = (path) => {
             <div className='navbar__auth'>
               {this.props.loggedIn ? 
                 (<div>
-                    <div className="navbar__circle" onClick={() => this.setState({ dropActive: !this.state.dropActive })}></div>
+                    <div className="navbar__circle" onClick={() => this.setState({ dropActive: !this.state.dropActive })} style={{ backgroundImage: `url("${defaultImage}")` }}></div>
                     <NavDropDown active={this.state.dropActive}/>
                   </div>)
               :

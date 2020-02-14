@@ -33,7 +33,7 @@ const FORM_VALUES = {
       label: "شهر",
       error: "لطفا شهر خود را وارد کنید"
     }, {
-      title: "Address",
+      title: "address",
       label: "آدرس"
     }, {
       title: "is_corporate",

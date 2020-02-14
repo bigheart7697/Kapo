@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import { editProfile } from '../../actions'
 
 import './style.scss'
 
@@ -25,7 +26,7 @@ const FORM_VALUES = {
         label: "شهر",
         error: "لطفا شهر خود را وارد کنید"
       }, {
-        title: "Address",
+        title: "address",
         label: "آدرس"
       }, {
         title: "corporate_name",
@@ -33,6 +34,11 @@ const FORM_VALUES = {
       }, {
         title: "corporate_number",
         label: "شماره شرکت"
+      },{
+        title: "image",
+        label: "تصویر کالا",
+        type: "file",
+        error: "لطفا تصویر کالا را بارگذاری کنید"
       }
     ],
     form_inputs_normal: [
@@ -49,7 +55,7 @@ const FORM_VALUES = {
           label: "شهر",
           error: "لطفا شهر خود را وارد کنید"
         }, {
-          title: "Address",
+          title: "address",
           label: "آدرس"
         }, {
           title: "first_name",
@@ -57,19 +63,23 @@ const FORM_VALUES = {
         }, {
           title: "last_name",
           label: "نام خانوادگی"
-        }
+        },{
+            title: "photo",
+            type: "file",
+            error: "لطفا تصویر کالا را بارگذاری کنید"
+          }
       ],
   };
 
 class EditProfile extends React.Component{
     onSubmit = (formValues) => {
-        console.log('submit')
+        this.props.editProfile(formValues, this.props.information.id)
     }
     render(){
         console.log(this.props.information)
         return(
             <div className="edit-profile__container">
-                <ProfileImage />
+                <ProfileImage image = {this.props.information.photo ? this.props.information.photo : null}/>
                 <div className="edit-profile__email">
                 {this.props.information ? this.props.information.email : null}
                    : ایمیل
@@ -94,4 +104,4 @@ const mapStateToProps = state => {
     return { information : state.user.information }
 }
 
-export default connect(mapStateToProps)(EditProfile)
+export default connect(mapStateToProps, { editProfile })(EditProfile)

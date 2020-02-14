@@ -1,5 +1,4 @@
 import server from "../apis/server";
-import heroku from '../apis/heroku';
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
@@ -282,10 +281,20 @@ export const createAdvertisingCampaigns = () => {};
   
 export const getCurrentUser = () => async dispatch => {
   try{
-    const response = await heroku.get('accounts/current-user/')
+    const response = await server.get('accounts/current-user/')
     dispatch({ type: FETCH_USER_INFO, payload: response.data })
   }catch{
 
+  }
+}
+
+export const editProfile = (data, id) => async dispatch => {
+  try{
+    const respsonse = await server.patch(`accounts/${id}/`, data)
+    alert('success')
+    console.log(respsonse.data)
+  }catch{
+    alert('error')
   }
 }
 
