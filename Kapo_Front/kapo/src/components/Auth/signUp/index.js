@@ -12,7 +12,6 @@ const FORM_VALUES = {
   submitText: "ثبت نام",
   title: "ثبت نام کنید",
   form_inputs: [
-    //corporate_name, corporate_number
     {
       title: "email",
       label: "ایمیل",
@@ -56,6 +55,11 @@ const FORM_VALUES = {
     }, {
       title: "last_name",
       label: "نام خانوادگی"
+    },{
+      title: "image",
+      label: "تصویر کالا",
+      type: "file",
+      error: "لطفا تصویر کالا را بارگذاری کنید"
     }
   ]
 };

@@ -29,6 +29,7 @@ urlpatterns = [
 
                   path('accounts/', include("accounts.urls")),
                   path('kapo/', include('kapo.urls')),
+                  path('admin_statistics/', include('adminStatistics.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if PRODUCTION:

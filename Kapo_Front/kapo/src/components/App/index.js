@@ -28,6 +28,8 @@ import PayFactor from '../payFactor'
 import Dashboard from '../dashboard'
 import PaymentResult from '../basic/paymentResult'
 import AdvertisementList from '../advertisementList'
+import AdminPanel from '../adminPanel'
+import setAuthToken from '../basic/setAuthToken'
 
 class App extends React.Component{
     componentDidMount(){
@@ -50,7 +52,7 @@ class App extends React.Component{
                         <Route path="/Auth/SignUp" exact component={SignUp}/>
                         <Route path="/MyProductList" exact component={MyProductList} />
                         <Route path="/order/preview/:id" exact component={PreviewOrder}/>
-                        <Route path="/bank/:id" exact component={Bank}/>
+                        <Route path="/order/bank/:id" exact component={Bank}/>
                         <Route path="/order/list" exact component={MyOrders}/>
                         <Route path="/order/factor/:id" exact component={OrderFactor}/>
                         <Route path="/AddProduct/SetPrice/:id" exact component={SetPrice}/>
@@ -62,6 +64,7 @@ class App extends React.Component{
                         <Route path="/ProductList/:cat1/:cat2/:cat3" exact component={CategoryProducts}/>
                         <Route path="/pay/factor" exact component={PayFactor}/>
                         <Route path="/dashboard" exact component={Dashboard} />
+                        <Route path="/dashboard_admin" exact component={AdminPanel} />
                         <Route path="/payment/result" exact component={PaymentResult}/>
                         <Route path="/advertisement/list" exact component={AdvertisementList}/>
                     </div>
