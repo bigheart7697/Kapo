@@ -4,6 +4,7 @@ import defaultImg from '../../../assets/default.jpg'
 import './style.scss'
 
 import StarScore from '../../basic/starScore'
+import { Link } from 'react-router-dom'
 
 class productCard extends React.Component {
     state={mouseOver: false, element: this.props.product}
@@ -22,7 +23,7 @@ class productCard extends React.Component {
                     </div>
                 </>
                 : (<div className="product-card__details-button-container">
-                    <div className={`product-card__details-button` + (this.props.is_sponsered ? ` product-card__details-button--gold` : ``)}>مشاهده جزییات</div>
+                    <div className={`product-card__details-button` + (this.props.is_sponsered ? ` product-card__details-button--gold` : ``)}><Link to={`/product/` + (this.props.product ? this.props.product.id : ``)}>مشاهده جزییات</Link></div>
                 </div>)}
                 <div className="product-card__image-container">
                     <div className={`product-card__image-before` + (this.props.is_sponsered ? ` product-card__image-before--gold` : ``)} />

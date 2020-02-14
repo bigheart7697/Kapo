@@ -32,6 +32,23 @@
     background-color: $hover-color;
 }
 
+@media (max-width: 1000px) {
+    .navitem__box {
+        padding: 1.5rem 0;
+    }
+    .navitem__container {
+        white-space: initial;
+        width: 10rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .navitem__container {
+        width: 5rem;
+    }
+}
+
 @media(max-width: 550px){
     .navitem__container{
         padding: 0.2rem;

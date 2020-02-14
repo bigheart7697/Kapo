@@ -14,6 +14,7 @@ $transition-time: 0.4s;
     flex-direction: row-reverse;
     background-color: $second-color;
     align-items: center;
+    overflow: hidden;
 }
 
 .navbar__flex{
@@ -66,7 +67,6 @@ $transition-time: 0.4s;
 .navbar__searchbar {
     width: 40%;
     display: table;
-    margin-left: 10%;
 }
 
 .navbar__auth {
@@ -101,4 +101,18 @@ $transition-time: 0.4s;
 
 .navbar__component--padding-top {
     padding-top: 7rem;
+}
+
+@media (max-width: 1000px) {
+    .navbar__searchbar {
+        width: 30%;
+        margin-left: 5%;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar__searchbar {
+        width: 40%;
+        margin-left: 5%;
+    }
 }

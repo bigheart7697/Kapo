@@ -17,6 +17,7 @@
     border-radius: 1rem;
     background-color: $white;
     padding: 2rem 1rem;
+    margin-bottom: 2rem;
 }
 
 .advertisement-list__title {
@@ -26,3 +27,17 @@
     text-align: center;
 }
 
+@media (max-width: 1000px) {
+    .advertisement-list__container {
+        flex-direction: column;
+    }
+    .advertisement-list__section {
+        width: 80%;
+    }
+}
+
+@media (max-width: 767px) {
+    .advertisement-list__section {
+        width: 100%;
+    }
+}
