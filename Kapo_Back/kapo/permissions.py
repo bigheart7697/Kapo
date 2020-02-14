@@ -14,32 +14,39 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # Write permissions are only allowed to the owner of the snippet.
-        return obj.owner == request.user
+        return obj.owner == request.user or request.user.is_staff
 
 
 class IsNotOwnerOfOrderedProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        if obj.product.owner == request.user:
+        if obj.product.owner == request.user and not request.user.is_staff:
             raise PermissionDenied()
         return True
 
 
 class IsCustomerOfOrderedProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        if obj.customer != request.user:
+        if obj.customer != request.user and not request.user.is_staff:
             raise PermissionDenied()
         return True
 
 
 class IsOwnerOfProduct(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        if obj.product.owner != request.user:
+        if obj.product.owner != request.user and not request.user.is_staff:
             raise PermissionDenied()
         return True
 
 
 class IsOwnerOfTransaction(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        if obj.transaction_object.product.owner != request.user:
+        if obj.transaction_object.product.owner != request.user and not request.user.is_staff:
+            raise PermissionDenied()
+        return True
+
+
+class HasEnoughBalance(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user.balance < request.user.MIN_BALANCE:
             raise PermissionDenied()
         return True

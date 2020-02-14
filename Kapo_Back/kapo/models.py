@@ -30,12 +30,16 @@ class Transaction(models.Model):
         SPONSOR = 1
         BANNER = 2
         CAMPAIGN = 3
+        ORDER = 4
+        INCREASE_BALANCE = 5
+        LIQUIDATE = 6
 
     id = models.AutoField(primary_key=True)
     type = models.IntegerField(_("type"), choices=Type.choices)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='debt')
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='credit', null=True, blank=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
     transaction_object = GenericForeignKey('content_type', 'object_id')
     amount = models.IntegerField(_("amount"))
     created = models.DateTimeField(_("created"), auto_now_add=True)
@@ -340,8 +344,9 @@ class SponsoredSearch(TransactionMixin, models.Model):
         verbose_name_plural = _('Sponsored Searches')
 
 
-class Banner(models.Model):
+class Banner(TransactionMixin, models.Model):
     FEE = 1000000
+
     MAX_FIRST_NUM = 6
     MAX_SECOND_NUM = 6
     MAX_THIRD_NUM = 6
@@ -363,7 +368,6 @@ class Banner(models.Model):
     slogan = models.TextField(_("slogan"), max_length=100)
     days = models.IntegerField(_("days"), validators=[MinValueValidator(1), MaxValueValidator(7)])
     remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
-    receipt = GenericRelation(Transaction)
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
@@ -397,6 +401,11 @@ class Rate(models.Model):
         unique_together = [["user", "product"]]
 
 
+class Liquidate(TransactionMixin, models.Model):
+    owner = models.ForeignKey(User, related_name='liquidate', on_delete=models.CASCADE)
+    amount = models.IntegerField(_("amount"))
+
+
 @receiver(post_save, sender=SponsoredSearch)
 def create_transaction(sender, instance, created, **kwargs):
     if created:
@@ -411,3 +420,11 @@ def create_transaction(sender, instance, created, **kwargs):
         transaction_type = Transaction.Type.BANNER
         Transaction.objects.create(sender=instance.product.owner, transaction_object=instance,
                                    amount=instance.days*instance.FEE, type=transaction_type)
+
+
+@receiver(post_save, sender=Liquidate)
+def create_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.LIQUIDATE
+        Transaction.objects.create(sender=instance.owner, transaction_object=instance,
+                                   amount=instance.amount, type=transaction_type)

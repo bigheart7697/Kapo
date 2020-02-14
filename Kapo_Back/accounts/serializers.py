@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'country', 'city', 'address', 'phone_number', 'photo',
                   'is_corporate', 'first_name', 'last_name', 'corporate_name', 'balance',
-                  'corporate_number')
+                  'corporate_number', 'date_joined')
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):

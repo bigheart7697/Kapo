@@ -17,7 +17,7 @@ from .tasks import update_order_state, update_banner
 
 class ProductCreateView(generics.CreateAPIView):
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, HasEnoughBalance]
 
     def perform_create(self, serializer):
         cat1 = self.request.data['cat1']
@@ -306,6 +306,16 @@ def order_complete_view(request, pk):
         else:
             order.state = order.State.COMPLETED
             order.save()
+            owner = order.product.owner
+            amount = int(owner.percentage * order.product.price)
+            Liquidate.objects.create(owner=owner, amount=amount)
+
+            transaction_type = Transaction.Type.ORDER
+            Transaction.objects.create(sender=order.customer, transaction_object=order,
+                                       amount=order.product.price, type=transaction_type)
+
+            owner.balance -= amount
+            owner.save()
             return Response(request.data, status=status.HTTP_200_OK)
     except Order.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
