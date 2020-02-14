@@ -74,10 +74,12 @@ class BannerSerializer(serializers.ModelSerializer):
     remaining_days = serializers.IntegerField(read_only=True)
     state = serializers.CharField(source='get_state_display', read_only=True)
     valid = serializers.BooleanField(read_only=True)
+    transaction = serializers.IntegerField(source='get_transaction.id', read_only=True)
 
     class Meta:
         model = Banner
-        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created', 'place', 'slogan']
+        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created', 'place', 'slogan',
+                  'transaction']
 
 
 class RateSerializer(serializers.ModelSerializer):

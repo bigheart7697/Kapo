@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 
 from accounts.permissions import IsOwnerProfileOrReadOnly
 from accounts.serializers import *
+from kapo.models import Transaction
 
 
 @api_view(['GET'])
@@ -34,7 +35,13 @@ def balance_increase_view(request, pk):
     try:
         user = User.objects.get(id=pk)
         amount = int(request.data['amount'])
+
+        transaction_type = Transaction.Type.INCREASE_BALANCE
+        Transaction.objects.create(sender=request.user,
+                                   amount=amount, type=transaction_type)
+
         user.balance += amount
+        user.save()
         return Response(request.data, status=status.HTTP_200_OK)
     except User.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)

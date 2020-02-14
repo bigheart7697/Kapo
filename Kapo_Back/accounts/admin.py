@@ -15,6 +15,7 @@ class UserAdmin(BaseUserAdmin):
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         (_('Profile Status'), {'fields': ('is_corporate', 'first_name', 'last_name',
                                           'corporate_name', 'corporate_number')}),
+        (_('Financial'), {'fields': ('balance',)}),
     )
     add_fieldsets = (
         (None, {

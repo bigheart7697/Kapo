@@ -13,7 +13,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 @admin.register(SponsoredSearch)
-class OrderAdmin(admin.ModelAdmin):
+class SponsoredSearchAdmin(admin.ModelAdmin):
     model = SponsoredSearch
 
 
@@ -25,3 +25,8 @@ class BannerAdmin(admin.ModelAdmin):
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
     model = Transaction
+
+
+@admin.register(Liquidate)
+class LiquidateAdmin(admin.ModelAdmin):
+    model = Liquidate
