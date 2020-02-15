@@ -4,6 +4,11 @@ import './style.scss'
 
 import DashboardBar from '../basic/dashboardBar'
 import EditProfile from '../editProfile'
+import MyOrders from "../MyOrders"
+import MYProductList from "../myProductList"
+import MyBanners from "../MyBanners"
+import MyCampaigns from "../MyCampaigns"
+import MySponsors from "../MySponsors"
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -17,7 +22,16 @@ const DASHBOARD_ITEMS = [
         text: "سفارش‌های من",
         image: orderImage
     },{
-        text: "آدرس‌های من",
+        text: "کالاهای من",
+        image: addressImage
+    },{
+        text: "بنرهای تبلیغاتی من",
+        image: addressImage
+    },{
+        text: "کمپین‌های تبلیغاتی من",
+        image: addressImage
+    },{
+        text: "جست‌وجوهای پیشرفته من",
         image: addressImage
     }
 ]
@@ -32,9 +46,15 @@ class Dashboard extends React.Component{
             case 0:
                 return(<EditProfile/>)
             case 1:
-                return(<div>My Orders</div>)
+                return(<MyOrders/>)
             case 2:
-                return(<div>My Locations</div>)
+                return(<MYProductList/>)
+            case 3:
+                return(<MyBanners type="mine"/>)
+            case 4:
+                return(<MyCampaigns type="mine"/>)
+            case 5:
+                return(<MySponsors type="mine"/>)
             default:
                 return(<div>Default</div>)
         }

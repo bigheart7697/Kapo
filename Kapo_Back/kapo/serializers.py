@@ -18,10 +18,26 @@ class TransactionObjectRelatedField(serializers.RelatedField):
             serializer = SponsoredSearchSerializer(value)
         elif isinstance(value, Banner):
             serializer = BannerSerializer(value)
+        elif isinstance(value, Campaign):
+            serializer = CampaignSerializer(value)
+        elif isinstance(value, Order):
+            serializer = OrderSerializer(value)
+        elif isinstance(value, Liquidate):
+            serializer = LiquidateSerializer(value)
+        elif value is None:
+            serializer = UserSerializer(value)
         else:
             raise Exception('Unexpected type of transaction object')
 
         return serializer.data
+
+
+class LiquidateSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Liquidate
+        fields = ['amount', 'owner']
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -34,7 +50,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'name', 'first_category', 'second_category', 'third_category', 'cat1', 'cat2', 'cat3',
                   'description', 'image', 'price', 'second_hand', 'average_rating',
-                  'quantity', 'owner', 'production_year', 'available']
+                  'quantity', 'owner', 'production_year', 'available', 'created']
 
 
 class TransactionSerializer(serializers.ModelSerializer):
@@ -69,6 +85,19 @@ class SponsoredSearchSerializer(serializers.ModelSerializer):
                   'transaction', 'created', 'valid']
 
 
+class CampaignSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True, many=False)
+    remaining_days = serializers.IntegerField(read_only=True)
+    state = serializers.CharField(source='get_state_display', read_only=True)
+    valid = serializers.BooleanField(read_only=True)
+    transaction = serializers.IntegerField(source='get_transaction.id', read_only=True)
+
+    class Meta:
+        model = Campaign
+        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created',
+                  'transaction', 'discount']
+
+
 class BannerSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True, many=False)
     remaining_days = serializers.IntegerField(read_only=True)
@@ -78,8 +107,8 @@ class BannerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Banner
-        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created', 'place', 'slogan',
-                  'transaction']
+        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created', 'place',
+                  'transaction', 'slogan']
 
 
 class RateSerializer(serializers.ModelSerializer):

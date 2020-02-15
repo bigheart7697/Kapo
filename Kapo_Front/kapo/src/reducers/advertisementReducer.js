@@ -1,10 +1,14 @@
-import { FETCH_FIRST_BANNER, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, BANNER_COUNT, FETCH_TRANSACTIONS } from "../actions/types";
+import { FETCH_CAMPAIGNS, FETCH_SPONSORS, FETCH_BANNERS ,FETCH_FIRST_BANNER, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, BANNER_COUNT, FETCH_TRANSACTIONS, FETCH_FACTOR } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_VALUE = {
+  sponsors: {},
+  banners: {},
+  campaigns: {},
   first_banners: {},
   second_banners: {},
-  third_banners: {}
+  third_banners: {},
+  transactions: {}
 };
 
 const advertisementReducer = (state = INITIAL_VALUE, action) => {
@@ -46,7 +50,27 @@ const advertisementReducer = (state = INITIAL_VALUE, action) => {
     case FETCH_TRANSACTIONS:
       return {
         ...state,
-        transactions: {..._.mapKeys(action.payload, "id")}
+        transactions: {..._.mapKeys(action.payload, "id") }
+      }
+    case FETCH_FACTOR:
+      return {
+        ...state,
+        transactions: { ...state.transactions, [action.payload.id]: action.payload }
+      };
+    case FETCH_BANNERS:
+      return {
+        ...state,
+        banners: { ..._.mapKeys(action.payload, "id") }
+      }
+    case FETCH_CAMPAIGNS:
+      return {
+        ...state,
+        campaigns: { ..._.mapKeys(action.payload, "id") }
+      }
+    case FETCH_SPONSORS:
+      return {
+        ...state,
+        sponsors: { ..._.mapKeys(action.payload, "id") }
       }
     default:
       return state;

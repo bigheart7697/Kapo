@@ -47,6 +47,12 @@ const FORM_VALUES = {
       error: "لطفا نوع کالای خود را وارد نمایید"
     },
     {
+      title: "price",
+      label: "قیمت",
+      inputType: "number",
+      error: "لطفا قیمت کالای موجود را وارد کنید"
+    },
+    {
       title: "image",
       label: "تصویر کالا",
       type: "file",

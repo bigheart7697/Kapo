@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^products/(?P<pk>\d+)/order/$', views.OrderCreateView.as_view(), name='order'),
     url(r'^products/(?P<pk>\d+)/sponsor/$', views.SponsoredSearchCreateView.as_view(), name='banner'),
     url(r'^products/(?P<pk>\d+)/banner/$', views.BannerCreateView.as_view(), name='sponsor'),
+    url(r'^products/(?P<pk>\d+)/campaign/$', views.CampaignCreateView.as_view(), name='campaign'),
+    url(r'^products/(?P<pk>\d+)/campaigns/$', views.ProductCampaignListView.as_view(), name='product-campaigns'),
     url(r'^search/$', views.ProductSearchView.as_view(), name='search'),
     url(r'^sponsored-search/$', views.SponsoredSearchView.as_view(), name='sponsored_search'),
     url(r'^orders/$', views.CustomerOrderListView.as_view(), name='customer-orders'),
@@ -51,6 +53,11 @@ urlpatterns = [
     url(r'^sponsors/(?P<pk>\d+)/complete/$', views.sponsor_complete_view, name='sponsor-complete'),
     url(r'^sponsors/(?P<pk>\d+)/fail/$', views.sponsor_fail_view, name='sponsor-fail'),
     url(r'^my-sponsors/$', views.OwnerSponsorSearchListView.as_view(), name='my-sponsors'),
+
+    url(r'^my-campaigns/$', views.OwnerCampaignListView.as_view(), name='campaigns'),
+    url(r'^campaigns/(?P<pk>\d+)/$', views.CampaignDetailView.as_view(), name='campaign-detail'),
+    url(r'^campaigns/(?P<pk>\d+)/complete/$', views.campaign_complete_view, name='campaign-complete'),
+    url(r'^campaigns/(?P<pk>\d+)/fail/$', views.campaign_fail_view, name='campaign-fail'),
 
     url(r'^transaction/(?P<pk>\d+)/$', views.TransactionDetailView.as_view(), name='transaction-detail'),
 

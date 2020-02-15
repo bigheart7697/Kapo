@@ -1,8 +1,8 @@
 from accounts.models import User
-from kapo.models import Transaction, Banner, SponsoredSearch
+from kapo.models import Transaction, Banner, SponsoredSearch, Campaign
 from .permissions import IsStaff
 from accounts.serializers import UserSerializer
-from kapo.serializers import TransactionSerializer, BannerSerializer, SponsoredSearchSerializer
+from kapo.serializers import TransactionSerializer, BannerSerializer, SponsoredSearchSerializer, CampaignSerializer
 from rest_framework import generics, permissions
 
 
@@ -28,5 +28,11 @@ class SponsoredSearchesListView(generics.ListAPIView):
     serializer_class = SponsoredSearchSerializer
     permission_classes = [permissions.IsAuthenticated, IsStaff]
     queryset = SponsoredSearch.objects.all()
+
+
+class CampaignsListView(generics.ListAPIView):
+    serializer_class = CampaignSerializer
+    permission_classes = [permissions.IsAuthenticated, IsStaff]
+    queryset = Campaign.objects.all()
 
 

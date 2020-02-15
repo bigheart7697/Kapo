@@ -60,7 +60,7 @@ class App extends React.Component{
                         <Route path="/ProductList/:cat1" exact component={CategoryProducts}/>
                         <Route path="/ProductList/:cat1/:cat2" exact component={CategoryProducts}/>
                         <Route path="/ProductList/:cat1/:cat2/:cat3" exact component={CategoryProducts}/>
-                        <Route path="/pay/factor" exact component={PayFactor}/>
+                        <Route path="/pay/factor/:id" exact component={PayFactor}/>
                         <Route path="/dashboard" exact component={Dashboard} />
                         <Route path="/dashboard_admin" exact component={AdminPanel} />
                         <Route path="/payment/result" exact component={PaymentResult}/>
