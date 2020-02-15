@@ -107,8 +107,8 @@ class BannerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Banner
-        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created', 'place', 'slogan',
-                  'transaction']
+        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created', 'place',
+                  'transaction', 'slogan']
 
 
 class RateSerializer(serializers.ModelSerializer):
