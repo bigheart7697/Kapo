@@ -22,6 +22,11 @@ class BannerAdmin(admin.ModelAdmin):
     model = Banner
 
 
+@admin.register(Campaign)
+class CampaignAdmin(admin.ModelAdmin):
+    model = Campaign
+
+
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
     model = Transaction

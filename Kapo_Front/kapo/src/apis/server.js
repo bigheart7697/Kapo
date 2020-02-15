@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-    baseURL: 'https://kapokala.herokuapp.com/'
+    baseURL: 'https://kapokala.herokuapp.com'
 })

@@ -200,9 +200,12 @@ class CampaignCreateView(generics.CreateAPIView):
             return Response(self.request.data, status=status.HTTP_404_NOT_FOUND)
 
 
-class CampaignListView(generics.ListAPIView):
+class OwnerCampaignListView(generics.ListAPIView):
     serializer_class = CampaignSerializer
     queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED)
+
+    def get_queryset(self):
+        return Campaign.objects.filter(product__owner=self.request.user)
 
 
 class CampaignDetailView(generics.RetrieveAPIView):

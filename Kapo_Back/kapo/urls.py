@@ -54,7 +54,7 @@ urlpatterns = [
     url(r'^sponsors/(?P<pk>\d+)/fail/$', views.sponsor_fail_view, name='sponsor-fail'),
     url(r'^my-sponsors/$', views.OwnerSponsorSearchListView.as_view(), name='my-sponsors'),
 
-    url(r'^campaigns/$', views.CampaignListView.as_view(), name='campaigns'),
+    url(r'^my-campaigns/$', views.OwnerCampaignListView.as_view(), name='campaigns'),
     url(r'^campaigns/(?P<pk>\d+)/$', views.CampaignDetailView.as_view(), name='campaign-detail'),
     url(r'^campaigns/(?P<pk>\d+)/complete/$', views.campaign_complete_view, name='campaign-complete'),
     url(r'^campaigns/(?P<pk>\d+)/fail/$', views.campaign_fail_view, name='campaign-fail'),
