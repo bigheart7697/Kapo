@@ -12,7 +12,7 @@ const FORM_VALUES = {
     title: "ثبت درخواست کمپین تبلیغاتی",
     form_inputs: [
       {
-        title: "count",
+        title: "days",
         label: "تعداد روز",
         inputType: "number",
         error: "لطفا تعداد روز نمایش را وارد کنید"
@@ -29,7 +29,7 @@ const FORM_VALUES = {
         error: "لطفا مکان نمایش کمپین خود را مشخص کنید"
       },
       {
-        title: "percentage",
+        title: "discount",
         label: "درصد تخفیف",
         inputType: "number",
         error: "لطفا درصد تخفیف را وارد کنید"

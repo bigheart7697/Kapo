@@ -9,6 +9,9 @@ import ProductReports from '../reports/productReports'
 import TransactionReports from '../reports/transactionReports'
 import { connect } from 'react-redux'
 import AdvertisementList from '../advertisementList'
+import MyBanners from "../MyBanners"
+import MyCampaigns from "../MyCampaigns"
+import MySponsors from "../MySponsors"
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -147,11 +150,11 @@ class AdminPanel extends React.Component{
             case 2:
                 return(<TransactionReports transactions={TRANSACTIONS} accounts={ACCOUNTS} />)
             case 3:
-                return(<AdvertisementList />)
+                return(<MyBanners type="all"/>)
             case 4:
-                return(<AdvertisementList />)
+                return(<MyCampaigns type="all"/>)
             case 5:
-                return(<AdvertisementList />)
+                return(<MySponsors type="all"/>)
             default:
                 return(<div>Default</div>)
         }

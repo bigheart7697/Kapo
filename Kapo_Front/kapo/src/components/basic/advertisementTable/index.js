@@ -26,7 +26,7 @@ class AdvertisementTable extends React.Component {
                         <div className='advertisement-table__table-cell'>{index + 1}</div>
                         <div className='advertisement-table__table-cell'>{element.product ? element.product.name : '-'}</div>
                         <div className='advertisement-table__table-cell'>{(this.props.type === 'banner' || this.props.type === 'campaign') ? element.place : element.search_phrases}</div>
-                        <div className='advertisement-table__table-cell'>{element.remaining_count}</div>
+                        <div className='advertisement-table__table-cell'>{element.remaining_count? element.remaining_count : element.remaining_days}</div>
                     </div>
                 ) : null}
             </div>
