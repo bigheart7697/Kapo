@@ -1,10 +1,11 @@
-import { FETCH_FIRST_BANNER, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, BANNER_COUNT, FETCH_TRANSACTIONS } from "../actions/types";
+import { FETCH_FIRST_BANNER, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, BANNER_COUNT, FETCH_TRANSACTIONS, FETCH_FACTOR } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_VALUE = {
   first_banners: {},
   second_banners: {},
-  third_banners: {}
+  third_banners: {},
+  transactions: {}
 };
 
 const advertisementReducer = (state = INITIAL_VALUE, action) => {
@@ -48,6 +49,11 @@ const advertisementReducer = (state = INITIAL_VALUE, action) => {
         ...state,
         transactions: {..._.mapKeys(action.payload, "id")}
       }
+      case FETCH_FACTOR:
+          return {
+            ...state,
+            transactions: { ...state.transactions, [action.payload.id]: action.payload }
+          };
     default:
       return state;
   }
