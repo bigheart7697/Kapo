@@ -27,7 +27,7 @@ const FORM_VALUES = {
 
 class SignIn extends React.Component {
   onSubmit = (formValues) => {
-    this.props.signInAction(formValues)
+    this.props.signInAction(formValues, this.props.showModal)
   };
   render() {
     return (

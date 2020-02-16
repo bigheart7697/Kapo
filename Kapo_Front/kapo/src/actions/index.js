@@ -84,6 +84,25 @@ export const failBanner = id => async dispatch => {
   }
 }
 
+export const completeCampaign = id => async dispatch => {
+  try {
+    const response = await server.post(`/kapo/campaigns/${id}/complete/`);
+    alert("هزینه‌ی کمپن پرداخت شد");
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
+export const failCampaign = id => async dispatch => {
+  try {
+    const response = await server.post(`/kapo/campaigns/${id}/fail/`);
+    alert("پرداخت هزینه‌ی کمپین موفقیت آمیز نبود");
+  }
+  catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
 
 export const completeSponsor = id => async dispatch => {
   try {
@@ -130,23 +149,19 @@ export const setPrice = (category = null) => async dispatch => {
 }
 
 export const fetchProduct = id => async dispatch => {
-  console.log("id")
-  console.log(id)
   const response = await server.get(`/kapo/products/${id}/`)
-  console.log(response)
+  console.log('prooooduct')
+  console.log(response.data)
   dispatch({ type: FETCH_PRODUCT, payload: response.data })
 }
 
-export const searchProducts = (search, category = null) => async dispatch => {
-  console.log(search)
+export const searchProducts = (search, category = null, params = null) => async dispatch => {
   let response
   if (search !== "") {
-    response = await server.get(`/kapo/search/?search=${search}`);
+    response = await server.get(`/kapo/search/${search ? `?search=${search}` : ''}`, {params});
   } else {
     response = await server.get(`/kapo/`)
   }
-  console.log('response')
-  console.log(response)
   dispatch({ type: FETCH_PRODUCTS, payload: response.data });
 };
 
@@ -211,20 +226,17 @@ export const addToCart = (id, formValues) => async dispatch => {
   }
 };
 
-export const SignIn = (auth) => async dispatch => {
+export const SignIn = (auth, showModal) => async dispatch => {
   try {
-    console.log(auth)
     setAuthToken()
     const response = await server.post('/token-auth/', auth)
     localStorage.setItem("jwtToken", response.data.token)
     localStorage.setItem("user_email", response.data.user.email)
     setAuthToken(response.data.token)
-    console.log(response.data.token)
-    alert("ورود با موفقیت انجام شد")
     history.push('/')
     dispatch({ type: LOG_IN })
-  } catch{
-    alert("error")
+  } catch(e) {
+    showModal('خطا', 'عملیات ورود با خطا مواجه شد', e.message)
   }
 }
 
@@ -235,16 +247,16 @@ export const SignOut = () => async dispatch => {
   dispatch({ type: LOG_OUT })
 }
 
-export const SignUp = (formValues) => async dispatch => {
+export const SignUp = (formValues, showModal) => async dispatch => {
   try {
     setAuthToken()
     const response = await server.post("/accounts/register/", formValues)
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
     console.log(response)
-    alert("ثبت‌نام با موفقیت انجام شد")
-  } catch{
-    alert("error")
+    showModal("ثبت‌نام", "ثبت‌نام با موفقیت انجام شد")
+  } catch {
+    showModal("ثبت‌نام", "ثبت‌نام با خطا مواجه شد")
   }
 }
 

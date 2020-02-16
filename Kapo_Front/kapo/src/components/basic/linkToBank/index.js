@@ -20,7 +20,7 @@ const LinkToBank = props => {
                 </div>
             </div>
             <div className="link-to-bank__one-third-container">
-                <div className="link-to-bank__button"><NavLink to={"/order/bank/" + props.id}>انتقال به درگاه بانک</NavLink></div>
+                <div className="link-to-bank__button"><NavLink to={"/bank/" + props.id}>انتقال به درگاه بانک</NavLink></div>
             </div>
         </div>
     );
