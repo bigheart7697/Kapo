@@ -45,7 +45,7 @@ urlpatterns = [
     url(r'^second-banners/$', views.BannerSecondListView.as_view(), name='second-banners'),
     url(r'^third-banners/$', views.BannerThirdListView.as_view(), name='third-banners'),
     url(r'^my-banners/$', views.OwnerBannerListView.as_view(), name='my-banners'),
-    url(r'^banner-count/(?P<banner_id>\d+)/$', views.get_pending_banners_count, name='pending-banners'),
+    url(r'^banner-count/(?P<pid>\d+)/$', views.get_pending_banners_count, name='pending-banners'),
     url(r'^banners/(?P<pk>\d+)/$', views.BannerDetailView.as_view(), name='banner-detail'),
     url(r'^banners/(?P<pk>\d+)/complete/$', views.banner_complete_view, name='banner-complete'),
     url(r'^banners/(?P<pk>\d+)/fail/$', views.banner_fail_view, name='banner-fail'),
@@ -58,6 +58,7 @@ urlpatterns = [
     url(r'^campaigns/(?P<pk>\d+)/$', views.CampaignDetailView.as_view(), name='campaign-detail'),
     url(r'^campaigns/(?P<pk>\d+)/complete/$', views.campaign_complete_view, name='campaign-complete'),
     url(r'^campaigns/(?P<pk>\d+)/fail/$', views.campaign_fail_view, name='campaign-fail'),
+    url(r'^campaign-count/(?P<pid>\d+)/$', views.get_pending_campaigns_count, name='pending-campaigns'),
 
     url(r'^transaction/(?P<pk>\d+)/$', views.TransactionDetailView.as_view(), name='transaction-detail'),
 

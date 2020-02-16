@@ -1,0 +1,11 @@
+@import '../../scss/base/variables.scss';
+
+.profiles-account__container {
+    width: 100%;
+    display: flex;
+    direction: rtl;
+}
+
+.profiles-account__section {
+    width: 50%;
+}

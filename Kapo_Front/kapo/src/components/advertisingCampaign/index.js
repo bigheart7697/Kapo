@@ -11,10 +11,10 @@ import image3 from '../../assets/3.png'
 
 class AdvertisingCampaign extends React.Component {
     state = {campaigns: 
-        [{id: 1, percentage: 50, deadline: new Date("2020-04-01"),
+        [{id: 1, discount: 43, deadline: new Date("2020-04-01"),
             product: {id: 35, name: 'تست', price: 120000, image: image2, description: 'بهترین کالا', 
                         owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}},
-        {id: 1, percentage: 50, deadline: new Date("2020-02-15"),
+        {id: 1, discount: 50, deadline: new Date("2020-02-15"),
             product: {id: 35, name: 'تست', price: 120000, image: image3, description: 'بهترین کالا', 
                         owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}}]
     }

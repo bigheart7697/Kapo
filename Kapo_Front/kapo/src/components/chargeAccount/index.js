@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import './style.scss'
 
-import Form from '../../form'
-import FormWrapper from '../../formWrapper'
+import Form from '../form'
+import FormWrapper from '../formWrapper'
 
 const FORM_VALUES = {
     submitText: "ثبت",
