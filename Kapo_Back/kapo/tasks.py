@@ -7,6 +7,10 @@ def update_order_state(order_id):
     order = Order.objects.get(pk=order_id)
     product = order.product
     if order.state == order.State.AWAITING:
+
+        transaction = order.get_transaction
+        transaction.delete()
+
         order.state = order.State.FAILED
         product.quantity += order.count
     order.save()
