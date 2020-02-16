@@ -4,17 +4,12 @@ import './style.scss'
 
 import ProductCard from '../productCard'
 
+const JDate = require('jalali-date');
+
 class AdvertisementDetails extends React.Component {
-    state = {advertisement: {}}
-
-    componentDidMount() {
-        this.props.setMethod(this.change_advertisement);
-        this.setState({advertisement: this.props.advertisement});
-    }
-
-    change_advertisement = (advertisement, index) => {
-        this.setState({advertisement})
-        this.props.callMethod(index)
+    get_date = () => {
+        let date = new JDate(new Date(this.props.advertisement ? this.props.advertisement.created ? this.props.advertisement.created : Date.now() : Date.now()))
+        return date.format('dddd DD MMMM YYYY')
     }
 
     render() {
@@ -22,6 +17,17 @@ class AdvertisementDetails extends React.Component {
             <div className='advertisement-details__container'>
                 <ProductCard product={this.props.advertisement ? this.props.advertisement.product : {}}/>
                 <div className='advertisement-details__content'>
+                    {this.props.type === 'banner' ? 
+                        <div className='advertisement-details__line'>
+                            <div className='advertisement-details__key'>شعار</div>
+                            <div className='advertisement-details__value'>{this.props.advertisement ? this.props.advertisement.slogan : '-'}</div>
+                        </div>
+                    : this.props.type === 'campaign' ? 
+                        <div className='advertisement-details__line'>
+                            <div className='advertisement-details__key'>درصد تخفیف</div>
+                            <div className='advertisement-details__value'>{this.props.advertisement ? this.props.advertisement.discount : '-'}</div>
+                        </div>
+                    : null}
                     <div className='advertisement-details__line'>
                         <div className='advertisement-details__key'>{(this.props.type === 'banner' || this.props.type === 'campaign') ? 'مکان قرارگیری' : 'لغات مورد نظر'}</div>
                         <div className='advertisement-details__value'>{this.props.advertisement ? (this.props.type === 'banner' || this.props.type === 'campaign') ? this.props.advertisement.place : this.props.advertisement.search_phrases : '-'}</div>
@@ -36,7 +42,7 @@ class AdvertisementDetails extends React.Component {
                     </div>
                     <div className='advertisement-details__line'>
                         <div className='advertisement-details__key'>تاریخ شروع</div>
-                        <div className='advertisement-details__value'>{this.props.advertisement ? this.props.advertisement.created : '-'}</div>
+                        <div className='advertisement-details__value'>{this.get_date()}</div>
                     </div>
                 </div>
             </div>

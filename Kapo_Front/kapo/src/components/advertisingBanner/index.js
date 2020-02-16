@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './style.scss';
 
-import defaultImg from '../../assets/default.jpg'
+import defaultImg from '../../assets/category4.png'
 
 class AdvertisingBanner extends React.Component {
     render() {

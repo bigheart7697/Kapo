@@ -322,7 +322,6 @@ export const editProfile = (data, id) => async dispatch => {
   }
 }
 
-export const chargeAccount = () => {};
 
 export const getAllUsers = () => async dispatch => {
   const response = await server.get("/admin_statistics/user_statistics/");
@@ -375,4 +374,8 @@ export const fetchMySponsors = () => async dispatch => {
 export const fetchAllSponsors = () => async dispatch => {
   const response = await server.get("/admin_statistics/all_sponsored_searches/");
   dispatch({ type: FETCH_SPONSORS, payload: response.data });
+}
+
+export const chargeAccount = (formValues, id) => async dispatch => {
+  await server.post(`/accounts/increase-balance/${id}/`, formValues);
 }
