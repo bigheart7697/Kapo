@@ -414,18 +414,28 @@ class Liquidate(TransactionMixin, models.Model):
 
 class Campaign(TransactionMixin, models.Model):
 
-    FEE = 100000
+    FEE = 1000000
+
+    MAX_FIRST_NUM = 3
+    MAX_SECOND_NUM = 3
+    MAX_THIRD_NUM = 3
 
     class State(models.IntegerChoices):
         AWAITING = 1
         COMPLETED = 2
 
+    class Place(models.IntegerChoices):
+        FIRST = 1
+        SECOND = 2
+        THIRD = 3
+
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("campaigns"), on_delete=models.CASCADE)
     valid = models.BooleanField(_("valid"), default=False)
+    place = models.IntegerField(_("place"), choices=Place.choices, default=Place.FIRST)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     days = models.IntegerField(_("days"), validators=[MinValueValidator(3), MaxValueValidator(7)])
-    discount = models.IntegerField(_("discount"), default=10, validators=[MinValueValidator(0), MaxValueValidator(99)])
+    discount = models.IntegerField(_("discount"), default=10, validators=[MinValueValidator(10), MaxValueValidator(99)])
     remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
