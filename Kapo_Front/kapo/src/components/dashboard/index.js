@@ -9,6 +9,7 @@ import MYProductList from "../myProductList"
 import MyBanners from "../MyBanners"
 import MyCampaigns from "../MyCampaigns"
 import MySponsors from "../MySponsors"
+import ProfilesAccount from '../profilesAccount'
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -33,6 +34,9 @@ const DASHBOARD_ITEMS = [
     },{
         text: "جست‌وجوهای پیشرفته من",
         image: addressImage
+    },{
+        text: "حساب",
+        image: addressImage
     }
 ]
 
@@ -55,6 +59,8 @@ class Dashboard extends React.Component{
                 return(<MyCampaigns type="mine"/>)
             case 5:
                 return(<MySponsors type="mine"/>)
+            case 6:
+                return(<ProfilesAccount/>)
             default:
                 return(<div>Default</div>)
         }
