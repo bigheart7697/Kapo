@@ -27,13 +27,8 @@ const CampaignCard = (props) => {
                     <div className='campaign-card__precentage'>{toPersianNum(props.campaign ? props.campaign.discount : '-')}%</div>
                     <div className='campaign-card__old-price'>{toPersianNum(props.campaign ? props.campaign.product ? props.campaign.product.price : '-' : '-')}</div>
                 </div>
-<<<<<<< HEAD
-                <div className='campaign-card__new-price'>{toPersianNum(props.campaign ? props.campaign.product ? props.campaign.product.price ? props.campaign.discount ? props.campaign.product.price * props.campaign.discount / 100 : '-' : '-' : '-' : '-')} تومان</div>
-                <Countdown date={props.campaign ? props.campaign.deadline : Date.now() - 1000} renderer={CountDown}/>
-=======
                 <div className='campaign-card__new-price'>{props.campaign ? props.campaign.product ? props.campaign.product.price ? props.campaign.discount ? props.campaign.product.price * (100 - props.campaign.discount) / 100 : '-' : '-' : '-' : '-'} تومان</div>
                 <Countdown date={props.campaign ? get_due(props.campaign.created, props.campaign.days) : Date.now() - 1000} renderer={CountDown}/>
->>>>>>> 36487162ecee118f3855b392e62ebf282c6dc1dc
             </div>
         </a>
     );
