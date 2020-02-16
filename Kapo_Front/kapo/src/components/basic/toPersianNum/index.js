@@ -1,5 +1,3 @@
-import './style.scss'
-
 function toPersianNum( num, dontTrim ) {
 
     var i = 0,

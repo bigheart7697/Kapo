@@ -2,6 +2,8 @@ import React from "react";
 
 import "./style.scss";
 
+import ToPersianNum from '../../basic/toPersianNum'
+
 class CustomSelect extends React.Component {
   state = {content: [], id: '-1'}
 
@@ -34,7 +36,7 @@ class CustomSelect extends React.Component {
           <select className="basic-select__input" {...this.props.input} onChangeCapture={this.changed} ref='select'>
             {this.props.noEmpty ? null :<option></option>}
             {this.state.content.map((element, index) => {
-              return <option key={index} value={element.value ? element.value : ""}>{element.text}</option>;
+              return <option key={index} value={element.value ? element.value : ""}>{ToPersianNum(element.text)}</option>;
             })}
           </select>
         </div>

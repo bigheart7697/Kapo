@@ -4,8 +4,10 @@ import Countdown from 'react-countdown-now';
 import './style.scss';
 
 import CountDown from '../countDown'
-
 import defaultImg from '../../../assets/default.jpg'
+import ToPersianNum from '../../basic/toPersianNum'
+import toPersianNum from '../../basic/toPersianNum';
+
 
 const CampaignCard = (props) => {
     return (
@@ -16,10 +18,10 @@ const CampaignCard = (props) => {
             <div className='campaign-card__content'>
                 <div className='campaign-card__title'>{props.campaign ? props.campaign.product ? props.campaign.product.name : '' : ''}</div>
                 <div className='campaign-card__line'>
-                    <div className='campaign-card__precentage'>{props.campaign ? props.campaign.discount : '-'}%</div>
-                    <div className='campaign-card__old-price'>{props.campaign ? props.campaign.product ? props.campaign.product.price : '-' : '-'}</div>
+                    <div className='campaign-card__precentage'>{toPersianNum(props.campaign ? props.campaign.discount : '-')}%</div>
+                    <div className='campaign-card__old-price'>{toPersianNum(props.campaign ? props.campaign.product ? props.campaign.product.price : '-' : '-')}</div>
                 </div>
-                <div className='campaign-card__new-price'>{props.campaign ? props.campaign.product ? props.campaign.product.price ? props.campaign.discount ? props.campaign.product.price * props.campaign.discount / 100 : '-' : '-' : '-' : '-'} تومان</div>
+                <div className='campaign-card__new-price'>{toPersianNum(props.campaign ? props.campaign.product ? props.campaign.product.price ? props.campaign.discount ? props.campaign.product.price * props.campaign.discount / 100 : '-' : '-' : '-' : '-')} تومان</div>
                 <Countdown date={props.campaign ? props.campaign.deadline : Date.now() - 1000} renderer={CountDown}/>
             </div>
         </a>
