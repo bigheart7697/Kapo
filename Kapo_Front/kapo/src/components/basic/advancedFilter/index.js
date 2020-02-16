@@ -30,7 +30,7 @@ class AdvancedFilter extends React.Component{
        if(this.state.direction == 0){
            direction = '-'
        }
-       this.props.searchProducts(null, null, {'cat1' : this.state.cat1,'cat2': this.state.cat2, 'cat3': this.state.cat3, 'production_year': this.state.productionYearRange[0], 'second_hand': this.state.secondHandOnly, 'price_range_min': this.state.priceRange[0], 'price_range_max': this.state.priceRange[1], 'quantity_range_min': this.state.quantityRange[0], 'quantity_range_max': this.state.quantityRange[1], 'ordering': direction + order})
+       this.props.searchProducts(null, null, {'cat1' : this.state.cat1,'cat2': this.state.cat2, 'cat3': this.state.cat3, 'production_year_range_min': this.state.productionYearRange[0], 'production_year_range_max': this.state.productionYearRange[1] , 'second_hand': this.state.secondHandOnly ? this.state.secondHandOnly : null, 'price_range_min': this.state.priceRange[0], 'price_range_max': this.state.priceRange[1], 'quantity_range_min': this.state.quantityRange[0], 'quantity_range_max': this.state.quantityRange[1], 'ordering': direction + order})
     }
     render(){
         let categories1 = [], categories2 = [], categories3 =[]

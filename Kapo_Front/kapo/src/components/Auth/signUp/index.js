@@ -85,4 +85,6 @@ class SignUp extends React.Component {
   }
 }
 
+
+
 export default connect(null, { signUpAction })(SignUp);
