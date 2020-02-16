@@ -40,3 +40,8 @@ class LiquidateAdmin(admin.ModelAdmin):
 @admin.register(BalanceIncrease)
 class BalanceIncreaseAdmin(admin.ModelAdmin):
     model = BalanceIncrease
+
+
+@admin.register(Rate)
+class RateAdmin(admin.ModelAdmin):
+    model = Rate
