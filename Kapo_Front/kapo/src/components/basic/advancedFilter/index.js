@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { fetchCategoryHierarchy } from '../../../actions'
+import { fetchCategoryHierarchy, searchProducts } from '../../../actions'
 
 import './style.scss'
 
@@ -15,6 +15,21 @@ class AdvancedFilter extends React.Component{
     state = {priceRange: null, productionYearRange: null, quantityRange: null, secondHandOnly: false, cat1: null, cat2: null, cat3: null, activeSort: 0, direction: 0}
     componentDidMount(){
         this.props.fetchCategoryHierarchy()
+    }
+    filterRequest = () => {
+       let order = null
+       let direction = ''
+        if(this.state.activeSort == 0){
+            order = 'price'
+        }else if(this.state.activeSort == 1){
+            order = 'production_year'
+        }else{
+            order = 'create'
+        }
+       if(this.state.direction == 0){
+           direction = '-'
+       }
+       this.props.searchProducts(null, null, {'cat1' : this.state.cat1,'cat2': this.state.cat2, 'cat3': this.state.cat3, 'production_year': this.state.productionYearRange[0], 'second_hand': this.state.secondHandOnly, 'price_range_min': this.state.priceRange[0], 'price_range_max': this.state.priceRange[1], 'quantity_range_min': this.state.quantityRange[0], 'quantity_range_max': this.state.quantityRange[1], 'ordering': direction + order})
     }
     render(){
         let categories1 = [], categories2 = [], categories3 =[]
@@ -42,7 +57,7 @@ class AdvancedFilter extends React.Component{
                     <CustomRangeSlider min={0} max={100} header="بازه قیمت" syncState={(range) => { if(this.state.priceRange != range){this.setState({ priceRange: range })} }}/>
                 </div>
                 <div className="advanced-filter__field">
-                    <CustomRangeSlider min={0} max={100} header="سال تولید" syncState={(range) => { if(this.state.productionYearRange != range){this.setState({ productionYearRange: range })} }}/>
+                    <CustomRangeSlider min={1900} max={2020} header="سال تولید" syncState={(range) => { if(this.state.productionYearRange != range){this.setState({ productionYearRange: range })} }}/>
                 </div>
                 <div className="advanced-filter__field">
                     <CustomRangeSlider min={0} max={100} header="تعداد موجود" syncState={(range) => { if(this.state.quantityRange != range){this.setState({ quantityRange: range })} }}/>
@@ -60,11 +75,11 @@ class AdvancedFilter extends React.Component{
                 <div>
                     <CustomSelect name='cat3' label='دسته سوم' content={categories3} onChange={(e) => {e.persist(); this.setState({ cat3: e.target.value })}} full normal/>
                 </div>
-                <div className="advanced-filter__button">
-                    <CustomButton text="اعمال فیلتر"></CustomButton>
-                </div>    
                 <div className="advanced-filter__header">مرتب‌سازی</div>
                 <AdvancedSorting syncState={(sort, direction) => {if(this.state.activeSort != sort || this.state.direction != direction){ this.setState({ activeSort: sort, direction: direction }) }}}/>
+                <div className="advanced-filter__button">
+                    <CustomButton text="اعمال فیلتر" onClick={this.filterRequest}></CustomButton>
+                </div>    
             </div>
         </div>)
     }
@@ -85,4 +100,4 @@ const searchValue = (value, myArray) => {
     return null
 }
 
-export default connect(mapStateToProps, { fetchCategoryHierarchy })(AdvancedFilter)
+export default connect(mapStateToProps, { fetchCategoryHierarchy, searchProducts })(AdvancedFilter)

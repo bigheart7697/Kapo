@@ -130,23 +130,19 @@ export const setPrice = (category = null) => async dispatch => {
 }
 
 export const fetchProduct = id => async dispatch => {
-  console.log("id")
-  console.log(id)
   const response = await server.get(`/kapo/products/${id}/`)
-  console.log(response)
+  console.log('prooooduct')
+  console.log(response.data)
   dispatch({ type: FETCH_PRODUCT, payload: response.data })
 }
 
-export const searchProducts = (search, category = null) => async dispatch => {
-  console.log(search)
+export const searchProducts = (search, category = null, params = null) => async dispatch => {
   let response
   if (search !== "") {
-    response = await server.get(`/kapo/search/?search=${search}`);
+    response = await server.get(`/kapo/search/${search ? `?search=${search}` : ''}`, {params});
   } else {
     response = await server.get(`/kapo/`)
   }
-  console.log('response')
-  console.log(response)
   dispatch({ type: FETCH_PRODUCTS, payload: response.data });
 };
 
@@ -240,7 +236,7 @@ export const SignUp = (formValues, showModal) => async dispatch => {
     setAuthToken(response.data.token)
     console.log(response)
     showModal("ثبت‌نام", "ثبت‌نام با موفقیت انجام شد")
-  } catch{
+  } catch {
     showModal("ثبت‌نام", "ثبت‌نام با خطا مواجه شد")
   }
 }

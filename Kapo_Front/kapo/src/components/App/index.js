@@ -7,7 +7,7 @@ import { setIsLoggedInStatus, getCurrentUser } from '../../actions'
 import '../../style.scss'
 import './index.scss'
 
-import productDetails from '../product-details'
+import ProductDetails from '../product-details'
 import AddProduct from '../AddProduct'
 import Navbar from '../navbar'
 import SignIn from '../Auth/signIn'
@@ -56,7 +56,7 @@ class App extends React.Component{
                             <Navbar loggedIn={this.props.isLoggedIn ? true : false}></Navbar>
                             <Route path="/" exact component={MainPage}/>
                             <Route path="/ProductList" exact component={() => <AllProducts showModal={this.showModal} modal={this.state.showModal}/>}/>
-                            <Route path="/product/:id" exact component={() => <productDetails showModal={this.showModal} modal={this.state.showModal}/>}/>
+                            <Route path="/product/:id" exact component={ProductDetails}/>
                             <Route path="/AddProduct" exact component={() => <AddProduct showModal={this.showModal} modal={this.state.showModal}/>}/>
                             <Route path="/Auth/SignIn" exact component={() => <SignIn showModal={this.showModal} modal={this.state.showModal}/>}/>
                             <Route path="/Auth/SignUp" exact component={() => <SignUp showModal={this.showModal} modal={this.state.showModal}/>}/>
