@@ -326,7 +326,8 @@ class TransactionDetailView(generics.RetrieveAPIView):
 
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
-def get_pending_banners_count(request, place_id):
+def get_pending_banners_count(request, pid):
+    place_id = pid
     if place_id == 1:
         place = Banner.Place.FIRST
         limit = Banner.MAX_FIRST_NUM
@@ -338,8 +339,27 @@ def get_pending_banners_count(request, place_id):
         limit = Banner.MAX_THIRD_NUM
     total = len(Banner.objects.filter(valid=True, place=place))
     if total > limit:
-        return total - limit
-    return 0
+        return Response({'count': total - limit}, status=status.HTTP_200_OK)
+    return Response({'count': 0}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def get_pending_campaigns_count(request, pid):
+    place_id = pid
+    if place_id == 1:
+        place = Campaign.Place.FIRST
+        limit = Campaign.MAX_FIRST_NUM
+    elif place_id == 2:
+        place = Campaign.Place.SECOND
+        limit = Campaign.MAX_SECOND_NUM
+    else:
+        place = Campaign.Place.THIRD
+        limit = Campaign.MAX_THIRD_NUM
+    total = len(Campaign.objects.filter(valid=True, place=place))
+    if total > limit:
+        return Response({'count': total - limit}, status=status.HTTP_200_OK)
+    return Response({'count': 0}, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
