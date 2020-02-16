@@ -4,8 +4,7 @@ import { categoryProducts } from '../../actions'
 import Productlist from "../product-list"
 import _ from "lodash";
 import './style.scss'
-
-
+import AdvertisingCampaign from '../advertisingCampaign'
 
 class CategoryProducts extends React.Component {
     componentDidMount() {
@@ -27,12 +26,11 @@ class CategoryProducts extends React.Component {
         }
     }
     render() {
-        
         const newArray = _.map(this.props.products, (item, key) => {
             return item
         })
-        console.log(newArray);
         return (<>
+            <AdvertisingCampaign />
             <Productlist newArray={newArray}></Productlist>
         </>)
     }

@@ -1,10 +1,9 @@
 import React from 'react'
 
 import './style.scss'
-import { fetchProducts, setPrice } from '../../actions'
+import { setPrice } from '../../actions'
 import Product from '../product'
 import { connect } from 'react-redux'
-import _ from "lodash";
 import image1 from '../../assets/1.png'
 import image2 from '../../assets/2.png'
 import image3 from '../../assets/3.png'
@@ -29,19 +28,13 @@ class SetPrice extends React.Component {
 
     componentDidUpdate() {
         if(Array.isArray(this.props.products)) {
-            console.log('props', this.props.products)
             if(this.state.products !== this.props.products) {
             this.setState({products: this.props.products ? this.props.products : []})
             }
         }
       }
 
-    onSubmit = (formValues) => {
-        // this.props.addProduct(formValues)
-    };
-
     render() {
-        // this.props.setPrice(this.props.category);
         return (
             <div className='set-price__container'>
                 <div className='set-price__section set-price__section--products'>
@@ -58,18 +51,5 @@ class SetPrice extends React.Component {
         );
     }
 }
-
-// const mapStateToProps = (state, ownProps) => {
-//     let productItem = null
-//     if(ownProps.match)
-//     {
-//       productItem = state.products.products[ownProps.match.params.id]
-//       delete state.products.products[ownProps.match.params.id];
-//     //   state.products.products[ownProps.match.params.id] = undefined
-//     }else{
-//       productItem = null
-//     }
-//     return { products: state.products.products, category: productItem? productItem.cat3 : null}
-// }
 
 export default connect(null, { setPrice })(SetPrice)

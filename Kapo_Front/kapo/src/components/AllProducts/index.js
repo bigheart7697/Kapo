@@ -14,18 +14,16 @@ class AllProducts extends React.Component {
         this.props.fetchProducts()
     }
     render() {
-        
         const newArray = _.map(this.props.products, (item, key) => {
             return item
         })
         const newArray2 = _.map(this.props.sponsored_products, (item, key) => {
             return item.product
         })
-        console.log(newArray);
         return (<>
             <AdvertisingCampaign />
             <div className="all-products__container">
-                <Productlist newArray={newArray} sponsered_products={newArray2}></Productlist>
+                <Productlist newArray={newArray} sponsered_products={newArray2} campaigned_products={[{id: 1}]}></Productlist>
                 <AdvancedFilter></AdvancedFilter>
             </div>
         </>)

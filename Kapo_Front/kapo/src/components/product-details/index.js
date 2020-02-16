@@ -236,7 +236,7 @@ class ProductDetails extends React.Component {
         </div>
         <ProductScoreSubmit onRateHandler={(rate) => {this.props.rateProduct(rate, this.props.match.params.id)}}/>
         {(localStorage.user_email != null) ? 
-        ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email != this.props.product.owner.email) : false : false : false : false) ? 
+        ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
             <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>

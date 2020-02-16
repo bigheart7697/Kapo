@@ -8,12 +8,6 @@ import LinkToBank from '../basic/linkToBank'
 import {fetch_factor} from "../../actions"
 import { connect } from "react-redux";
 
-// const factor = {
-//     type: 'بنر تبلیغاتی',
-//     product: {name: 'لباس بچه'},
-//     days_number: 4
-// }
-
 const kapo = {
     is_corporate: true,
     corporate_name: 'کاپو کالا',
@@ -66,19 +60,19 @@ class PayFactor extends React.Component {
         if (this.props.factorObject) {
             console.log(this.props.factorObject.type)}
             
-        if (this.props.factorObject && this.props.factorObject.type == 1){
+        if (this.props.factorObject && this.props.factorObject.type === 1){
             factor = {
                 type: 'جست‌وجوی اسپانسر شده',
                 product: {name: this.props.factorObject.transaction_object.product.name},
                 days_number: this.props.factorObject.transaction_object.count
             }}
-        if (this.props.factorObject && this.props.factorObject.type == 2){
+        if (this.props.factorObject && this.props.factorObject.type === 2){
             factor = {
             type: 'بنر تبلیغاتی',
             product: {name: this.props.factorObject.transaction_object.product.name},
             days_number: this.props.factorObject.transaction_object.days
             }}
-        if (this.props.factorObject && this.props.factorObject.type == 3){
+        if (this.props.factorObject && this.props.factorObject.type === 3){
             factor = {
                 type: 'کمپین تبلیغاتی',
                 product: {name: this.props.factorObject.transaction_object.product.name},

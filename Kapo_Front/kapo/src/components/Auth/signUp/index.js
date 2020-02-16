@@ -64,10 +64,9 @@ const FORM_VALUES = {
   ]
 };
 
-class SignIn extends React.Component {
+class SignUp extends React.Component {
   onSubmit = (formValues) => {
-    // console.log(formValues)
-    this.props.signUpAction(formValues)
+    this.props.signUpAction(formValues, this.props.showModal)
   };
   render() {
     return (
@@ -86,4 +85,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default connect(null, { signUpAction })(SignIn);
+export default connect(null, { signUpAction })(SignUp);
