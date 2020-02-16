@@ -55,10 +55,10 @@ class AdvertisementList extends React.Component {
             <div className='advertisement-list__container'>
                 <div className='advertisement-list__section'>
                     <div className='advertisement-list__title'>لیست {this.get_title()}</div>
-                    <AdvertisementTable header={this.get_header()} advertisements={this.props.advertisementList? this.props.advertisementList : ADVERTISEMENT_LIST} type={this.props.type} setMethod={click => this.change_active = click} callMethod={this.change_advertisements}/>
+                    <AdvertisementTable header={this.get_header()} advertisements={this.props.advertisementList? this.props.advertisementList : null} type={this.props.type} setMethod={click => this.change_active = click} callMethod={this.change_advertisements}/>
                 </div>
                 <div className='advertisement-list__section'>
-                    <AdvertisementDetails advertisement={this.props.advertisementList[0]? this.props.advertisementList[0] : ADVERTISEMENT_LIST[0]} type={this.props.type} setMethod={click => this.change_advertisements = click} callMethod={this.change_active}/>
+                    <AdvertisementDetails advertisement={this.props.advertisementList[0]? this.props.advertisementList[0] : null} type={this.props.type} setMethod={click => this.change_advertisements = click} callMethod={this.change_active}/>
                 </div>
             </div>
         );

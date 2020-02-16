@@ -4,10 +4,13 @@ import './style.scss'
 
 import ChargeAccount from '../chargeAccount'
 import Whitespace from '../basic/whitespace'
+import { connect } from 'react-redux'
+import {getCurrentUser} from "../../actions"
 
 
 class ProfilesAccount extends React.Component {
     render() {
+        this.props.getCurrentUser()
         return (
             <div className='profiles-account__container'>
                 <div className='profiles-account__section'>
@@ -18,7 +21,7 @@ class ProfilesAccount extends React.Component {
                             </div>
                             <Whitespace space="2"/>
                             <div className='form__title'>
-                                120000
+                                {this.props.balance}
                             </div>
                         </div>
                     </div>
@@ -29,4 +32,8 @@ class ProfilesAccount extends React.Component {
     }
 }
 
-export default ProfilesAccount;
+const mapStateToProps = (state) => {
+    return { balance: state.user.information.balance }
+}
+
+export default connect(mapStateToProps, { getCurrentUser })(ProfilesAccount)

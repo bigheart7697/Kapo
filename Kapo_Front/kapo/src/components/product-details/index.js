@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { deleteProduct, addToCart, fetchProduct, fetchFirstBanners, fetchSecondBanners, fetchThirdBanners, rateProduct } from '../../actions';
 import faker from 'faker';
+import _ from "lodash";
 
 import "./style.scss";
 
@@ -138,9 +139,11 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    console.log(this.props.second_banners);
+    
     return (
       <>
-        {this.props.second_banners[1]? <AdvertisingBanner product={{link: `${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
+        {this.props.second_banners[0]? <AdvertisingBanner product={{link: `${this.props.second_banners[0].product.id}` ,image: this.props.second_banners[0].product.image, name: this.props.second_banners[0].product.name, moto: this.props.second_banners[0].slogan, price: this.props.second_banners[0].product.price}}/> : 
         null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">
@@ -254,15 +257,14 @@ class ProductDetails extends React.Component {
 }
 
 const mapStatToProps = (state, ownProps) => {
-  let productItem = null
-  if(ownProps.match)
-  {
-    productItem = state.products.products[ownProps.match.params.id]
-  }else{
-    productItem = null
-  }
-  return { product: productItem, first_banners: state.advertisements.first_banners, 
-    second_banners: state.advertisements.second_banners, third_bannesr: state.advertisements.third_banners}
+  return { product: ownProps.match? state.products.products[ownProps.match.params.id] : null, 
+    first_banners: _.map(state.advertisements.first_banners, (item, key) => {
+      return item
+  }), second_banners: _.map(state.advertisements.second_banners, (item, key) => {
+    return item
+}), third_bannesr: _.map(state.advertisements.third_banners, (item, key) => {
+  return item
+})}
 }
 
 export default connect(mapStatToProps, { deleteProduct, addToCart, fetchProduct, fetchFirstBanners, 
