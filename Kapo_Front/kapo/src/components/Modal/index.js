@@ -13,7 +13,7 @@ const Modal = props => {
           </div>
           {props.onSubmit ? <div className="modal__actions">
             <button onClick={props.onSubmit} className="modal__actions-button modal__actions-submit">{props.modalSubmitText ? props.modalSubmitText : 'ادامه'}</button>
-            <button onClick={props.onCancel} className="modal__actions-button modal__actions-cancel">{props.modalCancelText ? props.modalCancelText : 'بیخیال'}</button>
+            { props.modalCancelText ? <button onClick={props.onCancel} className="modal__actions-button modal__actions-cancel">{props.modalCancelText ? props.modalCancelText : 'بیخیال'}</button> : null}
           </div> : null}
       </div>
     </div>,
