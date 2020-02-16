@@ -10,7 +10,10 @@ import MyBanners from "../MyBanners"
 import MyCampaigns from "../MyCampaigns"
 import MySponsors from "../MySponsors"
 import ProfilesAccount from '../profilesAccount'
+import {fetchFirstBanners} from "../../actions"
+import { connect } from "react-redux";
 import AdvertisingBanner from '../advertisingBanner'
+import _ from "lodash";
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -42,10 +45,20 @@ const DASHBOARD_ITEMS = [
 ]
 
 class Dashboard extends React.Component{
+    index = 0
     state={ activeTab: 0 }
     changeActiveTab = (tab) => {
         this.setState({ activeTab: tab })
     }
+
+    componentDidMount() {
+        this.props.fetchFirstBanners();
+    }
+
+    componentDidUpdate() {
+        this.index = Math.floor(Math.random() * this.props.first_banners.length);
+      }
+    
     renderContent = () => {
         switch(this.state.activeTab){
             case 0:
@@ -69,7 +82,8 @@ class Dashboard extends React.Component{
     render(){
         return(
             <>
-                <AdvertisingBanner />
+                {this.props.first_banners[this.index]? <AdvertisingBanner product={{link: `/product/${this.props.first_banners[this.index].product.id}` ,image: this.props.first_banners[this.index].product.image, name: this.props.first_banners[this.index].product.name, moto: this.props.first_banners[this.index].slogan, price: this.props.first_banners[this.index].product.price}}/> : 
+        null}
                 <div className="dashboard__container">
                     <DashboardBar activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab} content={DASHBOARD_ITEMS}/>
                     <div className="dashboard__content">
@@ -81,4 +95,12 @@ class Dashboard extends React.Component{
     }
 }
 
-export default Dashboard
+const mapStatToProps = (state, ownProps) => {
+    return { product: ownProps.match? state.products.products[ownProps.match.params.id] : null, 
+      first_banners: _.map(state.advertisements.first_banners, (item, key) => {
+        return item
+    })}
+  }
+  
+  export default connect(mapStatToProps, { fetchFirstBanners })(Dashboard);
+  

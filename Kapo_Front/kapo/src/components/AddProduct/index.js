@@ -124,7 +124,7 @@ class AddProduct extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {category_hierarchy: state.products.category_hierarchy, products: state.products.products }
+  return {category_hierarchy: state.products.category_hierarchy, products: state.products.similar_products }
 }
 
 export default connect(mapStateToProps, {setPrice, fetchCategoryHierarchy, addProduct })(AddProduct);

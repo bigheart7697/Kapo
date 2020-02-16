@@ -20,6 +20,8 @@ class AdvertisingCampaign extends React.Component {
     }
     
     render() {
+        console.log(this.props.campaigns);
+        
         return (
             <div className='advertising-campaign__container'>
                 <div className='advertising-campaign__right-panel'>
@@ -29,7 +31,7 @@ class AdvertisingCampaign extends React.Component {
                     <img src={image} alt='محصولات' className='advertising-campaign__image'></img>
                 </div>
                 <div className='advertising-campaign__left-panel'>
-                    {this.state.campaigns ? this.state.campaigns.map((element, index) => 
+                    {this.props.campaigns ? this.props.campaigns.map((element, index) => 
                         <CampaignCard campaign={element} key={index}/>
                     ) : null}
                 </div>

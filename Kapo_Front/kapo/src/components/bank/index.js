@@ -1,16 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchOrder, completeOrder, cancelOrder } from '../../actions';
+import { completeCharge, failCharge, fetch_factor, completeBanner, completeOrder, completeSponsor, completeCampaign, cancelOrder, failBanner, failCampaign, failSponsor } from '../../actions';
 
 
 import "./style.scss";
+import history from "../../history";
 
 class Bank extends React.Component {
     componentDidMount() {
-        this.props.fetchOrder(this.props.match.params.id);
+        this.props.fetch_factor(this.props.match.params.id);
       }
     render() {
-        // console.log(this.props.match.params.id)
+        console.log(this.props.id);
+        
         return (
             <div className="bank__container">
             <div className="bank__header-container">
@@ -62,8 +64,9 @@ class Bank extends React.Component {
                 </div>
                 <div className="bank__details">
                 <div className="bank__button-containers">
-                    <button className="bank__button bank__button--accept" onClick={() => this.props.completeOrder(this.props.match.params.id)}>پرداخت</button>
-                    <button className="bank__button bank__button--reject" onClick={() => this.props.cancelOrder(this.props.match.params.id)}>انصراف</button>
+                    <button className="bank__button bank__button--accept" onClick={() => [(this.props.type == 1)? this.props.completeSponsor(this.props.id) : (this.props.type == 2)? this.props.completeBanner(this.props.id) : (this.props.type == 3)? this.props.completeCampaign(this.props.id) : (this.props.type == 4)? this.props.completeOrder(this.props.id) : (this.props.type == 5)? this.props.completeCharge(this.props.id) : this.props.completeMethod(this.props.id), history.push("/payment/result/success")
+                    ]}>پرداخت</button>
+                    <button className="bank__button bank__button--reject" onClick={() => [(this.props.type == 1)? this.props.failSponsor(this.props.id) : (this.props.type == 2)? this.props.failBanner(this.props.id) : (this.props.type == 3)? this.props.failCampaign(this.props.id) : (this.props.type == 4)? this.props.cancelOrder(this.props.id) : (this.props.type == 5)? this.props.failCharge(this.props.id) : this.props.cancelMethod(this.props.id), history.push("/payment/result/fail")]}>انصراف</button>
                 </div>
                 </div>
             </div>
@@ -73,7 +76,7 @@ class Bank extends React.Component {
                     دارنده حساب:
                 </div>
                 <div className="bank__value">
-                    {this.props.order ? this.props.order.customer ? this.props.order.customer.first_name + " " + this.props.order.customer.last_name : '-' : '-'}
+                    {this.props.owner? this.props.owner : '-'}
                 </div>
                 </div>
                 <div className="bank__details">
@@ -81,7 +84,7 @@ class Bank extends React.Component {
                     مبلغ:
                 </div>
                 <div className="bank__value">
-                    {this.props.order ? this.props.order.product.price * this.props.order.count : '-'} تومان
+                    {this.props.price ? this.props.price : '-'} تومان
                 </div>
                 </div>
             </div>
@@ -96,15 +99,55 @@ class Bank extends React.Component {
 }
 
 const mapStatToProps = (state, ownProps) => {
-    let orderItem = null
-    if(ownProps.match)
+    let price = null
+    let owner = null
+    let completeMethod  = null
+    let cancelMethod = null
+    let id = null
+    let type = null
+    if(ownProps.match && state.advertisements.transactions && state.advertisements.transactions[ownProps.match.params.id])
     {
-      orderItem = state.orders.orders[ownProps.match.params.id]
-    }else{
-      orderItem = null
+        const factorItem = state.advertisements.transactions[ownProps.match.params.id];
+        console.log(factorItem);
+        type = factorItem.type
+        id = factorItem.transaction_object.id
+        switch (factorItem.type){
+            case 1:
+                    price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
+                    owner = "شرکت کاپوکالا"
+                    completeMethod = completeSponsor
+                    cancelMethod = failSponsor
+            
+            case 2:
+                    price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
+                    owner = "شرکت کاپوکالا"
+                    completeMethod = completeBanner
+                    cancelMethod = [failBanner]
+
+            case 3:
+                console.log(3);
+                
+                    price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
+                    owner = "شرکت کاپوکالا"
+                    completeMethod = ownProps.completeCampaign
+                    cancelMethod = failCampaign
+        
+
+            case 4:
+                price = factorItem.transaction_object.count * factorItem.transaction_object.product.price
+                owner = factorItem.transaction_object.product.owner.is_corporate ? factorItem.transaction_object.product.owner.corporate_name : factorItem.transaction_object.product.owner.first_name + " " + factorItem.transaction_object.product.owner.last_name
+                completeMethod = completeOrder
+                cancelMethod = cancelOrder
+            case 5:
+                price = factorItem.amount
+                owner = "شرکت کاپوکالا"
+                completeMethod = completeCharge
+                cancelMethod = failCharge
+        }
     }
-    return { order: orderItem}
-  }
+    console.log(completeMethod);
+    
+  return {price: price, owner: owner, completeMethod: completeMethod, cancelMethod: cancelMethod, id: id, type: type} 
+}
   
-  export default connect(mapStatToProps, { fetchOrder, completeOrder, cancelOrder })(Bank);
-// export default Bank;
+  export default connect(mapStatToProps, { fetch_factor, completeBanner, completeBanner, completeCampaign, completeOrder, cancelOrder, failBanner, failCampaign, failSponsor, completeCharge, failCharge })(Bank);

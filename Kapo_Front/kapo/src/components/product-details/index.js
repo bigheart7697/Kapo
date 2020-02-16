@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deleteProduct, addToCart, fetchProduct, fetchFirstBanners, fetchSecondBanners, fetchThirdBanners, rateProduct } from '../../actions';
+import { deleteProduct, addToCart, fetchProduct, fetchSecondBanners, rateProduct, fetchProductCampaign } from '../../actions';
 import faker from 'faker';
 import _ from "lodash";
 
@@ -38,9 +38,8 @@ class ProductDetails extends React.Component {
   componentDidMount() {
     this.setState({ image: faker.image.image() })
     this.props.fetchProduct(this.props.match.params.id);
-    this.props.fetchFirstBanners();
     this.props.fetchSecondBanners();
-    this.props.fetchThirdBanners();
+    this.props.fetchProductCampaign(this.props.match.params.id);
   }
 
   componentDidUpdate() {
@@ -143,12 +142,10 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    console.log(this.props.second_banners);
-    
     return (
       <>
-        {this.props.second_banners[this.index]? <AdvertisingBanner product={{link: `${this.props.second_banners[this.index].product.id}` ,image: this.props.second_banners[this.index].product.image, name: this.props.second_banners[this.index].product.name, moto: this.props.second_banners[this.index].slogan, price: this.props.second_banners[this.index].product.price}}/> : 
-        null}
+        {this.props.second_banners[this.index]? this.props.second_banners[this.index].product? <AdvertisingBanner product={{link: `${this.props.second_banners[this.index].product? this.props.second_banners[this.index].product.id : -1}` ,image: this.props.second_banners[this.index].product.image, name: this.props.second_banners[this.index].product.name, moto: this.props.second_banners[this.index].slogan, price: this.props.second_banners[this.index].product.price}}/> : 
+        null : null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">
 
@@ -177,7 +174,7 @@ class ProductDetails extends React.Component {
                   <td>دسته کالا</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.availability ? this.props.product.availability : '-' : '-'}</td>
+                  <td>{this.props.product ? this.props.product.available ? "موجود" : '-' : '-'}</td>
                   <td>در دسترس بودن</td>
                 </tr>
                 <tr>
@@ -262,14 +259,11 @@ class ProductDetails extends React.Component {
 
 const mapStatToProps = (state, ownProps) => {
   return { product: ownProps.match? state.products.products[ownProps.match.params.id] : null, 
-    first_banners: _.map(state.advertisements.first_banners, (item, key) => {
+    second_banners: _.map(state.advertisements.second_banners, (item, key) => {
       return item
-  }), second_banners: _.map(state.advertisements.second_banners, (item, key) => {
+  }), product_campaign: _.map(state.advertisements.product_campaign, (item, key) => {
     return item
-}), third_bannesr: _.map(state.advertisements.third_banners, (item, key) => {
-  return item
 })}
 }
 
-export default connect(mapStatToProps, { deleteProduct, addToCart, fetchProduct, fetchFirstBanners, 
-  fetchSecondBanners, fetchThirdBanners, rateProduct })(ProductDetails);
+export default connect(mapStatToProps, { deleteProduct, addToCart, fetchProduct, fetchSecondBanners, rateProduct, fetchProductCampaign })(ProductDetails);

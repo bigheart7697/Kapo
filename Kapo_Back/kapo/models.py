@@ -385,17 +385,18 @@ class Banner(TransactionMixin, models.Model):
 
 
 class Rate(models.Model):
-    RATING_RANGE = (
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5')
-    )
+
+    class RatingRange(models.IntegerChoices):
+        ONE = 1
+        TWO = 2
+        THREE = 3
+        FOUR = 4
+        FIVE = 5
+
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
-    rating = models.IntegerField(choices=RATING_RANGE, )
+    rating = models.IntegerField(choices=RatingRange.choices)
 
     class Meta:
         unique_together = [["user", "product"]]
@@ -451,6 +452,31 @@ class Campaign(TransactionMixin, models.Model):
         ordering = ['-created']
         verbose_name = _('Campaign')
         verbose_name_plural = _('Campaigns')
+
+
+class BalanceIncrease(TransactionMixin, models.Model):
+    class State(models.IntegerChoices):
+        AWAITING = 1
+        COMPLETED = 2
+
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, related_name='balance_increase', on_delete=models.CASCADE)
+    state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
+    amount = models.IntegerField(_('amount'), validators=[MinValueValidator(0)])
+    created = models.DateTimeField(_("registration date"), auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = _('Balance Increase')
+        verbose_name_plural = _('Balance Increases')
+
+
+@receiver(post_save, sender=BalanceIncrease)
+def create_increase_balance_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.INCREASE_BALANCE
+        Transaction.objects.create(sender=instance.user, transaction_object=instance,
+                                   amount=instance.amount, type=transaction_type)
 
 
 @receiver(post_save, sender=SponsoredSearch)
