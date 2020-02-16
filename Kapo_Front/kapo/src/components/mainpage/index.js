@@ -4,8 +4,10 @@ import './style.scss'
 
 import DogAnimation from '../basic/dogAnimation'
 import Slider from '../basic/slider'
-import Modal from '../Modal'
+import AdvertisingCampaign from '../advertisingCampaign'
+import AdvertisingBanner from '../advertisingBanner'
 import ProductCard from '../basic/productCard'
+import { Link } from 'react-router-dom'
 
 const slideData = [
     {
@@ -34,12 +36,29 @@ const slideData = [
     }
 ]
 
+const PRODUCTS = [
+    {id: 1, name: 'کالا'},
+    {id: 1, name: 'کالا'},
+    {id: 1, name: 'کالا'},
+    {id: 1, name: 'کالا'}
+]
+
 const mainpage = () => {
     return(
         <div className="mainpage__container">
-            <div className="main-page__slider">
-                {/* <Modal onSubmit={() => {console.log('yo')}}></Modal> */}
+            <AdvertisingCampaign />
+            <div className="main-page__slider"> 
                 <Slider heading="Example Slider" slides={slideData} /> 
+            </div>
+            <div className='mainpage__products_container'>
+                <Link to='/ProductList'>لیست محصولات</Link>
+                <div className='mainpage__products-wrapper'>
+                    <div className='mainpage__products'>
+                        {PRODUCTS ? PRODUCTS.map((element, index) => 
+                            <ProductCard product={element} key={index} />
+                        ) : null}
+                    </div>
+                </div>
             </div>
             <DogAnimation/>
 		</div>
