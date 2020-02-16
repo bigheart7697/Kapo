@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import './style.scss'
 
@@ -7,6 +8,8 @@ import Slider from '../basic/slider'
 import AdvertisingCampaign from '../advertisingCampaign'
 import ProductCard from '../basic/productCard'
 import { Link } from 'react-router-dom'
+import {fetchProducts} from "../../actions"
+import _ from "lodash"
 
 import image1 from '../../assets/category1.jpg'
 import image2 from '../../assets/category2.jpg'
@@ -50,26 +53,39 @@ const PRODUCTS = [
     {id: 1, name: 'کالا'}
 ]
 
-const mainpage = () => {
-    return(
-        <div className="mainpage__container">
-            <AdvertisingCampaign />
-            <div className="main-page__slider"> 
-                <Slider heading="Example Slider" slides={slideData} /> 
-            </div>
-            <div className='mainpage__products_container'>
-                <Link to='/ProductList'>لیست محصولات</Link>
-                <div className='mainpage__products-wrapper'>
-                    <div className='mainpage__products'>
-                        {PRODUCTS ? PRODUCTS.map((element, index) => 
-                            <ProductCard product={element} key={index} />
-                        ) : null}
+class mainpage extends React.Component {
+    componentDidMount() {
+        this.props.fetchProducts()
+    }
+    render() {
+        const newArray = _.map(this.props.products, (item, key) => {
+            return item
+        })
+        return(
+            <div className="mainpage__container">
+                <AdvertisingCampaign />
+                <div className="main-page__slider"> 
+                    <Slider heading="Example Slider" slides={slideData} /> 
+                </div>
+                <div className='mainpage__products_container'>
+                    <Link to='/ProductList'>لیست محصولات</Link>
+                    <div className='mainpage__products-wrapper'>
+                        <div className='mainpage__products'>
+                            {newArray ? newArray.map((element, index) => 
+                                <ProductCard product={element} key={index} />
+                            ) : null}
+                        </div>
                     </div>
                 </div>
+                <DogAnimation/>
             </div>
-            <DogAnimation/>
-		</div>
-    )
+        )
+    }
+    
 }
 
-export default mainpage
+const mapStateToProps = (state) => {
+    return { products: state.products.products }
+}
+
+export default connect(mapStateToProps, { fetchProducts })(mainpage)

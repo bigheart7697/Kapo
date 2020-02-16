@@ -52,7 +52,7 @@ class App extends React.Component{
                         <Route path="/Auth/SignUp" exact component={SignUp}/>
                         <Route path="/MyProductList" exact component={MyProductList} />
                         <Route path="/order/preview/:id" exact component={PreviewOrder}/>
-                        <Route path="/order/bank/:id" exact component={Bank}/>
+                        <Route path="/bank/:id" exact component={Bank}/>
                         <Route path="/order/list" exact component={MyOrders}/>
                         <Route path="/order/factor/:id" exact component={OrderFactor}/>
                         <Route path="/AddProduct/SetPrice/:id" exact component={SetPrice}/>
@@ -65,7 +65,8 @@ class App extends React.Component{
                         <Route path="/pay/factor/:id" exact component={PayFactor}/>
                         <Route path="/dashboard" exact component={Dashboard} />
                         <Route path="/dashboard_admin" exact component={AdminPanel} />
-                        <Route path="/payment/result" exact component={PaymentResult}/>
+                        <Route path="/payment/result/success" exact component={() => <PaymentResult success={true} /> }/>
+                        <Route path="/payment/result/fail" exact component={() => <PaymentResult success={false} /> }/>
                         <Route path="/advertisement/list" exact component={AdvertisementList}/>
                     </div>
                 </Router>

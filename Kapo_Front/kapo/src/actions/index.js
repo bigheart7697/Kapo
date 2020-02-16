@@ -84,6 +84,25 @@ export const failBanner = id => async dispatch => {
   }
 }
 
+export const completeCampaign = id => async dispatch => {
+  try {
+    const response = await server.post(`/kapo/campaigns/${id}/complete/`);
+    alert("هزینه‌ی کمپن پرداخت شد");
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
+export const failCampaign = id => async dispatch => {
+  try {
+    const response = await server.post(`/kapo/campaigns/${id}/fail/`);
+    alert("پرداخت هزینه‌ی کمپین موفقیت آمیز نبود");
+  }
+  catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
 
 export const completeSponsor = id => async dispatch => {
   try {
