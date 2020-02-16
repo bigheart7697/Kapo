@@ -9,7 +9,8 @@ const Modal = props => {
       <div onClick={(e) => e.stopPropagation()} className="modal__content-container">
           {props.header ? <div className="modal__header">{props.header}</div> : null}
           <div className="modal__children">
-              {props.children}
+              <div>{props.children}</div>
+              <div>{props.error}</div>
           </div>
           {props.onSubmit ? <div className="modal__actions">
             <button onClick={props.onSubmit} className="modal__actions-button modal__actions-submit">{props.modalSubmitText ? props.modalSubmitText : 'ادامه'}</button>
