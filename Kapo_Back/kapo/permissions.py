@@ -48,7 +48,7 @@ class IsOwnerOfTransaction(permissions.BasePermission):
 class HasEnoughBalance(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.user.balance < request.user.MIN_BALANCE:
-            raise PermissionDenied()
+            raise PermissionDenied('You do not have enough balance')
         return True
 
 

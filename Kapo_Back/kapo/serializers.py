@@ -44,6 +44,7 @@ class ProductSerializer(serializers.ModelSerializer):
     first_category = serializers.CharField(source='get_cat1_display', read_only=True)
     second_category = serializers.CharField(source='get_cat2_display', read_only=True)
     third_category = serializers.CharField(source='get_cat3_display', read_only=True)
+    available = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Product
