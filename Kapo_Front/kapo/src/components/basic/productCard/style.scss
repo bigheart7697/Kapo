@@ -4,6 +4,8 @@ $lightgold: rgb(255, 238, 143);
 $gold: rgb(255,215,0);
 $darkgold: rgb(190, 162, 0);
 
+$lightRed: #ff8fbc;
+
 .product-card__container{
     background-color: #888;
     height: 30rem;
@@ -20,11 +22,23 @@ $darkgold: rgb(190, 162, 0);
 }
 
 .product-card__container:hover {
-    box-shadow: 1rem 1rem 1rem grey;
+    box-shadow: .8rem .8rem 1rem grey;
 }
 
 .product-card__container--gold {
-    box-shadow: .5rem .5rem 1rem $darkgold;
+    box-shadow: .5rem .5rem .5rem $darkgold;
+}
+
+.product-card__container--gold:hover {
+    box-shadow: .8rem .8rem 1rem $darkgold;
+}
+
+.product-card__container--campaign {
+    box-shadow: .5rem .5rem .5rem $fourth-color;
+}
+
+.product-card__container--campaign:hover {
+    box-shadow: .8rem .8rem 1rem $fourth-color;
 }
 
 .product-card__container:hover {
@@ -45,6 +59,10 @@ $darkgold: rgb(190, 162, 0);
     border-color: $gold;
 }
 
+.product-card__content--campaign {
+    border-color: $fourth-color;
+}
+
 .product-card__content:hover{
     color: $white;
 }
@@ -59,6 +77,10 @@ $darkgold: rgb(190, 162, 0);
 
 .product-card__content--gold:hover{
     border: 2px solid $gold;
+}
+
+.product-card__content--campaign:hover{
+    border: 2px solid $lightRed;
 }
 
 .product-card__name{
@@ -79,6 +101,10 @@ $darkgold: rgb(190, 162, 0);
 
 .product-card__name--gold.product-card__name--hover {
     color: $gold;
+}
+
+.product-card__name--campaign.product-card__name--hover {
+    color: $lightRed;
 }
 
 .product-card__container:hover .product-card__name{
@@ -166,6 +192,11 @@ $darkgold: rgb(190, 162, 0);
 .product-card__details-button--gold a{
     color: $gold;
     border-color: $gold;
+}
+
+.product-card__details-button--campaign a{
+    color: $lightRed;
+    border-color: $lightRed;
 }
 
 .product-card__details-button a:hover{

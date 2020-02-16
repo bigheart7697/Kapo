@@ -25,7 +25,7 @@ const CampaignCard = (props) => {
                     <div className='campaign-card__precentage'>{props.campaign ? props.campaign.discount : '-'}%</div>
                     <div className='campaign-card__old-price'>{props.campaign ? props.campaign.product ? props.campaign.product.price : '-' : '-'}</div>
                 </div>
-                <div className='campaign-card__new-price'>{props.campaign ? props.campaign.product ? props.campaign.product.price ? props.campaign.discount ? props.campaign.product.price * props.campaign.discount / 100 : '-' : '-' : '-' : '-'} تومان</div>
+                <div className='campaign-card__new-price'>{props.campaign ? props.campaign.product ? props.campaign.product.price ? props.campaign.discount ? props.campaign.product.price * (100 - props.campaign.discount) / 100 : '-' : '-' : '-' : '-'} تومان</div>
                 <Countdown date={props.campaign ? get_due(props.campaign.created, props.campaign.days) : Date.now() - 1000} renderer={CountDown}/>
             </div>
         </a>

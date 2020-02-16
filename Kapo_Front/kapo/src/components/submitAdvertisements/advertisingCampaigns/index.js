@@ -22,9 +22,8 @@ const FORM_VALUES = {
         label: "مکان نمایش کمپین",
         type: "select",
         content:[
-          {text: "مکان 1", value: "1"},
-          {text: "مکان 2", value: "2"},
-          {text: "مکان 3", value: "3"}
+          {text: "صفحه اصلی", value: "1"},
+          {text: "لیست محصولات", value: "2"}
         ],
         error: "لطفا مکان نمایش کمپین خود را مشخص کنید"
       },
@@ -44,14 +43,42 @@ class SubmitAdvertisingCampaigns extends React.Component {
 
     render() {
         return (
-          <FormWrapper>
-            <Form
-              formValues={FORM_VALUES.form_inputs}
-              onSubmit={this.onSubmit}
-              submitText={FORM_VALUES.submitText}
-              title={FORM_VALUES.title}
-            ></Form>
-          </FormWrapper>
+          <>
+            <FormWrapper>
+              <Form
+                formValues={FORM_VALUES.form_inputs}
+                onSubmit={this.onSubmit}
+                submitText={FORM_VALUES.submitText}
+                title={FORM_VALUES.title}
+              ></Form>
+            </FormWrapper>
+            <div className='submit-advertising-banners__table'>
+              <div className='submit-advertising-banners__headers'>
+                <div className='submit-advertising-banners__cell'>
+                  مکان
+                </div>
+                <div className='submit-advertising-banners__cell'>
+                  تعداد کمپین‌های در انتظار
+                </div>
+              </div>
+              <div className='submit-advertising-banners__row'>
+                <div className='submit-advertising-banners__cell'>
+                  صفحه اصلی
+                </div>
+                <div className='submit-advertising-banners__cell'>
+                  3
+                </div>
+              </div>
+              <div className='submit-advertising-banners__row'>
+                <div className='submit-advertising-banners__cell'>
+                  لیست کالاها
+                </div>
+                <div className='submit-advertising-banners__cell'>
+                  7
+                </div>
+              </div>
+            </div>
+          </>
         );
       }
 }

@@ -17,6 +17,17 @@ class AdvertisementDetails extends React.Component {
             <div className='advertisement-details__container'>
                 <ProductCard product={this.props.advertisement ? this.props.advertisement.product : {}}/>
                 <div className='advertisement-details__content'>
+                    {this.props.type === 'banner' ? 
+                        <div className='advertisement-details__line'>
+                            <div className='advertisement-details__key'>شعار</div>
+                            <div className='advertisement-details__value'>{this.props.advertisement ? this.props.advertisement.slogan : '-'}</div>
+                        </div>
+                    : this.props.type === 'campaign' ? 
+                        <div className='advertisement-details__line'>
+                            <div className='advertisement-details__key'>درصد تخفیف</div>
+                            <div className='advertisement-details__value'>{this.props.advertisement ? this.props.advertisement.discount : '-'}</div>
+                        </div>
+                    : null}
                     <div className='advertisement-details__line'>
                         <div className='advertisement-details__key'>{(this.props.type === 'banner' || this.props.type === 'campaign') ? 'مکان قرارگیری' : 'لغات مورد نظر'}</div>
                         <div className='advertisement-details__value'>{this.props.advertisement ? (this.props.type === 'banner' || this.props.type === 'campaign') ? this.props.advertisement.place : this.props.advertisement.search_phrases : '-'}</div>
