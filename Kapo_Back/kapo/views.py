@@ -450,6 +450,8 @@ def sponsor_fail_view(request, pk):
         if sponsored_search.state != sponsored_search.State.AWAITING:
             raise ValidationError("Operation failed. This order is {}".format(sponsored_search.state))
         else:
+            transaction = sponsored_search.get_transaction
+            transaction.delete()
             sponsored_search.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except SponsoredSearch.DoesNotExist:
@@ -482,6 +484,8 @@ def banner_fail_view(request, pk):
             raise ValidationError("Operation failed. This order is {}".format(banner.state))
         else:
             banner.delete()
+            transaction = banner.get_transaction
+            transaction.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
@@ -512,6 +516,8 @@ def campaign_fail_view(request, pk):
         if campaign.state != campaign.State.AWAITING:
             raise ValidationError("Operation failed. This order is {}".format(campaign.state))
         else:
+            transaction = campaign.get_transaction
+            transaction.delete()
             campaign.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from kapo.models import *
 from accounts.serializers import UserSerializer
-from django.db.models import Avg
 
 
 class TransactionObjectRelatedField(serializers.RelatedField):
@@ -120,3 +119,13 @@ class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rate
         fields = ['product', 'user', 'rating']
+
+
+class BalanceIncreaseSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    state = serializers.CharField(source='get_state_display', read_only=True)
+    transaction = serializers.IntegerField(source='get_transaction.id', read_only=True)
+
+    class Meta:
+        model = BalanceIncrease
+        fields = ('id', 'user', 'amount', 'state', 'created', 'transaction')

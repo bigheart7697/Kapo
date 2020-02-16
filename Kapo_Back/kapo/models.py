@@ -453,6 +453,31 @@ class Campaign(TransactionMixin, models.Model):
         verbose_name_plural = _('Campaigns')
 
 
+class BalanceIncrease(TransactionMixin, models.Model):
+    class State(models.IntegerChoices):
+        AWAITING = 1
+        COMPLETED = 2
+
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, related_name='balance_increase', on_delete=models.CASCADE)
+    state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
+    amount = models.IntegerField(_('amount'), validators=[MinValueValidator(0)])
+    created = models.DateTimeField(_("registration date"), auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = _('Balance Increase')
+        verbose_name_plural = _('Balance Increases')
+
+
+@receiver(post_save, sender=BalanceIncrease)
+def create_increase_balance_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.INCREASE_BALANCE
+        Transaction.objects.create(sender=instance.user, transaction_object=instance,
+                                   amount=instance.amount, type=transaction_type)
+
+
 @receiver(post_save, sender=SponsoredSearch)
 def create_sponsor_transaction(sender, instance, created, **kwargs):
     if created:

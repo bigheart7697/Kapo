@@ -3,11 +3,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import *
 from rest_framework.permissions import *
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from accounts.permissions import IsOwnerProfileOrReadOnly
 from accounts.serializers import *
-from kapo.models import Transaction
+from kapo.models import BalanceIncrease
+from kapo.serializers import BalanceIncreaseSerializer
 
 
 @api_view(['GET'])
@@ -29,19 +29,45 @@ class ProfileDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerProfileOrReadOnly, IsAuthenticated]
 
 
+class BalanceIncreaseCreateVIew(CreateAPIView):
+    serializer_class = BalanceIncreaseSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class BalanceIncreaseDetailView(RetrieveAPIView):
+    serializer_class = BalanceIncreaseSerializer
+
+    def get_queryset(self):
+        return BalanceIncrease.objects.filter(user=self.request.user)
+
+
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
-def balance_increase_view(request, pk):
+def increase_balance_complete_view(request, pk):
     try:
-        user = User.objects.get(id=pk)
-        amount = int(request.data['amount'])
+        increase_balance = BalanceIncrease.objects.get(id=pk)
+        if increase_balance.state != increase_balance.State.AWAITING:
+            raise ValidationError("Operation failed. This object is {}".format(increase_balance.state))
+        else:
+            increase_balance.state = increase_balance.State.COMPLETED
+            return Response(request.data, status=status.HTTP_200_OK)
+    except BalanceIncrease.DoesNotExist:
+        return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
-        transaction_type = Transaction.Type.INCREASE_BALANCE
-        Transaction.objects.create(sender=request.user,
-                                   amount=amount, type=transaction_type)
 
-        user.balance += amount
-        user.save()
-        return Response(request.data, status=status.HTTP_200_OK)
-    except User.DoesNotExist:
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def increase_balance_fail_view(request, pk):
+    try:
+        increase_balance = BalanceIncrease.objects.get(id=pk)
+        if increase_balance.state != increase_balance.State.AWAITING:
+            raise ValidationError("Operation failed. This order is {}".format(increase_balance.state))
+        else:
+            transaction = increase_balance.get_transaction
+            transaction.delete()
+            increase_balance.delete()
+            return Response(request.data, status=status.HTTP_200_OK)
+    except BalanceIncrease.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
