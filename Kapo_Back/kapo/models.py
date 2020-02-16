@@ -385,17 +385,18 @@ class Banner(TransactionMixin, models.Model):
 
 
 class Rate(models.Model):
-    RATING_RANGE = (
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5')
-    )
+
+    class RatingRange(models.IntegerChoices):
+        ONE = 1
+        TWO = 2
+        THREE = 3
+        FOUR = 4
+        FIVE = 5
+
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='ratings')
-    rating = models.IntegerField(choices=RATING_RANGE, )
+    rating = models.IntegerField(choices=RatingRange.choices)
 
     class Meta:
         unique_together = [["user", "product"]]
