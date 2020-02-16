@@ -1,5 +1,5 @@
 import React from 'react'
-import  {createAdvertisingBanners} from "../../../actions"
+import  {createAdvertisingBanners, bannerCount} from "../../../actions"
 import { connect } from 'react-redux'
 
 import './style.scss'
@@ -36,6 +36,11 @@ const FORM_VALUES = {
   };
 
 class SubmitAdvertisingBanners extends React.Component {
+componentDidMount() {
+  this.props.bannerCount(1);
+  this.props.bannerCount(2);
+}
+
     onSubmit = (formValues) => {
         this.props.createAdvertisingBanners(formValues, this.props.product.id)
     };
@@ -65,7 +70,7 @@ class SubmitAdvertisingBanners extends React.Component {
                   پنل کاربر
                 </div>
                 <div className='submit-advertising-banners__cell'>
-                  3
+                  {this.props.first_banners_count}
                 </div>
               </div>
               <div className='submit-advertising-banners__row'>
@@ -73,7 +78,7 @@ class SubmitAdvertisingBanners extends React.Component {
                   جزئیات محصول
                 </div>
                 <div className='submit-advertising-banners__cell'>
-                  7
+                {this.props.second_banners_count}
                 </div>
               </div>
             </div>
@@ -82,4 +87,8 @@ class SubmitAdvertisingBanners extends React.Component {
       }
 }
 
-export default connect(null, { createAdvertisingBanners })(SubmitAdvertisingBanners);
+const mapStatetoProps = (state, ownProps) => {
+  return {first_banners_count: state.advertisements.first_banners_count, second_banners_count: state.advertisements.second_banners_count,}
+}
+
+export default connect(mapStatetoProps, { createAdvertisingBanners, bannerCount })(SubmitAdvertisingBanners);

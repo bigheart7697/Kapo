@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_SPONSORS, FETCH_CAMPAIGNS, FETCH_BANNERS, FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO } from "./types";
+import { FETCH_PRODUCT_CAMPAIGN, FETCH_FIRST_CAMPAIGN, FETCH_SECOND_CAMPAIGN, FETCH_THIRD_CAMPAIGN, CAMPAIGN_COUNT, FETCH_SPONSORS, FETCH_CAMPAIGNS, FETCH_BANNERS, FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO, FETCH_SIMILAR_PRODUCTS } from "./types";
 import bank from "../apis/bank";
 
 export const fetchProducts = () => async dispatch => {
@@ -12,7 +12,7 @@ export const fetchProducts = () => async dispatch => {
 
 export const fetchMyProducts = () => async dispatch => {
   const response = await server.get("/kapo/products/");
-  dispatch({ type: FETCH_MY_PRODUCTS, payload: response.data });
+  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
 };
 
 export const fetchCategories = () => async dispatch => {
@@ -49,7 +49,6 @@ export const fetchProductOrders = id => async dispatch => {
 export const completeOrder = id => async dispatch => {
   try {
 	  const response = await server.post(`/kapo/orders/${id}/complete/`);
-    alert("سفارش پرداخت شد");
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -122,9 +121,27 @@ export const failSponsor = id => async dispatch => {
     alert("خطایی رخ داد");
   }
 }
+
+export const completeCharge = id => async dispatch => {
+  try {
+    await server.post(`/accounts/balance/${id}/complete`);
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
+export const failCharge = id => async dispatch => {
+  try {
+    const response = await server.post(`/accounts/balance/${id}/fail/`);
+  }
+  catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
 export const bannerCount = place_id => async dispatch => {
   const response = await server.get(`/kapo/banner-count/${place_id}/`);
-  dispatch({type: BANNER_COUNT, payload: {count: response.data, place: place_id}})
+  dispatch({type: BANNER_COUNT, payload: {count: response.data.count, place: place_id}})
 }
 
 export const addProduct = product => async dispatch => {
@@ -143,9 +160,9 @@ export const setPrice = (category = null) => async dispatch => {
   if (category != null) {
     response = await server.get(`/kapo/search/?cat3=${category}`);
   } else {
-    response = await server.get(`/kapo/`);
+    response = {}
   }
-  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
+  dispatch({ type: FETCH_SIMILAR_PRODUCTS, payload: response.data });
 }
 
 export const fetchProduct = id => async dispatch => {
@@ -214,8 +231,6 @@ export const fetchThirdBanners = () => async dispatch => {
 };
 
 export const addToCart = (id, formValues) => async dispatch => {
-  // let payload = { count: parseInt(count) }
-  // console.log(payload)
   try {
     const response = await server.post(`/kapo/products/${id}/order/`, formValues);
     console.log(response);
@@ -395,6 +410,39 @@ export const fetchAllSponsors = () => async dispatch => {
   dispatch({ type: FETCH_SPONSORS, payload: response.data });
 }
 
-export const chargeAccount = (formValues, id) => async dispatch => {
-  await server.post(`/accounts/increase-balance/${id}/`, formValues);
+export const chargeAccount = (formValues) => async dispatch => {
+  try {
+    const response = await server.post(`/accounts/increase-balance/`, formValues);
+    history.push(`/pay/factor/${response.data.transaction}`);
+  }
+  catch {
+    alert("درخواست شارژ حساب با مشکل روبرو شد.")
+  }
+}
+
+export const fetchProductCampaign = (id) => async dispatch => {
+  const response = await server.get(`kapo/products/${id}/campaigns/`);
+  dispatch({ type: FETCH_PRODUCT_CAMPAIGN, payload: response.data });
+}
+
+export const fetchFirsCampaign = () => async dispatch => {
+  const response = await server.get(`/kapo/first-campaigns/`)
+  dispatch({ type: FETCH_FIRST_CAMPAIGN, payload: response.data });
+};
+
+export const fetchSecondCampaign = () => async dispatch => {
+  const response = await server.get(`/kapo/second-campaigns/`)
+  dispatch({ type: FETCH_SECOND_CAMPAIGN, payload: response.data });
+};
+
+export const fetchThirdCampaign = () => async dispatch => {
+  const response = await server.get(`/kapo/third-campaigns/`)
+  dispatch({ type: FETCH_THIRD_CAMPAIGN, payload: response.data });
+};
+
+export const campaignCount = (place_id) => async dispatch => {
+  const response = await server.get(`/kapo/campaign-count/${place_id}/`);
+  console.log(response.data);
+  
+  dispatch({type: CAMPAIGN_COUNT, payload: {count: response.data.count, place: place_id}})
 }
