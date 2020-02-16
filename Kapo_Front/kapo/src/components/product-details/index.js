@@ -20,7 +20,7 @@ import defaultImg from '../../assets/default.jpg'
 import { Link } from "react-router-dom";
 
 class ProductDetails extends React.Component {
-
+  index = 0
   state = {
     delivery_weekday: 1,
     delivery_hours:1,
@@ -40,6 +40,10 @@ class ProductDetails extends React.Component {
     this.props.fetchFirstBanners();
     this.props.fetchSecondBanners();
     this.props.fetchThirdBanners();
+  }
+
+  componentDidUpdate() {
+    this.index = Math.floor(Math.random() * this.props.second_banners.length);
   }
 
   get_starting_day = () => {
@@ -140,7 +144,7 @@ class ProductDetails extends React.Component {
   render() {
     return (
       <>
-        {this.props.second_banners[1]? <AdvertisingBanner product={{link: `${this.props.second_banners[1].product.id}` ,image: this.props.second_banners[1].product.image, name: this.props.second_banners[1].product.name, moto: this.props.second_banners[1].slogan, price: this.props.second_banners[1].product.price}}/> : 
+        {this.props.second_banners[1]? <AdvertisingBanner product={{link: `${this.props.second_banners[this.index].product.id}` ,image: this.props.second_banners[this.index].product.image, name: this.props.second_banners[this.index].product.name, moto: this.props.second_banners[this.index].slogan, price: this.props.second_banners[this.index].product.price}}/> : 
         null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">
