@@ -10,6 +10,7 @@ import MyBanners from "../MyBanners"
 import MyCampaigns from "../MyCampaigns"
 import MySponsors from "../MySponsors"
 import ProfilesAccount from '../profilesAccount'
+import AdvertisingBanner from '../advertisingBanner'
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
@@ -67,12 +68,15 @@ class Dashboard extends React.Component{
     }
     render(){
         return(
-            <div className="dashboard__container">
-                <DashboardBar activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab} content={DASHBOARD_ITEMS}/>
-                <div className="dashboard__content">
-                    {this.renderContent()}
+            <>
+                <AdvertisingBanner />
+                <div className="dashboard__container">
+                    <DashboardBar activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab} content={DASHBOARD_ITEMS}/>
+                    <div className="dashboard__content">
+                        {this.renderContent()}
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

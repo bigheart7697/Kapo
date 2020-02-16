@@ -5,25 +5,19 @@ import './style.scss'
 import AdvertisementDetails from '../basic/advertisementDetails'
 import AdvertisementTable from '../basic/advertisementTable'
 
-const ADVERTISEMENT_LIST = [
-    {id: 1, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 3, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05 18:52'},
-    {id: 2, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 12, remaining_count: 5, search_phrases: 'لباس زمستانی پالتو', created: '2020-02-05 18:52'},
-    {id: 3, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 11, remaining_count: 2, search_phrases: 'مشکی لباس پالتو', created: '2020-02-05 18:52'},
-    {id: 4, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 5, remaining_count: 1, search_phrases: 'مشکی لباس زمستانی پالتو', created: '2020-02-05 18:52'},
-    {id: 5, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 8, remaining_count: 4, search_phrases: 'مشکی پالتو', created: '2020-02-05 18:52'},
-    {id: 6, product: {id: 1, name: 'پالتو گرم', price: 120000, owner: {corporate_name: 'مبنا', address: 'نیاوران', country: 'ایران', city: 'تهران', is_corporate: true}},
-        count: 10, remaining_count: 8, search_phrases: ' زمستانی پالتو', created: '2020-02-05 18:52'}
-]
-
 class AdvertisementList extends React.Component {
+    state = {advertisement: {}}
+
+    componentDidMount() {
+        this.setState({advertisement: this.props.advertisements ? this.props.advertisements[0] : {}})
+    }
+    componentDidUpdate() {
+        if(this.props.advertisements && this.state.advertisement != this.props.advertisements[0]) {
+            this.setState({advertisement: this.props.advertisements ? this.props.advertisements[0] : {}})
+        }
+    }
+
     get_title = () => {
-        console.log(this.props.type);
-        
         switch(this.props.type) {
             case 'banner':
                 return 'بنرهای تبلیغاتی'
@@ -34,6 +28,11 @@ class AdvertisementList extends React.Component {
             default:
                 return 'کالاهای اسپانسر شده'
         }
+    }
+
+    set_advertisement = (advertisement, index) => {
+        this.setState({advertisement})
+        this.change_active(index)
     }
 
     get_header = () => {
@@ -49,16 +48,15 @@ class AdvertisementList extends React.Component {
         }
     }
 
-    render() {    
-        console.log(this.props.type);
+    render() {
         return (
             <div className='advertisement-list__container'>
                 <div className='advertisement-list__section'>
                     <div className='advertisement-list__title'>لیست {this.get_title()}</div>
-                    <AdvertisementTable header={this.get_header()} advertisements={this.props.advertisementList? this.props.advertisementList : ADVERTISEMENT_LIST} type={this.props.type} setMethod={click => this.change_active = click} callMethod={this.change_advertisements}/>
+                    <AdvertisementTable header={this.get_header()} advertisements={this.props.advertisementList? this.props.advertisementList : []} type={this.props.type} setMethod={click => this.change_active = click} callMethod={this.set_advertisement}/>
                 </div>
                 <div className='advertisement-list__section'>
-                    <AdvertisementDetails advertisement={this.props.advertisementList[0]? this.props.advertisementList[0] : ADVERTISEMENT_LIST[0]} type={this.props.type} setMethod={click => this.change_advertisements = click} callMethod={this.change_active}/>
+                    <AdvertisementDetails advertisement={this.state.advertisement} type={this.props.type}/>
                 </div>
             </div>
         );

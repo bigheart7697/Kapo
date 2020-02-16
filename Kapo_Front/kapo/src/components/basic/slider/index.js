@@ -1,11 +1,7 @@
 import React from 'react'
 
 import './style.scss'
-
-
-// =========================
-// Slide
-// =========================
+import { Link } from 'react-router-dom'
 
 class Slide extends React.Component {
     constructor(props) {
@@ -40,7 +36,7 @@ class Slide extends React.Component {
     }
 
     render() {
-        const { src, button, headline, index } = this.props.slide
+        const { link, src, button, headline, index } = this.props.slide
         const current = this.props.current
         let classNames = 'slide'
 
@@ -67,7 +63,7 @@ class Slide extends React.Component {
 
                 <article className="slide__content">
                     <h2 className="slide__headline">{headline}</h2>
-                    <button className="slide__action btn">{button}</button>
+                    <Link className="slide__action btn" to={link ? link : '/'}>{button}</Link>
                 </article>
             </li>
         )

@@ -22,7 +22,7 @@ const FORM_VALUES = {
 
 class ChargeAccount extends React.Component {
     onSubmit = (formValues) => {
-        this.props.chargeAccount(formValues, this.props.product.id)
+        this.props.chargeAccount(formValues, this.props.user_id);
     };
 
     render() {
@@ -39,4 +39,8 @@ class ChargeAccount extends React.Component {
       }
 }
 
-export default connect(null, { chargeAccount })(ChargeAccount);
+const mapStateToProps = (state) => {
+  return { user_id: state.user.information.id }
+}
+
+export default connect(mapStateToProps, { chargeAccount })(ChargeAccount);
