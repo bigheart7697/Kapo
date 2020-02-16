@@ -94,7 +94,7 @@ class CampaignSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Campaign
-        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'created',
+        fields = ['id', 'product', 'days', 'remaining_days', 'valid', 'state', 'place', 'created',
                   'transaction', 'discount']
 
 

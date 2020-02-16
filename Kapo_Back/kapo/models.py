@@ -1,11 +1,12 @@
 import datetime
 
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-import kapo.signals
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 
 from django.db.models import Avg
@@ -413,18 +414,28 @@ class Liquidate(TransactionMixin, models.Model):
 
 class Campaign(TransactionMixin, models.Model):
 
-    FEE = 100000
+    FEE = 1000000
+
+    MAX_FIRST_NUM = 3
+    MAX_SECOND_NUM = 3
+    MAX_THIRD_NUM = 3
 
     class State(models.IntegerChoices):
         AWAITING = 1
         COMPLETED = 2
 
+    class Place(models.IntegerChoices):
+        FIRST = 1
+        SECOND = 2
+        THIRD = 3
+
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, related_name=_("campaigns"), on_delete=models.CASCADE)
     valid = models.BooleanField(_("valid"), default=False)
+    place = models.IntegerField(_("place"), choices=Place.choices, default=Place.FIRST)
     state = models.IntegerField(_("state"), choices=State.choices, default=State.AWAITING)
     days = models.IntegerField(_("days"), validators=[MinValueValidator(3), MaxValueValidator(7)])
-    discount = models.IntegerField(_("discount"), default=10, validators=[MinValueValidator(0), MaxValueValidator(99)])
+    discount = models.IntegerField(_("discount"), default=10, validators=[MinValueValidator(10), MaxValueValidator(99)])
     remaining_days = models.IntegerField(_("remaining_days"), default=0, validators=[MinValueValidator(0)])
     created = models.DateTimeField(_("registration date"), auto_now_add=True)
 
@@ -442,4 +453,33 @@ class Campaign(TransactionMixin, models.Model):
         verbose_name_plural = _('Campaigns')
 
 
+@receiver(post_save, sender=SponsoredSearch)
+def create_sponsor_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.SPONSOR
+        Transaction.objects.create(sender=instance.product.owner, transaction_object=instance,
+                                   amount=instance.count*instance.FEE, type=transaction_type)
 
+
+@receiver(post_save, sender=Banner)
+def create_banner_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.BANNER
+        Transaction.objects.create(sender=instance.product.owner, transaction_object=instance,
+                                   amount=instance.days*instance.FEE, type=transaction_type)
+
+
+@receiver(post_save, sender=Campaign)
+def create_campaign_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.CAMPAIGN
+        Transaction.objects.create(sender=instance.product.owner, transaction_object=instance,
+                                   amount=instance.days*instance.FEE, type=transaction_type)
+
+
+@receiver(post_save, sender=Liquidate)
+def create_liquidate_transaction(sender, instance, created, **kwargs):
+    if created:
+        transaction_type = Transaction.Type.LIQUIDATE
+        Transaction.objects.create(sender=instance.owner, transaction_object=instance,
+                                   amount=instance.amount, type=transaction_type)

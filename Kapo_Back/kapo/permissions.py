@@ -50,3 +50,12 @@ class HasEnoughBalance(permissions.BasePermission):
         if request.user.balance < request.user.MIN_BALANCE:
             raise PermissionDenied()
         return True
+
+
+class IsOwnerOfProductOrReadOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        if obj.product.owner != request.user and not request.user.is_staff:
+            raise PermissionDenied()
+        return True

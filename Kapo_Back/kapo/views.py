@@ -211,6 +211,7 @@ class OwnerCampaignListView(generics.ListAPIView):
 class CampaignDetailView(generics.RetrieveAPIView):
     serializer_class = CampaignSerializer
     queryset = Campaign.objects.all()
+    permission_classes = [IsOwnerOfProductOrReadOnly]
 
 
 class BannerCreateView(generics.CreateAPIView):
@@ -247,26 +248,44 @@ class ProductCampaignListView(generics.ListAPIView):
 
 class BannerDetailView(generics.RetrieveAPIView):
     serializer_class = BannerSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOfProduct]
+    permission_classes = [IsOwnerOfProductOrReadOnly]
     queryset = Banner.objects.all()
+
+
+class CampaignFirstListView(generics.ListAPIView):
+    serializer_class = CampaignSerializer
+    queryset = Campaign.objects.filter(valid=True, state=Campaign.State.COMPLETED, place=Campaign.Place.FIRST).order_by(
+        '-created')[:Campaign.MAX_FIRST_NUM]
+
+
+class CampaignSecondListView(generics.ListAPIView):
+    serializer_class = CampaignSerializer
+    queryset = Campaign.objects.filter(valid=True, state=Campaign.State.COMPLETED, place=Campaign.Place.SECOND).order_by(
+        '-created')[:Campaign.MAX_SECOND_NUM]
+
+
+class CampaignThirdListView(generics.ListAPIView):
+    serializer_class = CampaignSerializer
+    queryset = Campaign.objects.filter(valid=True, state=Campaign.State.COMPLETED, place=Campaign.Place.THIRD).order_by(
+        '-created')[:Campaign.MAX_THIRD_NUM]
 
 
 class BannerFirstListView(generics.ListAPIView):
     serializer_class = BannerSerializer
     queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.FIRST).order_by(
-        'created')[:Banner.MAX_FIRST_NUM]
+        '-created')[:Banner.MAX_FIRST_NUM]
 
 
 class BannerSecondListView(generics.ListAPIView):
     serializer_class = BannerSerializer
     queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.SECOND).order_by(
-        'created')[:Banner.MAX_SECOND_NUM]
+        '-created')[:Banner.MAX_SECOND_NUM]
 
 
 class BannerThirdListView(generics.ListAPIView):
     serializer_class = BannerSerializer
     queryset = Banner.objects.filter(valid=True, state=Banner.State.COMPLETED, place=Banner.Place.THIRD).order_by(
-        'created')[:Banner.MAX_THIRD_NUM]
+        '-created')[:Banner.MAX_THIRD_NUM]
 
 
 class ProductRateView(generics.CreateAPIView):
@@ -388,14 +407,14 @@ def order_cancel_view(request, pk):
 @permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
 def sponsor_complete_view(request, pk):
     try:
-        sponsored_search = SponsoredSearchView.objects.get(id=pk)
+        sponsored_search = SponsoredSearch.objects.get(id=pk)
         if sponsored_search.state != sponsored_search.State.AWAITING:
             raise ValidationError("Operation failed. This object is {}".format(sponsored_search.state))
         else:
             sponsored_search.state = sponsored_search.State.COMPLETED
             sponsored_search.save()
             return Response(request.data, status=status.HTTP_200_OK)
-    except SponsoredSearchView.DoesNotExist:
+    except SponsoredSearch.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
@@ -403,13 +422,13 @@ def sponsor_complete_view(request, pk):
 @permission_classes([permissions.IsAuthenticated, IsOwnerOfProduct])
 def sponsor_fail_view(request, pk):
     try:
-        sponsored_search = SponsoredSearchView.objects.get(id=pk)
+        sponsored_search = SponsoredSearch.objects.get(id=pk)
         if sponsored_search.state != sponsored_search.State.AWAITING:
             raise ValidationError("Operation failed. This order is {}".format(sponsored_search.state))
         else:
             sponsored_search.delete()
             return Response(request.data, status=status.HTTP_200_OK)
-    except SponsoredSearchView.DoesNotExist:
+    except SponsoredSearch.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
 
 
