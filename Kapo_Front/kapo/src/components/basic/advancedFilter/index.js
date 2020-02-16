@@ -10,6 +10,7 @@ import CustomReactSwitch from '../customReactSwitch'
 import CustomSelect from '../customSelect'
 import CustomButton from '../customButton'
 import AdvancedSorting from '../advancedSorting'
+import { translate } from '../../basic/categoryDict'
 
 class AdvancedFilter extends React.Component{
     state = {priceRange: null, productionYearRange: null, quantityRange: null, secondHandOnly: false, cat1: null, cat2: null, cat3: null, activeSort: 0, direction: 0}
@@ -24,7 +25,7 @@ class AdvancedFilter extends React.Component{
         }else if(this.state.activeSort == 1){
             order = 'production_year'
         }else{
-            order = 'create'
+            order = 'average_rating'
         }
        if(this.state.direction == 0){
            direction = '-'
@@ -35,18 +36,18 @@ class AdvancedFilter extends React.Component{
         let categories1 = [], categories2 = [], categories3 =[]
         if(this.props.categories){
             this.props.categories.forEach((category) => {
-                categories1.push({ text: category.name, label: category.text ,value: category.value, categories: category.categories })
+                categories1.push({ text: translate(category.name) ,value: category.value, categories: category.categories })
             })
             let searchedValue = searchValue(this.state.cat1, categories1)
             if(searchedValue){
                 searchedValue.categories.forEach((category) => {
-                    categories2.push({ text: category.name, label: category.text, value: category.value, categories: category.categories }) 
+                    categories2.push({ text: translate(category.name), value: category.value, categories: category.categories }) 
                 })
             }
             searchedValue = searchValue(this.state.cat2, categories2)
             if(searchedValue){
                 searchedValue.categories.forEach((category) => {
-                    categories3.push({ text: category.name, label: category.text, value: category.value, categories: category.categories }) 
+                    categories3.push({ text: translate(category.name), value: category.value, categories: category.categories }) 
                 })
             }
         }
@@ -54,26 +55,26 @@ class AdvancedFilter extends React.Component{
             <div className="advanced-filter__content">
                 <div className="advanced-filter__header">فیلتر</div>
                 <div className="advanced-filter__field">
-                    <CustomRangeSlider min={0} max={100} header="بازه قیمت" syncState={(range) => { if(this.state.priceRange != range){this.setState({ priceRange: range })} }}/>
+                    <CustomRangeSlider min={0} max={1000000} header="(تومان) بازه قیمت" syncState={(range) => { if(this.state.priceRange != range){this.setState({ priceRange: range })} }}/>
                 </div>
                 <div className="advanced-filter__field">
                     <CustomRangeSlider min={1900} max={2020} header="سال تولید" syncState={(range) => { if(this.state.productionYearRange != range){this.setState({ productionYearRange: range })} }}/>
                 </div>
                 <div className="advanced-filter__field">
-                    <CustomRangeSlider min={0} max={100} header="تعداد موجود" syncState={(range) => { if(this.state.quantityRange != range){this.setState({ quantityRange: range })} }}/>
+                    <CustomRangeSlider min={0} max={1000} header="تعداد موجود" syncState={(range) => { if(this.state.quantityRange != range){this.setState({ quantityRange: range })} }}/>
                 </div>
                 <div className="advanced-filter__field">
                     <CustomReactSwitch label="فقط کالا‌های دسته دوم" handleChange={(checked) => {this.setState({secondHandOnly: checked})}} checked={this.state.secondHandOnly}/>
                 </div>
                 {/* TODO inputs should be fixed */}
                 <div className="advanced-filter__field">
-                    <CustomSelect name='cat1' label='دسته اول' content={categories1} onChange={(e) => {e.persist(); this.setState({ cat1: e.target.value, cat2: null, cat3: null })}} full normal/>
+                    <CustomSelect name='cat1' label='دسته اول' content={categories1} input={{ value: this.state.cat1 }} onChange={(e) => {e.persist(); this.setState({ cat1: e.target.value, cat2: null, cat3: null })}} full normal/>
                 </div>
                 <div>
-                    <CustomSelect name='cat2' label='دسته دوم' content={categories2} onChange={(e) => {e.persist(); this.setState({ cat2: e.target.value, cat3: null })}} full normal/>
+                    <CustomSelect name='cat2' label='دسته دوم' content={categories2} input={{ value: this.state.cat2 }} onChange={(e) => {e.persist(); this.setState({ cat2: e.target.value, cat3: null })}} full normal/>
                 </div>
                 <div>
-                    <CustomSelect name='cat3' label='دسته سوم' content={categories3} onChange={(e) => {e.persist(); this.setState({ cat3: e.target.value })}} full normal/>
+                    <CustomSelect name='cat3' label='دسته سوم' content={categories3} input={{ value: this.state.cat3 }} onChange={(e) => {e.persist(); this.setState({ cat3: e.target.value })}} full normal/>
                 </div>
                 <div className="advanced-filter__header">مرتب‌سازی</div>
                 <AdvancedSorting syncState={(sort, direction) => {if(this.state.activeSort != sort || this.state.direction != direction){ this.setState({ activeSort: sort, direction: direction }) }}}/>

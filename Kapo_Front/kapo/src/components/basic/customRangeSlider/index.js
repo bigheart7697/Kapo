@@ -8,7 +8,7 @@ import ToPersianNum from '../../basic/toPersianNum'
 import ToEnglishNum from '../../basic/toEnglishNum'
 
 class CustomRangeSlider extends React.Component {
-    state={range: [this.props.min + 0.1 * (this.props.max - this.props.min), this.props.max - (this.props.max - this.props.min) * 0.1 ]}
+    state={range: [this.props.min, this.props.max]}
     onChangeHandler = (range) => {
         this.setState({ range: range })
     }
