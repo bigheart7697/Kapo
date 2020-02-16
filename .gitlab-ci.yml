@@ -1,7 +1,6 @@
 # image: python:latest
 # stages:
 #   - testing
-# #   - styling
 # #   - build
 #   - deploy
 
@@ -48,7 +47,6 @@
 #   stage: testing
 #   script:
 #     - cd Kapo_Front/kapo
-#     # - npm install -g yarn yarnpkg
 #     - yarn install
 #     - yarn test
 #   artifacts:
