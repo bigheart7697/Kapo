@@ -71,13 +71,13 @@ class Navbar extends React.Component {
     if (path.startsWith("/order/factor")) {
       return 'جزئیات سفارش'
     }
-    if (path.startsWith("/ProductOrders")) {
+    if (path.startsWith("/productorders")) {
       return 'سفارش‌های کالا'
     }
-    if (path.startsWith("/changeProduct")) {
+    if (path.startsWith("/changeproduct")) {
       return 'ویرایش اطلاعات محصول'
     }
-    if (path.startsWith("/ProductList")) {
+    if (path.startsWith("/productlist")) {
       return 'لیست کالاها'
     }
     if (path.startsWith("/pay/factor")) {
@@ -90,22 +90,23 @@ class Navbar extends React.Component {
   }
 
   setPathName = (path) => {
-    switch(path){
+    let p = path.toLower()
+    switch(p){
       case '/':
         return 'صفحه‌اصلی'
-      case '/ProductList':
+      case '/productlist':
         return 'لیست کالاها'
-      case '/AddProduct':
+      case '/addproduct':
         return 'اضافه کردن کالا'
-      case '/Auth/SignIn':
+      case '/auth/signin':
         return 'ورود'
-      case '/Auth/SignUp':
+      case '/auth/signup':
         return 'ثبت نام'
       case '/order/list':
         return 'لیست سفارش‌ها'
       case '/dashboard':
         return 'پنل کاربری'
-      case '/adminDashboard':
+      case '/admindashboard':
         return 'پنل کاربری'
       case '/payment/result/success':
         return 'پرداخت موفقیت آمیز'
@@ -113,8 +114,28 @@ class Navbar extends React.Component {
         return 'پرداخت غیر موفقیت آمیز'
       case '/advertisement/list':
         return 'لیست تبلیغات'
+      case '/productlist/':
+        return 'لیست کالاها'
+      case '/addproduct/':
+        return 'اضافه کردن کالا'
+      case '/auth/signin/':
+        return 'ورود'
+      case '/auth/signup/':
+        return 'ثبت نام'
+      case '/order/list/':
+        return 'لیست سفارش‌ها'
+      case '/dashboard/':
+        return 'پنل کاربری'
+      case '/admindashboard/':
+        return 'پنل کاربری'
+      case '/payment/result/success/':
+        return 'پرداخت موفقیت آمیز'
+      case '/payment/result/fail/':
+        return 'پرداخت غیر موفقیت آمیز'
+      case '/advertisement/list/':
+        return 'لیست تبلیغات'
       default:
-        return this.checkStartWith(path);
+        return this.checkStartWith(p);
     }
   }
 
