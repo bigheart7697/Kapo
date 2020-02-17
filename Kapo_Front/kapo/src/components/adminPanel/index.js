@@ -12,9 +12,13 @@ import MyBanners from "../MyBanners"
 import MyCampaigns from "../MyCampaigns"
 import MySponsors from "../MySponsors"
 
-import userStatisticsImage from '../../assets/report.svg'
-import productStatisticsImage from '../../assets/order.svg'
+import userStatisticsImage from '../../assets/marketing.svg'
+import listUserImage from '../../assets/order.svg'
+import productStatisticsImage from '../../assets/report.svg'
 import businessStatisticsImage from '../../assets/graph.svg'
+import listImage from '../../assets/list.svg'
+import adImage from '../../assets/ad.svg'
+
 import _ from "lodash";
 
 const DASHBOARD_ITEMS = [
@@ -29,13 +33,13 @@ const DASHBOARD_ITEMS = [
         image: businessStatisticsImage
     },{
         text: "لیست تمام بنرهای تبلغیاتی",
-        image: userStatisticsImage
+        image: listImage
     },{
         text: "لیست تمام کمپین‌های تبلیغاتی",
-        image: userStatisticsImage
+        image: adImage
     },{
         text: "لیست تمام جست‌وجوهای پیشرفته",
-        image: userStatisticsImage
+        image: listUserImage
     }
 ]
 

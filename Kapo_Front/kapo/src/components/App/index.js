@@ -70,8 +70,8 @@ class App extends React.Component{
                                 <Route path="/pay/factor/:id" exact component={PayFactor}/>
                                 <Route path="/dashboard" exact component={Dashboard}/>
                                 <Route path="/adminDashboard" exact component={AdminPanel}/>
-                                <Route path="/payment/result/success" exact component={() => <PaymentResult success={true} /> }/>
-                                <Route path="/payment/result/fail" exact component={() => <PaymentResult success={false} /> }/>
+                                <Route path="/payment/result/success" exact component={(props) => <PaymentResult {...props} success={true} /> }/>
+                                <Route path="/payment/result/fail" exact component={(props) => <PaymentResult {...props} success={false} /> }/>
                                 <Route path="/advertisement/list" exact component={CategoryProducts}/>
                                 <Route component={Page404}/>
                             </Switch>
