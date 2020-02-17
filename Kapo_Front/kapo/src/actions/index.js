@@ -31,18 +31,12 @@ export const fetchMyOrders = () => async dispatch => {
 };
 
 export const fetchOrder = id => async dispatch => {
-  console.log("id")
-  console.log(id)
   const response = await server.get(`/kapo/orders/${id}/`)
-  console.log(response)
   dispatch({ type: FETCH_ORDER, payload: response.data })
 }
 
 export const fetchProductOrders = id => async dispatch => {
-  console.log("id")
-  console.log(id)
   const response = await server.get(`/kapo/products/${id}/orders/`);
-  console.log(response)
   dispatch({type: FETCH_ORDERS, payload: response.data})
 }
 
@@ -57,7 +51,6 @@ export const completeOrder = id => async dispatch => {
 export const cancelOrder = id => async dispatch => {
   try {
 	const response = await server.post(`/kapo/orders/${id}/cancel/`);
-	console.log(response)
     alert("سفارش لغو شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -146,9 +139,7 @@ export const bannerCount = place_id => async dispatch => {
 
 export const addProduct = product => async dispatch => {
   try {
-    console.log(product)
     const response = await server.post("/kapo/add-product/", product);
-    console.log(response)
     alert("کالا اضافه شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -167,8 +158,6 @@ export const setPrice = (category = null) => async dispatch => {
 
 export const fetchProduct = id => async dispatch => {
   const response = await server.get(`/kapo/products/${id}/`)
-  console.log('prooooduct')
-  console.log(response.data)
   dispatch({ type: FETCH_PRODUCT, payload: response.data })
 }
 
@@ -189,8 +178,6 @@ export const sponsoredSearchProducts = (search) => async dispatch => {
   } else {
     response  = {data: {}}
   }
-  console.log('response')
-  console.log(response)
   dispatch({ type: SEARCH_ITEM, payload: response.data });
 };
 
@@ -233,7 +220,6 @@ export const fetchThirdBanners = () => async dispatch => {
 export const addToCart = (id, formValues) => async dispatch => {
   try {
     const response = await server.post(`/kapo/products/${id}/order/`, formValues);
-    console.log(response);
     history.push(`/order/preview/${response.data.id}/`)
     alert("سفارش شما ثبت شد");
   } catch (e) {
@@ -268,7 +254,6 @@ export const SignUp = (formValues, showModal) => async dispatch => {
     const response = await server.post("/accounts/register/", formValues)
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
-    console.log(response)
     showModal("ثبت‌نام", "ثبت‌نام با موفقیت انجام شد")
   } catch {
     showModal("ثبت‌نام", "ثبت‌نام با خطا مواجه شد")
@@ -317,8 +302,6 @@ export const createSponsoredSearch = (formValues, id) => async dispatch => {
 export const createAdvertisingBanners = (formValues, id) => async dispatch => {
   try {
     const response = await server.post(`/kapo/products/${id}/banner/`, formValues)
-    console.log(response.data);
-    
     history.push(`/pay/factor/${response.data.transaction}`);
     alert("درخواست ثبت بنر با موفقیت انجام شد")
   }
@@ -350,7 +333,6 @@ export const editProfile = (data, id) => async dispatch => {
   try{
     const respsonse = await server.patch(`accounts/${id}/`, data)
     alert('success')
-    console.log(respsonse.data)
   }catch{
     alert('error')
   }
@@ -442,7 +424,5 @@ export const fetchThirdCampaign = () => async dispatch => {
 
 export const campaignCount = (place_id) => async dispatch => {
   const response = await server.get(`/kapo/campaign-count/${place_id}/`);
-  console.log(response.data);
-  
   dispatch({type: CAMPAIGN_COUNT, payload: {count: response.data.count, place: place_id}})
 }

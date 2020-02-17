@@ -11,7 +11,6 @@ class Bank extends React.Component {
         this.props.fetch_factor(this.props.match.params.id);
       }
     render() {
-        console.log(this.props.id);
         
         return (
             <div className="bank__container">
@@ -108,7 +107,6 @@ const mapStatToProps = (state, ownProps) => {
     if(ownProps.match && state.advertisements.transactions && state.advertisements.transactions[ownProps.match.params.id])
     {
         const factorItem = state.advertisements.transactions[ownProps.match.params.id];
-        console.log(factorItem);
         type = factorItem.type
         id = factorItem.transaction_object.id
         switch (factorItem.type){
@@ -125,7 +123,6 @@ const mapStatToProps = (state, ownProps) => {
                     cancelMethod = [failBanner]
 
             case 3:
-                console.log(3);
                 
                     price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
                     owner = "شرکت کاپوکالا"
@@ -145,7 +142,6 @@ const mapStatToProps = (state, ownProps) => {
                 cancelMethod = failCharge
         }
     }
-    console.log(completeMethod);
     
   return {price: price, owner: owner, completeMethod: completeMethod, cancelMethod: cancelMethod, id: id, type: type} 
 }

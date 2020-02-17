@@ -89,7 +89,6 @@ class AddProduct extends React.Component {
   onChangeCategory3 = (event) => {
     this.setState({cat3: event.target.value});
     this.props.setPrice(event.target.value);
-    console.log(event.target.value);
     
   }
 

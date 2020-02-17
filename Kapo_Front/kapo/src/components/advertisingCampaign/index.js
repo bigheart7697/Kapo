@@ -20,7 +20,6 @@ class AdvertisingCampaign extends React.Component {
     }
     
     render() {
-        console.log(this.props.campaigns);
         
         return (
             <div className='advertising-campaign__container'>

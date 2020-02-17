@@ -76,7 +76,6 @@ class EditProfile extends React.Component{
         this.props.editProfile(formValues, this.props.information.id)
     }
     render(){
-        console.log(this.props.information)
         return(
             <div className="edit-profile__container">
                 <ProfileImage image = {this.props.information.photo ? this.props.information.photo : null}/>

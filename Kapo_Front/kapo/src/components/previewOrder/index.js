@@ -8,7 +8,6 @@ import LinkToBank from '../basic/linkToBank';
 
 class PreviewOrder extends React.Component {
     componentDidMount() {
-        console.log(this.props);
         this.props.fetchOrder(this.props.match ? this.props.match.params ? this.props.match.params.id : '0' : '0');
     }
     render() {

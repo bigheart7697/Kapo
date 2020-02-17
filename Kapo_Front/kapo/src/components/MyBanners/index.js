@@ -22,7 +22,6 @@ class MyBanners extends React.Component {
             return item
         })
 
-        console.log(newArray);
         return (<>
             <AdvertisementList type="banner" advertisementList={newArray}/>
         </>)
