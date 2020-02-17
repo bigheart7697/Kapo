@@ -178,20 +178,12 @@ class Navbar extends React.Component {
             <div className="navbar__container">
               <div className="navbar__content">
                 {navItems.map((element, index) => {
-                  if (this.state.active === index) {
-                    return (
-                      <NavItem key={index} active onMouseOver={() => this.activeMegaDropDown(element)} onMouseOut={() => this.deActiveMegaDropDown(element)}>
-                        {element.text}
-                      </NavItem>
-                    );
-                  } else {
                     return(
                       <NavItem key={index} onClick={() => this.navItemOnClick(index, element.link)}
                         onMouseOver={() => this.activeMegaDropDown(element)}
                         onMouseOut={() => this.deActiveMegaDropDown(element)}>
                         {element.text}
                       </NavItem>);
-                  }
                 })}
               </div>
               <div className='navbar__searchbar'>
@@ -200,7 +192,7 @@ class Navbar extends React.Component {
               <div className='navbar__auth'>
                 {this.props.loggedIn ? 
                   (<div>
-                      <div className="navbar__circle" onClick={() => {this.setState({ dropActive: !this.state.dropActive }); history.push('/dashboard/')}} style={{ backgroundImage: `url("${this.props.profileImage ? this.props.profileImage : defaultImage}")` }}></div>
+                      <div className="navbar__circle" onClick={() => {this.setState({ dropActive: !this.state.dropActive }); history.push(this.props.isStaff ? '/adminDashboard/' : '/dashboard/')}} style={{ backgroundImage: `url("${this.props.profileImage ? this.props.profileImage : defaultImage}")` }}></div>
                       <NavDropDown active={this.state.dropActive}/>
                     </div>)
                 :
@@ -232,7 +224,7 @@ class Navbar extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  return {category_hierarchy: state.products.category_hierarchy, profileImage: state.user.information.photo }
+  return {category_hierarchy: state.products.category_hierarchy, profileImage: state.user.information.photo, isStaff: state.user.information.is_staff }
 }
 
 export default connect(mapStateToProps, {fetchCategoryHierarchy, searchProducts, sponsoredSearchProducts, SignOut})(Navbar)

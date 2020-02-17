@@ -12,30 +12,34 @@ import MyBanners from "../MyBanners"
 import MyCampaigns from "../MyCampaigns"
 import MySponsors from "../MySponsors"
 
-import editImage from '../../assets/edit.svg'
-import orderImage from '../../assets/order.svg'
-import addressImage from '../../assets/address.svg'
+import userStatisticsImage from '../../assets/marketing.svg'
+import listUserImage from '../../assets/order.svg'
+import productStatisticsImage from '../../assets/order.svg'
+import businessStatisticsImage from '../../assets/graph.svg'
+import listImage from '../../assets/list.svg'
+import adImage from '../../assets/ad.svg'
+
 import _ from "lodash";
 
 const DASHBOARD_ITEMS = [
     {
         text: "گزارش‌های آماری کاربران",
-        image: editImage
+        image: userStatisticsImage
     },{
         text: "گزارش‌های آماری محصولات",
-        image: orderImage
+        image: productStatisticsImage
     },{
         text: "گزارش‌های آماری معاملات",
-        image: addressImage
+        image: businessStatisticsImage
     },{
         text: "لیست تمام بنرهای تبلغیاتی",
-        image: addressImage
+        image: listImage
     },{
         text: "لیست تمام کمپین‌های تبلیغاتی",
-        image: addressImage
+        image: adImage
     },{
         text: "لیست تمام جست‌وجوهای پیشرفته",
-        image: addressImage
+        image: listUserImage
     }
 ]
 

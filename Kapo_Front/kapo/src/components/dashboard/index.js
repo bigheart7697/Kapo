@@ -17,7 +17,11 @@ import _ from "lodash";
 
 import editImage from '../../assets/edit.svg'
 import orderImage from '../../assets/order.svg'
-import addressImage from '../../assets/address.svg'
+import ordersImage from '../../assets/item.svg'
+import adImage from '../../assets/ad.svg'
+import dmImage from '../../assets/dm.svg'
+import searchImage from '../../assets/search.svg'
+import walletImage from '../../assets/money.svg'
 
 const DASHBOARD_ITEMS = [
     {
@@ -28,19 +32,19 @@ const DASHBOARD_ITEMS = [
         image: orderImage
     },{
         text: "کالاهای من",
-        image: addressImage
+        image: ordersImage
     },{
         text: "بنرهای تبلیغاتی من",
-        image: addressImage
+        image: adImage
     },{
         text: "کمپین‌های تبلیغاتی من",
-        image: addressImage
+        image: dmImage
     },{
         text: "جست‌وجوهای پیشرفته من",
-        image: addressImage
+        image: searchImage
     },{
         text: "حساب",
-        image: addressImage
+        image: walletImage
     }
 ]
 
