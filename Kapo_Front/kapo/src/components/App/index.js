@@ -18,7 +18,6 @@ import Bank from '../bank'
 import PreviewOrder from '../previewOrder'
 import OrderFactor from '../orderDetails/factor'
 import AllProducts from '../AllProducts'
-import SetPrice from '../setPrice'
 import Page404 from '../basic/404'
 import MyOrders from "../MyOrders"
 import ProductOrders from "../ProductOrders"
@@ -29,7 +28,6 @@ import Dashboard from '../dashboard'
 import PaymentResult from '../basic/paymentResult'
 import AdminPanel from '../adminPanel'
 import Modal from '../Modal'
-import Agreement from '../agreement'
 
 class App extends React.Component{
     state = { showModal : false, modalHeader: null, modalBody: null, modalError: null}
@@ -64,7 +62,6 @@ class App extends React.Component{
                                 <Route path="/bank/:id" exact component={Bank}/>
                                 <Route path="/order/list" exact component={MyOrders}/>
                                 <Route path="/order/factor/:id" exact component={OrderFactor}/>
-                                <Route path="/AddProduct/SetPrice/:id" exact component={SetPrice}/>
                                 <Route path="/ProductOrders/:id" exact component={ProductOrders}/>
                                 <Route path="/changeProduct/:id" exact component={ChangeProduct}/>
                                 <Route path="/ProductList/:cat1" exact component={CategoryProducts}/>
@@ -76,7 +73,6 @@ class App extends React.Component{
                                 <Route path="/payment/result/success" exact component={() => <PaymentResult success={true} /> }/>
                                 <Route path="/payment/result/fail" exact component={() => <PaymentResult success={false} /> }/>
                                 <Route path="/advertisement/list" exact component={CategoryProducts}/>
-                                <Route path="/agreement" exact component={Agreement}/>
                                 <Route component={Page404}/>
                             </Switch>
                     </Router>
