@@ -131,7 +131,7 @@ setCorrectState = (path) => {
               <div className='navbar__auth'>
                 {this.props.loggedIn ? 
                   (<div>
-                      <div className="navbar__circle" onClick={() => {this.setState({ dropActive: !this.state.dropActive }); history.push('/dashboard/')}} style={{ backgroundImage: `url("${this.props.profileImage ? this.props.profileImage : defaultImage}")` }}></div>
+                      <div className="navbar__circle" onClick={() => {this.setState({ dropActive: !this.state.dropActive }); history.push(this.props.isStaff ? '/adminDashboard/' : '/dashboard/')}} style={{ backgroundImage: `url("${this.props.profileImage ? this.props.profileImage : defaultImage}")` }}></div>
                       <NavDropDown active={this.state.dropActive}/>
                     </div>)
                 :
@@ -163,7 +163,7 @@ setCorrectState = (path) => {
 
 
 const mapStateToProps = (state) => {
-  return {category_hierarchy: state.products.category_hierarchy, profileImage: state.user.information.photo }
+  return {category_hierarchy: state.products.category_hierarchy, profileImage: state.user.information.photo, isStaff: state.user.information.is_staff }
 }
 
 export default connect(mapStateToProps, {fetchCategoryHierarchy, searchProducts, sponsoredSearchProducts, SignOut})(Navbar)

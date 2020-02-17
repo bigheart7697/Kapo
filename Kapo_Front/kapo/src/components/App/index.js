@@ -72,7 +72,7 @@ class App extends React.Component{
                                 <Route path="/ProductList/:cat1/:cat2/:cat3" exact component={CategoryProducts}/>
                                 <Route path="/pay/factor/:id" exact component={PayFactor}/>
                                 <Route path="/dashboard" exact component={Dashboard}/>
-                                <Route path="/dashboard_admin" exact component={AdminPanel}/>
+                                <Route path="/adminDashboard" exact component={AdminPanel}/>
                                 <Route path="/payment/result/success" exact component={() => <PaymentResult success={true} /> }/>
                                 <Route path="/payment/result/fail" exact component={() => <PaymentResult success={false} /> }/>
                                 <Route path="/advertisement/list" exact component={CategoryProducts}/>
