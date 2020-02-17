@@ -417,9 +417,9 @@ class Campaign(TransactionMixin, models.Model):
 
     FEE = 1000000
 
-    MAX_FIRST_NUM = 3
-    MAX_SECOND_NUM = 3
-    MAX_THIRD_NUM = 3
+    MAX_FIRST_NUM = 2
+    MAX_SECOND_NUM = 2
+    MAX_THIRD_NUM = 2
 
     class State(models.IntegerChoices):
         AWAITING = 1
