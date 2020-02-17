@@ -18,7 +18,7 @@ const CampaignCard = (props) => {
     return (
         <a href={`/product/` + (props.campaign ? props.campaign.product ? props.campaign.product.id : 0 : 0)} className='campaign-card__container'>
             <div className='campaign-card__image-container'>
-                <img src={props.campaign ? props.campaign.product ? props.campaign.product.image : defaultImg : defaultImg} alt={props.campaign ? props.campaign.product ? props.campaign.product.name : '' : ''} className='campaign-card__image'></img>
+                <img src={props.campaign ? props.campaign.product ? props.campaign.product.image? props.campaign.product.image : defaultImg : defaultImg : defaultImg} alt={props.campaign ? props.campaign.product ? props.campaign.product.name : '' : ''} className='campaign-card__image'></img>
             </div>
             <div className='campaign-card__content'>
                 <div className='campaign-card__title'>{props.campaign ? props.campaign.product ? props.campaign.product.name : '' : ''}</div>

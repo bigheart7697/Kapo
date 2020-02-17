@@ -2,15 +2,13 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_PRODUCT_CAMPAIGN, FETCH_FIRST_CAMPAIGN, FETCH_SECOND_CAMPAIGN, FETCH_THIRD_CAMPAIGN, CAMPAIGN_COUNT, FETCH_SPONSORS, FETCH_CAMPAIGNS, FETCH_BANNERS, FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO, FETCH_SIMILAR_PRODUCTS } from "./types";
-import bank from "../apis/bank";
+import { FETCH_PRODUCT_CAMPAIGN, FETCH_FIRST_CAMPAIGN, FETCH_SECOND_CAMPAIGN, FETCH_THIRD_CAMPAIGN, CAMPAIGN_COUNT, FETCH_SPONSORS, FETCH_CAMPAIGNS, FETCH_BANNERS, FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, LOG_IN, LOG_OUT, FETCH_USER_INFO, FETCH_SIMILAR_PRODUCTS } from "./types";
 
 export const fetchProducts = (showModal = alert) => async dispatch => {
   try{
     const response = await server.get("/kapo/");
     dispatch({ type: FETCH_PRODUCTS, payload: response.data });
   }catch(e){
-    // showModal('خطا', 'عملیات درخواست کالا از سرور با خطا مواجه شد', e.message)
   }
 };
 
@@ -46,7 +44,8 @@ export const fetchProductOrders = id => async dispatch => {
 
 export const completeOrder = id => async dispatch => {
   try {
-	  const response = await server.post(`/kapo/orders/${id}/complete/`);
+    const response = await server.post(`/kapo/orders/${id}/complete/`);
+    history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -55,7 +54,7 @@ export const completeOrder = id => async dispatch => {
 export const cancelOrder = id => async dispatch => {
   try {
 	const response = await server.post(`/kapo/orders/${id}/cancel/`);
-    alert("سفارش لغو شد");
+  history.push("/payment/result/fail")
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -64,7 +63,7 @@ export const cancelOrder = id => async dispatch => {
 export const completeBanner = id => async dispatch => {
   try {
     const response = await server.post(`/kapo/banners/${id}/complete/`);
-    alert("هزینه‌ی بنر پرداخت شد");
+    history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -73,7 +72,7 @@ export const completeBanner = id => async dispatch => {
 export const failBanner = id => async dispatch => {
   try {
     const response = await server.post(`/kapo/banners/${id}/fail/`);
-    alert("پرداخت هزینه‌ی بنر موفقیت آمیز نبود");
+    history.push("/payment/result/fail")
   }
   catch (e) {
     alert("خطایی رخ داد");
@@ -83,7 +82,7 @@ export const failBanner = id => async dispatch => {
 export const completeCampaign = id => async dispatch => {
   try {
     const response = await server.post(`/kapo/campaigns/${id}/complete/`);
-    alert("هزینه‌ی کمپن پرداخت شد");
+    history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -92,7 +91,7 @@ export const completeCampaign = id => async dispatch => {
 export const failCampaign = id => async dispatch => {
   try {
     const response = await server.post(`/kapo/campaigns/${id}/fail/`);
-    alert("پرداخت هزینه‌ی کمپین موفقیت آمیز نبود");
+    history.push("/payment/result/fail")
   }
   catch (e) {
     alert("خطایی رخ داد");
@@ -103,7 +102,7 @@ export const failCampaign = id => async dispatch => {
 export const completeSponsor = id => async dispatch => {
   try {
     const response = await server.post(`/kapo/sponsors/${id}/complete/`);
-    alert("هزینه‌ی جست‌وجوی اسپانسر شده پرداخت شد");
+    history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -112,7 +111,7 @@ export const completeSponsor = id => async dispatch => {
 export const failSponsor = id => async dispatch => {
   try {
     const response = await server.post(`/kapo/sponsors/${id}/fail/`);
-    alert("پرداخت هزینه‌ی جست‌وجوی اسپانسر شده موفقیت آمیز نبود");
+    history.push("/payment/result/fail")
   }
   catch (e) {
     alert("خطایی رخ داد");
@@ -122,6 +121,7 @@ export const failSponsor = id => async dispatch => {
 export const completeCharge = id => async dispatch => {
   try {
     await server.post(`/accounts/balance/${id}/complete/`);
+    history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -130,6 +130,7 @@ export const completeCharge = id => async dispatch => {
 export const failCharge = id => async dispatch => {
   try {
     const response = await server.post(`/accounts/balance/${id}/fail/`);
+    history.push("/payment/result/fail")
   }
   catch (e) {
     alert("خطایی رخ داد");
