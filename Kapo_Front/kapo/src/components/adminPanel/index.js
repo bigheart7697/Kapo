@@ -141,7 +141,6 @@ class AdminPanel extends React.Component{
         const transactionssList = _.map(this.props.transactions, (item) => {
             return item
         })
-        console.log('here', transactionssList)
         switch(this.state.activeTab){
             case 0:
                 return(<AccountReports accounts={accountsList}/>)

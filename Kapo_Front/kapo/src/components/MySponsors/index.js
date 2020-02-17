@@ -22,7 +22,6 @@ class MySponsors extends React.Component {
             return item
         })
 
-        console.log(newArray);
         return (<>
             <AdvertisementList type="sponsor" advertisementList={newArray}/>
         </>)

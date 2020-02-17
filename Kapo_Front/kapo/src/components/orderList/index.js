@@ -13,7 +13,6 @@ class OrderList extends React.Component {
     }
 
     render(){
-        console.log(this.props)
         return (
                     <div className="order-list__container">
                         <OrderCard details="-"></OrderCard>

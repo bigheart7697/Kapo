@@ -1,4 +1,4 @@
-import { FETCH_FIRST_BANNER, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_MY_PRODUCTS, FETCH_PRODUCT_CATEGORIES } from "../actions/types";
+import {  FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_SIMILAR_PRODUCTS, FETCH_PRODUCT_CATEGORIES } from "../actions/types";
 import _ from "lodash";
 import {catDict} from "../components/basic/categoryDict"
 
@@ -24,8 +24,6 @@ const productReducer = (state = INITIAL_VALUE, action) => {
         ...state,
         sponsored_products: { ..._.mapKeys(action.payload, "id") }
       };
-    // case DELETE_PRODUCT:
-    //   return { ...state, products: _.omit(state.products, action.payload) };
     case ADD_PRODUCT:
     case FETCH_PRODUCT:
       return {
@@ -37,10 +35,10 @@ const productReducer = (state = INITIAL_VALUE, action) => {
         ...state,
         products: { ..._.mapKeys(action.payload, "id") }
       };
-      case FETCH_MY_PRODUCTS:
+      case FETCH_SIMILAR_PRODUCTS:
         return {
           ...state,
-          products: {..._.mapKeys(action.payload, "id") }
+          similar_products: {..._.mapKeys(action.payload, "id") }
         };
     default:
       return state;

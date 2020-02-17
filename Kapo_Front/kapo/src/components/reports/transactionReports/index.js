@@ -153,7 +153,6 @@ class TransactionReports extends React.Component {
     }
 
     render() {
-        console.log(this.state.corporate)
         return (
             <div className='account-reports__container'>
                 <div className='transaction-reports__select'>

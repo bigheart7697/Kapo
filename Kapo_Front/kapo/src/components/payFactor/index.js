@@ -27,7 +27,7 @@ class PayFactor extends React.Component {
     get_price = (type) => {
         switch(type) {
             case 'کمپین تبلیغاتی':
-                return 500000;
+                return 1000000;
             case 'جست‌وجوی اسپانسر شده':
                 return 1000;
             case 'بنر تبلیغاتی':
@@ -56,10 +56,6 @@ class PayFactor extends React.Component {
                 product: {name: ''},
                 days_number: 0
             }
-        this.props.factorObject? console.log(this.props.factorObject) : console.log("ez");
-        if (this.props.factorObject) {
-            console.log(this.props.factorObject.type)}
-            
         if (this.props.factorObject && this.props.factorObject.type === 1){
             factor = {
                 type: 'جست‌وجوی اسپانسر شده',

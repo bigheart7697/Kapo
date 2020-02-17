@@ -98,7 +98,6 @@ setCorrectState = (path) => {
   }
 
   render() {
-    console.log(this.props.category_hier);
     return (
       <div className="navbar__component--padding-top">
         <div className="navbar__flex">

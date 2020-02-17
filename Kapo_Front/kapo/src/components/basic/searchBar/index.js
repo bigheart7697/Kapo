@@ -2,6 +2,8 @@ import React from "react";
 
 import "./style.scss";
 
+import history from '../../../history'
+
 class SearchBar extends React.Component {
   state = { term: "", timeout: null };
 
@@ -22,6 +24,7 @@ class SearchBar extends React.Component {
             placeholder="جستجوی عبارت"
             value={this.state.term}
             onChange={e => {
+              history.push('/ProductList/')
               this.setState({ term: e.target.value });
               this.typeTimeout()
             }}

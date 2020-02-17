@@ -132,6 +132,9 @@ const validate = formValues => {
   if(!formValues.phone_number){
     errors.phone_number = "لطفا شماره تلفن خود را وارد کنید"
   }
+  if(!formValues.is_corporate){
+    errors.is_corporate = "لطفا نوع اکانت را مشخص کنید"
+  }
   return errors;
 };
 

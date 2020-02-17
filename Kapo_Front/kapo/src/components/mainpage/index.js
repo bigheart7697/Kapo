@@ -8,7 +8,7 @@ import Slider from '../basic/slider'
 import AdvertisingCampaign from '../advertisingCampaign'
 import ProductCard from '../basic/productCard'
 import { Link } from 'react-router-dom'
-import {fetchProducts} from "../../actions"
+import {fetchProducts, fetchFirsCampaign} from "../../actions"
 import _ from "lodash"
 
 import image1 from '../../assets/category1.jpg'
@@ -55,7 +55,8 @@ const PRODUCTS = [
 
 class mainpage extends React.Component {
     componentDidMount() {
-        this.props.fetchProducts()
+        this.props.fetchProducts();
+        this.props.fetchFirsCampaign();
     }
     render() {
         const newArray = _.map(this.props.products, (item, key) => {
@@ -63,7 +64,8 @@ class mainpage extends React.Component {
         })
         return(
             <div className="mainpage__container">
-                <AdvertisingCampaign />
+                {this.props.first_campaigns? <AdvertisingCampaign campaigns={this.props.first_campaigns}/> : 
+        null}
                 <div className="main-page__slider"> 
                     <Slider heading="Example Slider" slides={slideData} /> 
                 </div>
@@ -85,7 +87,9 @@ class mainpage extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { products: state.products.products }
+    return { products: state.products.products, first_campaigns: _.map(state.advertisements.first_campaigns, (item, key) => {
+        return item
+    }) }
 }
 
-export default connect(mapStateToProps, { fetchProducts })(mainpage)
+export default connect(mapStateToProps, { fetchProducts, fetchFirsCampaign })(mainpage)

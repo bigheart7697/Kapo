@@ -14,7 +14,6 @@ class AdvertisementTable extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         return(
             <div className='advertisement-table__table'>
                 <div className='advertisement-table__row advertisement-table__header'>

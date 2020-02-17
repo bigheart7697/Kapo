@@ -2,7 +2,7 @@ import server from "../apis/server";
 import setAuthToken from '../components/basic/setAuthToken'
 import history from '../history'
 
-import { FETCH_SPONSORS, FETCH_CAMPAIGNS, FETCH_BANNERS, FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO } from "./types";
+import { FETCH_PRODUCT_CAMPAIGN, FETCH_FIRST_CAMPAIGN, FETCH_SECOND_CAMPAIGN, FETCH_THIRD_CAMPAIGN, CAMPAIGN_COUNT, FETCH_SPONSORS, FETCH_CAMPAIGNS, FETCH_BANNERS, FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO, FETCH_SIMILAR_PRODUCTS } from "./types";
 import bank from "../apis/bank";
 
 export const fetchProducts = () => async dispatch => {
@@ -12,7 +12,7 @@ export const fetchProducts = () => async dispatch => {
 
 export const fetchMyProducts = () => async dispatch => {
   const response = await server.get("/kapo/products/");
-  dispatch({ type: FETCH_MY_PRODUCTS, payload: response.data });
+  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
 };
 
 export const fetchCategories = () => async dispatch => {
@@ -31,25 +31,18 @@ export const fetchMyOrders = () => async dispatch => {
 };
 
 export const fetchOrder = id => async dispatch => {
-  console.log("id")
-  console.log(id)
   const response = await server.get(`/kapo/orders/${id}/`)
-  console.log(response)
   dispatch({ type: FETCH_ORDER, payload: response.data })
 }
 
 export const fetchProductOrders = id => async dispatch => {
-  console.log("id")
-  console.log(id)
   const response = await server.get(`/kapo/products/${id}/orders/`);
-  console.log(response)
   dispatch({type: FETCH_ORDERS, payload: response.data})
 }
 
 export const completeOrder = id => async dispatch => {
   try {
 	  const response = await server.post(`/kapo/orders/${id}/complete/`);
-    alert("سفارش پرداخت شد");
   } catch (e) {
     alert("خطایی رخ داد");
   }
@@ -58,7 +51,6 @@ export const completeOrder = id => async dispatch => {
 export const cancelOrder = id => async dispatch => {
   try {
 	const response = await server.post(`/kapo/orders/${id}/cancel/`);
-	console.log(response)
     alert("سفارش لغو شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -122,16 +114,32 @@ export const failSponsor = id => async dispatch => {
     alert("خطایی رخ داد");
   }
 }
+
+export const completeCharge = id => async dispatch => {
+  try {
+    await server.post(`/accounts/balance/${id}/complete`);
+  } catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
+export const failCharge = id => async dispatch => {
+  try {
+    const response = await server.post(`/accounts/balance/${id}/fail/`);
+  }
+  catch (e) {
+    alert("خطایی رخ داد");
+  }
+}
+
 export const bannerCount = place_id => async dispatch => {
   const response = await server.get(`/kapo/banner-count/${place_id}/`);
-  dispatch({type: BANNER_COUNT, payload: {count: response.data, place: place_id}})
+  dispatch({type: BANNER_COUNT, payload: {count: response.data.count, place: place_id}})
 }
 
 export const addProduct = product => async dispatch => {
   try {
-    console.log(product)
     const response = await server.post("/kapo/add-product/", product);
-    console.log(response)
     alert("کالا اضافه شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -143,15 +151,13 @@ export const setPrice = (category = null) => async dispatch => {
   if (category != null) {
     response = await server.get(`/kapo/search/?cat3=${category}`);
   } else {
-    response = await server.get(`/kapo/`);
+    response = {}
   }
-  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
+  dispatch({ type: FETCH_SIMILAR_PRODUCTS, payload: response.data });
 }
 
 export const fetchProduct = id => async dispatch => {
   const response = await server.get(`/kapo/products/${id}/`)
-  console.log('prooooduct')
-  console.log(response.data)
   dispatch({ type: FETCH_PRODUCT, payload: response.data })
 }
 
@@ -172,8 +178,6 @@ export const sponsoredSearchProducts = (search) => async dispatch => {
   } else {
     response  = {data: {}}
   }
-  console.log('response')
-  console.log(response)
   dispatch({ type: SEARCH_ITEM, payload: response.data });
 };
 
@@ -214,11 +218,8 @@ export const fetchThirdBanners = () => async dispatch => {
 };
 
 export const addToCart = (id, formValues) => async dispatch => {
-  // let payload = { count: parseInt(count) }
-  // console.log(payload)
   try {
     const response = await server.post(`/kapo/products/${id}/order/`, formValues);
-    console.log(response);
     history.push(`/order/preview/${response.data.id}/`)
     alert("سفارش شما ثبت شد");
   } catch (e) {
@@ -235,6 +236,7 @@ export const SignIn = (auth, showModal) => async dispatch => {
     setAuthToken(response.data.token)
     history.push('/')
     dispatch({ type: LOG_IN })
+    dispatch(getCurrentUser())
   } catch(e) {
     showModal('خطا', 'عملیات ورود با خطا مواجه شد', e.message)
   }
@@ -253,7 +255,6 @@ export const SignUp = (formValues, showModal) => async dispatch => {
     const response = await server.post("/accounts/register/", formValues)
     localStorage.setItem("jwtToken", response.data.token)
     setAuthToken(response.data.token)
-    console.log(response)
     showModal("ثبت‌نام", "ثبت‌نام با موفقیت انجام شد")
   } catch {
     showModal("ثبت‌نام", "ثبت‌نام با خطا مواجه شد")
@@ -302,8 +303,6 @@ export const createSponsoredSearch = (formValues, id) => async dispatch => {
 export const createAdvertisingBanners = (formValues, id) => async dispatch => {
   try {
     const response = await server.post(`/kapo/products/${id}/banner/`, formValues)
-    console.log(response.data);
-    
     history.push(`/pay/factor/${response.data.transaction}`);
     alert("درخواست ثبت بنر با موفقیت انجام شد")
   }
@@ -335,7 +334,6 @@ export const editProfile = (data, id) => async dispatch => {
   try{
     const respsonse = await server.patch(`accounts/${id}/`, data)
     alert('success')
-    console.log(respsonse.data)
   }catch{
     alert('error')
   }
@@ -395,6 +393,37 @@ export const fetchAllSponsors = () => async dispatch => {
   dispatch({ type: FETCH_SPONSORS, payload: response.data });
 }
 
-export const chargeAccount = (formValues, id) => async dispatch => {
-  await server.post(`/accounts/increase-balance/${id}/`, formValues);
+export const chargeAccount = (formValues) => async dispatch => {
+  try {
+    const response = await server.post(`/accounts/increase-balance/`, formValues);
+    history.push(`/pay/factor/${response.data.transaction}`);
+  }
+  catch {
+    alert("درخواست شارژ حساب با مشکل روبرو شد.")
+  }
+}
+
+export const fetchProductCampaign = (id) => async dispatch => {
+  const response = await server.get(`kapo/products/${id}/campaigns/`);
+  dispatch({ type: FETCH_PRODUCT_CAMPAIGN, payload: response.data });
+}
+
+export const fetchFirsCampaign = () => async dispatch => {
+  const response = await server.get(`/kapo/first-campaigns/`)
+  dispatch({ type: FETCH_FIRST_CAMPAIGN, payload: response.data });
+};
+
+export const fetchSecondCampaign = () => async dispatch => {
+  const response = await server.get(`/kapo/second-campaigns/`)
+  dispatch({ type: FETCH_SECOND_CAMPAIGN, payload: response.data });
+};
+
+export const fetchThirdCampaign = () => async dispatch => {
+  const response = await server.get(`/kapo/third-campaigns/`)
+  dispatch({ type: FETCH_THIRD_CAMPAIGN, payload: response.data });
+};
+
+export const campaignCount = (place_id) => async dispatch => {
+  const response = await server.get(`/kapo/campaign-count/${place_id}/`);
+  dispatch({type: CAMPAIGN_COUNT, payload: {count: response.data.count, place: place_id}})
 }
