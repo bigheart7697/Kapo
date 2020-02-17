@@ -356,7 +356,7 @@ export const getAllUsers = () => async dispatch => {
 
 export const rateProduct = (rate, id, showModal = alert) => async () => {
   try{
-    await server.post(`product/${id}/rate/`, {rating: rate})
+    await server.post(`/kapo/products/${id}/rate`, {rating: rate})
     showModal('موفق', 'نظر شما با موفقیت ثبت شد')
   }catch(e){
     showModal('خطا', 'در ثبت نظر شما خطایی پیش آمد', e.message)
