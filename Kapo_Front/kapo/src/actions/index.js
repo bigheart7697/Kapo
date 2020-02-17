@@ -117,7 +117,7 @@ export const failSponsor = id => async dispatch => {
 
 export const completeCharge = id => async dispatch => {
   try {
-    await server.post(`/accounts/balance/${id}/complete`);
+    await server.post(`/accounts/balance/${id}/complete/`);
   } catch (e) {
     alert("خطایی رخ داد");
   }
