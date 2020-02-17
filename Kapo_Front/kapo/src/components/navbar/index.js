@@ -90,7 +90,7 @@ class Navbar extends React.Component {
   }
 
   setPathName = (path) => {
-    let p = path.toLower()
+    let p = path.toLowerCase()
     switch(p){
       case '/':
         return 'صفحه‌اصلی'

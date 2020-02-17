@@ -21,8 +21,8 @@ class User(AbstractUser):
     is_corporate = models.BooleanField(default=False)
     corporate_name = models.CharField(_('corporate name'), max_length=200, null=True, blank=True)
     corporate_number = models.PositiveIntegerField(_('corporate number'), unique=True, null=True, blank=True,
-                                                   validators=[MaxValueValidator(999999999999),
-                                                               MinValueValidator(100000000000)])
+                                                   validators=[MaxValueValidator(999999),
+                                                               MinValueValidator(100000)])
     balance = models.IntegerField(_("balance"), default=0.0,
                                   validators=[MinValueValidator(0)])
 
