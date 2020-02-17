@@ -50,14 +50,15 @@
 
     .bank__label {
         display: inline-block;
-        color: $second-color;
+        color: black;
         padding: 0 1rem;
         min-width: 20%;
         text-align: center;
     }
     .bank__value {
         display: inline-block;
-        color: $first-color;
+        color: black;
+        font-weight: 600;
     }
 }
 

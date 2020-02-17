@@ -8,6 +8,7 @@ import "./style.scss";
 
 import {translate} from '../basic/categoryDict';
 import Input from '../basic/customInput';
+import OrderInput from '../basic/OrderInput'
 import Button from "../basic/customButton";
 import Select from '../basic/customSelect';
 import Whitespace from '../basic/whitespace';
@@ -21,6 +22,7 @@ import defaultImg from '../../assets/default.jpg'
 
 import { Link } from "react-router-dom";
 
+const JDate = require('jalali-date');
 class ProductDetails extends React.Component {
   index = 0
   state = {
@@ -142,6 +144,12 @@ class ProductDetails extends React.Component {
     this.childRef.current.change_active_state(active);
   }
 
+  get_due = (created, days) => {
+    let date = new Date(created)
+    let due = new JDate(new Date(date.getTime() + days * (1000 * 60 * 60 * 24)))
+    return due.format('dddd DD MMMM YYYY')
+  }
+
   render() {
     return (
       <>
@@ -213,6 +221,37 @@ class ProductDetails extends React.Component {
                 </tr>
               </tbody>
             </table>
+
+            {this.props.campaign_product ?
+              <>
+                <div className="ui horizontal divider header">
+                  <i className="address card outline icon"></i>
+                  <h4 className="product-details__h1--no-margin">
+                    کمپین تبلیغاتی
+                  </h4>
+                </div>
+                <table className="ui definition table product-details__table">
+                  <tbody>
+                    <tr>
+                      <td className="productDetails__column">
+                        {this.props.campaign_product ? this.props.campaign_product[0].discount : '0'}%
+                      </td>
+                      <td className="product-details__column">درصد تخفیف</td>
+                    </tr>
+                    <tr>
+                      <td>{this.props.campaign_product ? this.props.campaign_product[0].product ? this.props.campaign_product[0].product.price ? this.props.campaign_product[0].discount ? this.props.campaign_product[0].product.price * (100 - this.props.campaign_product[0].discount) / 100 : '-' : '-' : '-' : '-'}</td>
+                      <td>قیمت نهایی (تومان)</td>
+                    </tr>
+                    <tr>
+                      <td className="productDetails__column">
+                        {this.props.campaign_product ? this.get_due(this.props.campaign_product[0].created, this.props.campaign_product[0].days) : '-'}
+                      </td>
+                      <td className="product-details__column">زمان پایان کمپین</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </>
+            : null}
           </div>
           <div className="product-details__rightPanel">
             <div className="product-details__imageContainer">
@@ -237,7 +276,7 @@ class ProductDetails extends React.Component {
         ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
-            <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}></Input>
+            <OrderInput label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}/>
             <Whitespace space="1"/>
             <Select input={{name: 'receiving_day', onChange: (e) => this.setState({ delivery_weekday: e.target.value })}} label='روز دریافت کالا' content={this.get_day(this.get_starting_day() + 1)} />
             <Whitespace space="1"/>

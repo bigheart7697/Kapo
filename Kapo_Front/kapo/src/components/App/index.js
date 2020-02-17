@@ -31,6 +31,7 @@ import AdvertisementList from '../advertisementList'
 import AdminPanel from '../adminPanel'
 import Modal from '../Modal'
 import server from '../../apis/server'
+import Agreement from '../agreement'
 
 class App extends React.Component{
     state = { showModal : false, modalHeader: null, modalBody: null, modalError: null}
@@ -77,6 +78,7 @@ class App extends React.Component{
                                 <Route path="/payment/result/success" exact component={() => <PaymentResult success={true} /> }/>
                                 <Route path="/payment/result/fail" exact component={() => <PaymentResult success={false} /> }/>
                                 <Route path="/advertisement/list" exact component={CategoryProducts}/>
+                                <Route path="/agreement" exact component={Agreement}/>
                                 <Route component={Page404}/>
                             </Switch>
                     </Router>

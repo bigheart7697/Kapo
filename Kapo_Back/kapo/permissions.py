@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from .models import Transaction
 from django.core.exceptions import PermissionDenied, ValidationError
 
 
@@ -40,7 +41,8 @@ class IsOwnerOfProduct(permissions.BasePermission):
 
 class IsOwnerOfTransaction(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        if obj.transaction_object.product.owner != request.user and not request.user.is_staff:
+        if obj.sender != request.user and (obj.receiver is not None and obj.receiver != request.user)\
+                and not request.user.is_staff:
             raise PermissionDenied()
         return True
 

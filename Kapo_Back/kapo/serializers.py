@@ -23,6 +23,8 @@ class TransactionObjectRelatedField(serializers.RelatedField):
             serializer = OrderSerializer(value)
         elif isinstance(value, Liquidate):
             serializer = LiquidateSerializer(value)
+        elif isinstance(value, BalanceIncrease):
+            serializer = BalanceIncreaseSerializer(value)
         elif value is None:
             serializer = UserSerializer(value)
         else:

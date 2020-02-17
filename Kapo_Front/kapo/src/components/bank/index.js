@@ -63,9 +63,9 @@ class Bank extends React.Component {
                 </div>
                 <div className="bank__details">
                 <div className="bank__button-containers">
-                    <button className="bank__button bank__button--accept" onClick={() => [(this.props.type == 1)? this.props.completeSponsor(this.props.id) : (this.props.type == 2)? this.props.completeBanner(this.props.id) : (this.props.type == 3)? this.props.completeCampaign(this.props.id) : (this.props.type == 4)? this.props.completeOrder(this.props.id) : (this.props.type == 5)? this.props.completeCharge(this.props.id) : this.props.completeMethod(this.props.id), history.push("/payment/result/success")
+                    <button className="bank__button bank__button--accept" onClick={() => [(this.props.type === 1)? this.props.completeSponsor(this.props.id) : (this.props.type === 2)? this.props.completeBanner(this.props.id) : (this.props.type === 3)? this.props.completeCampaign(this.props.id) : (this.props.type === 4)? this.props.completeOrder(this.props.id) : (this.props.type === 5)? this.props.completeCharge(this.props.id) : this.props.completeMethod(this.props.id), history.push("/payment/result/success")
                     ]}>پرداخت</button>
-                    <button className="bank__button bank__button--reject" onClick={() => [(this.props.type == 1)? this.props.failSponsor(this.props.id) : (this.props.type == 2)? this.props.failBanner(this.props.id) : (this.props.type == 3)? this.props.failCampaign(this.props.id) : (this.props.type == 4)? this.props.cancelOrder(this.props.id) : (this.props.type == 5)? this.props.failCharge(this.props.id) : this.props.cancelMethod(this.props.id), history.push("/payment/result/fail")]}>انصراف</button>
+                    <button className="bank__button bank__button--reject" onClick={() => [(this.props.type === 1)? this.props.failSponsor(this.props.id) : (this.props.type === 2)? this.props.failBanner(this.props.id) : (this.props.type === 3)? this.props.failCampaign(this.props.id) : (this.props.type === 4)? this.props.cancelOrder(this.props.id) : (this.props.type === 5)? this.props.failCharge(this.props.id) : this.props.cancelMethod(this.props.id), history.push("/payment/result/fail")]}>انصراف</button>
                 </div>
                 </div>
             </div>
