@@ -215,6 +215,31 @@ class ProductDetails extends React.Component {
                 </tr>
               </tbody>
             </table>
+
+            {this.props.campaign ?
+              <>
+                <div className="ui horizontal divider header">
+                  <i className="address card outline icon"></i>
+                  <h4 className="product-details__h1--no-margin">
+                    کمپین تبلیغاتی
+                  </h4>
+                </div>
+                <table className="ui definition table product-details__table">
+                  <tbody>
+                    <tr>
+                      <td className="productDetails__column">
+                        {this.props.campaign ? this.props.campaign.discount : '0'}%
+                      </td>
+                      <td className="product-details__column">درصد تخفیف</td>
+                    </tr>
+                    <tr>
+                      <td>{this.props.campaign ? this.props.campaign.product ? this.props.campaign.product.price ? this.props.campaign.discount ? this.props.campaign.product.price * (100 - this.props.campaign.discount) / 100 : '-' : '-' : '-' : '-'}</td>
+                      <td>قیمت نهایی (تومان)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </>
+            : null}
           </div>
           <div className="product-details__rightPanel">
             <div className="product-details__imageContainer">
