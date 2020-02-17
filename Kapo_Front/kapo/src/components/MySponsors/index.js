@@ -9,7 +9,7 @@ import AdvertisementList from "../advertisementList"
 
 class MySponsors extends React.Component {
     componentDidMount() {
-        if (this.props.type == "mine"){
+        if (this.props.type === "mine"){
             this.props.fetchMySponsors()
         } else {
             this.props.fetchAllSponsors()
@@ -18,7 +18,7 @@ class MySponsors extends React.Component {
     }
     render() {
         
-        const newArray = _.map(this.props.sponsors, (item, key) => {
+        const newArray = _.map(this.props.sponsors, (item) => {
             return item
         })
 

@@ -63,9 +63,9 @@ class Bank extends React.Component {
                 </div>
                 <div className="bank__details">
                 <div className="bank__button-containers">
-                    <button className="bank__button bank__button--accept" onClick={() => [(this.props.type === 1)? this.props.completeSponsor(this.props.id) : (this.props.type === 2)? this.props.completeBanner(this.props.id) : (this.props.type === 3)? this.props.completeCampaign(this.props.id) : (this.props.type === 4)? this.props.completeOrder(this.props.id) : (this.props.type === 5)? this.props.completeCharge(this.props.id) : this.props.completeMethod(this.props.id), history.push("/payment/result/success")
+                    <button className="bank__button bank__button--accept" onClick={() => [(this.props.type === 1)? this.props.completeSponsor(this.props.id) : (this.props.type === 2)? this.props.completeBanner(this.props.id) : (this.props.type === 3)? this.props.completeCampaign(this.props.id) : (this.props.type === 4)? this.props.completeOrder(this.props.id) : (this.props.type === 5)? this.props.completeCharge(this.props.id) : this.props.completeMethod(this.props.id)
                     ]}>پرداخت</button>
-                    <button className="bank__button bank__button--reject" onClick={() => [(this.props.type === 1)? this.props.failSponsor(this.props.id) : (this.props.type === 2)? this.props.failBanner(this.props.id) : (this.props.type === 3)? this.props.failCampaign(this.props.id) : (this.props.type === 4)? this.props.cancelOrder(this.props.id) : (this.props.type === 5)? this.props.failCharge(this.props.id) : this.props.cancelMethod(this.props.id), history.push("/payment/result/fail")]}>انصراف</button>
+                    <button className="bank__button bank__button--reject" onClick={() => [(this.props.type === 1)? this.props.failSponsor(this.props.id) : (this.props.type === 2)? this.props.failBanner(this.props.id) : (this.props.type === 3)? this.props.failCampaign(this.props.id) : (this.props.type === 4)? this.props.cancelOrder(this.props.id) : (this.props.type === 5)? this.props.failCharge(this.props.id) : this.props.cancelMethod(this.props.id)]}>انصراف</button>
                 </div>
                 </div>
             </div>
@@ -115,35 +115,41 @@ const mapStatToProps = (state, ownProps) => {
                     owner = "شرکت کاپوکالا"
                     completeMethod = completeSponsor
                     cancelMethod = failSponsor
-            
+                    break
             case 2:
                     price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
                     owner = "شرکت کاپوکالا"
                     completeMethod = completeBanner
                     cancelMethod = [failBanner]
-
+                    break
             case 3:
-                
-                    price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
-                    owner = "شرکت کاپوکالا"
-                    completeMethod = ownProps.completeCampaign
-                    cancelMethod = failCampaign
-        
-
+                price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
+                owner = "شرکت کاپوکالا"
+                completeMethod = ownProps.completeCampaign
+                cancelMethod = failCampaign
+                break
             case 4:
                 price = factorItem.transaction_object.count * factorItem.transaction_object.product.price
                 owner = factorItem.transaction_object.product.owner.is_corporate ? factorItem.transaction_object.product.owner.corporate_name : factorItem.transaction_object.product.owner.first_name + " " + factorItem.transaction_object.product.owner.last_name
                 completeMethod = completeOrder
                 cancelMethod = cancelOrder
+                break
             case 5:
                 price = factorItem.amount
                 owner = "شرکت کاپوکالا"
                 completeMethod = completeCharge
                 cancelMethod = failCharge
+                break
+            default:
+                price = factorItem.amount
+                owner = "شرکت کاپوکالا"
+                completeMethod = completeCharge
+                cancelMethod = failCharge
+                break
         }
     }
     
   return {price: price, owner: owner, completeMethod: completeMethod, cancelMethod: cancelMethod, id: id, type: type} 
 }
   
-  export default connect(mapStatToProps, { fetch_factor, completeBanner, completeBanner, completeCampaign, completeOrder, cancelOrder, failBanner, failCampaign, failSponsor, completeCharge, failCharge })(Bank);
+  export default connect(mapStatToProps, { fetch_factor, completeBanner, completeSponsor, completeCampaign, completeOrder, cancelOrder, failBanner, failCampaign, failSponsor, completeCharge, failCharge })(Bank);

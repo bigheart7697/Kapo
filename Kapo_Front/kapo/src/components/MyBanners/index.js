@@ -9,7 +9,7 @@ import AdvertisementList from "../advertisementList"
 
 class MyBanners extends React.Component {
     componentDidMount() {
-        if (this.props.type == "mine"){
+        if (this.props.type === "mine"){
             this.props.fetchMyBanners()
         } else {
             this.props.fetchAllBanners()

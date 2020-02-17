@@ -9,7 +9,7 @@ import AdvertisementList from "../advertisementList"
 
 class MyCampaigns extends React.Component {
     componentDidMount() {
-        if (this.props.type == "mine"){
+        if (this.props.type === "mine"){
             this.props.fetchMyCampaigns()
         } else {
             this.props.fetchAllCampaigns()

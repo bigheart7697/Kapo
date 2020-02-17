@@ -9,7 +9,7 @@ const dashboardBar = props => {
         <div className="dashboard-bar__container">
             {props.content.map((item, index) => {
                 return(
-                    <DashboardBaritem key={index} label={item.text} image={item.image} onClick={() => props.changeActiveTab(index)} active={props.activeTab == index ? true : false}/>
+                    <DashboardBaritem key={index} label={item.text} image={item.image} onClick={() => props.changeActiveTab(index)} active={props.activeTab === index ? true : false}/>
                 )
             })}
         </div>
