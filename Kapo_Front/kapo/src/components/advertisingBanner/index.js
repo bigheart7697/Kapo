@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 import './style.scss';
 
-import defaultImg from '../../assets/category4.png'
+import defaultImg from '../../assets/default.jpg'
+
+import ToPersianNum from '../basic/toPersianNum'
 
 class AdvertisingBanner extends React.Component {
     render() {
@@ -13,7 +15,7 @@ class AdvertisingBanner extends React.Component {
                     backgroundImage: this.props? this.props.product ? this.props.product.image? "url(" + this.props.product.image + ")" : `url(${defaultImg})` : `url(${defaultImg})` : `url(${defaultImg})`
                 }}></div>
                 <div className='advertising-banner__content'>
-                    <div className='advertising-banner__line'><div className='advertising-banner__price'>قیمت: {this.props.product ? this.props.product.price : '-'} تومان</div></div>
+                    <div className='advertising-banner__line'><div className='advertising-banner__price'>قیمت: {ToPersianNum(this.props.product ? this.props.product.price : '-')} تومان</div></div>
                     <div className='advertising-banner__title'>
                         {this.props.product ? this.props.product.name : '-'}
                     </div>
