@@ -1,4 +1,4 @@
-import { FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_ORDERS } from "../actions/types";
+import { FETCH_ORDERS, FETCH_ORDER } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_VALUE = {
@@ -19,13 +19,6 @@ const orderReducer = (state = INITIAL_VALUE, action) => {
         ...state,
         orders: {  ..._.mapKeys(action.payload, "id") }
       };
-    case FETCH_PRODUCT_ORDERS:
-      return {
-        ...state,
-        orders: {  ..._.mapKeys(action.payload, "id")}
-      };
-    // case DELETE_PRODUCT:
-    //   return { ...state, products: _.omit(state.products, action.payload) };
     default:
       return state;
   }
