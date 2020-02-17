@@ -36,7 +36,7 @@ const DASHBOARD_ITEMS = [
         text: "کمپین‌های تبلیغاتی من",
         image: addressImage
     },{
-        text: "جست‌وجوهای پیشرفته من",
+        text: "جست‌وجوهای اسپاسنسر شده‌ی من",
         image: addressImage
     },{
         text: "حساب",
@@ -46,18 +46,15 @@ const DASHBOARD_ITEMS = [
 
 class Dashboard extends React.Component{
     index = 0
-    state={ activeTab: 0 }
+    state={ activeTab: 0, index: 0, banners: [] }
     changeActiveTab = (tab) => {
         this.setState({ activeTab: tab })
     }
 
     componentDidMount() {
         this.props.fetchFirstBanners();
+        this.setState({index: Math.random()})
     }
-
-    componentDidUpdate() {
-        this.index = Math.floor(Math.random() * this.props.first_banners.length);
-      }
     
     renderContent = () => {
         switch(this.state.activeTab){
@@ -80,9 +77,10 @@ class Dashboard extends React.Component{
         }
     }
     render(){
+        const bannerIndex = Math.floor(this.state.index * this.props.first_banners.length)
         return(
             <>
-                {this.props.first_banners[this.index]? <AdvertisingBanner product={{link: `/product/${this.props.first_banners[this.index].product.id}` ,image: this.props.first_banners[this.index].product.image, name: this.props.first_banners[this.index].product.name, moto: this.props.first_banners[this.index].slogan, price: this.props.first_banners[this.index].product.price}}/> : 
+                {this.props.first_banners[bannerIndex] ? <AdvertisingBanner product={{link: `/product/${this.props.first_banners[bannerIndex].product.id}` ,image: this.props.first_banners[bannerIndex].product.image, name: this.props.first_banners[bannerIndex].product.name, moto: this.props.first_banners[bannerIndex].slogan, price: this.props.first_banners[bannerIndex].product.price}}/> : 
         null}
                 <div className="dashboard__container">
                     <DashboardBar activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab} content={DASHBOARD_ITEMS}/>

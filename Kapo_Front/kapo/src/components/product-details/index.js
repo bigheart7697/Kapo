@@ -34,7 +34,8 @@ class ProductDetails extends React.Component {
     delivery_hours: 1,
     count: 0,
     image: "",
-    owns: false
+    owns: false,
+    index: 0
   }
 
   constructor(props) {
@@ -47,11 +48,9 @@ class ProductDetails extends React.Component {
     this.props.fetchProduct(this.props.match.params.id);
     this.props.fetchSecondBanners();
     this.props.fetchProductCampaign(this.props.match.params.id);
+    this.setState({index: Math.random()})
   }
 
-  componentDidUpdate() {
-    this.index = Math.floor(Math.random() * this.props.second_banners.length);
-  }
 
   get_day = (day) => {
     switch (day) {
@@ -149,9 +148,10 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    const bannerIndex = Math.floor(this.state.index * this.props.second_banners.length)
     return (
       <>
-        {this.props.second_banners[this.index] ? this.props.second_banners[this.index].product ? <AdvertisingBanner product={{ link: `${this.props.second_banners[this.index].product ? this.props.second_banners[this.index].product.id : -1}`, image: this.props.second_banners[this.index].product.image, name: this.props.second_banners[this.index].product.name, moto: this.props.second_banners[this.index].slogan, price: this.props.second_banners[this.index].product.price }} /> :
+        {this.props.second_banners[bannerIndex] ? this.props.second_banners[bannerIndex].product ? <AdvertisingBanner product={{ link: `${this.props.second_banners[bannerIndex].product ? this.props.second_banners[bannerIndex].product.id : -1}`, image: this.props.second_banners[bannerIndex].product.image, name: this.props.second_banners[bannerIndex].product.name, moto: this.props.second_banners[bannerIndex].slogan, price: this.props.second_banners[bannerIndex].product.price }} /> :
           null : null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">

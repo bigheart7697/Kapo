@@ -470,6 +470,7 @@ def banner_complete_view(request, pk):
             update_banner(banner.id, repeat=Task.DAILY,
                           repeat_until=datetime.datetime.now() + datetime.timedelta(days=banner.remaining_days))
             banner.valid = True
+            banner.save()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
@@ -483,8 +484,8 @@ def banner_fail_view(request, pk):
         if banner.state != banner.State.AWAITING:
             raise ValidationError("Operation failed. This order is {}".format(banner.state))
         else:
-            banner.delete()
             transaction = banner.get_transaction
+            banner.delete()
             transaction.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:
@@ -503,6 +504,7 @@ def campaign_complete_view(request, pk):
             update_campaign(campaign.id, repeat=Task.DAILY,
                             repeat_until=datetime.datetime.now() + datetime.timedelta(days=campaign.remaining_days))
             campaign.valid = True
+            campaign.save()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)

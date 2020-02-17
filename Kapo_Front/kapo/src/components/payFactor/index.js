@@ -74,7 +74,7 @@ class PayFactor extends React.Component {
                 product: {name: this.props.factorObject.transaction_object.product.name},
                 days_number: this.props.factorObject.transaction_object.days
                 }}
-        if (this.props.factorObject && this.props.factorObject.type === 3){
+        if (this.props.factorObject && this.props.factorObject.type === 5){
             factor = {
                 type: 'شارژ حساب',
                 product: "",
@@ -91,10 +91,10 @@ class PayFactor extends React.Component {
                     <PersonDetails title='در وجه' id='1'
                         person={kapo}/>
                     <CustomTable 
-                            headers={this.props.factorObject && this.props.factorObject.type === 3 ? 
+                            headers={this.props.factorObject && this.props.factorObject.type === 5 ? 
                                 ['ردیف', 'نوع خدمت/تبلیغات', 'مقدار افزایش موجودی حساب']
                                 : ['ردیف', 'نوع خدمت/تبلیغات', 'نام کالا', this.get_unit(factor.type), 'قیمت واحد', 'مبلغ کل']}
-                            rows={this.props.factorObject && this.props.factorObject.type === 3 ? 
+                            rows={this.props.factorObject && this.props.factorObject.type === 5 ? 
                                 [['1', 'افزایش موجودی حساب', this.props.factorObject.transaction_object.amount]]
                                 : [['1', factor.type, 
                                 factor.product.name, 
