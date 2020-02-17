@@ -236,6 +236,7 @@ export const SignIn = (auth, showModal) => async dispatch => {
     setAuthToken(response.data.token)
     history.push('/')
     dispatch({ type: LOG_IN })
+    dispatch(getCurrentUser())
   } catch(e) {
     showModal('خطا', 'عملیات ورود با خطا مواجه شد', e.message)
   }
