@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 import './style.scss'
 
+import defaultImg from '../../assets/default.jpg'
+
 class Product extends React.Component {
   state = { active: false, zIndex: -1, top: "30px" }
 
@@ -20,7 +22,7 @@ class Product extends React.Component {
   render () {
     return (
       <div className='product__example-1 product__card' onClick={this.props.onClick ? this.props.onClick : null}>
-        <div className='product__wrapper' style={{ backgroundImage: 'url(' + this.props.product.image + ')' }}>
+        <div className='product__wrapper' style={{ backgroundImage: 'url(' + this.props.product ? this.props.product.image ? this.props.product.image : defaultImg : defaultImg + ')' }}>
           <div className='product__date'>
             <span className='product__month'>قیمت</span>
             <span className='product__month' id='product__price'>{this.props.product ? this.props.product.price : "-"}</span>

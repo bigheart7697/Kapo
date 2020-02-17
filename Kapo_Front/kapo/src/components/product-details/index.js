@@ -190,10 +190,6 @@ class ProductDetails extends React.Component {
                   <td>سال ساخت</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.user ? (this.props.product.user.type ? this.props.product.user.type : '-') : '-' : '-'}</td>
-                  <td>نوع آگهی</td>
-                </tr>
-                <tr>
                   <td>{this.props.product ? this.props.product.price : '-'}</td>
                   <td>قیمت (تومان)</td>
                 </tr>
@@ -221,7 +217,7 @@ class ProductDetails extends React.Component {
               </tbody>
             </table>
 
-            {this.props.campaign_product ?
+            {this.props.product_campaign ? this.props.product_campaign[0] ?
               <>
                 <div className="ui horizontal divider header">
                   <i className="address card outline icon"></i>
@@ -233,24 +229,24 @@ class ProductDetails extends React.Component {
                   <tbody>
                     <tr>
                       <td className="productDetails__column">
-                        {this.props.campaign_product ? this.props.campaign_product[0].discount : '0'}%
+                        {this.props.product_campaign ? this.props.product_campaign[0] ? this.props.product_campaign[0].discount : '0' : '0'}%
                       </td>
                       <td className="product-details__column">درصد تخفیف</td>
                     </tr>
                     <tr>
-                      <td>{this.props.campaign_product ? this.props.campaign_product[0].product ? this.props.campaign_product[0].product.price ? this.props.campaign_product[0].discount ? this.props.campaign_product[0].product.price * (100 - this.props.campaign_product[0].discount) / 100 : '-' : '-' : '-' : '-'}</td>
+                      <td>{this.props.product_campaign ? this.props.product_campaign[0] ? this.props.product_campaign[0].product ? this.props.product_campaign[0].product.price ? this.props.product_campaign[0].discount ? this.props.product_campaign[0].product.price * (100 - this.props.product_campaign[0].discount) / 100 : '-' : '-' : '-' : '-' : '-'}</td>
                       <td>قیمت نهایی (تومان)</td>
                     </tr>
                     <tr>
                       <td className="productDetails__column">
-                        {this.props.campaign_product ? this.get_due(this.props.campaign_product[0].created, this.props.campaign_product[0].days) : '-'}
+                        {this.props.product_campaign ? this.props.product_campaign[0] ? this.get_due(this.props.product_campaign[0].created, this.props.product_campaign[0].days) : '-' : '-'}
                       </td>
                       <td className="product-details__column">زمان پایان کمپین</td>
                     </tr>
                   </tbody>
                 </table>
               </>
-            : null}
+            : null : null}
           </div>
           <div className="product-details__rightPanel">
             <div className="product-details__imageContainer">
@@ -275,7 +271,7 @@ class ProductDetails extends React.Component {
         ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
             <div className="product-details__order-title">ثبت سفارش</div>
-            <OrderInput label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}/>
+            <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}/>
             <Whitespace space="1"/>
             <Select input={{name: 'receiving_day', onChange: (e) => this.setState({ delivery_weekday: e.target.value })}} label='روز دریافت کالا' content={this.get_day(this.get_starting_day() + 1)} />
             <Whitespace space="1"/>
