@@ -265,7 +265,9 @@ class ProductDetails extends React.Component {
             }
           </div>
         </div>
-        <ProductScoreSubmit onRateHandler={(rate) => { this.props.rateProduct(rate, this.props.match.params.id, this.props.showModal) }} />
+        {(this.props ? this.props.product ? this.props.product.owner ? this.props.product.owner.email ? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? 
+          <ProductScoreSubmit onRateHandler={(rate) => { this.props.rateProduct(rate, this.props.match.params.id, this.props.showModal) }} />
+        : null }
         {(localStorage.user_email != null) ?
           ((this.props ? this.props.product ? this.props.product.owner ? this.props.product.owner.email ? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ?
             <div className="product-details__button-container">

@@ -10,17 +10,7 @@ import image2 from '../../assets/2.png'
 import image3 from '../../assets/3.png'
 
 class AdvertisingCampaign extends React.Component {
-    state = {campaigns: 
-        [{id: 1, discount: 73, created: "2020-02-15 18:52", days: 6,
-            product: {id: 35, name: 'تست', price: 120000, image: image2, description: 'بهترین کالا', 
-                        owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}},
-        {id: 1, discount: 50, created: "2020-02-15 18:52", days: 4,
-            product: {id: 35, name: 'تست', price: 120000, image: image3, description: 'بهترین کالا', 
-                        owner: {name: 'علی', address: 'نیاوران', country: 'ایران', city: 'تهران'}}}]
-    }
-    
-    render() {
-        
+    render() {  
         return (
             <div className='advertising-campaign__container'>
                 <div className='advertising-campaign__right-panel'>
