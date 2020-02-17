@@ -32,7 +32,7 @@ class CustomSelect extends React.Component {
     return (
       <div className={`basic-select__container ${this.props.full ? "basic-select__container--full" : null} ${this.props.normal ? "basic-select__container--normal" : ""} ${this.props.dashboard ? "basic-select__container--dashboard" : ""}`}>
         <div className={`basic-select__inner-container ${this.props.normal ? "basic-select__inner-container--normal" : ""}`}>
-          {this.props.label ? <label className={`basic-select__label ${this.props.normal ? "basic-select__label--normal" : ""}`}>{this.props.label}</label> : null}
+          {this.props.label ? <label className={`basic-select__label ${this.props.normal ? "basic-select__label--normal" : ""}`}>{this.props.label}</label> : null}{this.props.meta ? renderError(this.props.meta) : null}
           <select className="basic-select__input" {...this.props.input} onChangeCapture={this.changed} ref='select'>
             {this.props.noEmpty ? null :<option></option>}
             {this.state.content.map((element, index) => {
@@ -40,7 +40,6 @@ class CustomSelect extends React.Component {
             })}
           </select>
         </div>
-        {this.props.meta ? renderError(this.props.meta) : null}
       </div>
     );
   }
@@ -48,7 +47,7 @@ class CustomSelect extends React.Component {
 
 const renderError = ({ touched, error }) => {
   if (touched && error) {
-    return <div className="basic-input__error">{error}</div>;
+    return <div className="basic-select__error">{error}</div>;
   }
 };
 
