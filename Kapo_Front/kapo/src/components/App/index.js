@@ -55,11 +55,11 @@ class App extends React.Component{
                             <Navbar loggedIn={this.props.isLoggedIn ? true : false}></Navbar>
                             <Switch>
                                 <Route path="/" exact component={MainPage}/>
-                                <Route path="/ProductList" exact component={() => <AllProducts showModal={this.showModal} modal={this.state.showModal}/>}/>
-                                <Route path="/product/:id" exact component={ProductDetails}/>
+                                <Route path="/ProductList" exact component={AllProducts}/>
+                                <Route path="/product/:id" exact component={(props) => <ProductDetails {...props} showModal={this.showModal}/>}/>
                                 <Route path="/AddProduct" exact component={AddProduct}/>
-                                <Route path="/Auth/SignIn" exact component={() => <SignIn showModal={this.showModal} modal={this.state.showModal}/>}/>
-                                <Route path="/Auth/SignUp" exact component={() => <SignUp showModal={this.showModal} modal={this.state.showModal}/>}/>
+                                <Route path="/Auth/SignIn" exact component={() => <SignIn showModal={this.showModal}/>}/>
+                                <Route path="/Auth/SignUp" exact component={() => <SignUp showModal={this.showModal}/>}/>
                                 <Route path="/MyProductList" exact component={MyProductList} />
                                 <Route path="/order/preview/:id" exact component={PreviewOrder}/>
                                 <Route path="/bank/:id" exact component={Bank}/>
