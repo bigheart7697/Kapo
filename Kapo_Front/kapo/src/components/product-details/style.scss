@@ -154,8 +154,8 @@
     }   
 
     .ui.table:not(.unstackable) tbody, .ui.table:not(.unstackable) tr, .ui.table:not(.unstackable) tr > td, .ui.table:not(.unstackable) tr > th {
-        display: revert !important;
-        width: 50% !important;
+        display: none;
+        width: none;
     }
     .product-details__buttons-container a, .product-details__buttons-container div{
         padding: 1rem 1.5rem;
