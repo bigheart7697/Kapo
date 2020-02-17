@@ -5,9 +5,13 @@ import history from '../history'
 import { FETCH_PRODUCT_CAMPAIGN, FETCH_FIRST_CAMPAIGN, FETCH_SECOND_CAMPAIGN, FETCH_THIRD_CAMPAIGN, CAMPAIGN_COUNT, FETCH_SPONSORS, FETCH_CAMPAIGNS, FETCH_BANNERS, FETCH_FACTOR, FETCH_TRANSACTIONS, FETCH_USERS ,BANNER_COUNT, FETCH_SECOND_BANNER, FETCH_THIRD_BANNER, FETCH_FIRST_BANNER, FETCH_CATEGORY_HIERARCHY, FETCH_PRODUCTS, FETCH_MY_PRODUCTS, ADD_PRODUCT, SEARCH_ITEM, FETCH_PRODUCT, FETCH_ORDERS, FETCH_ORDER, FETCH_PRODUCT_CATEGORIES, FETCH_PRODUCT_ORDERS, LOG_IN, LOG_OUT, FETCH_USER_INFO, FETCH_SIMILAR_PRODUCTS } from "./types";
 import bank from "../apis/bank";
 
-export const fetchProducts = () => async dispatch => {
-  const response = await server.get("/kapo/");
-  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
+export const fetchProducts = (showModal = alert) => async dispatch => {
+  try{
+    const response = await server.get("/kapo/");
+    dispatch({ type: FETCH_PRODUCTS, payload: response.data });
+  }catch(e){
+    // showModal('خطا', 'عملیات درخواست کالا از سرور با خطا مواجه شد', e.message)
+  }
 };
 
 export const fetchMyProducts = () => async dispatch => {
@@ -156,9 +160,13 @@ export const setPrice = (category = null) => async dispatch => {
   dispatch({ type: FETCH_SIMILAR_PRODUCTS, payload: response.data });
 }
 
-export const fetchProduct = id => async dispatch => {
-  const response = await server.get(`/kapo/products/${id}/`)
-  dispatch({ type: FETCH_PRODUCT, payload: response.data })
+export const fetchProduct = (id, showModal = alert) => async dispatch => {
+  try{
+    const response = await server.get(`/kapo/products/${id}/`)
+    dispatch({ type: FETCH_PRODUCT, payload: response.data })
+  }catch(e){
+    // showModal('خطای', 'خطایی در درخواست کالا از سرور به وجود آمد', e.message)
+  }
 }
 
 export const searchProducts = (search, category = null, params = null) => async dispatch => {
@@ -345,12 +353,12 @@ export const getAllUsers = () => async dispatch => {
   dispatch({ type: FETCH_USERS, payload: response.data });
 }
 
-export const rateProduct = (rate, id) => async () => {
+export const rateProduct = (rate, id, showModal = alert) => async () => {
   try{
     const response = await server.post(`product/${id}/rate/`, {rating: rate})
-    alert('success')
-  }catch{
-    alert('error')
+    showModal('موفق', 'نظر شما با موفقیت ثبت شد')
+  }catch(e){
+    showModal('خطا', 'در ثبت نظر شما خطایی پیش آمد', e.message)
   }
 }
 export const getAllTransactions = () => async dispatch => {
