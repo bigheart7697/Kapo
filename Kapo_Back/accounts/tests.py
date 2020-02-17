@@ -44,7 +44,7 @@ class ProfileTestCase(APITestCase):
         user_data['corporate_number'] = 123
         response = self.client.post(reverse('register'), data=user_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        user_data['corporate_number'] = 123456789012
+        user_data['corporate_number'] = 123456
         response = self.client.post(reverse('register'), data=user_data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         User.objects.last().delete()
