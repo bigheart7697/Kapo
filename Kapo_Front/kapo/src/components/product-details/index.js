@@ -6,7 +6,7 @@ import _ from "lodash";
 
 import "./style.scss";
 
-import {translate} from '../basic/categoryDict';
+import { translate } from '../basic/categoryDict';
 import Input from '../basic/customInput';
 import Button from "../basic/customButton";
 import Select from '../basic/customSelect';
@@ -24,9 +24,14 @@ import { Link } from "react-router-dom";
 const JDate = require('jalali-date');
 class ProductDetails extends React.Component {
   index = 0
+  get_starting_day = () => {
+    let d = new Date(Date.now());
+    let start_date = d.getDay() + 1;
+    return start_date;
+  }
   state = {
-    delivery_weekday: 1,
-    delivery_hours:1,
+    delivery_weekday: (this.get_starting_day() + 1) % 7 + 1, 
+    delivery_hours: 1,
     count: 0,
     image: "",
     owns: false
@@ -48,93 +53,87 @@ class ProductDetails extends React.Component {
     this.index = Math.floor(Math.random() * this.props.second_banners.length);
   }
 
-  get_starting_day = () => {
-    let d = new Date(Date.now());
-    let start_date = d.getDay() + 1;
-    return start_date;
-  }
-
   get_day = (day) => {
-    switch(day) {
-      case '1': 
+    switch (day) {
+      case '1':
         return [
-          {text: 'دوشنبه', value: '3'},
-          {text: 'سه‌شنبه', value: '4'},
-          {text: 'چهارشنبه', value: '5'},
-          {text: 'پنجشنبه', value: '6'},
-          {text: 'جمعه', value: '7'},
-          {text: 'شنبه', value: '1'},
-          {text: 'یکشنبه', value: '2'}
-              ];
-      case '2': 
-        return [
-          {text: 'سه‌شنبه', value: '4'},
-          {text: 'چهارشنبه', value: '5'},
-          {text: 'پنجشنبه', value: '6'},
-          {text: 'جمعه', value: '7'},
-          {text: 'شنبه', value: '1'},
-          {text: 'یکشنبه', value: '2'},
-          {text: 'دوشنبه', value: '3'}
+          { text: 'دوشنبه', value: '3' },
+          { text: 'سه‌شنبه', value: '4' },
+          { text: 'چهارشنبه', value: '5' },
+          { text: 'پنجشنبه', value: '6' },
+          { text: 'جمعه', value: '7' },
+          { text: 'شنبه', value: '1' },
+          { text: 'یکشنبه', value: '2' }
         ];
-      case '3': 
+      case '2':
         return [
-          {text: 'چهارشنبه', value: '5'},
-          {text: 'پنجشنبه', value: '6'},
-          {text: 'جمعه', value: '7'},
-          {text: 'شنبه', value: '1'},
-          {text: 'یکشنبه', value: '2'},
-          {text: 'دوشنبه', value: '3'},
-          {text: 'سه‌شنبه', value: '4'}
+          { text: 'سه‌شنبه', value: '4' },
+          { text: 'چهارشنبه', value: '5' },
+          { text: 'پنجشنبه', value: '6' },
+          { text: 'جمعه', value: '7' },
+          { text: 'شنبه', value: '1' },
+          { text: 'یکشنبه', value: '2' },
+          { text: 'دوشنبه', value: '3' }
         ];
-      case '4': 
+      case '3':
         return [
-          {text: 'پنجشنبه', value: '6'},
-          {text: 'جمعه', value: '7'},
-          {text: 'شنبه', value: '1'},
-          {text: 'یکشنبه', value: '2'},
-          {text: 'دوشنبه', value: '3'},
-          {text: 'سه‌شنبه', value: '4'},
-          {text: 'چهارشنبه', value: '5'}
+          { text: 'چهارشنبه', value: '5' },
+          { text: 'پنجشنبه', value: '6' },
+          { text: 'جمعه', value: '7' },
+          { text: 'شنبه', value: '1' },
+          { text: 'یکشنبه', value: '2' },
+          { text: 'دوشنبه', value: '3' },
+          { text: 'سه‌شنبه', value: '4' }
         ];
-      case '5': 
+      case '4':
         return [
-          {text: 'جمعه', value: '7'},
-          {text: 'شنبه', value: '1'},
-          {text: 'یکشنبه', value: '2'},
-          {text: 'دوشنبه', value: '3'},
-          {text: 'سه‌شنبه', value: '4'},
-          {text: 'چهارشنبه', value: '5'},
-          {text: 'پنجشنبه', value: '6'}
+          { text: 'پنجشنبه', value: '6' },
+          { text: 'جمعه', value: '7' },
+          { text: 'شنبه', value: '1' },
+          { text: 'یکشنبه', value: '2' },
+          { text: 'دوشنبه', value: '3' },
+          { text: 'سه‌شنبه', value: '4' },
+          { text: 'چهارشنبه', value: '5' }
         ];
-      case '6': 
+      case '5':
         return [
-          {text: 'شنبه', value: '1'},
-          {text: 'یکشنبه', value: '2'},
-          {text: 'دوشنبه', value: '3'},
-          {text: 'سه‌شنبه', value: '4'},
-          {text: 'چهارشنبه', value: '5'},
-          {text: 'پنجشنبه', value: '6'},
-          {text: 'جمعه', value: '7'}
+          { text: 'جمعه', value: '7' },
+          { text: 'شنبه', value: '1' },
+          { text: 'یکشنبه', value: '2' },
+          { text: 'دوشنبه', value: '3' },
+          { text: 'سه‌شنبه', value: '4' },
+          { text: 'چهارشنبه', value: '5' },
+          { text: 'پنجشنبه', value: '6' }
         ];
-      case '7': 
+      case '6':
         return [
-          {text: 'یکشنبه', value: '2'},
-          {text: 'دوشنبه', value: '3'},
-          {text: 'سه‌شنبه', value: '4'},
-          {text: 'چهارشنبه', value: '5'},
-          {text: 'پنجشنبه', value: '6'},
-          {text: 'جمعه', value: '7'},
-          {text: 'شنبه', value: '1'}
+          { text: 'شنبه', value: '1' },
+          { text: 'یکشنبه', value: '2' },
+          { text: 'دوشنبه', value: '3' },
+          { text: 'سه‌شنبه', value: '4' },
+          { text: 'چهارشنبه', value: '5' },
+          { text: 'پنجشنبه', value: '6' },
+          { text: 'جمعه', value: '7' }
         ];
-      default: 
+      case '7':
         return [
-          {text: 'شنبه', value: '1'},
-          {text: 'یکشنبه', value: '2'},
-          {text: 'دوشنبه', value: '3'},
-          {text: 'سه‌شنبه', value: '4'},
-          {text: 'چهارشنبه', value: '5'},
-          {text: 'پنجشنبه', value: '6'},
-          {text: 'جمعه', value: '7'}
+          { text: 'یکشنبه', value: '2' },
+          { text: 'دوشنبه', value: '3' },
+          { text: 'سه‌شنبه', value: '4' },
+          { text: 'چهارشنبه', value: '5' },
+          { text: 'پنجشنبه', value: '6' },
+          { text: 'جمعه', value: '7' },
+          { text: 'شنبه', value: '1' }
+        ];
+      default:
+        return [
+          { text: 'شنبه', value: '1' },
+          { text: 'یکشنبه', value: '2' },
+          { text: 'دوشنبه', value: '3' },
+          { text: 'سه‌شنبه', value: '4' },
+          { text: 'چهارشنبه', value: '5' },
+          { text: 'پنجشنبه', value: '6' },
+          { text: 'جمعه', value: '7' }
         ];
     }
   }
@@ -152,8 +151,8 @@ class ProductDetails extends React.Component {
   render() {
     return (
       <>
-        {this.props.second_banners[this.index]? this.props.second_banners[this.index].product? <AdvertisingBanner product={{link: `${this.props.second_banners[this.index].product? this.props.second_banners[this.index].product.id : -1}` ,image: this.props.second_banners[this.index].product.image, name: this.props.second_banners[this.index].product.name, moto: this.props.second_banners[this.index].slogan, price: this.props.second_banners[this.index].product.price}}/> : 
-        null : null}
+        {this.props.second_banners[this.index] ? this.props.second_banners[this.index].product ? <AdvertisingBanner product={{ link: `${this.props.second_banners[this.index].product ? this.props.second_banners[this.index].product.id : -1}`, image: this.props.second_banners[this.index].product.image, name: this.props.second_banners[this.index].product.name, moto: this.props.second_banners[this.index].slogan, price: this.props.second_banners[this.index].product.price }} /> :
+          null : null}
         <div className="product-details__container">
           <div className="product-details__leftPanel">
 
@@ -206,12 +205,12 @@ class ProductDetails extends React.Component {
               <tbody>
                 <tr>
                   <td className="productDetails__column">
-                    {this.props.product? this.props.product.owner ? this.props.product.owner.is_corporate ? this.props.product.owner.corporate_name? this.props.product.owner.corporate_name : '-' : this.props.product.owner.first_name + " " + this.props.product.owner.last_name  : '-' : '-'}
+                    {this.props.product ? this.props.product.owner ? this.props.product.owner.is_corporate ? this.props.product.owner.corporate_name ? this.props.product.owner.corporate_name : '-' : this.props.product.owner.first_name + " " + this.props.product.owner.last_name : '-' : '-'}
                   </td>
                   <td className="product-details__column">نام</td>
                 </tr>
                 <tr>
-                  <td>{ToPersianNum(this.props.product ?  this.props.product.owner ? this.props.product.owner.address : '-' :'-')}</td>
+                  <td>{ToPersianNum(this.props.product ? this.props.product.owner ? this.props.product.owner.address : '-' : '-')}</td>
                   <td>آدرس</td>
                 </tr>
               </tbody>
@@ -229,76 +228,78 @@ class ProductDetails extends React.Component {
                   <tbody>
                     <tr>
                       <td className="productDetails__column">
-                        {this.props.product_campaign ? this.props.product_campaign[0] ? this.props.product_campaign[0].discount : '0' : '0'}%
+                        {ToPersianNum(this.props.product_campaign ? this.props.product_campaign[0] ? this.props.product_campaign[0].discount : '0' : '0')}%
                       </td>
                       <td className="product-details__column">درصد تخفیف</td>
                     </tr>
                     <tr>
-                      <td>{this.props.product_campaign ? this.props.product_campaign[0] ? this.props.product_campaign[0].product ? this.props.product_campaign[0].product.price ? this.props.product_campaign[0].discount ? this.props.product_campaign[0].product.price * (100 - this.props.product_campaign[0].discount) / 100 : '-' : '-' : '-' : '-' : '-'}</td>
+                      <td>{ToPersianNum(this.props.product_campaign ? this.props.product_campaign[0] ? this.props.product_campaign[0].product ? this.props.product_campaign[0].product.price ? this.props.product_campaign[0].discount ? this.props.product_campaign[0].product.price * (100 - this.props.product_campaign[0].discount) / 100 : '-' : '-' : '-' : '-' : '-')}</td>
                       <td>قیمت نهایی (تومان)</td>
                     </tr>
                     <tr>
                       <td className="productDetails__column">
-                        {this.props.product_campaign ? this.props.product_campaign[0] ? this.get_due(this.props.product_campaign[0].created, this.props.product_campaign[0].days) : '-' : '-'}
+                        {ToPersianNum(this.props.product_campaign ? this.props.product_campaign[0] ? this.get_due(this.props.product_campaign[0].created, this.props.product_campaign[0].days) : '-' : '-')}
                       </td>
                       <td className="product-details__column">زمان پایان کمپین</td>
                     </tr>
                   </tbody>
                 </table>
               </>
-            : null : null}
+              : null : null}
           </div>
           <div className="product-details__rightPanel">
             <div className="product-details__imageContainer">
               <div
                 className="product-details__image"
                 style={{
-                  backgroundImage: this.props? this.props.product ? this.props.product.image? "url(" + this.props.product.image + ")" : `url(${defaultImg})` : `url(${defaultImg})` : `url(${defaultImg})`
+                  backgroundImage: this.props ? this.props.product ? this.props.product.image ? "url(" + this.props.product.image + ")" : `url(${defaultImg})` : `url(${defaultImg})` : `url(${defaultImg})`
                 }}
               ></div>
             </div>
-            {(this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? null :
+            {(this.props ? this.props.product ? this.props.product.owner ? this.props.product.owner.email ? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? null :
               <div className='product-details__buttons-container'>
-                <div onClick={()=>this.props.deleteProduct(this.props.product? this.props.product.id? this.props.product.id : null : null)}>حذف</div>
-                <Link to={this.props.product? this.props.product.id? `/changeProduct/${this.props.product.id}` : "" : "" }>ویرایش</Link>
-                <Link to={this.props.product? this.props.product.id? `/ProductOrders/${this.props.product.id}` : "" : "" }>لیست سفارش ها</Link>
+                <div onClick={() => this.props.deleteProduct(this.props.product ? this.props.product.id ? this.props.product.id : null : null)}>حذف</div>
+                <Link to={this.props.product ? this.props.product.id ? `/changeProduct/${this.props.product.id}` : "" : ""}>ویرایش</Link>
+                <Link to={this.props.product ? this.props.product.id ? `/ProductOrders/${this.props.product.id}` : "" : ""}>لیست سفارش ها</Link>
               </div>
             }
           </div>
         </div>
-        <ProductScoreSubmit onRateHandler={(rate) => {this.props.rateProduct(rate, this.props.match.params.id, this.props.showModal)}}/>
-        {(localStorage.user_email != null) ? 
-        ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? 
-          <div className="product-details__button-container">
-            <div className="product-details__order-title">ثبت سفارش</div>
-            <Input label="تعداد" input={{value: this.state.count, onChange: (e) => this.setState({ count: e.target.value })}}/>
-            <Whitespace space="1"/>
-            <Select input={{name: 'receiving_day', onChange: (e) => this.setState({ delivery_weekday: e.target.value })}} label='روز دریافت کالا' content={this.get_day(this.get_starting_day() + 1)} />
-            <Whitespace space="1"/>
-            <Select input={{name: 'receiving_hour', onChange: (e) => this.setState({ delivery_hours: e.target.value })}} label='ساعت دریافت کالا' content={[{text: '9-12', value: '1'}, {text: '12-15', value: '2'}, {text: '15-18', value: '3'}]} />
-            <Whitespace space="1"/>
-            <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.id? this.props.product.id : null, {count: this.state.count, delivery_weekday: this.state.delivery_weekday, delivery_hours: this.state.delivery_hours})}/>
-          </div>
-        :
-          <div className='product-details__advertisements-container'>
-            <div className='product-details__advertisements-title'>ثبت تبلیغات و خدمات</div>
-            <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click}/>
-            <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click}/>
-          </div>)
-         : <></>}
-        <Whitespace space="10"/>
+        <ProductScoreSubmit onRateHandler={(rate) => { this.props.rateProduct(rate, this.props.match.params.id, this.props.showModal) }} />
+        {(localStorage.user_email != null) ?
+          ((this.props ? this.props.product ? this.props.product.owner ? this.props.product.owner.email ? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ?
+            <div className="product-details__button-container">
+              <div className="product-details__order-title">ثبت سفارش</div>
+              <Input label="تعداد" input={{ value: this.state.count, onChange: (e) => this.setState({ count: e }) }} />
+              <Whitespace space="1" />
+              <Select input={{ name: 'receiving_day', onChange: (e) => this.setState({ delivery_weekday: e.target.value }), value: this.state.delivery_weekday }} label='روز دریافت کالا' content={this.get_day('' + (this.get_starting_day()))} />
+              <Whitespace space="1" />
+              <Select input={{ name: 'receiving_hour', onChange: (e) => this.setState({ delivery_hours: e.target.value }), value: this.state.delivery_hours }} label='ساعت دریافت کالا' content={[{ text: '9-12', value: '1' }, { text: '12-15', value: '2' }, { text: '15-18', value: '3' }]} />
+              <Whitespace space="1" />
+              <Button text="سفارش" onClick={() => this.props.addToCart(this.props.product.id ? this.props.product.id : null, { count: this.state.count, delivery_weekday: this.state.delivery_weekday, delivery_hours: this.state.delivery_hours })} />
+            </div>
+            :
+            <div className='product-details__advertisements-container'>
+              <div className='product-details__advertisements-title'>ثبت تبلیغات و خدمات</div>
+              <CustomChoices callChild={this.change_advertisements} setMethod={click => this.change_choices = click} />
+              <SubmitAdvertisements product={this.props.product} callChild={this.change_choices} setMethod={click => this.change_advertisements = click} />
+            </div>)
+          : <></>}
+        <Whitespace space="10" />
       </>
     );
   }
 }
 
 const mapStatToProps = (state, ownProps) => {
-  return { product: ownProps.match? state.products.products[ownProps.match.params.id] : null, 
+  return {
+    product: ownProps.match ? state.products.products[ownProps.match.params.id] : null,
     second_banners: _.map(state.advertisements.second_banners, (item, key) => {
       return item
-  }), product_campaign: _.map(state.advertisements.product_campaign, (item, key) => {
-    return item
-})}
+    }), product_campaign: _.map(state.advertisements.product_campaign, (item, key) => {
+      return item
+    })
+  }
 }
 
 export default connect(mapStatToProps, { deleteProduct, addToCart, fetchProduct, fetchSecondBanners, rateProduct, fetchProductCampaign })(ProductDetails);
