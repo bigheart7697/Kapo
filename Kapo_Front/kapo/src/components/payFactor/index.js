@@ -74,6 +74,12 @@ class PayFactor extends React.Component {
                 product: {name: this.props.factorObject.transaction_object.product.name},
                 days_number: this.props.factorObject.transaction_object.days
                 }}
+        if (this.props.factorObject && this.props.factorObject.type === 3){
+            factor = {
+                type: 'شارژ حساب',
+                product: "",
+                days_number: ""
+                }}
 
 
         return (
