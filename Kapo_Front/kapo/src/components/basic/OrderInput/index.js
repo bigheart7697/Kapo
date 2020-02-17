@@ -1,6 +1,6 @@
 import React from "react";
 
-import './style.scss'
+import '../customInput/style.scss'
 
 import ToPersianNum from '../../basic/toPersianNum'
 import ToEnglishNum from '../../basic/toEnglishNum'
@@ -35,4 +35,4 @@ const renderError = ({touched, error}) => {
     }
 }
 
-export default BasicInput;
+export default OrderInput;
