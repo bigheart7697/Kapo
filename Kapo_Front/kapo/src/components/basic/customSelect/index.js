@@ -12,7 +12,7 @@ class CustomSelect extends React.Component {
   }
 
   componentDidUpdate() {
-    if(this.state.content != this.props.content) {
+    if(this.state.content !== this.props.content) {
       this.setState({content: this.props.content ? this.props.content : []})
       this.refs.select.value = null
     }

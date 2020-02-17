@@ -12,7 +12,7 @@ class AdvertisementList extends React.Component {
         this.setState({advertisement: this.props.advertisements ? this.props.advertisements[0] : {}})
     }
     componentDidUpdate() {
-        if(this.props.advertisements && this.state.advertisement != this.props.advertisements[0]) {
+        if(this.props.advertisements && this.state.advertisement !== this.props.advertisements[0]) {
             this.setState({advertisement: this.props.advertisements ? this.props.advertisements[0] : {}})
         }
     }

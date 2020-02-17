@@ -1,38 +1,44 @@
 @import '../../scss/base/variables.scss';
 
-$tail-top-relative : 0.75rem;
+$tail-top-relative : 0;
 $circle-radius : 7rem;
 $nav-height: 7rem;
 $tail-width : 10rem;
-$tail-height: 5.5rem;
+$tail-height: 7rem;
 $transition-time: 0.4s;
 
 .navbar__container{
-    max-width: 1000px;
-    width: 90%;
-    padding: 2rem 0;
+    width: 100%;
+    padding: 0;
     display: flex;
     flex-direction: row-reverse;
+    background-color: $second-color;
+    align-items: center;
+    overflow: hidden;
 }
 
 .navbar__flex{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 .navbar__content{
     display: flex;
     flex-direction: row-reverse;
-    background-color: $second-color;
     align-items: center;
     height: $nav-height;
     color: $white;
     flex: auto;
     padding: 0 1rem;
-    border-radius: 2rem;
 }
 
 .navbar__circle{
+    cursor: pointer;
     height: $circle-radius;
     width: $circle-radius;
     background-color: $third-color;
@@ -42,9 +48,8 @@ $transition-time: 0.4s;
     top: -$tail-top-relative;
     border: 3px solid $second-color;
     transition: $transition-time;
-    background-image: url('../../assets/user.png');
-    background-repeat: none;
-    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .navbar__tail{
@@ -54,17 +59,73 @@ $transition-time: 0.4s;
     flex-direction: row-reverse;
     height: $tail-height;
     width: $tail-width;
-    background-color: $third-color;
-    border-radius: 2rem;
+    background-color: $second-color;
     transition: $transition-time;
     cursor: pointer;
 }
 
-.navbar__tail:hover{
-    top: 0;
+.navbar__searchbar {
+    width: 35%;
+    display: table;
+}
+
+.navbar__auth {
+    width: 15%;
+}
+
+.navbar__new-product {
+    margin-left: 20%;
+    float: left;
+}
+
+.nav-bar__button {
+    display: flex;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    margin: auto;
+    background-color: $hover-color;
+    color: $white;
+    text-align: center;
+    cursor: pointer;
+    transition: .5s ease all;
+    text-decoration: none !important;
+}
+
+.nav-bar__button:hover {
+    background-color: $first-color;
+    color: black;    
+}
+
+.nav-bar__button--red {
+    background-color: $fourth-color;
+}
+
+.navbar__component--padding-top {
+    padding-top: 7rem;
+}
+
+.navbar__page-title{
     background-color: $second-color;
-    height: $nav-height;
-    .navbar__circle{
-        top: 0
+    color: $white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+@media (max-width: 1000px) {
+    .navbar__searchbar {
+        width: 30%;
+        margin-left: 5%;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar__searchbar {
+        width: 40%;
+        margin-left: 5%;
     }
 }

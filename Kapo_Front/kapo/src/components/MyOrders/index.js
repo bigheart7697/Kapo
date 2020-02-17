@@ -13,7 +13,7 @@ class MyOrders extends React.Component {
     }
 
     render(){
-        const newArray = _.map(this.props.orders, (item, key) => {
+        const newArray = _.map(this.props.orders, (item) => {
             return item
           })
         return (

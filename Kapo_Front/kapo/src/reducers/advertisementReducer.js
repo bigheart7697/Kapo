@@ -42,38 +42,38 @@ const advertisementReducer = (state = INITIAL_VALUE, action) => {
         third_campaigns: {..._.mapKeys(action.payload, "id")}
       };
     case CAMPAIGN_COUNT:
-        if (action.payload.place == 1) {
+        if (action.payload.place === 1) {
             return {
                 ...state,
                 first_campaigns_count: action.payload.count
             }
         }
-        if (action.payload.place == 2) {
+        if (action.payload.place === 2) {
             return {
                 ...state,
                 second_campaigns_count: action.payload.count
             }
         }
-        if (action.payload.place == 3) {
+        if (action.payload.place === 3) {
             return {
                 ...state,
                 third_campaigns: action.payload.count
             }
         }
     case BANNER_COUNT:
-        if (action.payload.place == 1) {
+        if (action.payload.place === 1) {
             return {
                 ...state,
                 first_banners_count: action.payload.count
             }
         }
-        if (action.payload.place == 2) {
+        if (action.payload.place === 2) {
             return {
                 ...state,
                 second_banners_count: action.payload.count
             }
         }
-        if (action.payload.place == 3) {
+        if (action.payload.place === 3) {
             return {
                 ...state,
                 third_banners_count: action.payload.count
