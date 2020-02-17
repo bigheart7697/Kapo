@@ -1,0 +1,37 @@
+@import '../../scss/base/variables.scss';
+
+.agreement__wrapper {
+    width: 100%;
+    margin: 4rem auto;
+}
+
+.agreement__container {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: $superwhite;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    border: 2px solid grey;
+    direction: rtl;
+}
+
+.agreement__title {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 1rem;
+}
+
+.agreement__text {
+    text-align: justify;
+    color: black;
+}
+
+.agreement__checkbox {
+    display: inline-block;
+    float: right;
+}
+
+.agreement__label {
+    display: inline-block;
+    margin-right: .5rem;
+}

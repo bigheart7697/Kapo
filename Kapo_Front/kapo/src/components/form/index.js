@@ -8,6 +8,7 @@ import CustomButton from "../basic/customButton";
 import CustomSelect from "../basic/customSelect";
 import CustomFileUpload from '../basic/customFileUpload';
 import WhiteSpace from "../basic/whitespace";
+import Agreement from '../agreement'
 
 class Form extends React.Component {
   setComponent = type => {
@@ -16,6 +17,8 @@ class Form extends React.Component {
         return CustomSelect;
       case "file":
         return CustomFileUpload;
+      case "agreement":
+        return Agreement;
       default:
         return CustomInput;
     }

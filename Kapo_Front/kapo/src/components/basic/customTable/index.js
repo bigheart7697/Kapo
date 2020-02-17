@@ -9,7 +9,7 @@ const CustomTable = (props) => {
                 <div className='custom-table__thead'>
                     {props.headers ? props.headers.map((element, index) => { 
                         return(
-                            <div className='custom-table__td' key={-1-index}>{element}</div>
+                            <div className={`custom-table__td` + (props.long ? ` custom-table__td--long` : ``)} key={-1-index}>{element}</div>
                         );}
                         ) : <div></div>
                     }
@@ -21,7 +21,7 @@ const CustomTable = (props) => {
                                 {element.map((e, i) =>
                                     {
                                         return (
-                                            <div className='custom-table__td' key={2 * i} id={'custom-table__td' + i}>{e}</div>
+                                            <div className={`custom-table__td` + (props.long ? ` custom-table__td--long` : ``)} key={2 * i} id={'custom-table__td' + i}>{e}</div>
                                         );
                                     }    
                                 )}

@@ -24,6 +24,10 @@
     border: 1px solid $borders;
 }
 
+.custom-table__td--long {
+    min-width: 20%;
+}
+
 .custom-table__tr, .custom-table__thead {
     display: flex;
 }

@@ -5,7 +5,6 @@ import './style.scss';
 
 import CountDown from '../countDown'
 import defaultImg from '../../../assets/default.jpg'
-import ToPersianNum from '../../basic/toPersianNum'
 import toPersianNum from '../../basic/toPersianNum';
 
 

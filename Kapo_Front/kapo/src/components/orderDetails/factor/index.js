@@ -18,10 +18,11 @@ class OrderFactor extends React.Component {
                     <PersonDetails title='خریدار' id='2'
                         person={this.props.order ? this.props.order.customer ? this.props.order.customer : {} : {}}/>
                     <CustomTable 
-                            headers={['ردیف', 'نام کالا', 'تعداد', 'قیمت واحد', 'مبلغ کل']}
-                            rows={[['1', this.props.order ? this.props.order.product ? this.props.order.product.name : '-' : '-', 
-                                this.props.order ? this.props.order.count : '-', this.props.order ? this.props.order.product ? this.props.order.product.price : '-' : '-',
-                                this.props.order ? this.props.order.product ? this.props.order.product.price ? this.props.order.count ? this.props.order.product.price * this.props.order.count : '-' : '-' : '-' : '-']]}
+                        long={true}
+                        headers={['ردیف', 'نام کالا', 'تعداد', 'قیمت واحد', 'مبلغ کل']}
+                        rows={[['1', this.props.order ? this.props.order.product ? this.props.order.product.name : '-' : '-', 
+                            this.props.order ? this.props.order.count : '-', this.props.order ? this.props.order.product ? this.props.order.product.price : '-' : '-',
+                            this.props.order ? this.props.order.product ? this.props.order.product.price ? this.props.order.count ? this.props.order.product.price * this.props.order.count : '0' : '0' : '0' : '-']]}
                     />
                 </div>
             </div>
