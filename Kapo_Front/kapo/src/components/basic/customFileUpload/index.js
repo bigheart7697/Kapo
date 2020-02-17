@@ -26,7 +26,6 @@ export default class CustomFileUpload  extends React.Component{
   }
 
   render(){
-    const { input : { value } } = this.props
     return(
       <div className="custom-file-upload__container">
         <div className="custom-file-upload__inner-container">

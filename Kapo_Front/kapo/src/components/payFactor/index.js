@@ -91,15 +91,19 @@ class PayFactor extends React.Component {
                     <PersonDetails title='در وجه' id='1'
                         person={kapo}/>
                     <CustomTable 
-                            headers={['ردیف', 'نوع خدمت/تبلیغات', 'نام کالا', this.props.factor ? this.get_unit(this.props.factor.type) : this.get_unit(factor.type), 'قیمت واحد', 'مبلغ کل']}
-                            rows={[['1', this.props.factor ? this.props.factor.type : factor.type, 
-                                this.props.factor ? this.props.factor.product ? this.props.factor.product.name : '-' : factor.product.name, 
-                                this.props.factor ? this.props.factor.days_number : factor.days_number, 
-                                this.props.factor ? this.get_price(this.props.factor.type) : this.get_price(factor.type),
-                                this.props.factor ? this.props.factor.type ? this.props.factor.days_number ? this.get_price(this.props.factor.type) * this.props.factor.days_number : '-' : '-' : this.get_price(factor.type) * factor.days_number]]}
+                            headers={this.props.factorObject && this.props.factorObject.type === 3 ? 
+                                ['ردیف', 'نوع خدمت/تبلیغات', 'مقدار افزایش موجودی حساب']
+                                : ['ردیف', 'نوع خدمت/تبلیغات', 'نام کالا', this.get_unit(factor.type), 'قیمت واحد', 'مبلغ کل']}
+                            rows={this.props.factorObject && this.props.factorObject.type === 3 ? 
+                                [['1', 'افزایش موجودی حساب', this.props.factorObject.transaction_object.amount]]
+                                : [['1', factor.type, 
+                                factor.product.name, 
+                                factor.days_number, 
+                                this.get_price(factor.type),
+                                this.get_price(factor.type) * factor.days_number]]}
                     />
                 </div>
-                <LinkToBank id={this.props.factorObject? this.props.factorObject.id : -1} /> {/* set id */}
+                <LinkToBank id={this.props.factorObject? this.props.factorObject.id : -1} />
             </div>
         );
     }

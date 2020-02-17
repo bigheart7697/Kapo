@@ -46,13 +46,6 @@ const slideData = [
     }
 ]
 
-const PRODUCTS = [
-    {id: 1, name: 'کالا'},
-    {id: 1, name: 'کالا'},
-    {id: 1, name: 'کالا'},
-    {id: 1, name: 'کالا'}
-]
-
 class mainpage extends React.Component {
     componentDidMount() {
         this.props.fetchProducts();

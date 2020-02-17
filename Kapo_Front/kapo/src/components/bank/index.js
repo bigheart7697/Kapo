@@ -115,35 +115,41 @@ const mapStatToProps = (state, ownProps) => {
                     owner = "شرکت کاپوکالا"
                     completeMethod = completeSponsor
                     cancelMethod = failSponsor
-            
+                    break
             case 2:
                     price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
                     owner = "شرکت کاپوکالا"
                     completeMethod = completeBanner
                     cancelMethod = [failBanner]
-
+                    break
             case 3:
-                
-                    price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
-                    owner = "شرکت کاپوکالا"
-                    completeMethod = ownProps.completeCampaign
-                    cancelMethod = failCampaign
-        
-
+                price = factorItem.amount * (factorItem.transaction_object.count? factorItem.transaction_object.count : factorItem.transaction_object.days)
+                owner = "شرکت کاپوکالا"
+                completeMethod = ownProps.completeCampaign
+                cancelMethod = failCampaign
+                break
             case 4:
                 price = factorItem.transaction_object.count * factorItem.transaction_object.product.price
                 owner = factorItem.transaction_object.product.owner.is_corporate ? factorItem.transaction_object.product.owner.corporate_name : factorItem.transaction_object.product.owner.first_name + " " + factorItem.transaction_object.product.owner.last_name
                 completeMethod = completeOrder
                 cancelMethod = cancelOrder
+                break
             case 5:
                 price = factorItem.amount
                 owner = "شرکت کاپوکالا"
                 completeMethod = completeCharge
                 cancelMethod = failCharge
+                break
+            default:
+                price = factorItem.amount
+                owner = "شرکت کاپوکالا"
+                completeMethod = completeCharge
+                cancelMethod = failCharge
+                break
         }
     }
     
   return {price: price, owner: owner, completeMethod: completeMethod, cancelMethod: cancelMethod, id: id, type: type} 
 }
   
-  export default connect(mapStatToProps, { fetch_factor, completeBanner, completeBanner, completeCampaign, completeOrder, cancelOrder, failBanner, failCampaign, failSponsor, completeCharge, failCharge })(Bank);
+  export default connect(mapStatToProps, { fetch_factor, completeBanner, completeSponsor, completeCampaign, completeOrder, cancelOrder, failBanner, failCampaign, failSponsor, completeCharge, failCharge })(Bank);

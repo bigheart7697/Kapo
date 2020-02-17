@@ -27,10 +27,8 @@ import CategoryProducts from "../categoryProducts"
 import PayFactor from '../payFactor'
 import Dashboard from '../dashboard'
 import PaymentResult from '../basic/paymentResult'
-import AdvertisementList from '../advertisementList'
 import AdminPanel from '../adminPanel'
 import Modal from '../Modal'
-import server from '../../apis/server'
 import Agreement from '../agreement'
 
 class App extends React.Component{
