@@ -8,7 +8,6 @@ import "./style.scss";
 
 import {translate} from '../basic/categoryDict';
 import Input from '../basic/customInput';
-import OrderInput from '../basic/OrderInput'
 import Button from "../basic/customButton";
 import Select from '../basic/customSelect';
 import Whitespace from '../basic/whitespace';
@@ -16,6 +15,7 @@ import SubmitAdvertisements from '../submitAdvertisements';
 import CustomChoices from '../basic/customChoices';
 import AdvertisingBanner from '../advertisingBanner';
 import ProductScoreSubmit from '../basic/productScoreSubmit'
+import ToPersianNum from '../basic/toPersianNum'
 
 import defaultImg from '../../assets/default.jpg'
 
@@ -186,7 +186,7 @@ class ProductDetails extends React.Component {
                   <td>در دسترس بودن</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ? this.props.product.production_year : '-'}</td>
+                  <td>{ToPersianNum(this.props.product ? this.props.product.production_year : '-')}</td>
                   <td>سال ساخت</td>
                 </tr>
                 <tr>
@@ -211,7 +211,7 @@ class ProductDetails extends React.Component {
                   <td className="product-details__column">نام</td>
                 </tr>
                 <tr>
-                  <td>{this.props.product ?  this.props.product.owner ? this.props.product.owner.address : '-' :'-'}</td>
+                  <td>{ToPersianNum(this.props.product ?  this.props.product.owner ? this.props.product.owner.address : '-' :'-')}</td>
                   <td>آدرس</td>
                 </tr>
               </tbody>
@@ -266,7 +266,7 @@ class ProductDetails extends React.Component {
             }
           </div>
         </div>
-        <ProductScoreSubmit onRateHandler={(rate) => {this.props.rateProduct(rate, this.props.match.params.id)}}/>
+        <ProductScoreSubmit onRateHandler={(rate) => {this.props.rateProduct(rate, this.props.match.params.id, this.props.showModal)}}/>
         {(localStorage.user_email != null) ? 
         ((this.props? this.props.product? this.props.product.owner? this.props.product.owner.email? (localStorage.user_email !== this.props.product.owner.email) : false : false : false : false) ? 
           <div className="product-details__button-container">
