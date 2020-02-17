@@ -105,7 +105,7 @@ class Navbar extends React.Component {
         return 'لیست سفارش‌ها'
       case '/dashboard':
         return 'پنل کاربری'
-      case '/dashboard_admin':
+      case '/adminDashboard':
         return 'پنل کاربری'
       case '/payment/result/success':
         return 'پرداخت موفقیت آمیز'
