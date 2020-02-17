@@ -19,7 +19,7 @@ class productCard extends React.Component {
                         <div className="product-card__description-text">
                             {this.props.product ? this.props.product.description : '-'}
                         </div>
-                        <StarScore score={this.props.product ? this.props.product.average_score ? this.props.product.average_score : 0 : 0}/>
+                        <StarScore score={this.props.product ? this.props.product.average_rating ? this.props.product.average_rating : 0 : 0}/>
                     </div>
                 </>
                 : (<div className="product-card__details-button-container">

@@ -122,6 +122,10 @@ export const catDict = catHierarchy => {
 }
 
 export const translate = originWord => {
+    if (!originWord) {
+        return ""
+    }
+
     if (originWord in dict) {
         return dict[originWord];
     }
