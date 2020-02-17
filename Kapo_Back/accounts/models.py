@@ -25,10 +25,16 @@ class User(AbstractUser):
                                                                MinValueValidator(100000000000)])
     balance = models.IntegerField(_("balance"), default=0.0,
                                   validators=[MinValueValidator(0)])
-    percentage = models.DecimalField(_("balance"), default=0.02, max_digits=2, decimal_places=2)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'phone_number']
+
+    @property
+    def percentage(self):
+        if self.is_corporate:
+            return 0.05
+        else:
+            return 0.02
 
     def __str__(self):
         return "{}".format(self.email)
