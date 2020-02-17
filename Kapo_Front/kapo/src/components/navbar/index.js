@@ -59,31 +59,79 @@ class Navbar extends React.Component {
     }
     this.props.searchProducts(query, category);
     this.props.sponsoredSearchProducts(query);
-};
+  };
 
-setPathName = (path) => {
-  switch(path){
-    case '/':
-      return 'صفحه‌اصلی'
-    default:
-      return path;
+  checkStartWith = (path) => {
+    if (path.startsWith("/product")) {
+      return 'جزئیات کالا'
+    }
+    if (path.startsWith("/order/preview")) {
+      return 'جزئیات سفارش'
+    }
+    if (path.startsWith("/order/factor")) {
+      return 'جزئیات سفارش'
+    }
+    if (path.startsWith("/ProductOrders")) {
+      return 'سفارش‌های کالا'
+    }
+    if (path.startsWith("/changeProduct")) {
+      return 'ویرایش اطلاعات محصول'
+    }
+    if (path.startsWith("/ProductList")) {
+      return 'لیست کالاها'
+    }
+    if (path.startsWith("/pay/factor")) {
+      return 'فاکتور پرداخت صورت حساب'
+    }
+    if (path.startsWith("/order/preview")) {
+      return 'جزئیات سفارش'
+    }
+    return path
   }
-}
 
-setCorrectState = (path) => {
-  switch(path){
-    case '/':
-      return 0;
-    case '/ProductList':
-      return 1;
-    case '/AddProduct':
-      return 2;
-    case '/dashboard':
-      return 3;
-    default:
-      return null;
+  setPathName = (path) => {
+    switch(path){
+      case '/':
+        return 'صفحه‌اصلی'
+      case '/ProductList':
+        return 'لیست کالاها'
+      case '/AddProduct':
+        return 'اضافه کردن کالا'
+      case '/Auth/SignIn':
+        return 'ورود'
+      case '/Auth/SignUp':
+        return 'ثبت نام'
+      case '/order/list':
+        return 'لیست سفارش‌ها'
+      case '/dashboard':
+        return 'پنل کاربری'
+      case '/dashboard_admin':
+        return 'پنل کاربری'
+      case '/payment/result/success':
+        return 'پرداخت موفقیت آمیز'
+      case '/payment/result/fail':
+        return 'پرداخت غیر موفقیت آمیز'
+      case '/advertisement/list':
+        return 'لیست تبلیغات'
+      default:
+        return this.checkStartWith(path);
+    }
   }
-}
+
+  setCorrectState = (path) => {
+    switch(path){
+      case '/':
+        return 0;
+      case '/ProductList':
+        return 1;
+      case '/AddProduct':
+        return 2;
+      case '/dashboard':
+        return 3;
+      default:
+        return null;
+    }
+  }
 
   componentDidMount() {
     this.props.fetchCategoryHierarchy();

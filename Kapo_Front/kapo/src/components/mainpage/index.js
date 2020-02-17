@@ -62,16 +62,18 @@ class mainpage extends React.Component {
                 <div className="main-page__slider"> 
                     <Slider heading="Example Slider" slides={slideData} /> 
                 </div>
-                <div className='mainpage__products_container'>
-                    <Link to='/ProductList'>لیست محصولات</Link>
-                    <div className='mainpage__products-wrapper'>
-                        <div className='mainpage__products'>
-                            {newArray ? newArray.map((element, index) => 
-                                <ProductCard product={element} key={index} />
-                            ) : null}
+                {this.props.newArray && this.props.newArray.length >= 1 ?
+                    <div className='mainpage__products_container'>
+                        <Link to='/ProductList'>لیست محصولات</Link>
+                        <div className='mainpage__products-wrapper'>
+                            <div className='mainpage__products'>
+                                {newArray ? newArray.map((element, index) => 
+                                    <ProductCard product={element} key={index} />
+                                ) : null}
+                            </div>
                         </div>
                     </div>
-                </div>
+                : null }
                 <DogAnimation/>
             </div>
         )
