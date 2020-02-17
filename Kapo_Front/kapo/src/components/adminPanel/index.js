@@ -14,7 +14,7 @@ import MySponsors from "../MySponsors"
 
 import userStatisticsImage from '../../assets/marketing.svg'
 import listUserImage from '../../assets/order.svg'
-import productStatisticsImage from '../../assets/report.svg'
+import productStatisticsImage from '../../assets/order.svg'
 import businessStatisticsImage from '../../assets/graph.svg'
 import listImage from '../../assets/list.svg'
 import adImage from '../../assets/ad.svg'
