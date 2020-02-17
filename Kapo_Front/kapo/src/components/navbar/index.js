@@ -157,20 +157,12 @@ class Navbar extends React.Component {
             <div className="navbar__container">
               <div className="navbar__content">
                 {navItems.map((element, index) => {
-                  if (this.state.active === index) {
-                    return (
-                      <NavItem key={index} active onMouseOver={() => this.activeMegaDropDown(element)} onMouseOut={() => this.deActiveMegaDropDown(element)}>
-                        {element.text}
-                      </NavItem>
-                    );
-                  } else {
                     return(
                       <NavItem key={index} onClick={() => this.navItemOnClick(index, element.link)}
                         onMouseOver={() => this.activeMegaDropDown(element)}
                         onMouseOut={() => this.deActiveMegaDropDown(element)}>
                         {element.text}
                       </NavItem>);
-                  }
                 })}
               </div>
               <div className='navbar__searchbar'>
