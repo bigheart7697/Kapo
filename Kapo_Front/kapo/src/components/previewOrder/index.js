@@ -36,7 +36,7 @@ class PreviewOrder extends React.Component {
                         </div>
                     </div>
                 </div>
-                <LinkToBank id={this.props.order ? this.props.order.tracnsaction ? this.props.order.tracnsaction : -1 : -1} />
+                <LinkToBank id={this.props.order ? this.props.order.transaction ? this.props.order.transaction : -1 : -1} />
             </div>
         );
     }

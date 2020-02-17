@@ -44,7 +44,7 @@ export const fetchProductOrders = id => async dispatch => {
 
 export const completeOrder = id => async dispatch => {
   try {
-    const response = await server.post(`/kapo/orders/${id}/complete/`);
+    await server.post(`/kapo/orders/${id}/complete/`);
     history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
@@ -53,7 +53,7 @@ export const completeOrder = id => async dispatch => {
 
 export const cancelOrder = id => async dispatch => {
   try {
-	const response = await server.post(`/kapo/orders/${id}/cancel/`);
+	await server.post(`/kapo/orders/${id}/cancel/`);
   history.push("/payment/result/fail")
   } catch (e) {
     alert("خطایی رخ داد");
@@ -62,7 +62,7 @@ export const cancelOrder = id => async dispatch => {
 
 export const completeBanner = id => async dispatch => {
   try {
-    const response = await server.post(`/kapo/banners/${id}/complete/`);
+    await server.post(`/kapo/banners/${id}/complete/`);
     history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
@@ -71,7 +71,7 @@ export const completeBanner = id => async dispatch => {
 
 export const failBanner = id => async dispatch => {
   try {
-    const response = await server.post(`/kapo/banners/${id}/fail/`);
+    await server.post(`/kapo/banners/${id}/fail/`);
     history.push("/payment/result/fail")
   }
   catch (e) {
@@ -81,7 +81,7 @@ export const failBanner = id => async dispatch => {
 
 export const completeCampaign = id => async dispatch => {
   try {
-    const response = await server.post(`/kapo/campaigns/${id}/complete/`);
+    await server.post(`/kapo/campaigns/${id}/complete/`);
     history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
@@ -90,7 +90,7 @@ export const completeCampaign = id => async dispatch => {
 
 export const failCampaign = id => async dispatch => {
   try {
-    const response = await server.post(`/kapo/campaigns/${id}/fail/`);
+    await server.post(`/kapo/campaigns/${id}/fail/`);
     history.push("/payment/result/fail")
   }
   catch (e) {
@@ -101,7 +101,7 @@ export const failCampaign = id => async dispatch => {
 
 export const completeSponsor = id => async dispatch => {
   try {
-    const response = await server.post(`/kapo/sponsors/${id}/complete/`);
+    await server.post(`/kapo/sponsors/${id}/complete/`);
     history.push("/payment/result/success")
   } catch (e) {
     alert("خطایی رخ داد");
@@ -110,7 +110,7 @@ export const completeSponsor = id => async dispatch => {
 
 export const failSponsor = id => async dispatch => {
   try {
-    const response = await server.post(`/kapo/sponsors/${id}/fail/`);
+    await server.post(`/kapo/sponsors/${id}/fail/`);
     history.push("/payment/result/fail")
   }
   catch (e) {
@@ -129,7 +129,7 @@ export const completeCharge = id => async dispatch => {
 
 export const failCharge = id => async dispatch => {
   try {
-    const response = await server.post(`/accounts/balance/${id}/fail/`);
+    await server.post(`/accounts/balance/${id}/fail/`);
     history.push("/payment/result/fail")
   }
   catch (e) {
@@ -144,7 +144,7 @@ export const bannerCount = place_id => async dispatch => {
 
 export const addProduct = product => async dispatch => {
   try {
-    const response = await server.post("/kapo/add-product/", product);
+    await server.post("/kapo/add-product/", product);
     alert("کالا اضافه شد");
   } catch (e) {
     alert("خطایی رخ داد");
@@ -208,7 +208,7 @@ export const categoryProducts = (category1 = null, category2 = null, category3 =
   else {
     response = await server.get(`/kapo/`)
   }
-  dispatch({ type: SEARCH_ITEM, payload: response.data });
+  dispatch({ type: FETCH_PRODUCTS, payload: response.data });
 };
 
 export const fetchFirstBanners = () => async dispatch => {
@@ -272,7 +272,7 @@ export const SignUp = (formValues, showModal) => async dispatch => {
 
 export const ChangeProductAction = (formValues, id) => async dispatch => {
   try {
-    const response = await server.put(`/kapo/products/${id}/`, formValues)
+    await server.put(`/kapo/products/${id}/`, formValues)
     alert("ویرایش کالا با موفقیت انجام شد")
   }
   catch{
@@ -283,7 +283,7 @@ export const ChangeProductAction = (formValues, id) => async dispatch => {
 export const deleteProduct = (id) => async dispatch => {
   if (id != null){
     try {
-      const response = await server.delete(`/kapo/products/${id}/`);
+      await server.delete(`/kapo/products/${id}/`);
       alert("کالا با موفقیت حذف شد.");
       history.push(`/`);
     } catch {
@@ -341,7 +341,7 @@ export const getCurrentUser = () => async dispatch => {
 
 export const editProfile = (data, id) => async dispatch => {
   try{
-    const respsonse = await server.patch(`accounts/${id}/`, data)
+    await server.patch(`accounts/${id}/`, data)
     alert('success')
   }catch{
     alert('error')
@@ -356,7 +356,7 @@ export const getAllUsers = () => async dispatch => {
 
 export const rateProduct = (rate, id, showModal = alert) => async () => {
   try{
-    const response = await server.post(`product/${id}/rate/`, {rating: rate})
+    await server.post(`product/${id}/rate/`, {rating: rate})
     showModal('موفق', 'نظر شما با موفقیت ثبت شد')
   }catch(e){
     showModal('خطا', 'در ثبت نظر شما خطایی پیش آمد', e.message)
