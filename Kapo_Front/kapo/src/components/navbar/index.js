@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import "./style-new.scss";
+import "./style.scss";
 import defaultImage from '../../assets/user.png'
 
 import NavItem from "../basic/navItem";
@@ -26,11 +26,6 @@ const navItems = [
   {
     text: "ثبت محصول جدید",
     link: "/AddProduct",
-    onHover: false
-  },
-  {
-    text: "دشبورد",
-    link: "/dashboard",
     onHover: false
   }
 ];
@@ -66,6 +61,15 @@ class Navbar extends React.Component {
     this.props.sponsoredSearchProducts(query);
 };
 
+setPathName = (path) => {
+  switch(path){
+    case '/':
+      return 'صفحه‌اصلی'
+    default:
+      return path;
+  }
+}
+
 setCorrectState = (path) => {
   switch(path){
     case '/':
@@ -99,55 +103,60 @@ setCorrectState = (path) => {
 
   render() {
     return (
-      <div className="navbar__component--padding-top">
-        <div className="navbar__flex">
-          <div className="navbar__container">
-            <div className="navbar__content">
-              {navItems.map((element, index) => {
-                if (this.state.active === index) {
-                  return (
-                    <NavItem key={index} active onMouseOver={() => this.activeMegaDropDown(element)} onMouseOut={() => this.deActiveMegaDropDown(element)}>
-                      {element.text}
-                    </NavItem>
-                  );
-                } else {
-                  return(
-                    <NavItem key={index} onClick={() => this.navItemOnClick(index, element.link)}
-                      onMouseOver={() => this.activeMegaDropDown(element)}
-                      onMouseOut={() => this.deActiveMegaDropDown(element)}>
-                      {element.text}
-                    </NavItem>);
-                }
-              })}
-            </div>
-            <div className='navbar__searchbar'>
-              <SearchBar onSearch={this.onSearch}/>
-            </div>
-            <div className='navbar__auth'>
-              {this.props.loggedIn ? 
-                (<div>
-                    <div className="navbar__circle" onClick={() => this.setState({ dropActive: !this.state.dropActive })} style={{ backgroundImage: `url("${this.props.profileImage ? this.props.profileImage : defaultImage}")` }}></div>
-                    <NavDropDown active={this.state.dropActive}/>
-                  </div>)
-              :
-                (<div className='navbar__new-product'>
-                  <Link to='/auth/SignIn' className='nav-bar__button'>
-                    ورود/ثبت‌نام
-                  </Link>
-                </div>)
-              }
-            </div>
-            <div>
-                </div>
-              <div>
-              {this.props.loggedIn ? <div onClick={this.props.SignOut} className='nav-bar__button'>
-                    خروج
-                  </div> : null}
+      <>
+        <div className="navbar__component--padding-top">
+          <div className="navbar__flex">
+            <div className="navbar__container">
+              <div className="navbar__content">
+                {navItems.map((element, index) => {
+                  if (this.state.active === index) {
+                    return (
+                      <NavItem key={index} active onMouseOver={() => this.activeMegaDropDown(element)} onMouseOut={() => this.deActiveMegaDropDown(element)}>
+                        {element.text}
+                      </NavItem>
+                    );
+                  } else {
+                    return(
+                      <NavItem key={index} onClick={() => this.navItemOnClick(index, element.link)}
+                        onMouseOver={() => this.activeMegaDropDown(element)}
+                        onMouseOut={() => this.deActiveMegaDropDown(element)}>
+                        {element.text}
+                      </NavItem>);
+                  }
+                })}
               </div>
+              <div className='navbar__searchbar'>
+                <SearchBar onSearch={this.onSearch}/>
+              </div>
+              <div className='navbar__auth'>
+                {this.props.loggedIn ? 
+                  (<div>
+                      <div className="navbar__circle" onClick={() => {this.setState({ dropActive: !this.state.dropActive }); history.push('/dashboard/')}} style={{ backgroundImage: `url("${this.props.profileImage ? this.props.profileImage : defaultImage}")` }}></div>
+                      <NavDropDown active={this.state.dropActive}/>
+                    </div>)
+                :
+                  (<div className='navbar__new-product'>
+                    <Link to='/auth/SignIn' className='nav-bar__button'>
+                      ورود/ثبت‌نام
+                    </Link>
+                  </div>)
+                }
+              </div>
+              <div>
+                  </div>
+                <div>
+                {this.props.loggedIn ? <div onClick={this.props.SignOut} className='nav-bar__button'>
+                      خروج
+                    </div> : null}
+                </div>
+            </div>
+            <MegaDropDown ref='megaDropDown' />
           </div>
-          <MegaDropDown ref='megaDropDown' />
         </div>
-      </div>
+        <div className="navbar__page-title">
+          {this.setPathName(history.location.pathname)}
+        </div>
+      </>
     );
   }
 }
