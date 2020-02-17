@@ -43,38 +43,46 @@ const FORM_VALUES = {
         { text: "بله", value: "True" },
         { text: "خیر", value: "False" }
       ]
-    }, {
-      title: "corporate_name",
-      label: "اسم شرکت"
-    }, {
-      title: "corporate_number",
-      label: "شماره شرکت"
-    }, {
-      title: "first_name",
-      label: "نام"
-    }, {
-      title: "last_name",
-      label: "نام خانوادگی"
     },{
       title: "image",
-      label: "تصویر کالا",
+      label: "تصویر", 
       type: "file",
       error: "لطفا تصویر کالا را بارگذاری کنید"
     }
   ]
 };
 
-class SignIn extends React.Component {
+class SignUp extends React.Component {
   onSubmit = (formValues) => {
-    // console.log(formValues)
-    this.props.signUpAction(formValues)
+    this.props.signUpAction(formValues, this.props.showModal)
   };
   render() {
+    let formVals = [...FORM_VALUES.form_inputs]
+    if(this.props.is_corporate == 'True'){
+      formVals.push({
+        title: "corporate_name",
+        label: "اسم شرکت"
+      })
+      formVals.push({
+        title: "corporate_number",
+        label: "شماره شرکت"
+      })
+    }else if((this.props.is_corporate == 'False')){
+      formVals.push({
+        title: "first_name",
+        label: "نام"
+      })
+      formVals.push({
+        title: "last_name",
+        label: "نام خانوادگی"
+      })
+    }
     return (
       <div className="sign-up__container">
         <FormWrapper>
           <Form
-            formValues={FORM_VALUES.form_inputs}
+            rerender={this.props.is_corporate}
+            formValues={formVals}
             onSubmit={this.onSubmit}
             submitText={FORM_VALUES.submitText}
             title={FORM_VALUES.title}
@@ -86,4 +94,8 @@ class SignIn extends React.Component {
   }
 }
 
-export default connect(null, { signUpAction })(SignIn);
+const mapStateToProps = (state) => {
+  return({ is_corporate : state.form ? state.form.form ? state.form.form.values ? state.form.form.values.is_corporate : null : null : null })
+}
+
+export default connect(mapStateToProps, { signUpAction })(SignUp);

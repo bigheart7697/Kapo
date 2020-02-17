@@ -16,7 +16,6 @@ class MyOrders extends React.Component {
         const newArray = _.map(this.props.orders, (item, key) => {
             return item
           })
-        console.log(this.props.products)
         return (
                     <OrderList newArray={newArray}></OrderList>
                 );

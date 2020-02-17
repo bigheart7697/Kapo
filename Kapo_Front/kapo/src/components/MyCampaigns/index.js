@@ -22,7 +22,6 @@ class MyCampaigns extends React.Component {
             return item
         })
 
-        console.log(newArray);
         return (<>
             <AdvertisementList type="campaign" advertisementList={newArray}/>
         </>)

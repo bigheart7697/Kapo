@@ -27,7 +27,7 @@ class PayFactor extends React.Component {
     get_price = (type) => {
         switch(type) {
             case 'کمپین تبلیغاتی':
-                return 500000;
+                return 1000000;
             case 'جست‌وجوی اسپانسر شده':
                 return 1000;
             case 'بنر تبلیغاتی':
@@ -53,13 +53,9 @@ class PayFactor extends React.Component {
     render() {
         let factor = {
                 type: 'بنر تبلیغاتی',
-                product: {name: 'لباس بچه'},
-                days_number: 4
+                product: {name: ''},
+                days_number: 0
             }
-        this.props.factorObject? console.log(this.props.factorObject) : console.log("ez");
-        if (this.props.factorObject) {
-            console.log(this.props.factorObject.type)}
-            
         if (this.props.factorObject && this.props.factorObject.type === 1){
             factor = {
                 type: 'جست‌وجوی اسپانسر شده',
@@ -97,7 +93,7 @@ class PayFactor extends React.Component {
                                 this.props.factor ? this.props.factor.type ? this.props.factor.days_number ? this.get_price(this.props.factor.type) * this.props.factor.days_number : '-' : '-' : this.get_price(factor.type) * factor.days_number]]}
                     />
                 </div>
-                <LinkToBank id={0} /> {/* set id */}
+                <LinkToBank id={this.props.factorObject? this.props.factorObject.id : -1} /> {/* set id */}
             </div>
         );
     }
@@ -105,14 +101,13 @@ class PayFactor extends React.Component {
 
 
 const mapStatToProps = (state, ownProps) => {
-    let factorItem = null
     if(ownProps.match)
     {
-      factorItem = state.advertisements.transactions[ownProps.match.params.id]
+        return { factorObject: state.advertisements.transactions[ownProps.match.params.id]}
     }else{
-      factorItem = null
+        return { factorObject: null }
     }
-    return { factorObject: factorItem }
+
   }
   
   export default connect(mapStatToProps, { fetch_factor })(PayFactor);

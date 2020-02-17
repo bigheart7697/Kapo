@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from kapo.models import *
 from accounts.serializers import UserSerializer
-from django.db.models import Avg
 
 
 class TransactionObjectRelatedField(serializers.RelatedField):
@@ -45,6 +44,7 @@ class ProductSerializer(serializers.ModelSerializer):
     first_category = serializers.CharField(source='get_cat1_display', read_only=True)
     second_category = serializers.CharField(source='get_cat2_display', read_only=True)
     third_category = serializers.CharField(source='get_cat3_display', read_only=True)
+    available = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Product
@@ -66,10 +66,12 @@ class OrderSerializer(serializers.ModelSerializer):
     customer = UserSerializer(read_only=True, many=False)
     product = ProductSerializer(read_only=True, many=False)
     state = serializers.CharField(source='get_state_display', read_only=True)
+    transaction = serializers.IntegerField(source='get_transaction.id', read_only=True)
 
     class Meta:
         model = Order
-        fields = ['id', 'state', 'customer', 'product', 'count', 'created', 'delivery_weekday', 'delivery_hours']
+        fields = ['id', 'state', 'customer', 'product', 'count', 'created', 'delivery_weekday',
+                  'delivery_hours', 'transaction']
 
 
 class SponsoredSearchSerializer(serializers.ModelSerializer):
@@ -118,3 +120,13 @@ class RateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rate
         fields = ['product', 'user', 'rating']
+
+
+class BalanceIncreaseSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    state = serializers.CharField(source='get_state_display', read_only=True)
+    transaction = serializers.IntegerField(source='get_transaction.id', read_only=True)
+
+    class Meta:
+        model = BalanceIncrease
+        fields = ('id', 'user', 'amount', 'state', 'created', 'transaction')

@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ValidationError
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -48,7 +48,7 @@ class IsOwnerOfTransaction(permissions.BasePermission):
 class HasEnoughBalance(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.user.balance < request.user.MIN_BALANCE:
-            raise PermissionDenied()
+            raise ValidationError('You do not have enough balance')
         return True
 
 

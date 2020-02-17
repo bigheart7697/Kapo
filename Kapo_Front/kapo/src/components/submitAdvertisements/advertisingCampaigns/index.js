@@ -1,5 +1,5 @@
 import React from 'react'
-import  {createAdvertisingCampaigns} from "../../../actions"
+import  {createAdvertisingCampaigns, campaignCount} from "../../../actions"
 import { connect } from 'react-redux'
 
 import './style.scss'
@@ -37,8 +37,12 @@ const FORM_VALUES = {
   };
 
 class SubmitAdvertisingCampaigns extends React.Component {
+  componentDidMount() {
+    this.props.campaignCount(1);
+    this.props.campaignCount(2);
+  }
     onSubmit = (formValues) => {
-        this.props.createAdvertisingCampaigns(formValues, this.props.product.id)
+        this.props.createAdvertisingCampaigns(formValues, this.props.product.id) 
     };
 
     render() {
@@ -66,7 +70,7 @@ class SubmitAdvertisingCampaigns extends React.Component {
                   صفحه اصلی
                 </div>
                 <div className='submit-advertising-banners__cell'>
-                  3
+                  {this.props.first_campaign_count}
                 </div>
               </div>
               <div className='submit-advertising-banners__row'>
@@ -74,7 +78,7 @@ class SubmitAdvertisingCampaigns extends React.Component {
                   لیست کالاها
                 </div>
                 <div className='submit-advertising-banners__cell'>
-                  7
+                {this.props.second_campaign_count}
                 </div>
               </div>
             </div>
@@ -83,4 +87,8 @@ class SubmitAdvertisingCampaigns extends React.Component {
       }
 }
 
-export default connect(null, { createAdvertisingCampaigns })(SubmitAdvertisingCampaigns);
+const mapStatetoProps = (state, ownProps) => {
+  return {first_campaign_count: state.advertisements.first_campaigns_count, second_campaign_count: state.advertisements.second_campaigns_count,}
+}
+
+export default connect(mapStatetoProps, { createAdvertisingCampaigns, campaignCount })(SubmitAdvertisingCampaigns);

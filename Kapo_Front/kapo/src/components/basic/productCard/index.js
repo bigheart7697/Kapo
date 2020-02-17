@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 class productCard extends React.Component {
     state={mouseOver: false, element: this.props.product}
     render() {
-        console.log(this.props)
         return (<div className={`product-card__container` + (this.props.is_sponsered ? ` product-card__container--gold ` : ``) + (this.props.is_campaign ? ` product-card__container--campaign` : ``)} onClick={this.props.onClick} onMouseEnter={() => this.setState({ mouseOver: true})} onMouseLeave={() => this.setState({ mouseOver: false })} style={{ backgroundImage: this.props.product ? this.props.product.image? `url(${this.props.product.image})` : `url(${defaultImg})` : `url(${defaultImg})` }}>
             <div className={`product-card__content` + (this.props.is_sponsered ? ` product-card__content--gold ` : ``) + (this.props.is_campaign ? ` product-card__content--campaign` : ``)}>
                 <div className={`product-card__name` + (!this.state.mouseOver ? `` : ` product-card__name--hover`) + (this.props.is_sponsered ? ` product-card__name--gold` : ``) + (this.props.is_campaign ? ` product-card__name--campaign` : ``)}>{this.props.product ? this.props.product.name : '-'}</div>

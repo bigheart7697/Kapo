@@ -14,7 +14,6 @@ const orderReducer = (state = INITIAL_VALUE, action) => {
         orders: { ...state.orders, [action.payload.id]: action.payload }
       };
     case FETCH_ORDERS:
-      console.log(action.payload);
       
       return {
         ...state,

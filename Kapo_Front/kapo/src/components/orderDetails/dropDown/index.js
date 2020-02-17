@@ -17,7 +17,6 @@ class OrderDetails extends React.Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div className={this.state.active ? "order-details__container" : "order-details__container order-details__container--hidden"}>
                 <OrderFactor order={this.state.order}/>

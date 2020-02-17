@@ -77,6 +77,11 @@ class OrderCreateView(generics.CreateAPIView):
                 product.save()
                 order = serializer.save(customer=self.request.user,
                                         product=product)
+
+                transaction_type = Transaction.Type.ORDER
+                Transaction.objects.create(sender=order.customer, transaction_object=order,
+                                           amount=order.product.price, type=transaction_type)
+
                 update_order_state(order.id)
 
         except Product.DoesNotExist:
@@ -372,6 +377,8 @@ def order_fail_view(request, pk):
             raise ValidationError("Operation failed. This order is {}".format(order.state))
         else:
             order.state = order.State.FAILED
+            transaction = order.get_transaction
+            transaction.delete()
             product.quantity += order.count
             order.save()
             product.save()
@@ -393,11 +400,6 @@ def order_complete_view(request, pk):
             owner = order.product.owner
             amount = int(owner.percentage * order.product.price)
             Liquidate.objects.create(owner=owner, amount=amount)
-
-            transaction_type = Transaction.Type.ORDER
-            Transaction.objects.create(sender=order.customer, transaction_object=order,
-                                       amount=order.product.price, type=transaction_type)
-
             owner.balance -= amount
             owner.save()
             return Response(request.data, status=status.HTTP_200_OK)
@@ -415,6 +417,8 @@ def order_cancel_view(request, pk):
             raise ValidationError("Operation failed. This order is {}".format(order.state))
         else:
             order.state = order.State.CANCELED
+            transaction = order.get_transaction
+            transaction.delete()
             product.quantity += order.count
             order.save()
             product.save()
@@ -446,6 +450,8 @@ def sponsor_fail_view(request, pk):
         if sponsored_search.state != sponsored_search.State.AWAITING:
             raise ValidationError("Operation failed. This order is {}".format(sponsored_search.state))
         else:
+            transaction = sponsored_search.get_transaction
+            transaction.delete()
             sponsored_search.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except SponsoredSearch.DoesNotExist:
@@ -478,6 +484,8 @@ def banner_fail_view(request, pk):
             raise ValidationError("Operation failed. This order is {}".format(banner.state))
         else:
             banner.delete()
+            transaction = banner.get_transaction
+            transaction.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:
         return Response(request.data, status=status.HTTP_404_NOT_FOUND)
@@ -508,6 +516,8 @@ def campaign_fail_view(request, pk):
         if campaign.state != campaign.State.AWAITING:
             raise ValidationError("Operation failed. This order is {}".format(campaign.state))
         else:
+            transaction = campaign.get_transaction
+            transaction.delete()
             campaign.delete()
             return Response(request.data, status=status.HTTP_200_OK)
     except Banner.DoesNotExist:

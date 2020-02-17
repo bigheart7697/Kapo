@@ -32,7 +32,7 @@ class SponsoredSearchesListView(generics.ListAPIView):
 
 class CampaignsListView(generics.ListAPIView):
     serializer_class = CampaignSerializer
-    permission_classes = [permissions.IsAuthenticated, IsStaff]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Campaign.objects.all()
 
 

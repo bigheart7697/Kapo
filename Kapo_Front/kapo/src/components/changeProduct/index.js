@@ -70,9 +70,7 @@ class ChangeProduct extends React.Component {
   }
 
   render() {
-    console.log(this.props.product)
     this.initialValues=(this.props.product? this.props.product : {})
-    console.log(this.initialValues)
     
     return (<>
       <FormWrapper>
