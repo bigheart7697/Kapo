@@ -58,7 +58,7 @@ class SignUp extends React.Component {
   };
   render() {
     let formVals = [...FORM_VALUES.form_inputs]
-    if(this.props.is_corporate == 'True'){
+    if(this.props.is_corporate === 'True'){
       formVals.push({
         title: "corporate_name",
         label: "اسم شرکت"
@@ -67,7 +67,12 @@ class SignUp extends React.Component {
         title: "corporate_number",
         label: "شماره شرکت"
       })
-    }else if((this.props.is_corporate == 'False')){
+      formVals.push({
+        title: "agreement",
+        type: "agreement",
+        content: true
+      })
+    }else if((this.props.is_corporate === 'False')){
       formVals.push({
         title: "first_name",
         label: "نام"
@@ -75,6 +80,11 @@ class SignUp extends React.Component {
       formVals.push({
         title: "last_name",
         label: "نام خانوادگی"
+      })
+      formVals.push({
+        title: "agreement",
+        type: "agreement",
+        content: false
       })
     }
     return (
