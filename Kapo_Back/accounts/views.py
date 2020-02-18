@@ -52,7 +52,7 @@ def increase_balance_complete_view(request, pk):
             raise ValidationError("Operation failed. This object is {}".format(increase_balance.state))
         else:
             increase_balance.state = increase_balance.State.COMPLETED
-            increase_balance.user.balance = increase_balance.amount
+            increase_balance.user.balance += increase_balance.amount
             increase_balance.save()
             increase_balance.user.save()
             return Response(request.data, status=status.HTTP_200_OK)

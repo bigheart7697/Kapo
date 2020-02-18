@@ -55,6 +55,18 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.deleted = True
+        banners = Banner.objects.filter(product=instance)
+        campaigns = Campaign.objects.filter(product=instance)
+        sponsors = SponsoredSearch.objects.filter(product=instance)
+        for banner in banners:
+            banner.remaining_days = 0
+            banner.save()
+        for campaign in campaigns:
+            campaign.remaining_days = 0
+            campaign.save()
+        for sponsor in sponsors:
+            sponsor.remaining_count = 0
+            sponsor.save
         instance.save()
         return instance
 
